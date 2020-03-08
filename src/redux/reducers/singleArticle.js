@@ -1,7 +1,6 @@
 import singleArticleTypes from '../types/singleArticle';
 
 const initialState = {
-	isFetching: false,
 	inProgress: false,
 	singleArticleData: {},
 	error: ''
@@ -10,11 +9,11 @@ const initialState = {
 export default function singleArticleReducer(state = initialState, action) {
 	switch (action.type) {
 		case singleArticleTypes.FETCH_SINGLE_ARTICLE_REQUEST:
-			return { ...state, isFetching: true };
+			return { ...state, inProgress: true };
 		case singleArticleTypes.FETCH_SINGLE_ARTICLE_DONE:
-			return { ...state, singleArticleData: { ...action.payload.singleArticleData }, isFetching: false };
+			return { ...state, singleArticleData: { ...action.payload.singleArticleData }, inProgress: false };
 		case singleArticleTypes.FETCH_SINGLE_ARTICLE_ERROR:
-			return { ...state, error: action.payload.error, isFetching: false };
+			return { ...state, error: action.payload.error, inProgress: false };
 
 		case singleArticleTypes.CREATE_SINGLE_ARTICLE_REQUEST:
 			return { ...state, inProgress: true };

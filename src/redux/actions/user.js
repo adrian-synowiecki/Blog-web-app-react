@@ -1,13 +1,13 @@
-import userTypes from '../types/user'
+import userTypes from '../types/user';
 
-export const signUpRequested = (user) => ({
-    type: userTypes.SIGN_UP_REQUESTED,
-    user
+export const signUpRequested = (userRegisterData) => ({
+	type: userTypes.SIGN_UP_REQUESTED,
+	userRegisterData
 });
 
-export const signUpDone = (user) => ({
+export const signUpDone = (currentUserData) => ({
 	type: userTypes.SIGN_UP_DONE,
-	payload: user
+	payload: { currentUserData }
 });
 
 export const signUpError = (error) => ({
@@ -15,34 +15,32 @@ export const signUpError = (error) => ({
 	payload: error
 });
 
-
-export const signInRequested = (user) => ({
-    type: userTypes.SIGN_IN_REQUESTED,
-    user
+export const signInRequested = (userLoginData) => ({
+	type: userTypes.SIGN_IN_REQUESTED,
+	userLoginData
 });
 
-export const signInDone = (user) => ({
+export const signInDone = (currentUserData) => ({
 	type: userTypes.SIGN_IN_DONE,
-	payload: user
+	payload: { currentUserData }
 });
 
 export const signInError = (error) => ({
 	type: userTypes.SIGN_IN_ERROR,
-	payload: error
+	payload: { error }
 });
 
-
-export const updateUserRequested = (updatedUser) => ({
-    type: userTypes.UPDATE_USER_REQUESTED,
-    updatedUser
+export const updateUserRequested = (currentUserUpdateData) => ({
+	type: userTypes.UPDATE_USER_REQUESTED,
+	currentUserUpdateData
 });
 
-export const updateUserDone = (updatedUser) => ({
+export const updateUserDone = (currentUserData) => ({
 	type: userTypes.UPDATE_USER_DONE,
-	payload: updatedUser
+	payload: { currentUserData }
 });
 
 export const updateUserError = (error) => ({
 	type: userTypes.UPDATE_USER_ERROR,
-	payload: error
+	payload: { error }
 });

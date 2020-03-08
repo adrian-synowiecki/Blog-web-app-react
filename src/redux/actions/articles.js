@@ -1,24 +1,19 @@
 import articlesTypes from '../types/articles';
 
-export const fetchArticlesByMostRecentRequest = (offSet) => {
-	return {
-		type: articlesTypes.FETCH_ARTICLES_BY_MOST_RECENT_REQUESTED,
-		offSet
-	};
-};
-export const fetchArticlesByMostRecentDone = (articlesList) => {
-	return {
-		type: articlesTypes.FETCH_ARTICLES_BY_MOST_RECENT_DONE,
-		payload: { articlesList }
-	};
-};
+export const fetchArticlesByMostRecentRequest = (offSet) => ({
+	type: articlesTypes.FETCH_ARTICLES_BY_MOST_RECENT_REQUESTED,
+	offSet
+});
+export const fetchArticlesByMostRecentDone = (articlesList) => ({
+	type: articlesTypes.FETCH_ARTICLES_BY_MOST_RECENT_DONE,
+	payload: { articlesList }
+});
 export const fetchArticlesByMostRecentFailure = (error) => {
 	return {
 		type: articlesTypes.FETCH_ARTICLES_BY_MOST_RECENT_FAILURE,
 		payload: { error }
 	};
 };
-
 export const fetchFavoriteArticlesRequest = (username) => ({
 	type: articlesTypes.FETCH_FAVORITE_ARTICLES_REQUESTED,
 	username

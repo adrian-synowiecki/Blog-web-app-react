@@ -2,8 +2,7 @@ import articlesTypes from '../types/articles';
 import { favoriteArticlesListUpdateUtil } from '../modules/utils/favoriteArticles.utils';
 
 const initialState = {
-	isFetching: false,
-/* 	inProgress: false, */
+	inProgress: false,
 	articlesList: [],
 	error: ''
 	/* 	userArticlesCount: null */
@@ -15,7 +14,7 @@ export default function articlesReducer(state = initialState, action) {
 		case articlesTypes.FETCH_ARTICLES_BY_TAG_REQUEST:
 		case articlesTypes.FETCH_ARTICLES_BY_AUTHOR_REQUEST:
 		case articlesTypes.FETCH_FAVORITE_ARTICLES_REQUEST:
-			return { ...state, isFetching: true };
+			return { ...state, inProgress: true };
 
 		case articlesTypes.FETCH_ARTICLES_BY_MOST_RECENT_DONE:
 		case articlesTypes.FETCH_ARTICLES_BY_TAG_DONE:
@@ -24,7 +23,7 @@ export default function articlesReducer(state = initialState, action) {
 			return {
 				...state,
 				articlesList: [ ...action.payload.articlesList ],
-				isFetching: false
+				inProgress: false
 				/* 	userArticlesCount: action.payload.articlesCount */
 			};
 
@@ -32,23 +31,23 @@ export default function articlesReducer(state = initialState, action) {
 		case articlesTypes.FETCH_ARTICLES_BY_TAG_ERROR:
 		case articlesTypes.FETCH_ARTICLES_BY_AUTHOR_ERROR:
 		case articlesTypes.FETCH_FAVORITE_ARTICLES_ERROR:
-			return { ...state, error: action.payload.error, isFetching: false };
+			return { ...state, error: action.payload.error, inProgress: false };
 
 		case articlesTypes.FAVORITE_ARTICLE_REQUEST:
 		case articlesTypes.UNFAVORITE_ARTICLE_REQUEST:
-			return { ...state, isFetching: true };
+			return { ...state, inProgress: true };
 
 		case articlesTypes.ARTICLE_FAVORITED_DONE:
 		case articlesTypes.ARTICLE_UNFAVORITED_DONE:
 			return {
 				...state,
 				articlesList: favoriteArticlesListUpdateUtil(state.articlesList, action.payload.article),
-				isFetching: false
+				inProgress: false
 			};
 
 		case articlesTypes.FAVORITE_ARTICLE_ERROR:
 		case articlesTypes.UNFAVORITE_ARTICLE_ERROR:
-			return { ...state, isFetching: false };
+			return { ...state, inProgress: false };
 
 		case articlesTypes.UNLOAD_ARTICLES:
 			return { ...state, articlesList: [] };

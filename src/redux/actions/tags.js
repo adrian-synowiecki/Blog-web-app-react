@@ -1,5 +1,4 @@
-import tagsTypes from '../types/tags'
-
+import tagsTypes from '../types/tags';
 
 /* export const fetchPopularTagsRequested = () => ({
 	type: tagsTypes.FETCH_POPULAR_TAGS_REQUESTED,
@@ -17,30 +16,29 @@ export const fetchPopularTagsError = (error) => ({
 	}
 }); */
 
-export const fetchTagsByMostPopularRequested = () => ({
+export const fetchTagsByMostPopularRequest = () => ({
 	type: tagsTypes.FETCH_TAGS_BY_MOST_POPULAR_REQUESTED
-})
+});
 
-export const fetchTagsByMostPopularDone = (tagsByMostPopular) => ({
+export const fetchTagsByMostPopularDone = (tagsList) => ({
 	type: tagsTypes.FETCH_TAGS_BY_MOST_POPULAR_DONE,
-	payload: tagsByMostPopular
-
-})
+	payload: { tagsList }
+});
 
 export const fetchTagsByMostPopularError = (error) => ({
 	type: tagsTypes.FETCH_TAGS_BY_MOST_POPULAR_ERROR,
-	payload: error
-})
+	payload: { error }
+});
 
 export const getTagName = (tag) => ({
 	type: tagsTypes.GET_TAG_NAME,
-	payload: tag
-})
+	payload: { tag }
+});
 
 export const removeTagName = (tag) => ({
 	type: tagsTypes.REMOVE_TAG_NAME
-})
+});
 
 export const unloadTags = () => ({
 	type: tagsTypes.UNLOAD_TAGS
-})
+});

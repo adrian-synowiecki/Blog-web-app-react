@@ -1,7 +1,7 @@
 import profileTypes from '../types/profile';
 
 const initialState = {
-	isFetching: false,
+	inProgress: false,
 	profileData: {},
 	error: ''
 };
@@ -9,11 +9,11 @@ const initialState = {
 export default function profileReducer(state = initialState, action) {
 	switch (action.type) {
 		case profileTypes.FETCH_ROFILE_BY_USERNAME_REQUESTED:
-			return { ...state, isFetching: true };
+			return { ...state, inProgress: true };
 		case profileTypes.FETCH_PROFILE_BY_USERNAME_DONE:
-			return { ...state, profileData: { ...action.payload }, isFetching: false };
+			return { ...state, profileData: { ...action.payload }, inProgress: false };
 		case profileTypes.FETCH_PROFILE_BY_USERNAME_ERROR:
-			return {...state, error: action.payload, isFetching: false }
+			return {...state, error: action.payload, inProgress: false }
 		case profileTypes.UNLOAD_PROFILE:
 			return {...state, profileData: {}};
 		default:

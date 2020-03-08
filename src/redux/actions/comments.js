@@ -1,14 +1,14 @@
 import commentsTypes from '../types/comments';
 
-export const addCommentToArticleRequest = (userObj, slug) => ({
+export const addCommentToArticleRequest = (commentCreationData, slug) => ({
 	type: commentsTypes.ADD_COMMENT_TO_ARTICLE_Request,
-	userObj,
+	commentCreationData,
 	slug
 });
 
-export const addCommentToArticleDone = (commentObj) => ({
+export const addCommentToArticleDone = (addedComment) => ({
 	type: commentsTypes.ADD_COMMENT_TO_ARTICLE_DONE,
-	payload: commentObj
+	payload: { addedComment }
 });
 
 export const addCommentToArticleError = (error) => ({
@@ -21,9 +21,9 @@ export const fetchCommentsFromArticleRequest = (slug) => ({
 	slug
 });
 
-export const fetchCommentsFromArticleDone = (comments) => ({
+export const fetchCommentsFromArticleDone = (commentsList) => ({
 	type: commentsTypes.FETCH_COMMENTS_FROM_ARTICLE_DONE,
-	payload: comments
+	payload: { commentsList }
 });
 
 export const fetchCommentsFromArticleFailure = (error) => ({
@@ -31,6 +31,7 @@ export const fetchCommentsFromArticleFailure = (error) => ({
 	payload: { error }
 });
 
+/////////// CHANGE Z RANAAAAAAAA
 export const fetchCommentsFromArticleUnmounted = () => ({
 	type: commentsTypes.FETCH_COMMENTS_FROM_ARTICLE_UNMOUNTED
 });

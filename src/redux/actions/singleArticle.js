@@ -11,7 +11,7 @@ export const fetchSingleArticleDone = (singleArticleData) => ({
 });
 export const fetcSingleArticleError = (error) => ({
 	type: singleArticleTypes.FETCH_SINGLE_ARTICLE_ERROR,
-	payload: error
+	payload: { error }
 });
 
 /* creating article */

@@ -1,7 +1,6 @@
 import commentsTypes from '../types/comments';
 
 const initialState = {
-	isFetching: false,
 	inProgress: false,
 	commentsList: [],
 	error: ''
@@ -10,18 +9,18 @@ const initialState = {
 export default function commentsReducer(state = initialState, action) {
 	switch (action.type) {
 		case commentsTypes.ADD_COMMENT_TO_ARTICLE_REQUEST:
-			return { ...state, isFetching: true };
+			return { ...state, inProgress: true };
 		case commentsTypes.ADD_COMMENT_TO_ARTICLE_DONE:
-			return { ...state, commentsList: [ action.payload, ...state.commentsList ], isFetching: false };
+			return { ...state, commentsList: [ action.payload, ...state.commentsList ], inProgress: false };
 		case commentsTypes.ADD_COMMENT_TO_ARTICLE_ERROR:
-			return { ...state, error: action.payload.error, isFetching: false };
+			return { ...state, error: action.payload.error, inProgress: false };
 
 		case commentsTypes.FETCH_COMMENTS_FROM_ARTICLE_REQUEST:
-			return { ...state, isFetching: true };
+			return { ...state, inProgress: true };
 		case commentsTypes.FETCH_COMMENTS_FROM_ARTICLE_DONE:
-			return { ...state, commentsList: [ ...action.payload ], isFetching: false };
+			return { ...state, commentsList: [ ...action.payload ], inProgress: false };
 		case commentsTypes.FETCH_COMMENTS_FROM_ARTICLE_ERROR:
-			return { ...state, error: action.payload.error, isFetching: false };
+			return { ...state, error: action.payload.error, inProgress: false };
 
 		case commentsTypes.REMOVE_COMMENT_FROM_ARTICLE_REQUEST:
 			return { ...state, inProgress: true };
