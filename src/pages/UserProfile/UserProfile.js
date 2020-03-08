@@ -10,7 +10,7 @@ import { fetchArticlesByAuthorRequested, fetchFavoriteArticlesRequested } from '
 
 function UserProfile({
 	match,
-	userDetails,
+	currentUserData,
 	fetchArticlesByAuthorRequested,
 	fetchFavoriteArticlesRequested,
 	userArticles,
@@ -28,13 +28,13 @@ function UserProfile({
 	console.log(articlesList);
 	return (
 		<div>
-			{!isEmpty(userDetails) && (
+			{!isEmpty(currentUserData) && (
 				<Profile
 					articlesList={articlesList}
 					username={username}
 					path={location.pathname}
 					/* 		userArticles={userArticles} */
-					userDetails={userDetails}
+					currentUserData={currentUserData}
 					/* 				favoriteArticles={favoriteArticles} */
 				/>
 			)}
@@ -45,7 +45,7 @@ function UserProfile({
 const mapStateToProps = (state) => {
 	return {
 		articlesList: state.articles.articlesList,
-		userDetails: state.user.userDetails
+		currentUserData: state.currentUser.currentUserData
 	};
 };
 const mapDispatchToProps = (dispatch) => ({

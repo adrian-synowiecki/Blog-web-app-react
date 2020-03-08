@@ -1,7 +1,7 @@
 import commentsTypes from '../types/comments';
 
-export const addCommentToArticleRequested = (userObj, slug) => ({
-	type: commentsTypes.ADD_COMMENT_TO_ARTICLE_REQUESTED,
+export const addCommentToArticleRequest = (userObj, slug) => ({
+	type: commentsTypes.ADD_COMMENT_TO_ARTICLE_Request,
 	userObj,
 	slug
 });
@@ -11,13 +11,13 @@ export const addCommentToArticleDone = (commentObj) => ({
 	payload: commentObj
 });
 
-export const addCommentToArticleFailure = (error) => ({
+export const addCommentToArticleError = (error) => ({
 	type: commentsTypes.ADD_COMMENT_TO_ARTICLE_FAILURE,
-	payload: error
+	payload: { error }
 });
 
-export const fetchCommentsFromArticleRequested = (slug) => ({
-	type: commentsTypes.FETCH_COMMENTS_FROM_ARTICLE_REQUESTED,
+export const fetchCommentsFromArticleRequest = (slug) => ({
+	type: commentsTypes.FETCH_COMMENTS_FROM_ARTICLE_Request,
 	slug
 });
 
@@ -28,15 +28,15 @@ export const fetchCommentsFromArticleDone = (comments) => ({
 
 export const fetchCommentsFromArticleFailure = (error) => ({
 	type: commentsTypes.FETCH_COMMENTS_FROM_ARTICLE_FAILURE,
-	payload: error
+	payload: { error }
 });
 
 export const fetchCommentsFromArticleUnmounted = () => ({
 	type: commentsTypes.FETCH_COMMENTS_FROM_ARTICLE_UNMOUNTED
 });
 
-export const removeCommentFromArticleRequested = (slug, commentId) => ({
-	type: commentsTypes.REMOVE_COMMENT_FROM_ARTICLE_REQUESTED,
+export const removeCommentFromArticleRequest = (slug, commentId) => ({
+	type: commentsTypes.REMOVE_COMMENT_FROM_ARTICLE_Request,
 	slug,
 	commentId
 });
@@ -47,5 +47,5 @@ export const removeCommentFromArticleDone = () => ({
 
 export const removeCommentFromArticleError = (error) => ({
 	type: commentsTypes.REMOVE_COMMENT_FROM_ARTICLE_ERROR,
-	payload: error
+	payload: { error }
 });

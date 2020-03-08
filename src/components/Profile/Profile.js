@@ -27,7 +27,7 @@ function Profile({
 	articlesList,
 	profileDetails,
 	username,
-	userDetails,
+	currentUserData,
 	favoriteArticles,
 	userArticles,
 	fetchArticlesByAuthorRequested,
@@ -40,9 +40,9 @@ function Profile({
 	if (!isEmpty(profileDetails)) {
 		profileLink = `/articleAuthorProfile/${profileDetails.username}`;
 		profileLinkFavorites = `/articleAuthorProfile/${profileDetails.username}/favorites`;
-	} else if (!isEmpty(userDetails)) {
-		profileLink = `/userProfile/${userDetails.username}`;
-		profileLinkFavorites = `/userProfile/${userDetails.username}/favorites`;
+	} else if (!isEmpty(currentUserData)) {
+		profileLink = `/userProfile/${currentUserData.username}`;
+		profileLinkFavorites = `/userProfile/${currentUserData.username}/favorites`;
 	}
 
 	return (
@@ -56,9 +56,9 @@ function Profile({
 					</React.Fragment>
 				) : (
 					<React.Fragment>
-						<ImageProfile src={userDetails.image} />
-						<Username>{userDetails.username}</Username>
-						<Bio>{userDetails.bio}</Bio>
+						<ImageProfile src={currentUserData.image} />
+						<Username>{currentUserData.username}</Username>
+						<Bio>{currentUserData.bio}</Bio>
 					</React.Fragment>
 				)}
 			</UserInfo>

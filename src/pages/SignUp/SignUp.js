@@ -10,8 +10,8 @@ function SignUp({userError, isLoadingUser}) {
 }
 
 const mapStateToProps = (state) => ({
-	isLoadingUser: state.user.isLoadingUser,
-	userError: state.user.userError
+	/* isLoadingUser: state.user.isLoadingUser,
+	userError: state.user.userError */
 });
 
 export default connect(mapStateToProps)(SignUp);

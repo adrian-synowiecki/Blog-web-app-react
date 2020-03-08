@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 import articles from './reducers/articles'
-import user from './reducers/user'
+import currentUser from './reducers/currentUser'
 import profile from './reducers/profile'
 import tags from './reducers/tags'
 import comments from './reducers/comments'
@@ -10,7 +10,7 @@ import singleArticle from './reducers/singleArticle'
 
 const rootReducer = combineReducers({
 	articles,
-	user,
+	currentUser,
 	profile,
 	tags,
 	comments,

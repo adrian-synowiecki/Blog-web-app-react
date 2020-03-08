@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 
 import AuthForm from '../../components/AuthForm/AuthForm';
 
-function SignIn({isLoadingUser, userError}) {
-	return <AuthForm isLoading={isLoadingUser} error={userError} />;
+function SignIn({isFetching, error}) {
+	return <AuthForm isFetching={isFetching} error={error} />;
 }
 
 
 const mapStateToProps = (state) => ({
-	isLoadingUser: state.user.isLoadingUser,
-	userError: state.user.userError
+	isFetching: state.currentUser.isFetching,
+	error: state.currentUser.error
 })
 
 export default connect(mapStateToProps)(SignIn);

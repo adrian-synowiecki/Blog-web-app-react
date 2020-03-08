@@ -44,12 +44,8 @@ function HomePage({
 		console.log('NOT EMPTY')
 	}
 	console.log(user)
-	const onGlobalFeedClickHandle = () => {
-		removeTagName();
-		fetchArticlesByMostRecentRequested(window.localStorage.getItem('offSet'));
-	};
 
-	const onTagClickHandle = () => {
+	const handleClick = () => {
 		removeTagName();
 		fetchArticlesByMostRecentRequested(window.localStorage.getItem('offSet'));
 	};
@@ -64,7 +60,7 @@ function HomePage({
 			</S.Header>
 			<S.NavigationWrapper>
 				<S.NavLinkExtended
-					onClick={() => onGlobalFeedClickHandle()}
+					onClick={() => handleClick()}
 					to="/"
 					activeStyle={styles.activeLinkStyle}
 					isActive={() => {
@@ -82,7 +78,7 @@ function HomePage({
 						tag
 						to="/"
 						activeStyle={styles.activeLinkStyle}
-						onClick={() => onTagClickHandle()}
+						onClick={() => handleClick()}
 					>
 						{tag}
 					</S.NavLinkExtended>
@@ -116,7 +112,7 @@ const mapStateToProps = (state) => {
 		articlesListError: state.articles.articlesListError,
 		tagsList: state.tags.tagsList,
 		tag: state.tags.tag,
-		user: state.user
+	
 	};
 };
 

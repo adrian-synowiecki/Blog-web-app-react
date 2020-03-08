@@ -1,13 +1,21 @@
 import tagsTypes from '../types/tags';
 
-export default function tags(state = {}, action) {
+
+const initialState = {
+	isFetching: false,
+	tagsList: [],
+	tag: null,
+	error: ''
+};
+
+export default function tags(state = initialState, action) {
 	switch (action.type) {
 		case tagsTypes.FETCH_TAGS_BY_MOST_POPULAR_REQUESTED:
-			return { ...state, isLoading: true };
+			return { ...state, isFetching: true };
 		case tagsTypes.FETCH_TAGS_BY_MOST_POPULAR_DONE:
-			return { ...state, tagsList: action.payload, isLoading: false };
+			return { ...state, tagsList: action.payload, isFetching: false };
 		case tagsTypes.FETCH_TAGS_BY_MOST_POPULAR_ERROR:
-			return { ...state, isLoading: false };
+			return { ...state, isFetching: false };
 		case tagsTypes.GET_TAG_NAME: 
 			return {...state, tag: action.payload}
 		case tagsTypes.REMOVE_TAG_NAME:

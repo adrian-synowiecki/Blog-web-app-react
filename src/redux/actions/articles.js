@@ -1,113 +1,99 @@
-import articlesTypes from '../types/articles'
+import articlesTypes from '../types/articles';
 
-
-export const fetchArticlesByMostRecentRequested = (offSet) => {
+export const fetchArticlesByMostRecentRequest = (offSet) => {
 	return {
-        type: articlesTypes.FETCH_ARTICLES_BY_MOST_RECENT_REQUESTED,
-        offSet
+		type: articlesTypes.FETCH_ARTICLES_BY_MOST_RECENT_REQUESTED,
+		offSet
 	};
 };
-export const fetchArticlesByMostRecentDone = (articlesByMostRecent) => {
+export const fetchArticlesByMostRecentDone = (articlesList) => {
 	return {
 		type: articlesTypes.FETCH_ARTICLES_BY_MOST_RECENT_DONE,
-		payload: articlesByMostRecent
+		payload: { articlesList }
 	};
 };
 export const fetchArticlesByMostRecentFailure = (error) => {
 	return {
 		type: articlesTypes.FETCH_ARTICLES_BY_MOST_RECENT_FAILURE,
-		payload: error
+		payload: { error }
 	};
 };
 
-
-
-export const fetchFavoriteArticlesRequested = (username) => ({
+export const fetchFavoriteArticlesRequest = (username) => ({
 	type: articlesTypes.FETCH_FAVORITE_ARTICLES_REQUESTED,
 	username
 });
 
-export const fetchFavoriteArticlesDone = (articles) => ({
+export const fetchFavoriteArticlesDone = (articlesList) => ({
 	type: articlesTypes.FETCH_FAVORITE_ARTICLES_DONE,
-	payload: articles
+	payload: { articlesList }
 });
 
-export const fetchFavoriteArticlesFailure = (error) => ({
+export const fetchFavoriteArticlesError = (error) => ({
 	type: articlesTypes.FETCH_FAVORITE_ARTICLES_FAILURE,
-	payload:error
-    
+	payload: { error }
 });
 
-
-
-export const fetchArticlesByAuthorRequested = (articleAuthorUsername) => ({
+export const fetchArticlesByAuthorRequest = (articleAuthorUsername) => ({
 	type: articlesTypes.FETCH_ARTICLES_BY_AUTHOR_REQUESTED,
 	articleAuthorUsername
 });
 
-export const fetchArticlesByAuthorDone = (articlesData) => ({
+export const fetchArticlesByAuthorDone = (articlesList) => ({
 	type: articlesTypes.FETCH_ARTICLES_BY_AUTHOR_DONE,
-	payload: articlesData
+	payload: { articlesList }
 });
 
-export const fetchArticlesByAuthorFailure = (error) => ({
+export const fetchArticlesByAuthorError = (error) => ({
 	type: articlesTypes.FETCH_ARTICLES_BY_AUTHOR_FAILURE,
-	payload:error
+	payload: { error }
 });
 
-
-
-export const fetchArticlesByTagRequested = (tag) => ({
+export const fetchArticlesByTagRequest = (tag) => ({
 	type: articlesTypes.FETCH_ARTICLES_BY_TAG_REQUESTED,
 	tag
-})
+});
 
-export const fetchArticlesByTagDone = (articles) => ({
+export const fetchArticlesByTagDone = (articlesList) => ({
 	type: articlesTypes.FETCH_ARTICLES_BY_TAG_DONE,
-	payload: articles
-})
+	payload: { articlesList }
+});
 
-export const fetchArticlesByTagFailure = (error) => ({
+export const fetchArticlesByTagError = (error) => ({
 	type: articlesTypes.FETCH_ARTICLES_BY_TAG_FAILURE,
-	payload: error
-})
+	payload: { error }
+});
 
-
-
-
-export const articleFavoritedRequested = (slug) => ({
+export const articleFavoritedRequest = (slug) => ({
 	type: articlesTypes.ARTICLE_FAVORITED_REQUESTED,
 	slug
 });
 
 export const articleFavoritedDone = (article) => ({
 	type: articlesTypes.ARTICLE_FAVORITED_DONE,
-	payload: article
+	payload: { article }
 });
 
-export const articleFavoritedFailure = (error) => ({
+export const articleFavoritedError = (error) => ({
 	type: articlesTypes.ARTICLE_FAVORITED_FAILURE,
-	payload:error
+	payload: { error }
 });
 
-
-
-export const articleUnfavoritedRequested = (slug) => ({
+export const unfavoriteArticleRequest = (slug) => ({
 	type: articlesTypes.ARTICLE_UNFAVORITED_REQUESTED,
 	slug
 });
 
-export const articleUnfavoritedDone = (article) => ({
+export const unfavoriteArticleDone = (article) => ({
 	type: articlesTypes.ARTICLE_UNFAVORITED_DONE,
-	payload: article
+	payload: { article }
 });
 
-export const articleUnfavoritedFailure = (error) => ({
+export const articleUnfavoritedError = (error) => ({
 	type: articlesTypes.ARTICLE_UNFAVORITED_FAILURE,
-	payload: error
+	payload: { error }
 });
 
 export const unloadArticles = () => ({
 	type: articlesTypes.UNLOAD_ARTICLES
-	
-})
+});

@@ -3,18 +3,18 @@ import { isEmpty } from 'lodash';
 
 import { NavbarContainer, NavbarBrand, NavLinks, StyledLink } from './Navbar.style';
 
-function Navbar({ userDetails }) {
+function Navbar({ currentUserData }) {
 	return (
 		<NavbarContainer>
 			<NavbarBrand to="/">conduit</NavbarBrand>
 			<NavLinks>
 				<StyledLink to="/">Home</StyledLink>
-				{isEmpty(userDetails) && <StyledLink to="/signIn">Sign in</StyledLink>}
-				{isEmpty(userDetails) && <StyledLink to="/signUp">Sign Up</StyledLink>}
-				{!isEmpty(userDetails) && <StyledLink to="/createNewArticle">New Post</StyledLink>}
-				{!isEmpty(userDetails) && <StyledLink to="/userSettings">Settings</StyledLink>}
-				{!isEmpty(userDetails) && (
-					<StyledLink to={`/userProfile/${userDetails.username}`}>{userDetails.username}</StyledLink>
+				{isEmpty(currentUserData) && <StyledLink to="/signIn">Sign in</StyledLink>}
+				{isEmpty(currentUserData) && <StyledLink to="/signUp">Sign Up</StyledLink>}
+				{!isEmpty(currentUserData) && <StyledLink to="/createNewArticle">New Post</StyledLink>}
+				{!isEmpty(currentUserData) && <StyledLink to="/userSettings">Settings</StyledLink>}
+				{!isEmpty(currentUserData) && (
+					<StyledLink to={`/userProfile/${currentUserData.username}`}>{currentUserData.username}</StyledLink>
 				)}
 			</NavLinks>
 		</NavbarContainer>

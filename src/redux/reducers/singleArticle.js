@@ -1,21 +1,44 @@
 import singleArticleTypes from '../types/singleArticle';
 
 const initialState = {
-	isFetchingArticleContent: false,
-	articleContent: {},
-	articleContentError: ''
+	isFetching: false,
+	inProgress: false,
+	singleArticleData: {},
+	error: ''
 };
 
 export default function singleArticleReducer(state = initialState, action) {
 	switch (action.type) {
-		case singleArticleTypes.FETCH_ARTICLE_REQUESTED:
-			return { ...state, isFetchingArticleContent: true };
-		case singleArticleTypes.FETCH_ARTICLE_DONE:
-			return { ...state, articleContent: { ...action.payload }, isFetchingArticleContent: false };
-		case singleArticleTypes.FETCH_ARTICLE_ERROR:
-			return { ...state, articleContentError: action.payload, isFetchingArticleContent: false };
-		case singleArticleTypes.UNLOAD_ARTICLE:
-			return { ...state, articleContent: {} };
+		case singleArticleTypes.FETCH_SINGLE_ARTICLE_REQUEST:
+			return { ...state, isFetching: true };
+		case singleArticleTypes.FETCH_SINGLE_ARTICLE_DONE:
+			return { ...state, singleArticleData: { ...action.payload.singleArticleData }, isFetching: false };
+		case singleArticleTypes.FETCH_SINGLE_ARTICLE_ERROR:
+			return { ...state, error: action.payload.error, isFetching: false };
+
+		case singleArticleTypes.CREATE_SINGLE_ARTICLE_REQUEST:
+			return { ...state, inProgress: true };
+		case singleArticleTypes.CREATE_SINGLE_ARTICLE_DONE:
+			return { ...state, inProgress: false };
+		case singleArticleTypes.CREATE_SINGLE_ARTICLE_ERROR:
+			return { ...state, error: action.payload.error, inProgress: false };
+
+		case singleArticleTypes.UPDATE_SINGLE_ARTICLE_REQUEST:
+			return { ...state, inProgress: true };
+		case singleArticleTypes.UPDATE_SINGLE_ARTICLE_DONE:
+			return { ...state, inProgress: false };
+		case singleArticleTypes.UPDATE_SINGLE_ARTICLE_ERROR:
+			return { ...state, error: action.payload.error, inProgress: false };
+
+		case singleArticleTypes.DELETE_SINGLE_ARTICLE_REQUEST:
+			return { ...state, inProgress: true };
+		case singleArticleTypes.DELETE_SINGLE_ARTICLE_DONE:
+			return { ...state, inProgress: false };
+		case singleArticleTypes.UPDATE_SINGLE_ARTICLE_ERROR:
+			return { ...state, error: action.payload.error, inProgress: false };
+
+		case singleArticleTypes.UNLOAD_SINGLE_ARTICLE:
+			return { ...state, singleArticleData: {} };
 		default:
 			return state;
 	}

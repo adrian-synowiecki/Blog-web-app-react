@@ -23,7 +23,7 @@ function ArticleOverview({
 	isFetchingSingleArticleData,
 	fetchArticles,
 	fetchCommentsFromArticleRequested,
-	userDetails,
+	currentUserData,
 	commentsList,
 	fetchSingleArticleUnmounted,
 	fetchCommentsFromArticleUnmounted,
@@ -46,7 +46,9 @@ function ArticleOverview({
 	}, []);
 
 	const canModify =
-		userDetails.length > 0 && !isEmpty(articleContent) && userDetails.username === articleContent.author.username;
+		!isEmpty(currentUserData) &&
+		!isEmpty(articleContent) &&
+		currentUserData.username === articleContent.author.username;
 	/* 	 	console.log(commentsList); */
 
 	console.log(commentsList);
@@ -56,14 +58,14 @@ function ArticleOverview({
 				<React.Fragment>
 					<Header
 						singleArticleHeader
-						articleContent={articleContent}
+						singleArticle={articleContent}
 						title={articleContent.title}
 						canModify={canModify}
 					/>
 					<ArticleMeta singleArticleMeta articleContent={articleContent} />
 					<FullArticleText>{articleContent.body}</FullArticleText>
 					<Tags tagList={tagList} />
-					{isEmpty(userDetails) ? (
+					{isEmpty(currentUserData) ? (
 						<Paragraph>
 							<span style={{ color: colors.green }}>Sign in</span> or{' '}
 							<span style={{ color: colors.green }}>sign up</span> to add comments on this article
@@ -83,7 +85,7 @@ const mapStateToProps = (state) => {
 		articleContent: state.singleArticle.articleContent,
 		tagList: state.singleArticle.articleContent.tagList,
 		isFetchingArticleContent: state.singleArticle.isFetchingArticleContent,
-		userDetails: state.user.userDetails,
+		currentUserData: state.currentUser.currentUserData,
 		commentsList: state.comments.commentsList
 	};
 };

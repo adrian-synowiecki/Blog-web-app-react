@@ -2,28 +2,32 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { useParams, useHistory } from 'react-router-dom';
+import { isEmpty } from 'lodash';
 
-import { fetchSingleArticle } from '../../redux/modules/singleArticle';
+import { fetchArticleRequested } from '../../redux/actions/singleArticle';
 
 import ArticleForm from '../../components/ArticleForm/ArticleForm';
 
-function EditArticle({ match, fetchSingleArticle, selectedArticle }) {
-	useEffect(() => {
-		fetchSingleArticle(match.params.articleSlug);
-	}, [fetchSingleArticle, match.params.articleSlug]);
+function EditArticle({ match, fetchArticleRequested, selectedArticle }) {
+	useEffect(
+		() => {
+			fetchArticleRequested(match.params.articleSlug);
+		},
+		[ fetchArticleRequested, match.params.articleSlug ]
+	);
 	console.log(match.params.articleSlug);
-	return <div>{selectedArticle && <ArticleForm selectedArticle={selectedArticle} />}</div>;
+	return <div>{!isEmpty(selectedArticle) && <ArticleForm selectedArticle={selectedArticle} />}</div>;
 }
 
 const mapStateToProps = (state, ownProps) => {
 	return {
-		selectedArticle: state.singleArticle.article
+		selectedArticle: state.singleArticle.articleContent
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		fetchSingleArticle: (slug) => dispatch(fetchSingleArticle(slug))
+		fetchArticleRequested: (slug) => dispatch(fetchArticleRequested(slug))
 	};
 };
 

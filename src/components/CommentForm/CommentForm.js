@@ -17,7 +17,7 @@ import {
 
 function CommentForm({
 	selectedArticle,
-	userDetails,
+	currentUserData,
 	commentsList,
 	fetchCommentsFromArticleRequested,
 	addCommentToArticleRequested,
@@ -52,7 +52,7 @@ function CommentForm({
 	);
 }
 const mapStateToProps = (state) => ({
-	userDetails: state.user.userDetails
+	currentUserData: state.currentUser.currentUserData
 });
 
 const mapDispatchToProps = (dispatch) => ({

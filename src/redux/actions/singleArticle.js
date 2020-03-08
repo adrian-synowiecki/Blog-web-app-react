@@ -1,96 +1,60 @@
-import singleArticleTypes from '../types/singleArticle'
+import singleArticleTypes from '../types/singleArticle';
 
-
-export const fetchArticleRequested = (slug) => ({
-    type: singleArticleTypes.FETCH_ARTICLE_REQUESTED,
-    slug
-})
-
-export const fetchArticleDone = (singleArticle) => ({
-	type: singleArticleTypes.FETCH_ARTICLE_DONE,
-	payload: singleArticle
+/* fetching article */
+export const fetchSingleArticleRequest = (slug) => ({
+	type: singleArticleTypes.FETCH_SINGLE_ARTICLE_REQUEST,
+	slug
 });
-
-export const fetchArticleError = (error) => ({
-	type: singleArticleTypes.FETCH_ARTICLE_ERROR,
+export const fetchSingleArticleDone = (singleArticleData) => ({
+	type: singleArticleTypes.FETCH_SINGLE_ARTICLE_DONE,
+	payload: { singleArticleData }
+});
+export const fetcSingleArticleError = (error) => ({
+	type: singleArticleTypes.FETCH_SINGLE_ARTICLE_ERROR,
 	payload: error
-    
 });
 
+/* creating article */
+export const createSingleArticleRequest = (singleArticleCreationData) => ({
+	type: singleArticleTypes.CREATE_SINGLE_ARTICLE_REQUEST,
+	singleArticleCreationData
+});
+export const createSingleArticleDone = () => ({
+	type: singleArticleTypes.CREATE_SINGLE_ARTICLE_DONE
+});
+export const createSingleArticleError = (error) => ({
+	type: singleArticleTypes.CREATE_SINGLE_ARTICLE_ERROR,
+	payload: { error }
+});
 
+/* updating article */
+export const updateSingleArticleRequest = (slug, singleArticleCreationData) => ({
+	type: singleArticleTypes.UPDATE_SINGLE_ARTICLE_REQUEST,
+	slug,
+	singleArticleCreationData
+});
+export const updateSingleArticleDone = () => ({
+	type: singleArticleTypes.UPDATE_SINGLE_ARTICLE_DONE
+});
+export const updateSingleArticleError = (error) => ({
+	type: singleArticleTypes.UPDATE_SINGLE_ARTICLE_ERROR,
+	payload: { error }
+});
 
-export const createArticleRequested = (articleDataObj) => ({
-    type: singleArticleTypes.CREATE_ARTICLE_REQUESTED,
-    payload: articleDataObj
+/* deleting article */
+export const deleteSingleArticleRequest = (slug) => ({
+	type: singleArticleTypes.DELETE_SINGLE_ARTICLE_REQUEST,
+	slug
+});
+export const deleteSingleArticleDone = () => ({
+	type: singleArticleTypes.DELETE_SINGLE_ARTICLE_DONE
+});
+export const deleteSingleArticleError = (error) => ({
+	type: singleArticleTypes.DELETE_SINGLE_ARTICLE_ERROR,
+	payload: { error }
+});
 
-})
-
-export const createArticleDone = () => ({
-    type: singleArticleTypes.CREATE_ARTICLE_DONE,
-  
-})
-
-export const createArticleError = (error) => ({
-    type: singleArticleTypes.CREATE_ARTICLE_ERROR,
-    payload: error
-    
-})
-
-
-export const updateArticleRequested = (slug, articleDataObj) => ({
-    type: singleArticleTypes.UPDATE_ARTICLE_REQUESTED,
-    slug,
-    articleDataObj
-})
-
-export const updateArticleDone = () => ({
-    type: singleArticleTypes.UPDATE_ARTICLE_DONE
-})
-
-export const updateArticleError = (error) => ({
-    type: singleArticleTypes.UPDATE_ARTICLE_ERROR,
-    payload: error
-    
-})
-
-
-export const deleteArticleRequested = (slug) => ({
-    type: singleArticleTypes.DELETE_ARTICLE_REQUESTED,
-    slug
-})
-   
-
-export const deleteArticleDone = () => ({
-    type: singleArticleTypes.DELETE_ARTICLE_DONE
-})
-
-export const deleteArticleError = (error) => ({
-    type: singleArticleTypes.DELETE_ARTICLE_ERROR,
-    payload: error
-})
-
-export const unloadArticle = () => ({
-	type: singleArticleTypes.UNLOAD_ARTICLE	
-})
-
-
-/* export default {
-	FETCH_SINGLE_ARTICLE_REQUESTED: 'FETCH_SINGLE_ARTICLE_REQUESTED',
-	FETCH_SINGLE_ARTICLE_DONE: 'FETCH_SINGLE_ARTICLE_DONE',
-	FETCH_SINGLE_ARTICLE_ERROR: 'FETCH_SINGLE_ARTICLE_ERROR',
-    FETCH_SINGLE_ARTICLE_UNMOUNTED: 'FETCH_SINGLE_ARTICLE_UNMOUNTED',
-
-	CREATE_ARTICLE_REQUESTED: 'CREATE_ARTICLE_REQUESTED',
-	CREATE_ARTICLE_DONE: 'CREATE_ARTICLE_DONE',
-	CREATE_ARTICLE_ERROR: 'CREATE_ARTICLE_ERROR',
-
-    UPDATE_ARTICLE_REQUESTED: 'UPDATE_ARTICLE_REQUESTED',
-    UPDATE_ARTICLE_DONE: 'UPDATE_ARTICLE_DONE',
-    UPDATE_ARTICLE_ERROR: 'UPDATE_ARTICLE_ERROR',
-
-    DELETE_ARTICLE_REQUESTED: 'DELETE_ARTICLE_REQUESTED',
-    DELETE_ARTICLE_DONE: 'DELETE_ARTICLE_DONE',
-    DELETE_ARTICLE_ERROR: 'DELETE_ARTICLE_ERROR'
-};
-
- */
+/* unloading article */
+export const unloadSingleArticle = () => ({
+	type: singleArticleTypes.UNLOAD_SINGLE_ARTICLE
+});

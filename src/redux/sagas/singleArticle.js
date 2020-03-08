@@ -35,10 +35,11 @@ function* createArticle(action) {
 }
 
 function* updateArticle(action) {
-    const {slug, payload} = action
+    const {slug, articleDataObj} = action
     try {
-        yield call(api.updateArticleInAPI, slug, payload)
+        yield call(api.updateArticleInAPI, slug, articleDataObj)
         yield put(singleArticleActions.updateArticleDone())
+        yield history.push('/');
     } catch (error) {
         console.log(error)
         yield put(singleArticleActions.updateArticleError(error.response))

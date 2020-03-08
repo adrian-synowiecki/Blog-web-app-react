@@ -103,7 +103,7 @@ function UserSettings({ userDetails, updateUserRequested, history }) {
 
 const mapStateToProps = (state) => {
 	return {
-		userDetails: state.user.userDetails
+		currentUserData: state.currentUser.currentUserData
 	};
 };
 

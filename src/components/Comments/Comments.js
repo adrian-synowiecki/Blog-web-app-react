@@ -21,7 +21,7 @@ import {
 
 function Comment({
 	selectedArticle,
-	userDetails,
+	currentUserData,
 	commentsList,
 	fetchCommentsFromArticleRequested,
 	addCommentToArticleRequested,
@@ -30,9 +30,11 @@ function Comment({
 	/* 	useEffect(() => {
 		fetchCommentsFromArticles(selectedArticle.slug);
 	}, []); */
+	
+	console.log(commentsList)
 	return (
 		<CommentContainer>
-			{commentsList &&
+			{commentsList.length > 0 &&
 				commentsList.map((comment) => (
 					<CommentContent key={comment.id}>
 						<CommentBlock>{comment.body}</CommentBlock>
@@ -40,7 +42,7 @@ function Comment({
 							<CommentImage>{comment.image}</CommentImage>
 							<CommentUsername>{comment.author.username}</CommentUsername>
 							<CommentCreatedAt>{comment.createdAt}</CommentCreatedAt>
-							{userDetails.username === comment.author.username && (
+							{currentUserData.username === comment.author.username && (
 								<DeleteComment
 									onClick={() => removeCommentFromArticleRequested(selectedArticle.slug, comment.id)}
 								/>
@@ -52,7 +54,7 @@ function Comment({
 	);
 }
 const mapStateToProps = (state) => ({
-	userDetails: state.user.userDetails
+	currentUserData: state.currentUser.currentUserData
 });
 
 const mapDispatchToProps = (dispatch) => ({

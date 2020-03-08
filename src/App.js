@@ -16,24 +16,24 @@ import Navbar from './components/Navbar/Navbar';
 
 import { connect } from 'react-redux';
 
-function App({ userDetails }) {
+function App({ currentUserData }) {
 	return (
 		<div>
-			<Navbar userDetails={userDetails} />
+			<Navbar currentUserData={currentUserData} />
 			<Switch>
 				<Route exact path="/">
 					<HomePage />
 				</Route>
-				<Route path="/signIn" render={() => (isEmpty(userDetails) ? <SignIn /> : <Redirect to="/" />)} />
-				<Route path="/signUp" render={() => (isEmpty(userDetails) ? <SignUp /> : <Redirect to="/" />)} />
-				<Route path="/userSettings" render={() => (!isEmpty(userDetails) ? <UserSettings /> : <Redirect to="/" />)} />
+				<Route path="/signIn" render={() => (isEmpty(currentUserData) ? <SignIn /> : <Redirect to="/" />)} />
+				<Route path="/signUp" render={() => (isEmpty(currentUserData) ? <SignUp /> : <Redirect to="/" />)} />
+				<Route path="/userSettings" render={() => (!isEmpty(currentUserData) ? <UserSettings /> : <Redirect to="/" />)} />
 				<Route
 					path="/createNewArticle"
-					render={() => (userDetails ? <CreateNewArticle /> : <Redirect to="/" />)}
+					render={() => (currentUserData ? <CreateNewArticle /> : <Redirect to="/" />)}
 				/>
 				<Route
 					path="/editArticle/:articleSlug"
-					render={({ ...props }) => (!isEmpty(userDetails)  ? <EditArticle {...props} /> : <Redirect to="/" />)}
+					render={({ ...props }) => (!isEmpty(currentUserData)  ? <EditArticle {...props} /> : <Redirect to="/" />)}
 				/>
 				<Route path="/article/:articleSlug" component={ArticleOverview} />
 				<Route path="/articleAuthorProfile/:username">
@@ -50,7 +50,7 @@ function App({ userDetails }) {
 
 const mapStateToProps = (state) => {
 	return {
-		userDetails: state.user.userDetails
+		currentUserData: state.currentUser.currentUserData
 	};
 };
 
