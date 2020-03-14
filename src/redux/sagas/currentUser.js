@@ -1,57 +1,53 @@
 import { all, put, call, takeLatest, takeEvery } from 'redux-saga/effects';
 
 import { history } from '../../index';
-import * as api from '../api/user';
-import * as userActions from '../actions/user';
-import userTypes from '../types/user';
+import * as api from '../api/currentUser';
+import * as userActions from '../actions/currentUser';
+import userTypes from '../types/currentUser';
 
-function* signUp(action) {
-	console.log(action.user);
+function* signUpAsync(action) {
 	try {
-		const response = yield call(api.signUpInAPI, action.user);
+		const response = yield call(api.signUpInAPI, action.userCreationData);
 		localStorage.setItem('token', response.data.user.token);
 		yield put(userActions.signUpDone(response.data.user));
 	} catch (error) {
-		yield put(userActions.signUpError(error.response));
-		console.log(error);
+		yield put(userActions.signUpError(error));
 	}
 }
 
-function* signIn(action) {
+function* loginAsync(action) {
 	try {
-		const response = yield call(api.signIninAPI, action.user);
+		const response = yield call(api.loginInApi, action.userLoginData);
 		localStorage.setItem('token', response.data.user.token);
-		yield put(userActions.signInDone(response.data.user));
+		yield put(userActions.loginDone(response.data.user));
 	} catch (error) {
-		yield put(userActions.signInError(error.response));
-		console.log(error);
+		yield put(userActions.loginError(error));
 	}
 }
 
-function* updateUser(action) {
+function* updateUserAsync(action) {
 	try {
-		const response = yield call(api.updateUserInAPI, action.updatedUser);
+		const response = yield call(api.updateUserInAPI, action.userUpdateData);
 		localStorage.setItem('token', response.data.user.token);
 		yield put(userActions.updateUserDone(response.data.user));
 		yield history.push('/');
 	} catch (error) {
-		yield put(userActions.updateUserError(error.response));
-		console.log(error);
+		yield put(userActions.updateUserError(error));
 	}
 }
 
-export default function* currentUserWatcher() {
+export default function* watchCurrentUserSaga() {
 	yield all([
-		takeLatest(userTypes.SIGN_UP_REQUESTED, signUp),
-		takeLatest(userTypes.SIGN_IN_REQUESTED, signIn),
-		takeLatest(userTypes.UPDATE_USER_REQUESTED, updateUser)
+		takeLatest(userTypes.SIGN_UP_REQUEST, signUpAsync),
+		takeLatest(userTypes.LOGIN_REQUEST, loginAsync),
+		takeLatest(userTypes.UPDATE_USER_REQUEST, updateUserAsync)
 	]);
 }
 
 /* export const signUp = (userObj) => {
 	return async (dispatch) => {
 		try {
-			dispatch(signUpRequested());
+			dispatch(signUpREQUEST());
 			const response = await axiosInstance.post('api/users', JSON.stringify(userObj));
 			localStorage.setItem('token', response.data.user.token);
 			dispatch(signUpDone(response.data.user));
@@ -65,7 +61,7 @@ export default function* currentUserWatcher() {
 export const signIn = (userObj) => {
 	return async (dispatch) => {
 		try {
-			dispatch(signInRequested());
+			dispatch(signInREQUEST());
 			const response = await axiosInstance.post('api/users/login', JSON.stringify(userObj));
 			localStorage.setItem('token', response.data.user.token);
 			dispatch(signInDone(response.data.user));
@@ -77,7 +73,7 @@ export const signIn = (userObj) => {
 export const updateUser = (updatedUserObj) => {
 	return async (dispatch) => {
 		try {
-			dispatch(updateUserRequested());
+			dispatch(updateUserREQUEST());
 			const response = await axiosInstance.put('api/user', JSON.stringify(updatedUserObj));
 			localStorage.setItem('token', response.data.user.token);
 			dispatch(updateUserDone(response.data.user));

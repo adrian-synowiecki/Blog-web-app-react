@@ -3,9 +3,9 @@ import { Formik, Field } from 'formik';
 import { connect } from 'react-redux';
 
 import {
-	fetchCommentsFromArticleRequested,
-	addCommentToArticleRequested,
-	removeCommentFromArticleRequested
+	fetchCommentsFromArticleRequest,
+	addCommentToArticleRequest,
+	removeCommentFromArticleRequest
 } from '../../redux/actions/comments';
 
 import {
@@ -26,9 +26,9 @@ function Comment({
 	selectedArticle,
 	currentUserData,
 	commentsList,
-	fetchCommentsFromArticleRequested,
-	addCommentToArticleRequested,
-	removeCommentFromArticleRequested
+	fetchCommentsFromArticleRequest,
+	addCommentToArticleRequest,
+	removeCommentFromArticleRequest
 }) {
 	/* 	useEffect(() => {
 		fetchCommentsFromArticles(selectedArticle.slug);
@@ -46,7 +46,7 @@ function Comment({
 							body: values.commentText
 						}
 					};
-					addCommentToArticleRequested(commentObj, selectedArticle.slug);
+					addCommentToArticleRequest(commentObj, selectedArticle.slug);
 				}}
 			>
 				{({ errors, touched }) => (
@@ -66,7 +66,7 @@ function Comment({
 							<CommentCreatedAt>{comment.createdAt}</CommentCreatedAt>
 							{currentUserData.username === comment.author.username && (
 								<DeleteComment
-									onClick={() => removeCommentFromArticleRequested(selectedArticle.slug, comment.id)}
+									onClick={() => removeCommentFromArticleRequest(selectedArticle.slug, comment.id)}
 								/>
 							)}
 						</CommentFooter>
@@ -80,10 +80,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	addCommentToArticleRequested: (commentObj, slug) => dispatch(addCommentToArticleRequested(commentObj, slug)),
-	removeCommentFromArticleRequested: (slug, commentId) =>
-	dispatch(removeCommentFromArticleRequested(slug, commentId)),
-	fetchCommentsFromArticleRequested: (slug) => dispatch(fetchCommentsFromArticleRequested(slug))
+	addCommentToArticleRequest: (commentObj, slug) => dispatch(addCommentToArticleRequest(commentObj, slug)),
+	removeCommentFromArticleRequest: (slug, commentId) =>
+	dispatch(removeCommentFromArticleRequest(slug, commentId)),
+	fetchCommentsFromArticleRequest: (slug) => dispatch(fetchCommentsFromArticleRequest(slug))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Comment);

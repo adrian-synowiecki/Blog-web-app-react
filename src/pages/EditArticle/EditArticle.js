@@ -4,16 +4,16 @@ import { connect } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { isEmpty } from 'lodash';
 
-import { fetchArticleRequested } from '../../redux/actions/singleArticle';
+import { fetchArticleRequest } from '../../redux/actions/article';
 
 import ArticleForm from '../../components/ArticleForm/ArticleForm';
 
-function EditArticle({ match, fetchArticleRequested, selectedArticle }) {
+function EditArticle({ match, fetchArticleRequest, selectedArticle }) {
 	useEffect(
 		() => {
-			fetchArticleRequested(match.params.articleSlug);
+			fetchArticleRequest(match.params.articleSlug);
 		},
-		[ fetchArticleRequested, match.params.articleSlug ]
+		[ fetchArticleRequest, match.params.articleSlug ]
 	);
 	console.log(match.params.articleSlug);
 	return <div>{!isEmpty(selectedArticle) && <ArticleForm selectedArticle={selectedArticle} />}</div>;
@@ -21,13 +21,13 @@ function EditArticle({ match, fetchArticleRequested, selectedArticle }) {
 
 const mapStateToProps = (state, ownProps) => {
 	return {
-		selectedArticle: state.singleArticle.articleContent
+		selectedArticle: state.article.articleContent
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		fetchArticleRequested: (slug) => dispatch(fetchArticleRequested(slug))
+		fetchArticleRequest: (slug) => dispatch(fetchArticleRequest(slug))
 	};
 };
 

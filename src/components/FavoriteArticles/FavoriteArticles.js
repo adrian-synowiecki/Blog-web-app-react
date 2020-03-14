@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchFavoriteArticlesRequested } from '../../redux/actions/articles'
+import { fetchFavoriteArticlesRequest } from '../../redux/actions/articleList'
 import ArticlePreview from '../ArticlePreview/ArticlePreview';
 
-function FavoriteArticles({ match, favoriteArticles, fetchFavoriteArticlesRequested }) {
+function FavoriteArticles({ match, favoriteArticles, fetchFavoriteArticlesRequest }) {
 /* 	useEffect(
 		() => {
 			if (match.url.includes('favorites')) {
@@ -30,7 +30,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	fetchFavoriteArticlesRequested: (username) => dispatch(fetchFavoriteArticlesRequested(username)) 
+	fetchFavoriteArticlesRequest: (username) => dispatch(fetchFavoriteArticlesRequest(username)) 
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(FavoriteArticles);

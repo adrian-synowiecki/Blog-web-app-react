@@ -1,36 +1,35 @@
 import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { isEmpty } from 'lodash';
 
 import Profile from '../../components/Profile/Profile';
 
 import { useLocation, useParams } from 'react-router-dom';
-import { connect } from 'react-redux';
 
-import { fetchArticlesByAuthorRequested, fetchFavoriteArticlesRequested } from '../../redux/actions/articles';
+import { fetchArticlesByAuthorRequest, fetchFavoriteArticlesRequest } from '../../redux/actions/articleList';
 
 function UserProfile({
 	match,
 	currentUserData,
-	fetchArticlesByAuthorRequested,
-	fetchFavoriteArticlesRequested,
+	fetchArticlesByAuthorRequest,
+	fetchFavoriteArticlesRequest,
 	userArticles,
 	favoriteArticles,
-	articlesList
+	articleList
 }) {
 	useEffect(() => {
-		fetchArticlesByAuthorRequested(username);
-	/* 	fetchFavoriteArticlesRequested(username); */
+		fetchArticlesByAuthorRequest(username);
+		fetchFavoriteArticlesRequest(username);
 	}, []);
 
 	const { username } = useParams();
 	let location = useLocation();
 
-	console.log(articlesList);
 	return (
 		<div>
 			{!isEmpty(currentUserData) && (
 				<Profile
-					articlesList={articlesList}
+					articleList={articleList}
 					username={username}
 					path={location.pathname}
 					/* 		userArticles={userArticles} */
@@ -42,15 +41,14 @@ function UserProfile({
 	);
 }
 
-const mapStateToProps = (state) => {
-	return {
-		articlesList: state.articles.articlesList,
-		currentUserData: state.currentUser.currentUserData
-	};
-};
+const mapStateToProps = (state) => ({
+	articleList: state.articleList.articleList,
+	currentUserData: state.currentUser.currentUserData
+});
+
 const mapDispatchToProps = (dispatch) => ({
-	fetchArticlesByAuthorRequested: (username) => dispatch(fetchArticlesByAuthorRequested(username)),
-	fetchFavoriteArticlesRequested: (username) => dispatch(fetchFavoriteArticlesRequested(username))
+	fetchArticlesByAuthorRequest: (username) => dispatch(fetchArticlesByAuthorRequest(username)),
+	fetchFavoriteArticlesRequest: (username) => dispatch(fetchFavoriteArticlesRequest(username))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);

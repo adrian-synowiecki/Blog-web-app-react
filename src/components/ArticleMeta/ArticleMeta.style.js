@@ -6,8 +6,8 @@ import colors from '../../utils/colors';
 export const ArticleMetaContainer = styled.div`
 	display: flex;
 	/*     margin-top: 2rem; */
-	margin-top: ${({ singleArticleMeta }) => (singleArticleMeta ? '-5rem' : '3rem')};
-	margin-left: ${({ singleArticleMeta }) => singleArticleMeta && '2rem'};
+	margin-top: ${({ articleMeta }) => (articleMeta ? '-5rem' : '3rem')};
+	margin-left: ${({ articleMeta }) => articleMeta && '2rem'};
 	position: absolute;
 `;
 
@@ -26,7 +26,7 @@ export const FlexWrapperCol = styled.div`
 
 export const AuthorName = styled.p`
 	margin-top: -0.7rem;
-	color: ${({ singleArticleMeta }) => (singleArticleMeta ? 'white' : colors.green)};
+	color: ${({ articleMeta }) => (articleMeta ? 'white' : colors.green)};
 	text-decoration: none;
 `;
 
@@ -35,5 +35,5 @@ export const DateCreated = styled.p`
 	color: gray;
 	opacity: 0.8;
 	font-size: 1rem;
-	color: ${({ singleArticleMeta }) => (singleArticleMeta ? 'white' : 'gray')};
+	color: ${({ articleMeta }) => (articleMeta ? 'white' : 'gray')};
 `;

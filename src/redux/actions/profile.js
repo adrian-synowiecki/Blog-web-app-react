@@ -1,7 +1,7 @@
 import profileTypes from '../types/profile';
 
-export const fetchProfileByUsernameRequested = (username) => ({
-	type: profileTypes.FETCH_PROFILE_BY_USERNAME_REQUESTED,
+export const fetchProfileByUsernameRequest = (username) => ({
+	type: profileTypes.FETCH_PROFILE_BY_USERNAME_REQUEST,
 	username
 });
 
@@ -13,10 +13,6 @@ export const fetchProfileByUsernameDone = (profileData) => ({
 export const fetchProfileByUsernameError = (error) => ({
 	type: profileTypes.FETCH_PROFILE_BY_USERNAME_ERROR,
 	payload: { error }
-});
-
-export const fetchProfileByUsernameUnmounted = () => ({
-	type: profileTypes.FETCH_PROFILE_BY_USERNAME_UNMOUNTED
 });
 
 export const unloadProfile = () => ({

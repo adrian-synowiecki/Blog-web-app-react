@@ -3,30 +3,29 @@ import { isEmpty } from 'lodash';
 
 import Profile from '../../components/Profile/Profile';
 
-import { fetchProfileByUsernameRequested, unloadProfile } from '../../redux/actions/profile';
+import { fetchProfileByUsernameRequest, unloadProfile } from '../../redux/actions/profile';
 
 import { useLocation, useParams } from 'react-router-dom';
 
-import { fetchArticlesByAuthorRequested, unloadArticles } from '../../redux/actions/articles';
+import { fetchArticlesByAuthorRequest, unloadArticles } from '../../redux/actions/articleList';
 
 import { connect } from 'react-redux';
 
 function ArticleAuthorProfile({
-	fetchArticlesByAuthorRequested,
-	fetchProfileByUsernameRequested,
-	match,
-	articlesList,
+	fetchArticlesByAuthorRequest,
+	fetchProfileByUsernameRequest,
+	articleList,
+	inProgress,
+	error,
 	unloadArticles,
 	unloadProfile,
-	fetchUserProfile,
-	fetchUserProfileUnmounted,
-	profileDetails
+	profileData
 }) {
 	const { username } = useParams();
 	let location = useLocation();
 	useEffect(() => {
-		fetchArticlesByAuthorRequested(username);
-		fetchProfileByUsernameRequested(username);
+		fetchArticlesByAuthorRequest(username);
+		fetchProfileByUsernameRequest(username);
 
 		console.log(username);
 		return () => {
@@ -34,31 +33,33 @@ function ArticleAuthorProfile({
 			unloadProfile();
 		};
 	}, []);
-	console.log(articlesList);
+
 	return (
 		<div>
-			{!isEmpty(profileDetails) && (
+			{!isEmpty(profileData) && (
 				<Profile
 					path={location.pathname}
-					username={username}
-					/* 	userArticles={userArticles} */
-					profileDetails={profileDetails}
-					articlesList={articlesList}
-					/* 	favoriteArticles={favoriteArticles} */
+					username={username}	
+					profileData={profileData}
+					inProgress={inProgress}
+					error={error}
+					articleList={articleList}
 				/>
 			)}
 		</div>
 	);
 }
 
-const mapStateToProps = (state) => ({
-	articlesList: state.articles.articlesList,
-	profileDetails: state.profile.profileDetails
+const mapStateToProps = ({ articleList: { inProgress, articleList, error }, profile: { profileData } }) => ({
+	articleList,
+	inProgress,
+	error,
+	profileData
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	fetchProfileByUsernameRequested: (username) => dispatch(fetchProfileByUsernameRequested(username)),
-	fetchArticlesByAuthorRequested: (username) => dispatch(fetchArticlesByAuthorRequested(username)),
+	fetchProfileByUsernameRequest: (username) => dispatch(fetchProfileByUsernameRequest(username)),
+	fetchArticlesByAuthorRequest: (username) => dispatch(fetchArticlesByAuthorRequest(username)),
 	unloadArticles: () => dispatch(unloadArticles()),
 	unloadProfile: () => dispatch(unloadProfile())
 });

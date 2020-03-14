@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { Formik, Field } from 'formik';
 import { withRouter } from 'react-router-dom';
 
-import { createArticleRequested, updateArticleRequested } from '../../redux/actions/singleArticle'
+import { createArticleRequest, updateArticleRequest } from '../../redux/actions/article'
 import { ArticleFormContainer, StyledForm, StyledTextField, StyledButton } from './ArticleForm.style';
 
-function ArticleForm({ createArticleRequested, selectedArticle, updateArticleRequested, history }) {
+function ArticleForm({ createArticleRequest, selectedArticle, updateArticleRequest, history }) {
 	return (
 		<ArticleFormContainer>
 			<Formik
@@ -19,8 +19,8 @@ function ArticleForm({ createArticleRequested, selectedArticle, updateArticleReq
 				onSubmit={(values, actions) => {
 					
 					// same shape as initial values
-					const articleDataObj = {
-						article: {
+					const ArticleDataObj = {
+						Article: {
 							title: values.title,
 							description: values.description,
 							body: values.body,
@@ -28,8 +28,8 @@ function ArticleForm({ createArticleRequested, selectedArticle, updateArticleReq
 						}
 					};
 					selectedArticle
-						? updateArticleRequested(selectedArticle.slug, articleDataObj)
-						: createArticleRequested(articleDataObj);
+						? updateArticleRequest(selectedArticle.slug, ArticleDataObj)
+						: createArticleRequest(ArticleDataObj);
 				/* 	history.push('/'); */
 				}}
 			>
@@ -46,7 +46,7 @@ function ArticleForm({ createArticleRequested, selectedArticle, updateArticleReq
 						<Field
 							name="description"
 							component={StyledTextField}
-							label="What's this article about?"
+							label="What's this Article about?"
 							margin="dense"
 							variant="outlined"
 						/>
@@ -54,7 +54,7 @@ function ArticleForm({ createArticleRequested, selectedArticle, updateArticleReq
 						<Field
 							name="body"
 							component={StyledTextField}
-							label="Wrtice your article (in markdown)"
+							label="Wrtice your Article (in markdown)"
 							multiline
 							rows="10"
 							margin="normal"
@@ -68,7 +68,7 @@ function ArticleForm({ createArticleRequested, selectedArticle, updateArticleReq
 							margin="dense"
 							variant="outlined"
 						/>
-						<StyledButton type="submit">Publish article</StyledButton>
+						<StyledButton type="submit">Publish Article</StyledButton>
 					</StyledForm>
 				)}
 			</Formik>
@@ -77,8 +77,8 @@ function ArticleForm({ createArticleRequested, selectedArticle, updateArticleReq
 }
 
 const mapDispatchToProps = (dispatch) => ({
-	createArticleRequested: (articleDataObj) => dispatch(createArticleRequested(articleDataObj)),
-	updateArticleRequested: (slug, articleDataObj) => dispatch(updateArticleRequested(slug, articleDataObj))
+	createArticleRequest: (ArticleDataObj) => dispatch(createArticleRequest(ArticleDataObj)),
+	updateArticleRequest: (slug, ArticleDataObj) => dispatch(updateArticleRequest(slug, ArticleDataObj))
 });
 
 export default withRouter(connect(null, mapDispatchToProps)(ArticleForm));

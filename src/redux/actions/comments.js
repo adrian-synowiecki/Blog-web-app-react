@@ -1,52 +1,53 @@
 import commentsTypes from '../types/comments';
 
-export const addCommentToArticleRequest = (commentCreationData, slug) => ({
-	type: commentsTypes.ADD_COMMENT_TO_ARTICLE_Request,
+export const addCommentToArticleRequest = (commentCreationData, articleSlug) => ({
+	type: commentsTypes.ADD_COMMENT_TO_ARTICLE_REQUEST,
 	commentCreationData,
-	slug
+	articleSlug
 });
 
-export const addCommentToArticleDone = (addedComment) => ({
+export const addCommentToArticleDone = (addedCommentData) => ({
 	type: commentsTypes.ADD_COMMENT_TO_ARTICLE_DONE,
-	payload: { addedComment }
+	payload: { addedCommentData }
 });
 
 export const addCommentToArticleError = (error) => ({
-	type: commentsTypes.ADD_COMMENT_TO_ARTICLE_FAILURE,
+	type: commentsTypes.ADD_COMMENT_TO_ARTICLE_ERROR,
 	payload: { error }
 });
 
-export const fetchCommentsFromArticleRequest = (slug) => ({
-	type: commentsTypes.FETCH_COMMENTS_FROM_ARTICLE_Request,
-	slug
+export const fetchCommentsFromArticleRequest = (articleSlug) => ({
+	type: commentsTypes.FETCH_COMMENTS_FROM_ARTICLE_REQUEST,
+	articleSlug
 });
 
-export const fetchCommentsFromArticleDone = (commentsList) => ({
+export const fetchCommentsFromArticleDone = (commentList) => ({
 	type: commentsTypes.FETCH_COMMENTS_FROM_ARTICLE_DONE,
-	payload: { commentsList }
+	payload: { commentList }
 });
 
-export const fetchCommentsFromArticleFailure = (error) => ({
-	type: commentsTypes.FETCH_COMMENTS_FROM_ARTICLE_FAILURE,
+export const fetchCommentsFromArticleError = (error) => ({
+	type: commentsTypes.FETCH_COMMENTS_FROM_ARTICLE_ERROR,
 	payload: { error }
 });
 
-/////////// CHANGE Z RANAAAAAAAA
-export const fetchCommentsFromArticleUnmounted = () => ({
-	type: commentsTypes.FETCH_COMMENTS_FROM_ARTICLE_UNMOUNTED
+export const removeCommentFromArticleRequest = (commentToDeleteData, articleSlug, commentId) => ({
+	type: commentsTypes.REMOVE_COMMENT_FROM_ARTICLE_REQUEST,
+	articleSlug,
+	commentId,
+	commentToDeleteData
 });
 
-export const removeCommentFromArticleRequest = (slug, commentId) => ({
-	type: commentsTypes.REMOVE_COMMENT_FROM_ARTICLE_Request,
-	slug,
-	commentId
-});
-
-export const removeCommentFromArticleDone = () => ({
-	type: commentsTypes.REMOVE_COMMENT_FROM_ARTICLE_DONE
+export const removeCommentFromArticleDone = (commentToDeleteData) => ({
+	type: commentsTypes.REMOVE_COMMENT_FROM_ARTICLE_DONE,
+	payload: { commentToDeleteData }
 });
 
 export const removeCommentFromArticleError = (error) => ({
 	type: commentsTypes.REMOVE_COMMENT_FROM_ARTICLE_ERROR,
 	payload: { error }
+});
+
+export const unloadCommentsFromArticle = () => ({
+	type: commentsTypes.UNLOAD_COMMENTS_FROM_ARTICLE
 });

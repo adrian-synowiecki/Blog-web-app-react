@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
 
 export const HeaderContainer = styled.header`
-	background: ${({ singleArticleHeader }) => (singleArticleHeader ? 'gray' : '#5cb85c')};
+	background: ${({ articleHeader }) => (articleHeader ? 'gray' : '#5cb85c')};
 	height: 19rem;
 	box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, .3), inset 0 -8px 8px -8px rgba(0, 0, 0, .3);
 	/* box-shadow: ${({ userProfileHeader }) =>
@@ -16,7 +16,7 @@ export const HeaderContainer = styled.header`
 export const HeaderWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
-	align-items: ${({ singleArticleHeader }) => (singleArticleHeader ? 'flex-start' : 'center')};
+	align-items: ${({ articleHeader }) => (articleHeader ? 'flex-start' : 'center')};
 	color: white;
 	position: relative;
 `;
@@ -24,15 +24,15 @@ export const HeaderWrapper = styled.div`
 export const HeaderTitle = styled.h1`
 	font-size: 5rem;
 	text-shadow: 0 1px 3px rgba(0, 0, 0, .3);
-	margin-left: ${({ singleArticleHeader }) => singleArticleHeader && '1.7rem'};
+	margin-left: ${({ articleHeader }) => articleHeader && '1.7rem'};
 `;
 
 export const HeaderText = styled.p`
 	font-weight: 300;
 	letter-spacing: 0.1rem;
 	font-size: 2rem;
-	margin-left: ${({ singleArticleHeader }) => singleArticleHeader && '2rem'};
-	margin-top: ${({ singleArticleHeader }) => (singleArticleHeader ? '0.1rem' : '-2.5rem')};
+	margin-left: ${({ articleHeader }) => articleHeader && '2rem'};
+	margin-top: ${({ articleHeader }) => (articleHeader ? '0.1rem' : '-2.5rem')};
 `;
 
 export const FollowButton = styled(Link)`

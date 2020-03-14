@@ -2,36 +2,35 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import {
-	articleFavoritedRequested,
-	articleUnfavoritedRequested,
-	fetchArticlesByTagRequested,
-	fetchArticlesByMostRecentRequested
-} from '../../redux/actions/articles';
-
+	addArticleToFavoritesRequest,
+	removeArticleFromFavoritesRequest,
+	fetchArticlesByTagRequest,
+	fetchArticlesByMostRecentRequest
+} from '../../redux/actions/articleList';
 
 import ArticleMeta from '../ArticleMeta/ArticleMeta';
-import Tags from '../Tags/Tags'
+import Tags from '../Tags/Tags';
 
 import * as S from './ArticlePreview.style';
 
 function ArticlePreview({
-	articleContent,
-	articleFavoritedRequested,
-	articleUnfavoritedRequested,
-	fetchArticlesByTagRequested
+	articleData,
+	addArticleToFavoritesRequest,
+	removeArticleFromFavoritesRequest,
+	fetchArticlesByTagRequest
 }) {
-	const { favorited, slug, title, description, favoritesCount, tagList } = articleContent;
+	const { favorited, slug, title, description, favoritesCount, tagList } = articleData;
 	const handleAddingToFavorite = () => {
 		if (favorited) {
-			articleUnfavoritedRequested(slug);
+			removeArticleFromFavoritesRequest(slug);
 		} else {
-			articleFavoritedRequested(slug);
+			addArticleToFavoritesRequest(slug);
 		}
 	};
 	return (
 		<S.ArticlePreviewContainer>
 			<S.ArticleLeftSide>
-				<ArticleMeta articleContent={articleContent} />
+				<ArticleMeta articleData={articleData} />
 				<S.ArticleContent>
 					<S.ArticleTitle to={`/article/${slug}`}>{title}</S.ArticleTitle>
 					<S.ArticleTextPreview to={`/article/${slug}`}>{description}</S.ArticleTextPreview>
@@ -43,11 +42,11 @@ function ArticlePreview({
 					<S.HeartIcon favorited={favorited} />
 					<S.FavoriteAddedCount favorited={favorited}>{favoritesCount}</S.FavoriteAddedCount>
 				</S.AddToFavorite>
-				<Tags tagList={tagList} isArticlePreviewTags  />
+				{<Tags tagList={tagList} isArticlePreviewTags />}
 				{/* {tagList.length > 0 && (
 					<S.ArticleTags>
 						{tagList.map((tag) => (
-							<S.Tag key={tag} onClick={() => fetchArticlesByTagRequested(tag)}>
+							<S.Tag key={tag} onClick={() => fetchArticlesByTagRequest(tag)}>
 								{tag}
 							</S.Tag>
 						))}
@@ -59,10 +58,10 @@ function ArticlePreview({
 }
 
 const mapDispatchToProps = (dispatch) => ({
-	articleFavoritedRequested: (slug) => dispatch(articleFavoritedRequested(slug)),
-	articleUnfavoritedRequested: (slug) => dispatch(articleUnfavoritedRequested(slug)),
-	fetchArticlesByTagRequested: (tag) => dispatch(fetchArticlesByTagRequested(tag)),
-	fetchArticlesByMostRecentRequested: (offset) => dispatch(fetchArticlesByMostRecentRequested(offset))
+	addArticleToFavoritesRequest: (slug) => dispatch(addArticleToFavoritesRequest(slug)),
+	removeArticleFromFavoritesRequest: (slug) => dispatch(removeArticleFromFavoritesRequest(slug)),
+	fetchArticlesByTagRequest: (tag) => dispatch(fetchArticlesByTagRequest(tag)),
+	fetchArticlesByMostRecentRequest: (offset) => dispatch(fetchArticlesByMostRecentRequest(offset))
 });
 
 export default connect(null, mapDispatchToProps)(ArticlePreview);

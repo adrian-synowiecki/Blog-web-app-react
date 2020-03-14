@@ -4,7 +4,7 @@ import {isEmpty} from 'lodash'
 import { connect } from 'react-redux';
 import { Route, useParams, useHistory } from 'react-router-dom';
 
-import { fetchArticlesByAuthorRequested, fetchFavoriteArticlesRequested } from '../../redux/actions/articles';
+import { fetchArticlesByAuthorRequest, fetchFavoriteArticlesRequest } from '../../redux/actions/articleList';
 import colors from '../../utils/colors';
 import styles from '../../utils/styles';
 import FavoriteArticles from '../FavoriteArticles/FavoriteArticles';
@@ -24,22 +24,21 @@ import {
 
 function Profile({
 	path,
-	articlesList,
-	profileDetails,
+	articleList,
+	profileData,
 	username,
 	currentUserData,
 	favoriteArticles,
 	userArticles,
-	fetchArticlesByAuthorRequested,
-	fetchFavoriteArticlesRequested,
-	...props
+	fetchArticlesByAuthorRequest,
+	fetchFavoriteArticlesRequest,
 }) {
 	let profileLink;
 	let profileLinkFavorites;
 
-	if (!isEmpty(profileDetails)) {
-		profileLink = `/articleAuthorProfile/${profileDetails.username}`;
-		profileLinkFavorites = `/articleAuthorProfile/${profileDetails.username}/favorites`;
+	if (!isEmpty(profileData)) {
+		profileLink = `/articleAuthorProfile/${profileData.username}`;
+		profileLinkFavorites = `/articleAuthorProfile/${profileData.username}/favorites`;
 	} else if (!isEmpty(currentUserData)) {
 		profileLink = `/userProfile/${currentUserData.username}`;
 		profileLinkFavorites = `/userProfile/${currentUserData.username}/favorites`;
@@ -48,11 +47,11 @@ function Profile({
 	return (
 		<ProfileContainer>
 			<UserInfo>
-				{!isEmpty(profileDetails) ? (
+				{!isEmpty(profileData) ? (
 					<React.Fragment>
-						<ImageProfile src={profileDetails.image} />
-						<Username>{profileDetails.username}</Username>
-						<Bio>{profileDetails.bio}</Bio>
+						<ImageProfile src={profileData.image} />
+						<Username>{profileData.username}</Username>
+						<Bio>{profileData.bio}</Bio>
 					</React.Fragment>
 				) : (
 					<React.Fragment>
@@ -69,14 +68,14 @@ function Profile({
 						<StyledNavLink
 							exact
 							to={profileLink}
-							onClick={() => fetchArticlesByAuthorRequested(username)}
+							onClick={() => fetchArticlesByAuthorRequest(username)}
 							activeStyle={styles.activeLinkStyle}
 						>
 							My Articles
 						</StyledNavLink>
 						<StyledNavLink
 							to={profileLinkFavorites}
-							onClick={() => fetchFavoriteArticlesRequested(username)}
+							onClick={() => fetchFavoriteArticlesRequest(username)}
 							activeStyle={styles.activeLinkStyle}
 						>
 							Favorited Articles
@@ -84,8 +83,8 @@ function Profile({
 					</NavLinks>
 				</ArticlesChoice>
 
-				{articlesList.length ? (
-					articlesList.map((articleContent) => <ArticlePreview key={articleContent.slug} articleContent={articleContent} />)
+				{articleList.length > 0 ? (
+					articleList.map((articleData) => <ArticlePreview key={articleData.slug} articleData={articleData} />)
 				) : (
 					'No articles found'
 				)}
@@ -94,8 +93,8 @@ function Profile({
 					exact
 					path={`${path}/favorites`}
 					render={() =>
-						articlesList.length
-							? articlesList.map((articleContent) => <ArticlePreview key={articleContent.slug} articleContent={articleContent} />)
+						articleList.length > 0
+							? articleList.map((articleData) => <ArticlePreview key={articleData.slug} articleData={articleData} />)
 							: 'No favorite articles found'}
 				/>
 				{/* 		<Route
@@ -109,8 +108,8 @@ function Profile({
 }
 
 const mapDispatchToProps = (dispatch) => ({
-	fetchArticlesByAuthorRequested: (userName) => dispatch(fetchArticlesByAuthorRequested(userName)),
-	fetchFavoriteArticlesRequested: (userName) => dispatch(fetchFavoriteArticlesRequested(userName))
+	fetchArticlesByAuthorRequest: (userName) => dispatch(fetchArticlesByAuthorRequest(userName)),
+	fetchFavoriteArticlesRequest: (userName) => dispatch(fetchFavoriteArticlesRequest(userName))
 });
 
 export default connect(null, mapDispatchToProps)(Profile);

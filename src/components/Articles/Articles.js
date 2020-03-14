@@ -5,12 +5,12 @@ import { ArticlesContainer, ArticlesList } from './Articles.style';
 
 
 
-function Articles({ articlesList }) {
+function Articles({ articleList }) {
 
 	return (
 		<ArticlesContainer>
-			{articlesList.map((articleContent) => (
-				<ArticlePreview key={articleContent.slug} articleContent={articleContent} />
+			{articleList.map((articleData) => (
+				<ArticlePreview key={articleData.slug} articleData={articleData} />
 			))}
 		</ArticlesContainer>
 	);

@@ -1,12 +1,11 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import {isEmpty} from 'lodash'
 
 import styles from '../../utils/styles';
-import { fetchArticlesByMostRecentRequested, unloadArticles } from '../../redux/actions/articles';
+import { fetchArticlesByMostRecentRequest, unloadArticles } from '../../redux/actions/articleList';
 import { unloadTags, removeTagName } from '../../redux/actions/tags';
-import { fetchTagsByMostPopularRequested, getTagName } from '../../redux/actions/tags';
-import { fetchArticlesByTagRequested } from '../../redux/actions/articles';
+import { fetchTagsByMostPopularRequest, getTagName } from '../../redux/actions/tags';
+import { fetchArticlesByTagRequest } from '../../redux/actions/articleList';
 
 import * as S from './HomePage.styles';
 
@@ -15,39 +14,31 @@ import ArticlePageLinks from '../../components/ArticlePageLinks/ArticlePageLinks
 import Tags from '../../components/Tags/Tags';
 
 function HomePage({
-	articlesList,
-	tagsList,
-	fetchArticlesByMostRecentRequested,
+	articleList,
+	error,
+	tagList,
+	tag,
+	fetchArticlesByMostRecentRequest,
 	unloadArticles,
 	unloadTags,
-	tag,
 	removeTagName,
-	isFetchingArticlesList,
-	articlesListError,
-	fetchTagsByMostPopularRequested,
+	fetchTagsByMostPopularRequest,
 	getTagName,
-	fetchArticlesByTagRequested,
-	user
+	fetchArticlesByTagRequest,
 }) {
-
 	useEffect(() => {
-		fetchArticlesByMostRecentRequested(window.localStorage.getItem('offSet'));
-		fetchTagsByMostPopularRequested();
+		fetchArticlesByMostRecentRequest(window.localStorage.getItem('offSet'));
+		fetchTagsByMostPopularRequest();
 		return () => {
 			unloadArticles();
 			unloadTags();
 		};
 	}, []);
-	if (isEmpty(user)) {
-		console.log('EMPTYYYYYYYYY')
-	} else {
-		console.log('NOT EMPTY')
-	}
-	console.log(user)
+
 
 	const handleClick = () => {
 		removeTagName();
-		fetchArticlesByMostRecentRequested(window.localStorage.getItem('offSet'));
+		fetchArticlesByMostRecentRequest(window.localStorage.getItem('offSet'));
 	};
 
 	return (
@@ -74,57 +65,46 @@ function HomePage({
 				</S.NavLinkExtended>
 
 				{tag && (
-					<S.NavLinkExtended
-						tag
-						to="/"
-						activeStyle={styles.activeLinkStyle}
-						onClick={() => handleClick()}
-					>
+					<S.NavLinkExtended tag to="/" activeStyle={styles.activeLinkStyle} onClick={() => handleClick()}>
 						{tag}
 					</S.NavLinkExtended>
 				)}
 			</S.NavigationWrapper>
 
 			<S.Row>
-				{articlesListError && <div>{articlesListError}</div>}
-				{isFetchingArticlesList ? (
-					<S.Paragraph>Loading...</S.Paragraph>
+				{error && <div>{error}</div>}
+				{articleList ? <Articles articleList={articleList} /> : 'Loading articles'}
+				<ArticlePageLinks fetchArticlesByMostRecentRequest={fetchArticlesByMostRecentRequest} />
+				{tagList ? (
+					<Tags
+						fetchArticlesByTagRequest={fetchArticlesByTagRequest}
+						getTagName={getTagName}
+						tagList={tagList}
+						isPopularTags
+					/>
 				) : (
-					<Articles articlesList={articlesList} />
+					'Loading tags'
 				)}
-				<ArticlePageLinks fetchArticlesByMostRecentRequested={fetchArticlesByMostRecentRequested} />
-				<Tags
-					fetchArticlesByTagRequested={fetchArticlesByTagRequested}
-					getTagName={getTagName}
-					tagList={tagsList}
-					isPopularTags
-				/>
-		
 			</S.Row>
 		</S.HomeContainer>
 	);
 }
 
-const mapStateToProps = (state) => {
-	return {
-		articlesList: state.articles.articlesList,
-		isFetchingArticlesList: state.articles.isFetchingArticlesList,
-		articlesListError: state.articles.articlesListError,
-		tagsList: state.tags.tagsList,
-		tag: state.tags.tag,
-	
-	};
-};
+const mapStateToProps = ({ articleList: { articleList, error }, tags: { tagList, tag } }) => ({
+	articleList,
+	error,
+	tagList,
+	tag
+});
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		fetchArticlesByMostRecentRequested: (offSet) => dispatch(fetchArticlesByMostRecentRequested(offSet)),
+		fetchArticlesByMostRecentRequest: (offSet) => dispatch(fetchArticlesByMostRecentRequest(offSet)),
 		unloadArticles: () => dispatch(unloadArticles()),
 		unloadTags: () => dispatch(unloadTags()),
 		removeTagName: () => dispatch(removeTagName()),
-
-		fetchTagsByMostPopularRequested: () => dispatch(fetchTagsByMostPopularRequested()),
-		fetchArticlesByTagRequested: (tag) => dispatch(fetchArticlesByTagRequested(tag)),
+		fetchTagsByMostPopularRequest: () => dispatch(fetchTagsByMostPopularRequest()),
+		fetchArticlesByTagRequest: (tag) => dispatch(fetchArticlesByTagRequest(tag)),
 		getTagName: (tag) => dispatch(getTagName(tag))
 	};
 };

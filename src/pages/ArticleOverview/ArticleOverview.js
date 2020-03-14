@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { isEmpty } from 'lodash';
 
 import colors from '../../utils/colors';
-import { fetchArticleRequested, fetchArticleUnmounted } from '../../redux/actions/singleArticle';
-import { fetchCommentsFromArticleRequested, fetchCommentsFromArticleUnmounted } from '../../redux/actions/comments';
-import { unloadArticle } from '../../redux/actions/singleArticle';
+import { fetchArticleRequest } from '../../redux/actions/article';
+import { fetchCommentsFromArticleRequest } from '../../redux/actions/comments';
+import { unloadArticle } from '../../redux/actions/article';
 
 import ArticleMeta from '../../components/ArticleMeta/ArticleMeta';
 import Header from '../../components/Header/Header';
@@ -18,18 +18,14 @@ import { FullArticleText, Paragraph } from './ArticleOverview.style';
 
 function ArticleOverview({
 	match,
-	fetchArticleRequested,
-	articleContent,
-	isFetchingSingleArticleData,
-	fetchArticles,
-	fetchCommentsFromArticleRequested,
+	fetchArticleRequest,
+	articleData,
+	fetchCommentsFromArticleRequest,
 	currentUserData,
-	commentsList,
-	fetchSingleArticleUnmounted,
-	fetchCommentsFromArticleUnmounted,
 	unloadArticle,
-	tagList
+	commentList
 }) {
+	const { body, tagList, author, title } = articleData;
 	/* 	useEffect(() => {
 		fetchArticles();
 	
@@ -38,32 +34,24 @@ function ArticleOverview({
 	}, []); */
 	/* console.log(match.params.articleSlug); */
 	useEffect(() => {
-		fetchArticleRequested(match.params.articleSlug);
-		fetchCommentsFromArticleRequested(match.params.articleSlug);
+		fetchArticleRequest(match.params.articleSlug);
+		fetchCommentsFromArticleRequest(match.params.articleSlug);
 		return () => {
 			unloadArticle();
 		};
 	}, []);
 
 	const canModify =
-		!isEmpty(currentUserData) &&
-		!isEmpty(articleContent) &&
-		currentUserData.username === articleContent.author.username;
+		!isEmpty(currentUserData) && !isEmpty(articleData) && currentUserData.username === author.username;
 	/* 	 	console.log(commentsList); */
 
-	console.log(commentsList);
 	return (
 		<div>
-			{!isEmpty(articleContent) && (
+			{!isEmpty(articleData) && (
 				<React.Fragment>
-					<Header
-						singleArticleHeader
-						singleArticle={articleContent}
-						title={articleContent.title}
-						canModify={canModify}
-					/>
-					<ArticleMeta singleArticleMeta articleContent={articleContent} />
-					<FullArticleText>{articleContent.body}</FullArticleText>
+					<Header ArticleHeader articleData={articleData} title={title} canModify={canModify} />
+					<ArticleMeta ArticleMeta articleData={articleData} />
+					<FullArticleText>{body}</FullArticleText>
 					<Tags tagList={tagList} />
 					{isEmpty(currentUserData) ? (
 						<Paragraph>
@@ -71,9 +59,9 @@ function ArticleOverview({
 							<span style={{ color: colors.green }}>sign up</span> to add comments on this article
 						</Paragraph>
 					) : (
-						<CommentForm /* articleContent={articleContent} */ /* commentsList={commentsList} */ />
+						<CommentForm articleData={articleData} commentList={commentList}  />
 					)}
-					<Comments commentsList={commentsList} />
+					<Comments commentList={commentList} />
 				</React.Fragment>
 			)}
 		</div>
@@ -82,18 +70,16 @@ function ArticleOverview({
 
 const mapStateToProps = (state) => {
 	return {
-		articleContent: state.singleArticle.articleContent,
-		tagList: state.singleArticle.articleContent.tagList,
-		isFetchingArticleContent: state.singleArticle.isFetchingArticleContent,
+		articleData: state.article.articleData,
 		currentUserData: state.currentUser.currentUserData,
-		commentsList: state.comments.commentsList
+		commentList: state.comments.commentList
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		fetchArticleRequested: (slug) => dispatch(fetchArticleRequested(slug)),
-		fetchCommentsFromArticleRequested: (slug) => dispatch(fetchCommentsFromArticleRequested(slug)),
+		fetchArticleRequest: (articleSlug) => dispatch(fetchArticleRequest(articleSlug)),
+		fetchCommentsFromArticleRequest: (articleSlug) => dispatch(fetchCommentsFromArticleRequest(articleSlug)),
 		unloadArticle: () => dispatch(unloadArticle())
 	};
 };

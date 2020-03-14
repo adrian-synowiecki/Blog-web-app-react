@@ -6,22 +6,22 @@ import { withRouter } from 'react-router-dom';
 
 import { Link } from 'react-router-dom';
 
-function ArticleMeta({ match, articleContent, ...props }) {
+function ArticleMeta({ match, articleData, ...props }) {
 	
 	return (
 		<ArticleMetaContainer {...props}>
-			<Link to={`/articleAuthorProfile/${articleContent.author.username}`}>
-				<ImageProfile src={articleContent.author.image} />
+			<Link to={`/articleAuthorProfile/${articleData.author.username}`}>
+				<ImageProfile src={articleData.author.image} />
 			</Link>
 			<FlexWrapperCol>
 				<Link
-					to={`/articleAuthorProfile/${articleContent.author.username}`}
+					to={`/articleAuthorProfile/${articleData.author.username}`}
 					style={{ textDecoration: 'none' }}
 				>
-					<AuthorName {...props}>{articleContent.author.username}</AuthorName>
+					<AuthorName {...props}>{articleData.author.username}</AuthorName>
 				</Link>
 
-				<DateCreated {...props}>{articleContent.createdAt}</DateCreated>
+				<DateCreated {...props}>{articleData.createdAt}</DateCreated>
 			</FlexWrapperCol>
 		</ArticleMetaContainer>
 	);

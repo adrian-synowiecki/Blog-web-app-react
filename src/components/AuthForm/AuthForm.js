@@ -6,12 +6,12 @@ import { withRouter } from 'react-router-dom';
 
 import { Formik, Field } from 'formik';
 
-import { signUpRequested, signInRequested } from '../../redux/actions/user';
+import { signUpRequest, loginRequest } from '../../redux/actions/currentUser';
 
 import Button from '../Button/Button';
 
 import { FormContainer, StyledForm, StyledTextField, Title, StyledLink } from './AuthForm.style';
-function AuthForm({ loading, signupform, signUpRequested, signInRequested, Requested }) {
+function AuthForm({ loading, signupform, signUpRequest, loginRequest, Request }) {
 	return (
 		<FormContainer>
 			<Title>{signupform ? 'SIGN UP' : 'SIGN IN'}</Title>
@@ -31,7 +31,7 @@ function AuthForm({ loading, signupform, signUpRequested, signInRequested, Reque
 						}
 					};
 
-					signupform ? signUpRequested(userObj) : signInRequested(userObj);
+					signupform ? signUpRequest(userObj) : loginRequest(userObj);
 					actions.resetForm();
 				}}
 			>
@@ -81,8 +81,8 @@ function AuthForm({ loading, signupform, signUpRequested, signInRequested, Reque
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		signUpRequested: (user) => dispatch(signUpRequested(user)),
-		signInRequested: (user) => dispatch(signInRequested(user))
+		signUpRequest: (user) => dispatch(signUpRequest(user)),
+		loginRequest: (user) => dispatch(loginRequest(user))
 	};
 };
 

@@ -1,28 +1,12 @@
 import tagsTypes from '../types/tags';
 
-/* export const fetchPopularTagsRequested = () => ({
-	type: tagsTypes.FETCH_POPULAR_TAGS_REQUESTED,
-})
-
-export const fetchPopularTagsDone = (tags) => ({
-	type: tagsTypes.FETCH_POPULAR_TAGS_DONE,
-	payload: tags
-});
-
-export const fetchPopularTagsError = (error) => ({
-	type: tagsTypes.FETCH_POPULAR_TAGS_ERROR,
-	payload: {
-		error
-	}
-}); */
-
 export const fetchTagsByMostPopularRequest = () => ({
-	type: tagsTypes.FETCH_TAGS_BY_MOST_POPULAR_REQUESTED
+	type: tagsTypes.FETCH_TAGS_BY_MOST_POPULAR_REQUEST
 });
 
-export const fetchTagsByMostPopularDone = (tagsList) => ({
+export const fetchTagsByMostPopularDone = (tagList) => ({
 	type: tagsTypes.FETCH_TAGS_BY_MOST_POPULAR_DONE,
-	payload: { tagsList }
+	payload: { tagList }
 });
 
 export const fetchTagsByMostPopularError = (error) => ({
@@ -35,7 +19,7 @@ export const getTagName = (tag) => ({
 	payload: { tag }
 });
 
-export const removeTagName = (tag) => ({
+export const removeTagName = () => ({
 	type: tagsTypes.REMOVE_TAG_NAME
 });
 

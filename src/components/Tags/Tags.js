@@ -36,31 +36,28 @@ import React, { useEffect } from 'react';
 
 import { connect } from 'react-redux';
 
-import { fetchTagsByMostPopularRequested, getTagName } from '../../redux/actions/tags';
-import { fetchArticlesByTagRequested } from '../../redux/actions/articles';
+import { fetchTagsByMostPopularRequest, getTagName } from '../../redux/actions/tags';
+import { fetchArticlesByTagRequest } from '../../redux/actions/articleList';
 
 import { TagsContainer, StyledTag, Paragraph, TagsList } from './Tags.style';
 
-function Tags({ tagList, fetchArticlesByTagRequested, getTagName, isPopularTags, isArticlePreviewTags }) {
+function Tags({ tagList, fetchArticlesByTagRequest, getTagName, isPopularTags, isArticlePreviewTags }) {
 	const onTagClick = (tag) => {
 		if (isPopularTags) {
 			getTagName(tag);
-			fetchArticlesByTagRequested(tag);
+			fetchArticlesByTagRequest(tag);
 		}
 	};
 	return (
 		<TagsContainer isArticlePreviewTags={isArticlePreviewTags}>
 			{isPopularTags && <Paragraph>Popular Tags</Paragraph>}
 			<TagsList>
-				{tagList ? (
+				{tagList.length > 0 &&
 					tagList.map((tag) => (
 						<StyledTag to={`/`} key={tag} onClick={() => onTagClick(tag)} isPopularTags={isPopularTags}>
 							{tag}
 						</StyledTag>
-					))
-				) : (
-					<Paragraph>Loading tags...</Paragraph>
-				)}
+					))}
 			</TagsList>
 		</TagsContainer>
 	);

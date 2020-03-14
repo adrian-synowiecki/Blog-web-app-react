@@ -2,21 +2,21 @@ import tagsTypes from '../types/tags';
 
 const initialState = {
 	inProgress: false,
-	tagsList: [],
+	tagList: [],
 	tag: '',
-	error: ''
+	error: null
 };
 
 export default function tags(state = initialState, action) {
 	switch (action.type) {
-		case tagsTypes.FETCH_TAGS_BY_MOST_POPULAR_REQUESTED:
+		case tagsTypes.FETCH_TAGS_BY_MOST_POPULAR_REQUEST:
 			return { ...state, inProgress: true };
 		case tagsTypes.FETCH_TAGS_BY_MOST_POPULAR_DONE:
-			return { ...state, tagsList: action.payload, inProgress: false };
+			return { ...state, tagList: action.payload.tagList, inProgress: false };
 		case tagsTypes.FETCH_TAGS_BY_MOST_POPULAR_ERROR:
-			return { ...state, inProgress: false };
+			return { ...state, error: action.payload.error, inProgress: false };
 		case tagsTypes.GET_TAG_NAME:
-			return { ...state, tag: action.payload };
+			return { ...state, tag: action.payload.tag };
 		case tagsTypes.REMOVE_TAG_NAME:
 			return { ...state, tag: null };
 		case tagsTypes.UNLOAD_TAGS:
@@ -25,3 +25,4 @@ export default function tags(state = initialState, action) {
 			return state;
 	}
 }
+

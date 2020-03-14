@@ -39,7 +39,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { deleteArticleRequested } from '../../redux/actions/singleArticle'
+import { deleteArticleRequest } from '../../redux/actions/article'
 import {
 	HeaderContainer,
 	HeaderTitle,
@@ -54,19 +54,19 @@ import {
 
 
 
-function Header({ history, singleArticle, title, text, canModify, dispatch, ...props }) {
+function Header({ history, Article, title, text, canModify, dispatch, ...props }) {
 	const handleDeleteArticle = () => {
-		dispatch(deleteArticleRequested(singleArticle.slug))
+		dispatch(deleteArticleRequest(Article.slug))
 		history.push('/')
 		
 	}
 	return (
 		<HeaderContainer {...props}>
 			<HeaderWrapper {...props}>
-				<HeaderTitle {...props}>{singleArticle ? singleArticle.title : title}</HeaderTitle>
+				<HeaderTitle {...props}>{Article ? Article.title : title}</HeaderTitle>
 				{canModify && (
 					<ArticleModify>
-						<EditArticle onClick={() => history.push(`/editArticle/${singleArticle.slug}`)}>
+						<EditArticle onClick={() => history.push(`/editArticle/${Article.slug}`)}>
 							Edit Article
 						</EditArticle>
 						<DeleteArticle onClick={handleDeleteArticle}>

@@ -8,7 +8,7 @@ import ArticleAuthorProfile from './pages/ArticleAuthorProfile/ArticleAuthorProf
 import UserProfile from './pages/UserProfile/UserProfile';
 import ArticleOverview from './pages/ArticleOverview/ArticleOverview';
 import UserSettings from './pages/UserSettings/UserSettings';
-import CreateNewArticle from './pages/CreateNewArticle/CreateNewArticle';
+import ArticleCreation from './pages/ArticleCreation/ArticleCreation';
 import EditArticle from './pages/EditArticle/EditArticle';
 import SignIn from './pages/SignIn/SignIn';
 import SignUp from './pages/SignUp/SignUp';
@@ -29,7 +29,7 @@ function App({ currentUserData }) {
 				<Route path="/userSettings" render={() => (!isEmpty(currentUserData) ? <UserSettings /> : <Redirect to="/" />)} />
 				<Route
 					path="/createNewArticle"
-					render={() => (currentUserData ? <CreateNewArticle /> : <Redirect to="/" />)}
+					render={() => (currentUserData ? <ArticleCreation /> : <Redirect to="/" />)}
 				/>
 				<Route
 					path="/editArticle/:articleSlug"

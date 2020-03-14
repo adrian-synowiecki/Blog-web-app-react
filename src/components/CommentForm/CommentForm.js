@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react';
-import { Formik, Field } from 'formik';
 import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { Formik, Field } from 'formik';
+
 
 import {
-	fetchCommentsFromArticleRequested,
-	addCommentToArticleRequested,
-	removeCommentFromArticleRequested
+	fetchCommentsFromArticleRequest,
+	addCommentToArticleRequest,
+	removeCommentFromArticleRequest
 } from '../../redux/actions/comments';
 
 import {
@@ -19,11 +21,11 @@ function CommentForm({
 	selectedArticle,
 	currentUserData,
 	commentsList,
-	fetchCommentsFromArticleRequested,
-	addCommentToArticleRequested,
-	removeCommentFromArticleRequested
+	fetchCommentsFromArticleRequest,
+	addCommentToArticleRequest,
+	removeCommentFromArticleRequest
 }) {
-
+	const { articleSlug } = useParams();
 	return (
 		<CommentContainer>
 			<Formik
@@ -37,7 +39,7 @@ function CommentForm({
 							body: values.commentText
 						}
 					};
-					addCommentToArticleRequested(commentObj, selectedArticle.slug);
+					addCommentToArticleRequest(commentObj, articleSlug);
 				}}
 			>
 				{({ errors, touched }) => (
@@ -56,10 +58,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	addCommentToArticleRequested: (commentObj, slug) => dispatch(addCommentToArticleRequested(commentObj, slug)),
-	removeCommentFromArticleRequested: (slug, commentId) =>
-	dispatch(removeCommentFromArticleRequested(slug, commentId)),
-	fetchCommentsFromArticleRequested: (slug) => dispatch(fetchCommentsFromArticleRequested(slug))
+	addCommentToArticleRequest: (commentObj, slug) => dispatch(addCommentToArticleRequest(commentObj, slug)),
+	removeCommentFromArticleRequest: (slug, commentId) =>
+	dispatch(removeCommentFromArticleRequest(slug, commentId)),
+	fetchCommentsFromArticleRequest: (slug) => dispatch(fetchCommentsFromArticleRequest(slug))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CommentForm);

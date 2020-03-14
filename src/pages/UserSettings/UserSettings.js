@@ -9,19 +9,19 @@ import { connect } from 'react-redux';
 
 import { withRouter } from 'react-router-dom';
 
-import { updateUserRequested } from '../../redux/actions/user'
+import { updateUserRequest } from '../../redux/actions/currentUser';
 
-function UserSettings({ userDetails, updateUserRequested, history }) {
-	console.log(userDetails);
+function UserSettings({ currentUserData, updateUserRequest, history }) {
+	console.log(currentUserData);
 	return (
 		<UserSettingsContainer>
 			<Title>Your Settings</Title>
 			<Formik
 				initialValues={{
-					profilePictureUrl: userDetails.image ? `${userDetails.image}` : '',
-					username: `${userDetails.username}`,
-					bio: userDetails.bio ? `${userDetails.bio}` : '',
-					email: `${userDetails.email}`,
+					profilePictureUrl: currentUserData.image ? `${currentUserData.image}` : '',
+					username: `${currentUserData.username}`,
+					bio: currentUserData.bio ? `${currentUserData.bio}` : '',
+					email: `${currentUserData.email}`,
 					password: ''
 				}}
 				onSubmit={(values, actions) => {
@@ -33,8 +33,8 @@ function UserSettings({ userDetails, updateUserRequested, history }) {
 						}
 					};
 					console.log(values.password);
-					updateUserRequested(userObj);
-			/* 		history.push('/') */
+					updateUserRequest(userObj);
+					/* 		history.push('/') */
 				}}
 			>
 				{({ errors, touched, values }) => (
@@ -80,7 +80,7 @@ function UserSettings({ userDetails, updateUserRequested, history }) {
 							name="password"
 							component={StyledTextField}
 							type="password"
-						/* 	inputProps={{
+							/* 	inputProps={{
 								form: {
 									autoComplete: 'off'
 								}
@@ -91,9 +91,7 @@ function UserSettings({ userDetails, updateUserRequested, history }) {
 							variant="outlined"
 						/>
 
-						<Button type="submit">
-							Update Settings
-						</Button>
+						<Button type="submit">Update Settings</Button>
 					</StyledForm>
 				)}
 			</Formik>
@@ -109,7 +107,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		updateUserRequested: (updatedUserObj) => dispatch(updateUserRequested(updatedUserObj))
+		updateUserRequest: (updatedUserObj) => dispatch(updateUserRequest(updatedUserObj))
 	};
 };
 
