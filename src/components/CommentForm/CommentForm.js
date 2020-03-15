@@ -8,7 +8,7 @@ import {
 	fetchCommentsFromArticleRequest,
 	addCommentToArticleRequest,
 	removeCommentFromArticleRequest
-} from '../../redux/actions/comments';
+} from '../../redux/comments/comments.actions';
 
 import {
 	CommentContainer,

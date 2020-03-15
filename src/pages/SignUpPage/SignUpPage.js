@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import AuthForm from '../../components/AuthForm/AuthForm';
 
-function SignUp({userError, isLoadingUser}) {
+function SignUpPage({userError, isLoadingUser}) {
 
 	return <AuthForm signupform isLoading={isLoadingUser} error={userError} />;
 }
@@ -14,4 +14,4 @@ const mapStateToProps = (state) => ({
 	userError: state.user.userError */
 });
 
-export default connect(mapStateToProps)(SignUp);
+export default connect(mapStateToProps)(SignUpPage);

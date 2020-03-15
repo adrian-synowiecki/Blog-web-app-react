@@ -6,9 +6,9 @@ import Profile from '../../components/Profile/Profile';
 
 import { useLocation, useParams } from 'react-router-dom';
 
-import { fetchArticlesByAuthorRequest, fetchFavoriteArticlesRequest } from '../../redux/actions/articleList';
+import { fetchArticlesByAuthorRequest, fetchFavoriteArticlesRequest } from '../../redux/articleList/articleList.actions';
 
-function UserProfile({
+function UserProfilePage({
 	match,
 	currentUserData,
 	fetchArticlesByAuthorRequest,
@@ -51,4 +51,4 @@ const mapDispatchToProps = (dispatch) => ({
 	fetchFavoriteArticlesRequest: (username) => dispatch(fetchFavoriteArticlesRequest(username))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfilePage);

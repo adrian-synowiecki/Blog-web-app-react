@@ -3,15 +3,15 @@ import { isEmpty } from 'lodash';
 
 import Profile from '../../components/Profile/Profile';
 
-import { fetchProfileByUsernameRequest, unloadProfile } from '../../redux/actions/profile';
+import { fetchProfileByUsernameRequest, unloadProfile } from '../../redux/profile/profile.actions';
 
 import { useLocation, useParams } from 'react-router-dom';
 
-import { fetchArticlesByAuthorRequest, unloadArticles } from '../../redux/actions/articleList';
+import { fetchArticlesByAuthorRequest, unloadArticles } from '../../redux/articleList/articleList.actions';
 
 import { connect } from 'react-redux';
 
-function ArticleAuthorProfile({
+function ArticleAuthorProfilePage({
 	fetchArticlesByAuthorRequest,
 	fetchProfileByUsernameRequest,
 	articleList,
@@ -64,4 +64,4 @@ const mapDispatchToProps = (dispatch) => ({
 	unloadProfile: () => dispatch(unloadProfile())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArticleAuthorProfile);
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleAuthorProfilePage);

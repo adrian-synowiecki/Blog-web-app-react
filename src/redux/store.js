@@ -5,8 +5,8 @@ import storage from 'redux-persist/lib/storage';
 import createSagaMiddleware from 'redux-saga';
 //import thunk from 'redux-thunk';
 
-import rootReducer from './rootReducer'
-import rootSaga from './sagas';
+import rootReducer from './root-reducer'
+import rootSaga from './root-saga'
 
 
 const persistConfig = {

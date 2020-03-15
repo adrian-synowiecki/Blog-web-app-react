@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchFavoriteArticlesRequest } from '../../redux/actions/articleList'
+import { fetchFavoriteArticlesRequest } from '../../redux/articleList/articleList.actions'
 import ArticlePreview from '../ArticlePreview/ArticlePreview';
 
 function FavoriteArticles({ match, favoriteArticles, fetchFavoriteArticlesRequest }) {

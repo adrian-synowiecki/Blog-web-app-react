@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import styles from '../../utils/styles';
-import { fetchArticlesByMostRecentRequest, unloadArticles } from '../../redux/actions/articleList';
-import { unloadTags, removeTagName } from '../../redux/actions/tags';
-import { fetchTagsByMostPopularRequest, getTagName } from '../../redux/actions/tags';
-import { fetchArticlesByTagRequest } from '../../redux/actions/articleList';
+import { fetchArticlesByMostRecentRequest, unloadArticles } from '../../redux/articleList/articleList.actions';
+import { unloadTags, removeTagName } from '../../redux/tags/tags.actions';
+import { fetchTagsByMostPopularRequest, getTagName } from '../../redux/tags/tags.actions';
+import { fetchArticlesByTagRequest } from '../../redux/articleList/articleList.actions';
 
 import * as S from './HomePage.styles';
 

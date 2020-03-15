@@ -3,15 +3,15 @@ import { Formik, Field } from 'formik';
 
 import Button from '../../components/Button/Button';
 
-import { UserSettingsContainer, Title, StyledTextField, StyledForm } from './UserSettings.style';
+import { UserSettingsContainer, Title, StyledTextField, StyledForm } from './UserSettingsPage.style';
 
 import { connect } from 'react-redux';
 
 import { withRouter } from 'react-router-dom';
 
-import { updateUserRequest } from '../../redux/actions/currentUser';
+import { updateUserRequest } from '../../redux/currentUser/currentUser.actions';
 
-function UserSettings({ currentUserData, updateUserRequest, history }) {
+function UserSettingsPage({ currentUserData, updateUserRequest, history }) {
 	console.log(currentUserData);
 	return (
 		<UserSettingsContainer>
@@ -113,4 +113,4 @@ const mapDispatchToProps = (dispatch) => {
 
 /* export default connect(mapStateToProps, mapDispatchToProps)(UserSettings) */
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(UserSettings));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(UserSettingsPage));

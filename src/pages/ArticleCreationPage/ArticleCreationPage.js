@@ -2,7 +2,7 @@
  
  import ArticleForm from '../../components/ArticleForm/ArticleForm'
 
- function ArticleCreation() {
+ function ArticleCreationPage() {
 	 return (
 		 <div>
 			 <ArticleForm />
@@ -10,5 +10,5 @@
 	 )
  }
  
- export default ArticleCreation
+ export default ArticleCreationPage
  

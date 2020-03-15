@@ -39,7 +39,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import { deleteArticleRequest } from '../../redux/actions/article'
+import { deleteArticleRequest } from '../../redux/article/article.actions'
 import {
 	HeaderContainer,
 	HeaderTitle,

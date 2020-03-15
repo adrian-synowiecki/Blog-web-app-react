@@ -6,7 +6,7 @@ import {
 	removeArticleFromFavoritesRequest,
 	fetchArticlesByTagRequest,
 	fetchArticlesByMostRecentRequest
-} from '../../redux/actions/articleList';
+} from '../../redux/articleList/articleList.actions'
 
 import ArticleMeta from '../ArticleMeta/ArticleMeta';
 import Tags from '../Tags/Tags';

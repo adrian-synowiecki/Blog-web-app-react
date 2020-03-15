@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { isEmpty } from 'lodash';
 
-import { fetchArticleRequest } from '../../redux/actions/article';
+import { fetchArticleRequest } from '../../redux/article/article.actions';
 
 import ArticleForm from '../../components/ArticleForm/ArticleForm';
 
-function EditArticle({ match, fetchArticleRequest, selectedArticle }) {
+function EditArticlePage({ match, fetchArticleRequest, selectedArticle }) {
 	useEffect(
 		() => {
 			fetchArticleRequest(match.params.articleSlug);
@@ -31,4 +31,4 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditArticle);
+export default connect(mapStateToProps, mapDispatchToProps)(EditArticlePage);

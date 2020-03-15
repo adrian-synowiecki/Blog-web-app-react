@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Formik, Field } from 'formik';
 import { withRouter } from 'react-router-dom';
 
-import { createArticleRequest, updateArticleRequest } from '../../redux/actions/article'
+import { createArticleRequest, updateArticleRequest } from '../../redux/article/article.actions'
 import { ArticleFormContainer, StyledForm, StyledTextField, StyledButton } from './ArticleForm.style';
 
 function ArticleForm({ createArticleRequest, selectedArticle, updateArticleRequest, history }) {

@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 
 import { Formik, Field } from 'formik';
 
-import { signUpRequest, loginRequest } from '../../redux/actions/currentUser';
+import { signUpRequest, loginRequest } from '../../redux/currentUser/currentUser.actions';
 
 import Button from '../Button/Button';
 

@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { isEmpty } from 'lodash';
 
 import colors from '../../utils/colors';
-import { fetchArticleRequest } from '../../redux/actions/article';
-import { fetchCommentsFromArticleRequest } from '../../redux/actions/comments';
-import { unloadArticle } from '../../redux/actions/article';
+import { fetchArticleRequest } from '../../redux/article/article.actions';
+import { fetchCommentsFromArticleRequest } from '../../redux/comments/comments.actions';
+import { unloadArticle } from '../../redux/article/article.actions';
 
 import ArticleMeta from '../../components/ArticleMeta/ArticleMeta';
 import Header from '../../components/Header/Header';
@@ -14,9 +14,9 @@ import CommentForm from '../../components/CommentForm/CommentForm';
 import Comments from '../../components/Comments/Comments';
 import Tags from '../../components/Tags/Tags';
 
-import { FullArticleText, Paragraph } from './ArticleOverview.style';
+import { FullArticleText, Paragraph } from './ArticleOverviewPage.style';
 
-function ArticleOverview({
+function ArticleOverviewPage({
 	match,
 	fetchArticleRequest,
 	articleData,
@@ -84,4 +84,4 @@ const mapDispatchToProps = (dispatch) => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArticleOverview);
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleOverviewPage);

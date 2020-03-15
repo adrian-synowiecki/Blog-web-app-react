@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import AuthForm from '../../components/AuthForm/AuthForm';
 
-function SignIn({isFetching, error}) {
+function SignInPage({isFetching, error}) {
 	return <AuthForm isFetching={isFetching} error={error} />;
 }
 
@@ -13,4 +13,4 @@ const mapStateToProps = (state) => ({
 	error: state.currentUser.error
 })
 
-export default connect(mapStateToProps)(SignIn);
+export default connect(mapStateToProps)(SignInPage);

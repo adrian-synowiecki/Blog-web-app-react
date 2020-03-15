@@ -36,8 +36,8 @@ import React, { useEffect } from 'react';
 
 import { connect } from 'react-redux';
 
-import { fetchTagsByMostPopularRequest, getTagName } from '../../redux/actions/tags';
-import { fetchArticlesByTagRequest } from '../../redux/actions/articleList';
+import { fetchTagsByMostPopularRequest, getTagName } from '../../redux/tags/tags.actions';
+import { fetchArticlesByTagRequest } from '../../redux/articleList/articleList.actions';
 
 import { TagsContainer, StyledTag, Paragraph, TagsList } from './Tags.style';
 

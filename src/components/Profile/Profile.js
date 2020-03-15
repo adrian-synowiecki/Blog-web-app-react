@@ -4,7 +4,7 @@ import {isEmpty} from 'lodash'
 import { connect } from 'react-redux';
 import { Route, useParams, useHistory } from 'react-router-dom';
 
-import { fetchArticlesByAuthorRequest, fetchFavoriteArticlesRequest } from '../../redux/actions/articleList';
+import { fetchArticlesByAuthorRequest, fetchFavoriteArticlesRequest } from '../../redux/articleList/articleList.actions';
 import colors from '../../utils/colors';
 import styles from '../../utils/styles';
 import FavoriteArticles from '../FavoriteArticles/FavoriteArticles';

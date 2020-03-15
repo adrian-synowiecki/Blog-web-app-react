@@ -4,14 +4,14 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import { isEmpty } from 'lodash';
 
 import HomePage from './pages/HomePage/HomePage';
-import ArticleAuthorProfile from './pages/ArticleAuthorProfile/ArticleAuthorProfile';
-import UserProfile from './pages/UserProfile/UserProfile';
-import ArticleOverview from './pages/ArticleOverview/ArticleOverview';
-import UserSettings from './pages/UserSettings/UserSettings';
-import ArticleCreation from './pages/ArticleCreation/ArticleCreation';
-import EditArticle from './pages/EditArticle/EditArticle';
-import SignIn from './pages/SignIn/SignIn';
-import SignUp from './pages/SignUp/SignUp';
+import ArticleAuthorProfile from './pages/ArticleAuthorProfilePage/ArticleAuthorProfilePage';
+import UserProfile from './pages/UserProfilePage/UserProfilePage';
+import ArticleOverview from './pages/ArticleOverviewPage/ArticleOverviewPage';
+import UserSettings from './pages/UserSettingsPage/UserSettingsPage';
+import ArticleCreation from './pages/ArticleCreationPage/ArticleCreationPage';
+import EditArticle from './pages/EditArticlePage/EditArticlePage';
+import SignIn from './pages/SignInPage/SignInPage';
+import SignUp from './pages/SignUpPage/SignUpPage';
 import Navbar from './components/Navbar/Navbar';
 
 import { connect } from 'react-redux';
