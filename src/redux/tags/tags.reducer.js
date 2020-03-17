@@ -20,7 +20,7 @@ export default function tags(state = initialState, action) {
 		case tagsTypes.REMOVE_TAG_NAME:
 			return { ...state, tag: null };
 		case tagsTypes.UNLOAD_TAGS:
-			return {};
+			return {...state, tagList: [], tag: '', inProgress: false, error: null };
 		default:
 			return state;
 	}

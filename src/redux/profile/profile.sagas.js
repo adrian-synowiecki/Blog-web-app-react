@@ -17,7 +17,7 @@ function* fetchProfileByUsernameAsync(action) {
 
 export default function* watchProfileSaga() {
     yield all ([
-        takeLatest(profileTypes.FETCH_PROFILE_BY_USERNAME_REQUEST, fetchProfileByUsernameAsync)
+       yield takeLatest(profileTypes.FETCH_PROFILE_BY_USERNAME_REQUEST, fetchProfileByUsernameAsync)
     ])
 }
 

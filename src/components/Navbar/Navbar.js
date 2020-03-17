@@ -9,8 +9,8 @@ function Navbar({ currentUserData }) {
 			<NavbarBrand to="/">conduit</NavbarBrand>
 			<NavLinks>
 				<StyledLink to="/">Home</StyledLink>
-				{isEmpty(currentUserData) && <StyledLink to="/signIn">Sign in</StyledLink>}
-				{isEmpty(currentUserData) && <StyledLink to="/signUp">Sign Up</StyledLink>}
+				{isEmpty(currentUserData) && <StyledLink to="/login">Log in</StyledLink>}
+				{isEmpty(currentUserData) && <StyledLink to="/signUp">Sign up</StyledLink>}
 				{!isEmpty(currentUserData) && <StyledLink to="/createNewArticle">New Post</StyledLink>}
 				{!isEmpty(currentUserData) && <StyledLink to="/userSettings">Settings</StyledLink>}
 				{!isEmpty(currentUserData) && (

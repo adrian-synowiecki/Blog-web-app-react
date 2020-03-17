@@ -38,8 +38,8 @@ function* removeCommentFromArticleAsync(action) {
 
 export default function* watchCommentsSaga() {
 	yield all([
-		takeLatest(commentsTypes.FETCH_COMMENTS_FROM_ARTICLE_REQUEST, fetchCommentsFromArticleAsync),
-		takeLatest(commentsTypes.ADD_COMMENT_TO_ARTICLE_REQUEST, addCommentToArticleAsync),
-		takeLatest(commentsTypes.REMOVE_COMMENT_FROM_ARTICLE_REQUEST, removeCommentFromArticleAsync)
+		yield takeLatest(commentsTypes.FETCH_COMMENTS_FROM_ARTICLE_REQUEST, fetchCommentsFromArticleAsync),
+		yield takeLatest(commentsTypes.ADD_COMMENT_TO_ARTICLE_REQUEST, addCommentToArticleAsync),
+		yield takeLatest(commentsTypes.REMOVE_COMMENT_FROM_ARTICLE_REQUEST, removeCommentFromArticleAsync)
 	]);
 }

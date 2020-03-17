@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 
 import colors from '../../utils/colors';
 
-import { ArticlePageLinksContainer, StyledPageLink } from './ArticlePageLinks.style';
+import { ArticlePageLinksContainer, StyledPageLink } from './Pagination.style';
 
 
-function ArticlePageLinks({ fetchArticlesByMostRecentRequest }) {
+function Pagination({ fetchArticlesByMostRecentRequest }) {
 	const initialCurrentPage = () => Number(window.localStorage.getItem('currentPage') || '1');
 	const [ currentPage, setCurrentPage ] = useState(initialCurrentPage);
 	const pageLinks = [];
@@ -43,4 +43,4 @@ function ArticlePageLinks({ fetchArticlesByMostRecentRequest }) {
 	return <ArticlePageLinksContainer>{pageLinks.map((pageLink) => pageLink)}</ArticlePageLinksContainer>;
 }
 
-export default ArticlePageLinks;
+export default Pagination;

@@ -52,7 +52,7 @@ export default function articlesReducer(state = initialState, action) {
 			return { ...state, inProgress: false };
 
 		case articlesTypes.UNLOAD_ARTICLES:
-			return { ...state, articleList: [] };
+			return { ...state, articleList: [], inProgress: false, error: null };
 		default:
 			return state;
 	}

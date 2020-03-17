@@ -10,7 +10,8 @@ function* signUpAsync(action) {
 		const response = yield call(api.signUpInAPI, action.userCreationData);
 		localStorage.setItem('token', response.data.user.token);
 		yield put(userActions.signUpDone(response.data.user));
-	} catch (error) {
+	} catch (error) {	
+		console.log(error.response)
 		yield put(userActions.signUpError(error));
 	}
 }
@@ -38,8 +39,8 @@ function* updateUserAsync(action) {
 
 export default function* watchCurrentUserSaga() {
 	yield all([
-		takeLatest(userTypes.SIGN_UP_REQUEST, signUpAsync),
-		takeLatest(userTypes.LOGIN_REQUEST, loginAsync),
-		takeLatest(userTypes.UPDATE_USER_REQUEST, updateUserAsync)
+		 takeLatest(userTypes.SIGN_UP_REQUEST, signUpAsync),
+		 takeLatest(userTypes.LOGIN_REQUEST, loginAsync),
+		 takeLatest(userTypes.UPDATE_USER_REQUEST, updateUserAsync)
 	]);
 }

@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 
 import AuthForm from '../../components/AuthForm/AuthForm';
 
-function SignUpPage({ inProgress, error }) {
-	return <AuthForm signUpPage inProgress={inProgress} error={error} />;
+function LoginPage({ inProgress, error }) {
+	return <AuthForm inProgress={inProgress} error={error} />;
 }
 
 const mapStateToProps = (state) => ({
@@ -12,4 +12,4 @@ const mapStateToProps = (state) => ({
 	error: state.currentUser.error
 });
 
-export default connect(mapStateToProps)(SignUpPage);
+export default connect(mapStateToProps)(LoginPage);

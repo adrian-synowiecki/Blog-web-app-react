@@ -9,8 +9,8 @@ import { fetchArticlesByTagRequest } from '../../redux/articleList/articleList.a
 
 import * as S from './HomePage.styles';
 
-import Articles from '../../components/Articles/Articles';
-import ArticlePageLinks from '../../components/ArticlePageLinks/ArticlePageLinks';
+import ArticleList from '../../components/ArticleList/ArticleList';
+import Pagination from '../../components/Pagination/Pagination';
 import Tags from '../../components/Tags/Tags';
 
 function HomePage({
@@ -19,12 +19,12 @@ function HomePage({
 	tagList,
 	tag,
 	fetchArticlesByMostRecentRequest,
-	unloadArticles,
-	unloadTags,
-	removeTagName,
 	fetchTagsByMostPopularRequest,
-	getTagName,
 	fetchArticlesByTagRequest,
+	removeTagName,
+	getTagName,
+	unloadArticles,
+	unloadTags
 }) {
 	useEffect(() => {
 		fetchArticlesByMostRecentRequest(window.localStorage.getItem('offSet'));
@@ -34,7 +34,6 @@ function HomePage({
 			unloadTags();
 		};
 	}, []);
-
 
 	const handleClick = () => {
 		removeTagName();
@@ -63,23 +62,21 @@ function HomePage({
 				>
 					Global Feed
 				</S.NavLinkExtended>
-
 				{tag && (
 					<S.NavLinkExtended tag to="/" activeStyle={styles.activeLinkStyle} onClick={() => handleClick()}>
 						{tag}
 					</S.NavLinkExtended>
 				)}
 			</S.NavigationWrapper>
-
 			<S.Row>
-				{error && <div>{error}</div>}
-				{articleList ? <Articles articleList={articleList} /> : 'Loading articles'}
-				<ArticlePageLinks fetchArticlesByMostRecentRequest={fetchArticlesByMostRecentRequest} />
-				{tagList ? (
+				{error && <div>{error.message}</div>}
+				{articleList.length > 0 ? <ArticleList articleList={articleList} /> : 'Loading articles'}
+				<Pagination fetchArticlesByMostRecentRequest={fetchArticlesByMostRecentRequest} />
+				{tagList.length > 0 ? (
 					<Tags
+						tagList={tagList}
 						fetchArticlesByTagRequest={fetchArticlesByTagRequest}
 						getTagName={getTagName}
-						tagList={tagList}
 						isPopularTags
 					/>
 				) : (
@@ -100,12 +97,12 @@ const mapStateToProps = ({ articleList: { articleList, error }, tags: { tagList,
 const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchArticlesByMostRecentRequest: (offSet) => dispatch(fetchArticlesByMostRecentRequest(offSet)),
-		unloadArticles: () => dispatch(unloadArticles()),
-		unloadTags: () => dispatch(unloadTags()),
-		removeTagName: () => dispatch(removeTagName()),
 		fetchTagsByMostPopularRequest: () => dispatch(fetchTagsByMostPopularRequest()),
 		fetchArticlesByTagRequest: (tag) => dispatch(fetchArticlesByTagRequest(tag)),
-		getTagName: (tag) => dispatch(getTagName(tag))
+		getTagName: (tag) => dispatch(getTagName(tag)),
+		removeTagName: () => dispatch(removeTagName()),
+		unloadArticles: () => dispatch(unloadArticles()),
+		unloadTags: () => dispatch(unloadTags())
 	};
 };
 

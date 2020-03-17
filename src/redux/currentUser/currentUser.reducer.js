@@ -19,7 +19,7 @@ export default function currentUserReducer(state = initialState, action) {
 		case userTypes.SIGN_UP_ERROR:
 		case userTypes.LOGIN_ERROR:
 		case userTypes.UPDATE_USER_ERROR:
-			return { ...state, error: action.payload.data.error, inProgress: false };
+			return { ...state, error: action.payload.error, inProgress: false };
 		default:
 			return state;
 	}

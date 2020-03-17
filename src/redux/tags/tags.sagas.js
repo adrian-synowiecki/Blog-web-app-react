@@ -16,6 +16,6 @@ try {
 
 export default function* watchTagsSaga() {
     yield all ([
-        takeLatest(tagsTypes.FETCH_TAGS_BY_MOST_POPULAR_REQUEST, fetchTagsByMostPopularAsync)
+       yield takeLatest(tagsTypes.FETCH_TAGS_BY_MOST_POPULAR_REQUEST, fetchTagsByMostPopularAsync)
     ])
 }

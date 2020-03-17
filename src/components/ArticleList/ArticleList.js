@@ -1,7 +1,7 @@
 import React from 'react';
 
 import ArticlePreview from '../ArticlePreview/ArticlePreview';
-import { ArticlesContainer, ArticlesList } from './Articles.style';
+import { ArticlesContainer, ArticlesList } from './ArticleList.style';
 
 
 
