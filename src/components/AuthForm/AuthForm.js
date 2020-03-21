@@ -1,42 +1,41 @@
-import React, { useState } from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import React, { useState, useRef, useEffect } from 'react';
 import { Formik, Field } from 'formik';
 
-import { signUpRequest, loginRequest } from '../../redux/currentUser/currentUser.actions';
 
-import { FormContainer, StyledForm, StyledTextField, Title, StyledLink } from './AuthForm.style';
+import {
+	FormContainer,
+	StyledForm,
+	StyledTextField,
+	Title,
+	StyledLink,
+	ErrorMessage,
+	ErrorMessageWrapper
+} from './AuthForm.style';
 
 import Button from '../Button/Button';
 
-/* import styled, { css } from 'styled-components'; */
-/* 
-const ButtonAuth = styled.button`
-	border-radius: 0.5rem;
-	border: none;
-	text-decoration: none;
-	display: flex;
-	align-self: flex-end;
-	background: red;
-	color: white;
-	padding: 1rem 2rem;
-	font-size: 1.6rem;
-	margin-top: 1rem;
-	text-align: center;
-	cursor: pointer;
- 	${({ disabled }) =>
-		disabled &&
-		css`
-			background-color: red;
-			opacity: .5;
-			cursor: not-allowed;
-		`};
-`;
- */
-function AuthForm({ signUpPage, signUpRequest, loginRequest, inProgress }) {
+function AuthForm({ error, signUpPage, signUpRequest, loginRequest, clearError }) {
 	const [ isReadOnly, setReadOnly ] = useState(true);
+	const formikRef = useRef(null);
 	const handleFocus = () => {
 		setReadOnly(false);
+	};
+
+	useEffect(
+		() => {
+			formikRef.current.setSubmitting(false);
+		},
+		[ error ]
+	);
+
+	useEffect(() => {
+		return () => {
+			clearError();
+		};
+	}, []);
+
+	window.onload = () => {
+		clearError();
 	};
 	return (
 		<FormContainer>
@@ -47,9 +46,9 @@ function AuthForm({ signUpPage, signUpRequest, loginRequest, inProgress }) {
 				<StyledLink to="/signUp">Need an account?</StyledLink>
 			)}
 			<Formik
+				ref={formikRef}
 				initialValues={{ username: '', email: '', password: '' }}
-				onSubmit={(values, actions) => {
-					/* 	actions.setSubmitting(true); */
+				onSubmit={(values) => {
 					const userObj = {
 						user: {
 							username: values.username,
@@ -59,12 +58,30 @@ function AuthForm({ signUpPage, signUpRequest, loginRequest, inProgress }) {
 					};
 
 					signUpPage ? signUpRequest(userObj) : loginRequest(userObj);
-					actions.resetForm();
-					actions.setSubmitting(false);
 				}}
 			>
-				{({ isSubmitting, handleSubmit }) => (
-					<StyledForm onSubmit={handleSubmit}>
+				{({ isSubmitting }) => (
+					<StyledForm>
+						<ErrorMessageWrapper>
+							{error &&
+								(error.email &&
+									error.email.map((emailError) => <ErrorMessage>email {emailError}</ErrorMessage>))}
+							{error &&
+								(error.password &&
+									error.password.map((passwordError) => (
+										<ErrorMessage>password {passwordError}</ErrorMessage>
+									)))}
+							{error &&
+								(error.username &&
+									error.username.map((usernameError) => (
+										<ErrorMessage>username {usernameError}</ErrorMessage>
+									)))}
+							{error &&
+								(error['email or password'] &&
+									error['email or password'].map((emailOrPasswordError) => (
+										<ErrorMessage>email or password {emailOrPasswordError}</ErrorMessage>
+									)))}
+						</ErrorMessageWrapper>
 						{signUpPage && (
 							<Field
 								name="username"
@@ -78,8 +95,7 @@ function AuthForm({ signUpPage, signUpRequest, loginRequest, inProgress }) {
 						)}
 						<Field
 							name="email"
-							/* 	type="email"
-						 */
+							type="email"
 							autocomplete="off"
 							component={StyledTextField}
 							label="Email"
@@ -87,7 +103,6 @@ function AuthForm({ signUpPage, signUpRequest, loginRequest, inProgress }) {
 							variant="outlined"
 							type="text"
 						/>
-
 						<Field
 							name="password"
 							component={StyledTextField}
@@ -101,8 +116,7 @@ function AuthForm({ signUpPage, signUpRequest, loginRequest, inProgress }) {
 							margin="normal"
 							variant="outlined"
 						/>
-
-						<Button type="submit" /* onClick={handleSubmit} */ disabled={isSubmitting} variant="contained">
+						<Button type="submit" disabled={isSubmitting} variant="contained">
 							{signUpPage ? 'SIGN UP' : 'LOG IN'}
 						</Button>
 					</StyledForm>
@@ -112,11 +126,5 @@ function AuthForm({ signUpPage, signUpRequest, loginRequest, inProgress }) {
 	);
 }
 
-const mapDispatchToProps = (dispatch) => {
-	return {
-		signUpRequest: (userCreationData) => dispatch(signUpRequest(userCreationData)),
-		loginRequest: (userLoginData) => dispatch(loginRequest(userLoginData))
-	};
-};
 
-export default withRouter(connect(null, mapDispatchToProps)(AuthForm));
+export default AuthForm;

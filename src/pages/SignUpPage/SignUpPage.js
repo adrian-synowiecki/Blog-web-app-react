@@ -2,14 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import AuthForm from '../../components/AuthForm/AuthForm';
+import { signUpRequest, clearError } from '../../redux/currentUser/currentUser.actions';
 
-function SignUpPage({ inProgress, error }) {
-	return <AuthForm signUpPage inProgress={inProgress} error={error} />;
+function SignUpPage({ error, signUpRequest, clearError }) {
+	return <AuthForm signUpPage error={error} signUpRequest={signUpRequest} clearError={clearError} />;
 }
 
 const mapStateToProps = (state) => ({
-	inProgress: state.currentUser.inProgress,
 	error: state.currentUser.error
 });
 
-export default connect(mapStateToProps)(SignUpPage);
+const mapDispatchToProps = (dispatch) => ({
+	signUpRequest: (userCreationData) => dispatch(signUpRequest(userCreationData)),
+	clearError: () => dispatch(clearError())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignUpPage);

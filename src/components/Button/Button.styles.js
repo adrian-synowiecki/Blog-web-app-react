@@ -14,20 +14,19 @@ export const ButtonContainer = styled.button`
 	margin-top: 1rem;
 	text-align: center;
 	cursor: pointer;
- 	${({ disabled }) =>
+	${({ disabled }) =>
 		disabled &&
 		css`
-			background-color: red;
 			opacity: .5;
 			cursor: not-allowed;
 		`};
-	 
+
 	&:hover {
 		background-color: #3e8e41;
 		opacity: 0.9;
 	}
-	
-/* 	&:disabled {
+
+	/* 	&:disabled {
 	
 		opacity: .5;
 		cursor: not-allowed;

@@ -8,7 +8,6 @@ import { Form } from 'formik';
 
 import { TextField } from 'formik-material-ui';
 
-
 export const FormContainer = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -29,17 +28,25 @@ export const StyledLink = styled(Link)`
     }
 `;
 
+export const ErrorMessage = styled.li`
+	color: #b85c5c;
+	font-size: 1.6rem;
+	font-weight: 700;
+	line-height: 2.5rem;
+	white-space: nowrap;
+`;
+
 export const StyledForm = styled(Form)`
     width: 90%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-
     @media (min-width: 500px) {
      width: 45rem;   
     }
 
 `;
+
+export const ErrorMessageWrapper = styled.ul`margin-left: -1rem;`;
 
 export const StyledTextField = styled(TextField)`
     width: 100%;

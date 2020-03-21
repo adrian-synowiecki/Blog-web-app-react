@@ -6,6 +6,7 @@ import { fetchArticlesByMostRecentRequest, unloadArticles } from '../../redux/ar
 import { unloadTags, removeTagName } from '../../redux/tags/tags.actions';
 import { fetchTagsByMostPopularRequest, getTagName } from '../../redux/tags/tags.actions';
 import { fetchArticlesByTagRequest } from '../../redux/articleList/articleList.actions';
+import { setCurrentPageNumber } from '../../redux/common/common.actions';
 
 import * as S from './HomePage.styles';
 
@@ -18,13 +19,15 @@ function HomePage({
 	error,
 	tagList,
 	tag,
-	fetchArticlesByMostRecentRequest,
 	fetchTagsByMostPopularRequest,
 	fetchArticlesByTagRequest,
 	removeTagName,
 	getTagName,
 	unloadArticles,
-	unloadTags
+	unloadTags,
+	fetchArticlesByMostRecentRequest,
+	setCurrentPageNumber,
+	currentPageNumber
 }) {
 	useEffect(() => {
 		fetchArticlesByMostRecentRequest(window.localStorage.getItem('offSet'));
@@ -71,7 +74,11 @@ function HomePage({
 			<S.Row>
 				{error && <div>{error.message}</div>}
 				{articleList.length > 0 ? <ArticleList articleList={articleList} /> : 'Loading articles'}
-				<Pagination fetchArticlesByMostRecentRequest={fetchArticlesByMostRecentRequest} />
+				<Pagination
+					currentPageNumber={currentPageNumber}
+					fetchArticlesByMostRecentRequest={fetchArticlesByMostRecentRequest}
+					setCurrentPageNumber={setCurrentPageNumber}
+				/>
 				{tagList.length > 0 ? (
 					<Tags
 						tagList={tagList}
@@ -87,23 +94,23 @@ function HomePage({
 	);
 }
 
-const mapStateToProps = ({ articleList: { articleList, error }, tags: { tagList, tag } }) => ({
+const mapStateToProps = ({ articleList: { articleList, error }, tags: { tagList, tag }, common: {currentPageNumber} }) => ({
 	articleList,
 	error,
 	tagList,
-	tag
+	tag,
+	currentPageNumber
 });
 
-const mapDispatchToProps = (dispatch) => {
-	return {
-		fetchArticlesByMostRecentRequest: (offSet) => dispatch(fetchArticlesByMostRecentRequest(offSet)),
-		fetchTagsByMostPopularRequest: () => dispatch(fetchTagsByMostPopularRequest()),
-		fetchArticlesByTagRequest: (tag) => dispatch(fetchArticlesByTagRequest(tag)),
-		getTagName: (tag) => dispatch(getTagName(tag)),
-		removeTagName: () => dispatch(removeTagName()),
-		unloadArticles: () => dispatch(unloadArticles()),
-		unloadTags: () => dispatch(unloadTags())
-	};
-};
+const mapDispatchToProps = (dispatch) => ({
+	fetchArticlesByMostRecentRequest: (offSet) => dispatch(fetchArticlesByMostRecentRequest(offSet)),
+	fetchTagsByMostPopularRequest: () => dispatch(fetchTagsByMostPopularRequest()),
+	getTagName: (tag) => dispatch(getTagName(tag)),
+	removeTagName: () => dispatch(removeTagName()),
+	unloadArticles: () => dispatch(unloadArticles()),
+	unloadTags: () => dispatch(unloadTags()),
+	fetchArticlesByTagRequest: (tag) => dispatch(fetchArticlesByTagRequest(tag)),
+	setCurrentPageNumber: (currentPageNumber) => dispatch(setCurrentPageNumber(currentPageNumber))
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

@@ -6,7 +6,6 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import './index.css';
 
-import createSagaMiddleware from 'redux-saga';
 
 import configureStore from './redux/store';
 

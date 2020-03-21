@@ -3,13 +3,19 @@ import { connect } from 'react-redux';
 
 import AuthForm from '../../components/AuthForm/AuthForm';
 
-function LoginPage({ inProgress, error }) {
-	return <AuthForm inProgress={inProgress} error={error} />;
+import { loginRequest, clearError } from '../../redux/currentUser/currentUser.actions';
+
+function LoginPage({ error, loginRequest, clearError }) {
+	return <AuthForm error={error} loginRequest={loginRequest} clearError={clearError} />;
 }
 
 const mapStateToProps = (state) => ({
-	inProgress: state.currentUser.inProgress,
 	error: state.currentUser.error
 });
 
-export default connect(mapStateToProps)(LoginPage);
+const mapDispatchToProps = (dispatch) => ({
+	loginRequest: (userLoginData) => dispatch(loginRequest(userLoginData)),
+	clearError: () => dispatch(clearError())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

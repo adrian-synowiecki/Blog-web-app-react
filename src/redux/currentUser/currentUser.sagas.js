@@ -10,9 +10,10 @@ function* signUpAsync(action) {
 		const response = yield call(api.signUpInAPI, action.userCreationData);
 		localStorage.setItem('token', response.data.user.token);
 		yield put(userActions.signUpDone(response.data.user));
+		yield history.push('/');
 	} catch (error) {	
 		console.log(error.response)
-		yield put(userActions.signUpError(error));
+		yield put(userActions.signUpError(error.response.data.errors));
 	}
 }
 
@@ -21,8 +22,9 @@ function* loginAsync(action) {
 		const response = yield call(api.loginInApi, action.userLoginData);
 		localStorage.setItem('token', response.data.user.token);
 		yield put(userActions.loginDone(response.data.user));
+		yield history.push('/');
 	} catch (error) {
-		yield put(userActions.loginError(error));
+		yield put(userActions.loginError(error.response.data.errors));
 	}
 }
 
@@ -33,7 +35,7 @@ function* updateUserAsync(action) {
 		yield put(userActions.updateUserDone(response.data.user));
 		yield history.push('/');
 	} catch (error) {
-		yield put(userActions.updateUserError(error));
+		yield put(userActions.updateUserError(error.response.data.errors));
 	}
 }
 

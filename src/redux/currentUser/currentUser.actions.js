@@ -44,3 +44,7 @@ export const updateUserError = (error) => ({
 	type: userTypes.UPDATE_USER_ERROR,
 	payload: { error }
 });
+
+export const clearError = () => ({
+	type: userTypes.CLEAR_ERROR
+})

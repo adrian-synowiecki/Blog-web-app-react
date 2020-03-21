@@ -6,7 +6,7 @@ import profile from './profile/profile.reducer'
 import tags from './tags/tags.reducer'
 import comments from './comments/comments.reducer'
 import article from './article/article.reducer'
-
+import common from './common/common.reducer'
 
 const rootReducer = combineReducers({
 	articleList,
@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
 	tags,
 	comments,
 	article,
-	
+	common
 });
 
 export default rootReducer;

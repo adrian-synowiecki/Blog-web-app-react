@@ -3,7 +3,8 @@ import userTypes from './currentUser.types'
 const initialState = {
 	inProgress: false,
 	currentUserData: {},
-	error: null
+	error: null,
+	isAuth: false
 };
 
 export default function currentUserReducer(state = initialState, action) {
@@ -15,11 +16,14 @@ export default function currentUserReducer(state = initialState, action) {
 		case userTypes.SIGN_UP_DONE:
 		case userTypes.LOGIN_REQUEST:
 		case userTypes.UPDATE_USER_DONE:
-			return { ...state, currentUserData: { ...action.payload.currentUserData }, inProgress: false };
+			return { ...state, currentUserData: { ...action.payload.currentUserData }, isAuth: true, inProgress: false, error: null };
 		case userTypes.SIGN_UP_ERROR:
 		case userTypes.LOGIN_ERROR:
 		case userTypes.UPDATE_USER_ERROR:
 			return { ...state, error: action.payload.error, inProgress: false };
+
+		case userTypes.CLEAR_ERROR:
+			return {...state, error: null}
 		default:
 			return state;
 	}

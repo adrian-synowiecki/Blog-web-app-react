@@ -1,19 +1,25 @@
 import React from 'react';
-import { isEmpty } from 'lodash';
 
 import { NavbarContainer, NavbarBrand, NavLinks, StyledLink } from './Navbar.style';
 
-function Navbar({ currentUserData }) {
+function Navbar({ currentUserData, isAuth, fetchArticlesByMostRecentRequest, setCurrentPageNumberToFirst }) {
+	const handleClick = () => {
+		fetchArticlesByMostRecentRequest();
+		setCurrentPageNumberToFirst();
+	};
+
 	return (
 		<NavbarContainer>
-			<NavbarBrand to="/">conduit</NavbarBrand>
+			<NavbarBrand onClick={handleClick} to="/">
+				conduit
+			</NavbarBrand>
 			<NavLinks>
 				<StyledLink to="/">Home</StyledLink>
-				{isEmpty(currentUserData) && <StyledLink to="/login">Log in</StyledLink>}
-				{isEmpty(currentUserData) && <StyledLink to="/signUp">Sign up</StyledLink>}
-				{!isEmpty(currentUserData) && <StyledLink to="/createNewArticle">New Post</StyledLink>}
-				{!isEmpty(currentUserData) && <StyledLink to="/userSettings">Settings</StyledLink>}
-				{!isEmpty(currentUserData) && (
+				{!isAuth && <StyledLink to="/login">Log in</StyledLink>}
+				{!isAuth && <StyledLink to="/signUp">Sign up</StyledLink>}
+				{isAuth && <StyledLink to="/createNewArticle">New Post</StyledLink>}
+				{isAuth && <StyledLink to="/userSettings">Settings</StyledLink>}
+				{isAuth && (
 					<StyledLink to={`/userProfile/${currentUserData.username}`}>{currentUserData.username}</StyledLink>
 				)}
 			</NavLinks>
