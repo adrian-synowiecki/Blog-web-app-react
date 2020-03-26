@@ -41,7 +41,7 @@ import { fetchArticlesByTagRequest } from '../../redux/articleList/articleList.a
 
 import { TagsContainer, StyledTag, Paragraph, TagsList } from './Tags.style';
 
-function Tags({ tagList, fetchArticlesByTagRequest, getTagName, isPopularTags, isArticlePreviewTags }) {
+function Tags({ tagList, fetchArticlesByTagRequest, getTagName, isPopularTags, isArticlePreviewTags,flexEnd }) {
 	const onTagClick = (tag) => {
 		if (isPopularTags) {
 			getTagName(tag);
@@ -49,7 +49,7 @@ function Tags({ tagList, fetchArticlesByTagRequest, getTagName, isPopularTags, i
 		}
 	};
 	return (
-		<TagsContainer isArticlePreviewTags={isArticlePreviewTags}>
+		<TagsContainer flexEnd={flexEnd} isArticlePreviewTags={isArticlePreviewTags}>
 			{isPopularTags && <Paragraph>Popular Tags</Paragraph>}
 			<TagsList>
 				{tagList.length > 0 &&

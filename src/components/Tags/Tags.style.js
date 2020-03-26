@@ -7,6 +7,8 @@ export const TagsContainer = styled.div`
 /* 	flex-direction: column; */
 	/* margin-left: 10%;  */
 	justify-content: flex-end;
+
+	/* align-self: flex-end; */
 	width: ${({ isArticlePreviewTags }) => isArticlePreviewTags && '15rem'};
 	margin-top: 2rem;
 	@media (min-width: 770px) {

@@ -1,33 +1,42 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import styles from '../../utils/styles';
-import { fetchArticlesByMostRecentRequest, unloadArticles } from '../../redux/articleList/articleList.actions';
-import { unloadTags, removeTagName } from '../../redux/tags/tags.actions';
-import { fetchTagsByMostPopularRequest, getTagName } from '../../redux/tags/tags.actions';
-import { fetchArticlesByTagRequest } from '../../redux/articleList/articleList.actions';
+import {
+	fetchArticlesByMostRecentRequest,
+	addArticleToFavoritesRequest,
+	removeArticleFromFavoritesRequest,
+	fetchArticlesByTagRequest,
+	unloadArticles
+} from '../../redux/articleList/articleList.actions';
+import { fetchTagsByMostPopularRequest, getTagName, removeTagName, unloadTags } from '../../redux/tags/tags.actions';
 import { setCurrentPageNumber } from '../../redux/common/common.actions';
+import { logOut } from '../../redux/currentUser/currentUser.actions';
 
 import * as S from './HomePage.styles';
 
 import ArticleList from '../../components/ArticleList/ArticleList';
 import Pagination from '../../components/Pagination/Pagination';
 import Tags from '../../components/Tags/Tags';
+import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
+import Button from '../../components/Button/Button';
 
 function HomePage({
 	articleList,
-	error,
 	tagList,
 	tag,
+	currentPageNumber,
+	setCurrentPageNumber,
+	logOut,
+	addArticleToFavoritesRequest,
+	removeArticleFromFavoritesRequest,
 	fetchTagsByMostPopularRequest,
 	fetchArticlesByTagRequest,
+	fetchArticlesByMostRecentRequest,
 	removeTagName,
 	getTagName,
 	unloadArticles,
-	unloadTags,
-	fetchArticlesByMostRecentRequest,
-	setCurrentPageNumber,
-	currentPageNumber
+	unloadTags
 }) {
 	useEffect(() => {
 		fetchArticlesByMostRecentRequest(window.localStorage.getItem('offSet'));
@@ -70,33 +79,39 @@ function HomePage({
 						{tag}
 					</S.NavLinkExtended>
 				)}
+				<Button onClick={() => logOut()}>LOG OUT</Button>
 			</S.NavigationWrapper>
 			<S.Row>
-				{error && <div>{error.message}</div>}
-				{articleList.length > 0 ? <ArticleList articleList={articleList} /> : 'Loading articles'}
-				<Pagination
-					currentPageNumber={currentPageNumber}
-					fetchArticlesByMostRecentRequest={fetchArticlesByMostRecentRequest}
-					setCurrentPageNumber={setCurrentPageNumber}
-				/>
-				{tagList.length > 0 ? (
-					<Tags
-						tagList={tagList}
-						fetchArticlesByTagRequest={fetchArticlesByTagRequest}
-						getTagName={getTagName}
-						isPopularTags
-					/>
+				{articleList === null ? (
+					<LoadingSpinner center />
 				) : (
-					'Loading tags'
+					<Fragment>
+						<ArticleList
+							articleList={articleList}
+							addArticleToFavoritesRequest={addArticleToFavoritesRequest}
+							removeArticleFromFavoritesRequest={removeArticleFromFavoritesRequest}
+						/>
+						<Pagination
+							currentPageNumber={currentPageNumber}
+							fetchArticlesByMostRecentRequest={fetchArticlesByMostRecentRequest}
+							setCurrentPageNumber={setCurrentPageNumber}
+						/>
+						{tagList.length > 0 && (
+							<Tags
+								tagList={tagList}
+								fetchArticlesByTagRequest={fetchArticlesByTagRequest}
+								getTagName={getTagName}
+							/>
+						)}
+					</Fragment>
 				)}
 			</S.Row>
 		</S.HomeContainer>
 	);
 }
 
-const mapStateToProps = ({ articleList: { articleList, error }, tags: { tagList, tag }, common: {currentPageNumber} }) => ({
+const mapStateToProps = ({ articleList: { articleList }, tags: { tagList, tag }, common: { currentPageNumber } }) => ({
 	articleList,
-	error,
 	tagList,
 	tag,
 	currentPageNumber
@@ -104,13 +119,16 @@ const mapStateToProps = ({ articleList: { articleList, error }, tags: { tagList,
 
 const mapDispatchToProps = (dispatch) => ({
 	fetchArticlesByMostRecentRequest: (offSet) => dispatch(fetchArticlesByMostRecentRequest(offSet)),
+	fetchArticlesByTagRequest: (tag) => dispatch(fetchArticlesByTagRequest(tag)),
+	addArticleToFavoritesRequest: (articleSlug) => dispatch(addArticleToFavoritesRequest(articleSlug)),
+	removeArticleFromFavoritesRequest: (articleSlug) => dispatch(removeArticleFromFavoritesRequest(articleSlug)),
+	unloadArticles: () => dispatch(unloadArticles()),
 	fetchTagsByMostPopularRequest: () => dispatch(fetchTagsByMostPopularRequest()),
 	getTagName: (tag) => dispatch(getTagName(tag)),
 	removeTagName: () => dispatch(removeTagName()),
-	unloadArticles: () => dispatch(unloadArticles()),
 	unloadTags: () => dispatch(unloadTags()),
-	fetchArticlesByTagRequest: (tag) => dispatch(fetchArticlesByTagRequest(tag)),
-	setCurrentPageNumber: (currentPageNumber) => dispatch(setCurrentPageNumber(currentPageNumber))
+	setCurrentPageNumber: (currentPageNumber) => dispatch(setCurrentPageNumber(currentPageNumber)),
+	logOut: () => dispatch(logOut())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

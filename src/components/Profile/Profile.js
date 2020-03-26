@@ -1,14 +1,6 @@
-import React, { useEffect } from 'react';
-import {isEmpty} from 'lodash'
-
-import { connect } from 'react-redux';
-import { Route, useParams, useHistory } from 'react-router-dom';
-
-import { fetchArticlesByAuthorRequest, fetchFavoriteArticlesRequest } from '../../redux/articleList/articleList.actions';
-import colors from '../../utils/colors';
+import React, { Fragment } from 'react';
+import { isEmpty } from 'lodash';
 import styles from '../../utils/styles';
-import FavoriteArticles from '../FavoriteArticles/FavoriteArticles';
-import ArticlePreview from '../ArticlePreview/ArticlePreview';
 
 import {
 	ProfileContainer,
@@ -19,97 +11,108 @@ import {
 	ArticlesChoice,
 	StyledNavLink,
 	NavLinks,
-	ArticlesList
+	ArticlesWrapper,
+	NotFoundMessage
 } from './Profile.style';
 
+import ArticleList from '../ArticleList/ArticleList';
+import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
+
 function Profile({
-	path,
-	articleList,
 	profileData,
-	username,
-	currentUserData,
-	favoriteArticles,
-	userArticles,
+	articleList,
+	isFetchingArticles,
 	fetchArticlesByAuthorRequest,
 	fetchFavoriteArticlesRequest,
+	unloadArticles,
+	path,
+	username
 }) {
 	let profileLink;
 	let profileLinkFavorites;
+	let notFoundMessage;
 
-	if (!isEmpty(profileData)) {
+	if (path.includes('articleAuthorProfile')) {
 		profileLink = `/articleAuthorProfile/${profileData.username}`;
 		profileLinkFavorites = `/articleAuthorProfile/${profileData.username}/favorites`;
-	} else if (!isEmpty(currentUserData)) {
-		profileLink = `/userProfile/${currentUserData.username}`;
-		profileLinkFavorites = `/userProfile/${currentUserData.username}/favorites`;
+	} else if (path.includes('userProfile')) {
+		profileLink = `/userProfile/${profileData.username}`;
+		profileLinkFavorites = `/userProfile/${profileData.username}/favorites`;
 	}
+	if (path.includes('favorites')) {
+		notFoundMessage = 'No favorite articles found.';
+	} else {
+		notFoundMessage = 'No articles found.';
+	}
+	console.log(isFetchingArticles, articleList);
 
+	const handleFetchArticlesByAuthorRequest = () => {
+		unloadArticles();
+		fetchArticlesByAuthorRequest(username);
+	};
+
+	const handleFetchFavoriteArticlesRequest = () => {
+		unloadArticles();
+		fetchFavoriteArticlesRequest(username);
+	};
 	return (
 		<ProfileContainer>
 			<UserInfo>
-				{!isEmpty(profileData) ? (
+				{isEmpty(profileData) ? (
+					<LoadingSpinner />
+				) : (
 					<React.Fragment>
 						<ImageProfile src={profileData.image} />
 						<Username>{profileData.username}</Username>
 						<Bio>{profileData.bio}</Bio>
 					</React.Fragment>
-				) : (
-					<React.Fragment>
-						<ImageProfile src={currentUserData.image} />
-						<Username>{currentUserData.username}</Username>
-						<Bio>{currentUserData.bio}</Bio>
-					</React.Fragment>
 				)}
 			</UserInfo>
-
-			<ArticlesList>
+			<ArticlesWrapper>
 				<ArticlesChoice>
 					<NavLinks>
-						<StyledNavLink
-							exact
-							to={profileLink}
-							onClick={() => fetchArticlesByAuthorRequest(username)}
-							activeStyle={styles.activeLinkStyle}
-						>
-							My Articles
-						</StyledNavLink>
-						<StyledNavLink
-							to={profileLinkFavorites}
-							onClick={() => fetchFavoriteArticlesRequest(username)}
-							activeStyle={styles.activeLinkStyle}
-						>
-							Favorited Articles
-						</StyledNavLink>
+						{!isEmpty(profileData) &&
+						!isFetchingArticles && (
+							<Fragment>
+								<StyledNavLink
+									isActive={() => {
+										if (!path.includes('favorites')) {
+											return true;
+										} else return false;
+									}}
+									exact
+									to={profileLink}
+									onClick={handleFetchArticlesByAuthorRequest}
+									activeStyle={styles.activeLinkStyle}
+								>
+									My Articles
+								</StyledNavLink>
+								<StyledNavLink
+									sActive={() => {
+										if (path.includes('favorites')) {
+											return true;
+										} else return false;
+									}}
+									to={profileLinkFavorites}
+									onClick={handleFetchFavoriteArticlesRequest}
+									activeStyle={styles.activeLinkStyle}
+								>
+									Favorited Articles
+								</StyledNavLink>
+							</Fragment>
+						)}
 					</NavLinks>
 				</ArticlesChoice>
-
-				{articleList.length > 0 ? (
-					articleList.map((articleData) => <ArticlePreview key={articleData.slug} articleData={articleData} />)
+				{articleList === null ? (
+					<LoadingSpinner center />
+				) : articleList.length > 0 ? (
+					<ArticleList articleList={articleList} />
 				) : (
-					'No articles found'
+					<NotFoundMessage>{notFoundMessage}</NotFoundMessage>
 				)}
-
-				<Route
-					exact
-					path={`${path}/favorites`}
-					render={() =>
-						articleList.length > 0
-							? articleList.map((articleData) => <ArticlePreview key={articleData.slug} articleData={articleData} />)
-							: 'No favorite articles found'}
-				/>
-				{/* 		<Route
-					exact
-					path={`${match.path}/favorites`}
-					render={({ ...routerProps }) => <FavoriteArticles favoriteArticles={favoriteArticles} {...routerProps} />}
-				/> */}
-			</ArticlesList>
+			</ArticlesWrapper>
 		</ProfileContainer>
 	);
 }
 
-const mapDispatchToProps = (dispatch) => ({
-	fetchArticlesByAuthorRequest: (userName) => dispatch(fetchArticlesByAuthorRequest(userName)),
-	fetchFavoriteArticlesRequest: (userName) => dispatch(fetchFavoriteArticlesRequest(userName))
-});
-
-export default connect(null, mapDispatchToProps)(Profile);
+export default Profile;

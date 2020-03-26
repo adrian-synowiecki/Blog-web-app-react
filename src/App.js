@@ -1,6 +1,5 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { isEmpty } from 'lodash';
 import { connect } from 'react-redux';
 
 import { setCurrentPageNumberToFirst } from './redux/common/common.actions';
@@ -27,12 +26,11 @@ function App({ currentUserData, isAuth, setCurrentPageNumberToFirst, fetchArticl
 				fetchArticlesByMostRecentRequest={fetchArticlesByMostRecentRequest}
 			/>
 			<Switch>
-				<Route exact path="/">
-					<HomePage />
-				</Route>
-				<Route path="/page/:currentPageNumber">
-					<HomePage />
-				</Route>
+				{[ '/', '/page/:currentPageNumber' ].map((path) => (
+					<Route key={path} exact path={path}>
+						<HomePage />
+					</Route>
+				))}
 				<Route path="/login">
 					<LoginPage />
 				</Route>
@@ -52,7 +50,12 @@ function App({ currentUserData, isAuth, setCurrentPageNumberToFirst, fetchArticl
 				<Route path="/article/:articleSlug">
 					<ArticleOverviewPage />
 				</Route>
-				<Route path="/articleAuthorProfile/:username">
+			{/* 	{[ '/articleAuthorProfile/:username', '/articleAuthorProfile/:username/favorites' ].map((path) => (
+					<Route exact key={path} path={path}>
+						<ArticleAuthorProfilePage />
+					</Route>
+				))} */}
+				<Route path={'/articleAuthorProfile/:username'}>
 					<ArticleAuthorProfilePage />
 				</Route>
 				<Route path="/userProfile/:username">

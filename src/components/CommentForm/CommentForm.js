@@ -1,30 +1,11 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+
 import { useParams } from 'react-router-dom';
-import { Formik, Field } from 'formik';
+import { Formik } from 'formik';
 
+import { CommentContainer, StyledForm, StyledField, StyledButton } from './CommentForm.style';
 
-import {
-	fetchCommentsFromArticleRequest,
-	addCommentToArticleRequest,
-	removeCommentFromArticleRequest
-} from '../../redux/comments/comments.actions';
-
-import {
-	CommentContainer,
-	StyledForm,
-	StyledField,
-	StyledButton,
-} from './CommentForm.style';
-
-function CommentForm({
-	selectedArticle,
-	currentUserData,
-	commentsList,
-	fetchCommentsFromArticleRequest,
-	addCommentToArticleRequest,
-	removeCommentFromArticleRequest
-}) {
+function CommentForm({ addCommentToArticleRequest }) {
 	const { articleSlug } = useParams();
 	return (
 		<CommentContainer>
@@ -33,7 +14,6 @@ function CommentForm({
 					commentText: ''
 				}}
 				onSubmit={(values) => {
-					// same shape as initial values
 					const commentObj = {
 						comment: {
 							body: values.commentText
@@ -49,19 +29,8 @@ function CommentForm({
 					</StyledForm>
 				)}
 			</Formik>
-		
 		</CommentContainer>
 	);
 }
-const mapStateToProps = (state) => ({
-	currentUserData: state.currentUser.currentUserData
-});
 
-const mapDispatchToProps = (dispatch) => ({
-	addCommentToArticleRequest: (commentObj, slug) => dispatch(addCommentToArticleRequest(commentObj, slug)),
-	removeCommentFromArticleRequest: (slug, commentId) =>
-	dispatch(removeCommentFromArticleRequest(slug, commentId)),
-	fetchCommentsFromArticleRequest: (slug) => dispatch(fetchCommentsFromArticleRequest(slug))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(CommentForm);
+export default CommentForm;

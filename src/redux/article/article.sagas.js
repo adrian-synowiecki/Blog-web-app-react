@@ -1,4 +1,4 @@
-import { all, put, call, takeLatest, takeEvery } from 'redux-saga/effects';
+import { all, put, call, takeLatest } from 'redux-saga/effects';
 
 
 import { history } from '../../index';

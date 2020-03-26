@@ -1,13 +1,5 @@
-import React, { useEffect } from 'react';
-import { Formik, Field } from 'formik';
-import { connect } from 'react-redux';
+import React from 'react';
 import { useParams } from 'react-router-dom';
-
-import {
-	fetchCommentsFromArticleRequest,
-	addCommentToArticleRequest,
-	removeCommentFromArticleRequest
-} from '../../redux/comments/comments.actions';
 
 import {
 	CommentContainer,
@@ -20,18 +12,8 @@ import {
 	DeleteComment
 } from './Comments.style.js';
 
-function Comment({
-	currentUserData,
-	commentList,
-	fetchCommentsFromArticleRequest,
-	addCommentToArticleRequest,
-	removeCommentFromArticleRequest
-}) {
+function Comment({ currentUserData, commentList, removeCommentFromArticleRequest }) {
 	const { articleSlug } = useParams();
-
-	/* 	useEffect(() => {
-		fetchcommentFromArticles(selectedArticle.slug);
-	}, []); */
 
 	return (
 		<CommentContainer>
@@ -55,15 +37,5 @@ function Comment({
 		</CommentContainer>
 	);
 }
-const mapStateToProps = (state) => ({
-	currentUserData: state.currentUser.currentUserData
-});
 
-const mapDispatchToProps = (dispatch) => ({
-	addCommentToArticleRequest: (commentObj, slug) => dispatch(addCommentToArticleRequest(commentObj, slug)),
-	removeCommentFromArticleRequest: (commentData, slug, commentId) =>
-	dispatch(removeCommentFromArticleRequest(commentData, slug, commentId)),
-	fetchCommentsFromArticleRequest: (slug) => dispatch(fetchCommentsFromArticleRequest(slug))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Comment);
+export default Comment;

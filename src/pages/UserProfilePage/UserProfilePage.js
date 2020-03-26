@@ -1,54 +1,63 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { isEmpty } from 'lodash';
 
-import Profile from '../../components/Profile/Profile';
-
-import { useLocation, useParams } from 'react-router-dom';
-
-import { fetchArticlesByAuthorRequest, fetchFavoriteArticlesRequest } from '../../redux/articleList/articleList.actions';
-
-function UserProfilePage({
-	match,
-	currentUserData,
+import {
 	fetchArticlesByAuthorRequest,
 	fetchFavoriteArticlesRequest,
-	userArticles,
-	favoriteArticles,
-	articleList
-}) {
-	useEffect(() => {
-		fetchArticlesByAuthorRequest(username);
-		fetchFavoriteArticlesRequest(username);
-	}, []);
+	unloadArticles
+} from '../../redux/articleList/articleList.actions';
 
+import Profile from '../../components/Profile/Profile';
+
+function UserProfilePage({
+	currentUserData,
+	articleList,
+	isFetchingArticles,
+	fetchArticlesByAuthorRequest,
+	fetchFavoriteArticlesRequest,
+	unloadArticles
+}) {
 	const { username } = useParams();
 	let location = useLocation();
 
+	useEffect(() => {
+		if (location.pathname.includes('favorites')) {
+			fetchFavoriteArticlesRequest(username);
+		} else fetchArticlesByAuthorRequest(username);
+
+		return () => {
+			unloadArticles();
+		};
+	}, []);
+
 	return (
-		<div>
-			{!isEmpty(currentUserData) && (
-				<Profile
-					articleList={articleList}
-					username={username}
-					path={location.pathname}
-					/* 		userArticles={userArticles} */
-					currentUserData={currentUserData}
-					/* 				favoriteArticles={favoriteArticles} */
-				/>
-			)}
-		</div>
+		<Fragment>
+			<Profile
+				profileData={currentUserData}
+				articleList={articleList}
+				isFetchingArticles={isFetchingArticles}
+				fetchArticlesByAuthorRequest={fetchArticlesByAuthorRequest}
+				fetchFavoriteArticlesRequest={fetchFavoriteArticlesRequest}
+				unloadArticles={unloadArticles}
+				username={username}
+				path={location.pathname}
+			/>
+		</Fragment>
 	);
 }
 
 const mapStateToProps = (state) => ({
 	articleList: state.articleList.articleList,
-	currentUserData: state.currentUser.currentUserData
+	currentUserData: state.currentUser.currentUserData,
+	isFetchingArticles: state.currentUser.isFetchingArticles
 });
 
 const mapDispatchToProps = (dispatch) => ({
 	fetchArticlesByAuthorRequest: (username) => dispatch(fetchArticlesByAuthorRequest(username)),
-	fetchFavoriteArticlesRequest: (username) => dispatch(fetchFavoriteArticlesRequest(username))
+	fetchFavoriteArticlesRequest: (username) => dispatch(fetchFavoriteArticlesRequest(username)),
+	unloadArticles: () => dispatch(unloadArticles())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserProfilePage);

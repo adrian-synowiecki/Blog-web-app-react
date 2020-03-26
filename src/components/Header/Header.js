@@ -37,9 +37,9 @@ export default Header;
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
-import { deleteArticleRequest } from '../../redux/article/article.actions'
+import { deleteArticleRequest } from '../../redux/article/article.actions';
 import {
 	HeaderContainer,
 	HeaderTitle,
@@ -52,14 +52,12 @@ import {
 	DeleteArticle
 } from './Header.style';
 
-
-
-function Header({ history, Article, title, text, canModify, dispatch, ...props }) {
+function Header({ Article, title, text, canModify, dispatch, ...props }) {
+	let history = useHistory();
 	const handleDeleteArticle = () => {
-		dispatch(deleteArticleRequest(Article.slug))
-		history.push('/')
-		
-	}
+		dispatch(deleteArticleRequest(Article.slug));
+		history.push('/');
+	};
 	return (
 		<HeaderContainer {...props}>
 			<HeaderWrapper {...props}>
@@ -69,9 +67,7 @@ function Header({ history, Article, title, text, canModify, dispatch, ...props }
 						<EditArticle onClick={() => history.push(`/editArticle/${Article.slug}`)}>
 							Edit Article
 						</EditArticle>
-						<DeleteArticle onClick={handleDeleteArticle}>
-							Delete Article
-						</DeleteArticle>
+						<DeleteArticle onClick={handleDeleteArticle}>Delete Article</DeleteArticle>
 					</ArticleModify>
 				)}
 				<HeaderText {...props}>{text}</HeaderText>
@@ -80,4 +76,4 @@ function Header({ history, Article, title, text, canModify, dispatch, ...props }
 	);
 }
 
-export default withRouter(connect()(Header));
+export default Header;

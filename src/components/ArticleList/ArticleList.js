@@ -1,19 +1,21 @@
 import React from 'react';
 
 import ArticlePreview from '../ArticlePreview/ArticlePreview';
-import { ArticlesContainer, ArticlesList } from './ArticleList.style';
+import { ArticlesContainer } from './ArticleList.style';
 
-
-
-function Articles({ articleList }) {
-
+function ArticleList({ articleList, addArticleToFavoritesRequest, removeArticleFromFavoritesRequest }) {
 	return (
 		<ArticlesContainer>
 			{articleList.map((articleData) => (
-				<ArticlePreview key={articleData.slug} articleData={articleData} />
+				<ArticlePreview
+					articleData={articleData}
+					addArticleToFavoritesRequest={addArticleToFavoritesRequest}
+					removeArticleFromFavoritesRequest={removeArticleFromFavoritesRequest}
+					key={articleData.slug}
+				/>
 			))}
 		</ArticlesContainer>
 	);
 }
 
-export default Articles;
+export default ArticleList;

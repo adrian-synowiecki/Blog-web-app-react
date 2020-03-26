@@ -1,24 +1,19 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Formik, Field } from 'formik';
-import { withRouter } from 'react-router-dom';
 
-import { createArticleRequest, updateArticleRequest } from '../../redux/article/article.actions'
 import { ArticleFormContainer, StyledForm, StyledTextField, StyledButton } from './ArticleForm.style';
 
-function ArticleForm({ createArticleRequest, selectedArticle, updateArticleRequest, history }) {
+function ArticleForm({ createArticleRequest, articleToEdit, updateArticleRequest, history }) {
 	return (
 		<ArticleFormContainer>
 			<Formik
 				initialValues={{
-					title: selectedArticle ? `${selectedArticle.title}` : '',
-					description: selectedArticle ? `${selectedArticle.description}` : '',
-					body: selectedArticle ? `${selectedArticle.body}` : '',
+					title: articleToEdit ? `${articleToEdit.title}` : '',
+					description: articleToEdit ? `${articleToEdit.description}` : '',
+					body: articleToEdit ? `${articleToEdit.body}` : '',
 					tagList: ''
 				}}
 				onSubmit={(values, actions) => {
-					
-					// same shape as initial values
 					const ArticleDataObj = {
 						Article: {
 							title: values.title,
@@ -27,10 +22,9 @@ function ArticleForm({ createArticleRequest, selectedArticle, updateArticleReque
 							tagList: values.tagList
 						}
 					};
-					selectedArticle
-						? updateArticleRequest(selectedArticle.slug, ArticleDataObj)
+					articleToEdit
+						? updateArticleRequest(articleToEdit.slug, ArticleDataObj)
 						: createArticleRequest(ArticleDataObj);
-				/* 	history.push('/'); */
 				}}
 			>
 				{({ errors, touched }) => (
@@ -76,9 +70,4 @@ function ArticleForm({ createArticleRequest, selectedArticle, updateArticleReque
 	);
 }
 
-const mapDispatchToProps = (dispatch) => ({
-	createArticleRequest: (ArticleDataObj) => dispatch(createArticleRequest(ArticleDataObj)),
-	updateArticleRequest: (slug, ArticleDataObj) => dispatch(updateArticleRequest(slug, ArticleDataObj))
-});
-
-export default withRouter(connect(null, mapDispatchToProps)(ArticleForm));
+export default ArticleForm;

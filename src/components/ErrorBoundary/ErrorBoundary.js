@@ -1,7 +1,5 @@
 import React from 'react'
 
-import {withRouter} from 'react-router-dom'
-
 class ErrorBoundary extends React.Component {
 	constructor(props) {
 		super(props);
@@ -12,7 +10,7 @@ class ErrorBoundary extends React.Component {
 		return { hasError: true };
 	}
 
-	componentDidCatch(error, errorInfo) {
+	componentDidCatch(error) {
 		// You can also log the error to an error reporting service
 		console.log(error)
 	}
@@ -20,17 +18,6 @@ class ErrorBoundary extends React.Component {
  
  
 	render() {
-      /*   const { history } = this.props;
-
-        history.listen((location, action) => {
-            if (this.state.hasError) {
-              this.setState({
-                hasError: false,
-              });
-            }
-          });
- */
-
 		if (this.state.hasError) {
 			// You can render any custom fallback UI
 			return <h1>Something went wrong.</h1>;
@@ -40,4 +27,4 @@ class ErrorBoundary extends React.Component {
 	}
 }
 
-export default withRouter(ErrorBoundary);
+export default ErrorBoundary

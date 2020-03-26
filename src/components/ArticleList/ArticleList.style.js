@@ -10,14 +10,11 @@ export const ArticlesContainer = styled.div`
 		order: 1;
 		width: 70%;
 	}
- 	/* margin-top: -0.2rem;  */
-
+	/* margin-top: -0.2rem;  */
 `;
-
-
 
 export const ArticlesList = styled.div`
 	display: flex;
 	flex-direction: column;
-/* 	margin-top: 1rem; */
+	/* 	margin-top: 1rem; */
 `;

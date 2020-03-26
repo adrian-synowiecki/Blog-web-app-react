@@ -1,13 +1,11 @@
-import React from 'react'
+import React from 'react';
 import styled from 'styled-components/macro';
 import { NavLink } from 'react-router-dom';
 import colors from '../../utils/colors';
 
-
 export const HomeContainer = styled.div`
- 	display: flex;
-	flex-direction: column; 
-	
+	display: flex;
+	flex-direction: column;
 `;
 
 export const Header = styled.header`
@@ -15,15 +13,13 @@ export const Header = styled.header`
 	box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, .3), inset 0 -8px 8px -8px rgba(0, 0, 0, .3);
 	text-shadow: 0 0 black;
 	background: #5cb85c;
-	
-`
+`;
 
 export const HeadingsWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	color: white;
-
 `;
 
 export const Heading = styled.h1`
@@ -40,32 +36,26 @@ export const SubHeading = styled.p`
 	margin-top: -2.5rem;
 `;
 
-
 export const Row = styled.main`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	position: relative;
+	min-height: 19rem;
 
 	@media (min-width: 770px) {
 		align-items: flex-start;
 		flex-direction: row;
 		flex-wrap: wrap;
-		
 	}
-	
-	
 `;
 
-
-export const NavigationWrapper = styled.div`
-	display: flex;
-`
+export const NavigationWrapper = styled.div`display: flex;`;
 
 export const Paragraph = styled.p`
-margin-right: auto;
-margin-top: 5rem;
-`
+	margin-right: auto;
+	margin-top: 5rem;
+`;
 
 /* export const NavLink = styled(NavLink)`
     color: ${colors.green};
@@ -76,21 +66,16 @@ margin-top: 5rem;
 	 margin-left: ${props => props.tag && '3rem'} 
 `; */
 
- export const NavLinkExtended = styled(({ tag, ...props }) => <NavLink {...props} />)`
+export const NavLinkExtended = styled(({ tag, ...props }) => <NavLink {...props} />)`
   color: ${colors.green};
   text-decoration: none;
   margin-top: 3rem;
   display: flex;
-  margin-left: ${props => props.tag && '3rem'}; 
+  margin-left: ${(props) => props.tag && '3rem'}; 
   padding: 1rem;
-` 
-
-
-
-
+`;
 
 /* 	width: 100%;
 	@media (min-width: 770px) {
 		width: 70%;
 	} */
-

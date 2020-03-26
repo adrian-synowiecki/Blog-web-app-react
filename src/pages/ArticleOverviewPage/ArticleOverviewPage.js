@@ -1,15 +1,19 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { isEmpty } from 'lodash';
 
 import colors from '../../utils/colors';
 import { fetchArticleRequest } from '../../redux/article/article.actions';
-import { fetchCommentsFromArticleRequest } from '../../redux/comments/comments.actions';
+import {
+	fetchCommentsFromArticleRequest,
+	addCommentToArticleRequest,
+	removeCommentFromArticleRequest
+} from '../../redux/comments/comments.actions';
 import { unloadArticle } from '../../redux/article/article.actions';
 
 import ArticleMeta from '../../components/ArticleMeta/ArticleMeta';
 import Header from '../../components/Header/Header';
-import Comment from '../../components/Comment/Comment';
 import CommentForm from '../../components/CommentForm/CommentForm';
 import Comments from '../../components/Comments/Comments';
 import Tags from '../../components/Tags/Tags';
@@ -17,25 +21,20 @@ import Tags from '../../components/Tags/Tags';
 import { FullArticleText, Paragraph } from './ArticleOverviewPage.style';
 
 function ArticleOverviewPage({
-	match,
-	fetchArticleRequest,
 	articleData,
-	fetchCommentsFromArticleRequest,
 	currentUserData,
-	unloadArticle,
-	commentList
+	commentList,
+	fetchArticleRequest,
+	fetchCommentsFromArticleRequest,
+	addCommentToArticleRequest,
+	unloadArticle
 }) {
+	const { articleSlug } = useParams();
 	const { body, tagList, author, title } = articleData;
-	/* 	useEffect(() => {
-		fetchArticles();
-	
-		 fetchCommentsFromArticles(selectedArticle.slug);
-		
-	}, []); */
-	/* console.log(match.params.articleSlug); */
+
 	useEffect(() => {
-		fetchArticleRequest(match.params.articleSlug);
-		fetchCommentsFromArticleRequest(match.params.articleSlug);
+		fetchArticleRequest(articleSlug);
+		fetchCommentsFromArticleRequest(articleSlug);
 		return () => {
 			unloadArticle();
 		};
@@ -43,7 +42,6 @@ function ArticleOverviewPage({
 
 	const canModify =
 		!isEmpty(currentUserData) && !isEmpty(articleData) && currentUserData.username === author.username;
-	/* 	 	console.log(commentsList); */
 
 	return (
 		<div>
@@ -59,9 +57,13 @@ function ArticleOverviewPage({
 							<span style={{ color: colors.green }}>sign up</span> to add comments on this article
 						</Paragraph>
 					) : (
-						<CommentForm articleData={articleData} commentList={commentList}  />
+						<CommentForm addCommentToArticleRequest={addCommentToArticleRequest} />
 					)}
-					<Comments commentList={commentList} />
+					<Comments
+						currentUserData={currentUserData}
+						commentList={commentList}
+						removeCommentFromArticleRequest={removeCommentFromArticleRequest}
+					/>
 				</React.Fragment>
 			)}
 		</div>
@@ -79,8 +81,11 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchArticleRequest: (articleSlug) => dispatch(fetchArticleRequest(articleSlug)),
+		unloadArticle: () => dispatch(unloadArticle()),
 		fetchCommentsFromArticleRequest: (articleSlug) => dispatch(fetchCommentsFromArticleRequest(articleSlug)),
-		unloadArticle: () => dispatch(unloadArticle())
+		addCommentToArticleRequest: (commentObj, slug) => dispatch(addCommentToArticleRequest(commentObj, slug)),
+		removeCommentFromArticleRequest: (commentData, slug, commentId) =>
+			dispatch(removeCommentFromArticleRequest(commentData, slug, commentId))
 	};
 };
 

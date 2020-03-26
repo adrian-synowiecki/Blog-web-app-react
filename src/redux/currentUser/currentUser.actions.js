@@ -45,6 +45,10 @@ export const updateUserError = (error) => ({
 	payload: { error }
 });
 
+export const logOut = () => ({
+	type: userTypes.LOG_OUT
+})
+
 export const clearError = () => ({
 	type: userTypes.CLEAR_ERROR
 })

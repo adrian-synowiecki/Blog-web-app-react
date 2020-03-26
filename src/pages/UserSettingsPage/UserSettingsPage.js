@@ -1,17 +1,14 @@
 import React from 'react';
-import { Formik, Field } from 'formik';
-
-import Button from '../../components/Button/Button';
-
-import { UserSettingsContainer, Title, StyledTextField, StyledForm } from './UserSettingsPage.style';
-
 import { connect } from 'react-redux';
-
-import { withRouter } from 'react-router-dom';
+import { Formik, Field } from 'formik';
 
 import { updateUserRequest } from '../../redux/currentUser/currentUser.actions';
 
-function UserSettingsPage({ currentUserData, updateUserRequest, history }) {
+import { UserSettingsContainer, Title, StyledTextField, StyledForm } from './UserSettingsPage.style';
+
+import Button from '../../components/Button/Button';
+
+function UserSettingsPage({ currentUserData, updateUserRequest }) {
 	console.log(currentUserData);
 	return (
 		<UserSettingsContainer>
@@ -25,7 +22,7 @@ function UserSettingsPage({ currentUserData, updateUserRequest, history }) {
 					password: ''
 				}}
 				onSubmit={(values, actions) => {
-					const userObj = {
+					const userUpdateData = {
 						user: {
 							username: values.username,
 							image: values.image,
@@ -33,8 +30,7 @@ function UserSettingsPage({ currentUserData, updateUserRequest, history }) {
 						}
 					};
 					console.log(values.password);
-					updateUserRequest(userObj);
-					/* 		history.push('/') */
+					updateUserRequest(userUpdateData);
 				}}
 			>
 				{({ errors, touched, values }) => (
@@ -107,10 +103,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		updateUserRequest: (updatedUserObj) => dispatch(updateUserRequest(updatedUserObj))
+		updateUserRequest: (userUpdateData) => dispatch(updateUserRequest(userUpdateData))
 	};
 };
 
 /* export default connect(mapStateToProps, mapDispatchToProps)(UserSettings) */
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(UserSettingsPage));
+export default connect(mapStateToProps, mapDispatchToProps)(UserSettingsPage);

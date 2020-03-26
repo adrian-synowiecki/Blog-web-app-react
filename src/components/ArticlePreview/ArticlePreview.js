@@ -5,7 +5,6 @@ import {
 	addArticleToFavoritesRequest,
 	removeArticleFromFavoritesRequest,
 	fetchArticlesByTagRequest,
-	fetchArticlesByMostRecentRequest
 } from '../../redux/articleList/articleList.actions'
 
 import ArticleMeta from '../ArticleMeta/ArticleMeta';
@@ -17,7 +16,6 @@ function ArticlePreview({
 	articleData,
 	addArticleToFavoritesRequest,
 	removeArticleFromFavoritesRequest,
-	fetchArticlesByTagRequest
 }) {
 	const { favorited, slug, title, description, favoritesCount, tagList } = articleData;
 	const handleAddingToFavorite = () => {
@@ -43,25 +41,10 @@ function ArticlePreview({
 					<S.FavoriteAddedCount favorited={favorited}>{favoritesCount}</S.FavoriteAddedCount>
 				</S.AddToFavorite>
 				{<Tags tagList={tagList} isArticlePreviewTags />}
-				{/* {tagList.length > 0 && (
-					<S.ArticleTags>
-						{tagList.map((tag) => (
-							<S.Tag key={tag} onClick={() => fetchArticlesByTagRequest(tag)}>
-								{tag}
-							</S.Tag>
-						))}
-					</S.ArticleTags>
-				)} */}
 			</S.ArticleRightSide>
 		</S.ArticlePreviewContainer>
 	);
 }
 
-const mapDispatchToProps = (dispatch) => ({
-	addArticleToFavoritesRequest: (slug) => dispatch(addArticleToFavoritesRequest(slug)),
-	removeArticleFromFavoritesRequest: (slug) => dispatch(removeArticleFromFavoritesRequest(slug)),
-	fetchArticlesByTagRequest: (tag) => dispatch(fetchArticlesByTagRequest(tag)),
-	fetchArticlesByMostRecentRequest: (offset) => dispatch(fetchArticlesByMostRecentRequest(offset))
-});
 
-export default connect(null, mapDispatchToProps)(ArticlePreview);
+export default ArticlePreview;
