@@ -1,20 +1,21 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
 
-import colors from '../../utils/colors';
-import { history } from '../../index';
+import colors from 'utils/colors';
 
 import { ArticlePageLinksContainer, StyledPageLink } from './Pagination.style';
 
-function Pagination({ currentPageNumber, setCurrentPageNumber, fetchArticlesByMostRecentRequest }) {
+function Pagination({ currentPageNumber, setCurrentPageNumber, fetchArticlesByMostRecentRequest, push }) {
 	const pageLinks = [];
 
 	useEffect(
 		() => {
 			window.localStorage.setItem('currentPageNumber', currentPageNumber);
 			if (currentPageNumber !== 1) {
-				history.push(`/page/${currentPageNumber}`);
+				push(`/page/${currentPageNumber}`);
 			} else {
-				history.push(`/`);
+				push(`/`);
 			}
 
 			/* window.scrollTo(0, 0); */
@@ -36,7 +37,7 @@ function Pagination({ currentPageNumber, setCurrentPageNumber, fetchArticlesByMo
 						return true;
 					}}
 					key={i}
-					activeStyle={{ background: colors.green, color: 'white' }}
+			/* 		activeStyle={{ background: colors.green, color: 'white' }} */
 					to
 				>
 					{i}
@@ -52,4 +53,4 @@ function Pagination({ currentPageNumber, setCurrentPageNumber, fetchArticlesByMo
 	return <ArticlePageLinksContainer>{pageLinks.map((pageLink) => pageLink)}</ArticlePageLinksContainer>;
 }
 
-export default Pagination;
+export default connect(null, { push })(Pagination);

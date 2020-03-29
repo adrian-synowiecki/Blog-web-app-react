@@ -1,6 +1,6 @@
 import articleTypes from './article.types';
 
-/* fetching article */
+// fetch article
 export const fetchArticleRequest = (articleSlug) => ({
 	type: articleTypes.FETCH_ARTICLE_REQUEST,
 	articleSlug
@@ -14,7 +14,7 @@ export const fetchArticleError = (error) => ({
 	payload: { error }
 });
 
-/* creating article */
+// create article
 export const createArticleRequest = (articleCreationData) => ({
 	type: articleTypes.CREATE_ARTICLE_REQUEST,
 	articleCreationData
@@ -27,11 +27,11 @@ export const createArticleError = (error) => ({
 	payload: { error }
 });
 
-/* updating article */
-export const updateArticleRequest = (articleSlug, articleCreationData) => ({
+// update article
+export const updateArticleRequest = (articleSlug, articleToUpdateData) => ({
 	type: articleTypes.UPDATE_ARTICLE_REQUEST,
 	articleSlug,
-	articleCreationData
+	articleToUpdateData
 });
 export const updateArticleDone = () => ({
 	type: articleTypes.UPDATE_ARTICLE_DONE
@@ -41,7 +41,7 @@ export const updateArticleError = (error) => ({
 	payload: { error }
 });
 
-/* deleting article */
+// delete article
 export const deleteArticleRequest = (articleSlug) => ({
 	type: articleTypes.DELETE_ARTICLE_REQUEST,
 	articleSlug
@@ -54,7 +54,10 @@ export const deleteArticleError = (error) => ({
 	payload: { error }
 });
 
-/* unloading article */
 export const unloadArticle = () => ({
 	type: articleTypes.UNLOAD_ARTICLE
+});
+
+export const clearArticleError = () => ({
+	type: articleTypes.CLEAR_ARTICLE_ERROR
 });

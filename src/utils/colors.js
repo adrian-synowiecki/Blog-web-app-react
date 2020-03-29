@@ -1,3 +1,3 @@
 export default {
-	green: ' #5cb85c'
-};
+    green: '#2E4272'
+}

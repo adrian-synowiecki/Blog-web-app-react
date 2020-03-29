@@ -1,19 +1,37 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { Formik, Field } from 'formik';
 
-import { updateUserRequest } from '../../redux/currentUser/currentUser.actions';
+import { updateUserRequest, clearUserError } from 'redux/user/user.actions';
 
 import { UserSettingsContainer, Title, StyledTextField, StyledForm } from './UserSettingsPage.style';
 
-import Button from '../../components/Button/Button';
+import Button from 'components/Button/Button';
+import ErrorList from 'components/ErrorList/ErrorList';
 
-function UserSettingsPage({ currentUserData, updateUserRequest }) {
-	console.log(currentUserData);
+function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUserError }) {
+	const formikRef = useRef(null);
+	useEffect(
+		() => {
+			formikRef.current.setSubmitting(false);
+		},
+		[ error ]
+	);
+	useEffect(() => {
+		return () => {
+			clearUserError();
+		};
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+	window.onload = () => {
+		clearUserError();
+	};
+
 	return (
 		<UserSettingsContainer>
 			<Title>Your Settings</Title>
 			<Formik
+				ref={formikRef}
 				initialValues={{
 					profilePictureUrl: currentUserData.image ? `${currentUserData.image}` : '',
 					username: `${currentUserData.username}`,
@@ -21,7 +39,7 @@ function UserSettingsPage({ currentUserData, updateUserRequest }) {
 					email: `${currentUserData.email}`,
 					password: ''
 				}}
-				onSubmit={(values, actions) => {
+				onSubmit={(values) => {
 					const userUpdateData = {
 						user: {
 							username: values.username,
@@ -29,12 +47,12 @@ function UserSettingsPage({ currentUserData, updateUserRequest }) {
 							bio: values.bio
 						}
 					};
-					console.log(values.password);
 					updateUserRequest(userUpdateData);
 				}}
 			>
-				{({ errors, touched, values }) => (
+				{({ isSubmitting }) => (
 					<StyledForm>
+						{error && <ErrorList error={error} />}
 						<Field
 							name="image"
 							type="text"
@@ -76,18 +94,14 @@ function UserSettingsPage({ currentUserData, updateUserRequest }) {
 							name="password"
 							component={StyledTextField}
 							type="password"
-							/* 	inputProps={{
-								form: {
-									autoComplete: 'off'
-								}
-							}} */
-							name="password"
 							label="New Password"
 							margin="normal"
 							variant="outlined"
 						/>
 
-						<Button type="submit">Update Settings</Button>
+						<Button disabled={isSubmitting} type="submit">
+							Update Settings
+						</Button>
 					</StyledForm>
 				)}
 			</Formik>
@@ -97,16 +111,16 @@ function UserSettingsPage({ currentUserData, updateUserRequest }) {
 
 const mapStateToProps = (state) => {
 	return {
-		currentUserData: state.currentUser.currentUserData
+		currentUserData: state.user.currentUserData,
+		error: state.user.error
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		updateUserRequest: (userUpdateData) => dispatch(updateUserRequest(userUpdateData))
+		updateUserRequest: (userUpdateData) => dispatch(updateUserRequest(userUpdateData)),
+		clearUserError: () => dispatch(clearUserError())
 	};
 };
-
-/* export default connect(mapStateToProps, mapDispatchToProps)(UserSettings) */
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserSettingsPage);

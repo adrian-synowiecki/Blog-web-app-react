@@ -1,9 +1,8 @@
-import { all, put, call, takeLatest, takeEvery } from 'redux-saga/effects';
+import { all, put, call, takeLatest } from 'redux-saga/effects';
 
-import { history } from '../../index';
-import * as api from './comments.api'
-import * as commentsActions from './comments.actions'
-import commentsTypes from './comments.types'
+import * as api from './comments.api';
+import * as commentsActions from './comments.actions';
+import commentsTypes from './comments.types';
 
 function* fetchCommentsFromArticleAsync(action) {
 	try {
@@ -21,19 +20,16 @@ function* addCommentToArticleAsync(action) {
 		yield put(commentsActions.addCommentToArticleDone(response.data.comment));
 	} catch (error) {
 		yield put(commentsActions.addCommentToArticleError(error));
-		
 	}
 }
 
 function* removeCommentFromArticleAsync(action) {
-	const { commentToDeleteData, articleSlug, commentId } = action;
+	const { articleSlug, commentToDeleteId } = action;
 	try {
-	const response = 	yield call(api.removeCommentFromArticle, articleSlug, commentId);
-	console.log(response)
-		yield put(commentsActions.removeCommentFromArticleDone(commentToDeleteData));
+		yield call(api.removeCommentFromArticle, articleSlug, commentToDeleteId);
+		yield put(commentsActions.removeCommentFromArticleDone(commentToDeleteId));
 	} catch (error) {
 		yield put(commentsActions.removeCommentFromArticleError(error));
-	
 	}
 }
 

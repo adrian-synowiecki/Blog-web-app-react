@@ -1,4 +1,4 @@
-import profileTypes from './profile.types'
+import profileTypes from './profile.types';
 
 const initialState = {
 	isFetchingProfileData: false,
@@ -13,9 +13,11 @@ export default function profileReducer(state = initialState, action) {
 		case profileTypes.FETCH_PROFILE_BY_USERNAME_DONE:
 			return { ...state, profileData: { ...action.payload.profileData }, isFetchingProfileData: false };
 		case profileTypes.FETCH_PROFILE_BY_USERNAME_ERROR:
-			return {...state, error: action.payload.error, isFetchingProfileData: false }
+			return { ...state, error: action.payload.error, isFetchingProfileData: false };
 		case profileTypes.UNLOAD_PROFILE:
-			return {...state, profileData: {}};
+			return { ...state, profileData: {}, error: null };
+		case profileTypes.CLEAR_PROFILE_ERROR:
+			return { ...state, error: null };
 		default:
 			return state;
 	}

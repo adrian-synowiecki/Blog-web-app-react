@@ -1,34 +1,49 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Formik, Field } from 'formik';
+import TagsInput from 'react-tagsinput';
 
+import 'utils/react-tags-input.css';
 import { ArticleFormContainer, StyledForm, StyledTextField, StyledButton } from './ArticleForm.style';
 
-function ArticleForm({ createArticleRequest, articleToEdit, updateArticleRequest, history }) {
+import ErrorList from 'components/ErrorList/ErrorList';
+
+function ArticleForm({ articleToEdit, error, createArticleRequest, updateArticleRequest }) {
+	const { title, description, body, slug } = articleToEdit || {}
+	
+
+	const formikRef = useRef(null);
+	useEffect(
+		() => {
+			formikRef.current.setSubmitting(false);
+		},
+		[ error ]
+	);
+
 	return (
 		<ArticleFormContainer>
 			<Formik
+				ref={formikRef}
 				initialValues={{
-					title: articleToEdit ? `${articleToEdit.title}` : '',
-					description: articleToEdit ? `${articleToEdit.description}` : '',
-					body: articleToEdit ? `${articleToEdit.body}` : '',
-					tagList: ''
+					title: articleToEdit ? `${title}` : '',
+					description: articleToEdit ? `${description}` : '',
+					body: articleToEdit ? `${body}` : '',
+					tagList: []
 				}}
-				onSubmit={(values, actions) => {
-					const ArticleDataObj = {
-						Article: {
+				onSubmit={(values) => {
+					const articleData = {
+						article: {
 							title: values.title,
 							description: values.description,
 							body: values.body,
 							tagList: values.tagList
 						}
 					};
-					articleToEdit
-						? updateArticleRequest(articleToEdit.slug, ArticleDataObj)
-						: createArticleRequest(ArticleDataObj);
+					articleToEdit ? updateArticleRequest(slug, articleData) : createArticleRequest(articleData);
 				}}
 			>
-				{({ errors, touched }) => (
+				{({ isSubmitting, values, setFieldValue }) => (
 					<StyledForm>
+						{error && <ErrorList error={error} />}
 						<Field
 							name="title"
 							component={StyledTextField}
@@ -46,6 +61,7 @@ function ArticleForm({ createArticleRequest, articleToEdit, updateArticleRequest
 						/>
 
 						<Field
+							body
 							name="body"
 							component={StyledTextField}
 							label="Wrtice your Article (in markdown)"
@@ -54,15 +70,15 @@ function ArticleForm({ createArticleRequest, articleToEdit, updateArticleRequest
 							margin="normal"
 							variant="outlined"
 						/>
-
-						<Field
-							name="tagList"
-							component={StyledTextField}
-							label="Enter tags"
-							margin="dense"
-							variant="outlined"
+						<TagsInput
+							value={values.tagList}
+							onChange={(tagList) => {
+								setFieldValue('tagList', tagList);
+							}}
 						/>
-						<StyledButton type="submit">Publish Article</StyledButton>
+						<StyledButton disabled={isSubmitting} type="submit">
+							Publish Article
+						</StyledButton>
 					</StyledForm>
 				)}
 			</Formik>

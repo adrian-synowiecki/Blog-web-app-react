@@ -1,20 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Formik, Field } from 'formik';
 
+import { FormContainer, StyledForm, StyledTextField, Title, StyledLink } from './AuthForm.style';
 
-import {
-	FormContainer,
-	StyledForm,
-	StyledTextField,
-	Title,
-	StyledLink,
-	ErrorMessage,
-	ErrorMessageWrapper
-} from './AuthForm.style';
+import ErrorList from 'components/ErrorList/ErrorList';
+import Button from 'components/Button/Button';
 
-import Button from '../Button/Button';
-
-function AuthForm({ error, signUpPage, signUpRequest, loginRequest, clearError }) {
+function AuthForm({ error, signUpPage, signUpRequest, loginRequest }) {
 	const [ isReadOnly, setReadOnly ] = useState(true);
 	const formikRef = useRef(null);
 	const handleFocus = () => {
@@ -28,15 +20,6 @@ function AuthForm({ error, signUpPage, signUpRequest, loginRequest, clearError }
 		[ error ]
 	);
 
-	useEffect(() => {
-		return () => {
-			clearError();
-		};
-	}, []);
-
-	window.onload = () => {
-		clearError();
-	};
 	return (
 		<FormContainer>
 			<Title>{signUpPage ? 'SIGN UP' : 'LOG IN'}</Title>
@@ -62,26 +45,7 @@ function AuthForm({ error, signUpPage, signUpRequest, loginRequest, clearError }
 			>
 				{({ isSubmitting }) => (
 					<StyledForm>
-						<ErrorMessageWrapper>
-							{error &&
-								(error.email &&
-									error.email.map((emailError) => <ErrorMessage>email {emailError}</ErrorMessage>))}
-							{error &&
-								(error.password &&
-									error.password.map((passwordError) => (
-										<ErrorMessage>password {passwordError}</ErrorMessage>
-									)))}
-							{error &&
-								(error.username &&
-									error.username.map((usernameError) => (
-										<ErrorMessage>username {usernameError}</ErrorMessage>
-									)))}
-							{error &&
-								(error['email or password'] &&
-									error['email or password'].map((emailOrPasswordError) => (
-										<ErrorMessage>email or password {emailOrPasswordError}</ErrorMessage>
-									)))}
-						</ErrorMessageWrapper>
+						{error && <ErrorList error={error} />}
 						{signUpPage && (
 							<Field
 								name="username"
@@ -101,7 +65,6 @@ function AuthForm({ error, signUpPage, signUpRequest, loginRequest, clearError }
 							label="Email"
 							margin="normal"
 							variant="outlined"
-							type="text"
 						/>
 						<Field
 							name="password"
@@ -125,6 +88,5 @@ function AuthForm({ error, signUpPage, signUpRequest, loginRequest, clearError }
 		</FormContainer>
 	);
 }
-
 
 export default AuthForm;

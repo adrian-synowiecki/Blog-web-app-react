@@ -46,7 +46,7 @@ export const StyledTag = styled(Link)`
 /* direction: rtl; */
 	text-align: center;
 	border: 0;
-	background-color: #aaa;
+	background-color: #4F628E;
 	border-radius: 1rem;
     padding: 0.5rem 0.75rem;
 	margin-right: 0.5rem;

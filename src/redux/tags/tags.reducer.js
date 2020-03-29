@@ -1,7 +1,7 @@
-import tagsTypes from './tags.types'
+import tagsTypes from './tags.types';
 
 const initialState = {
-	inProgress: false,
+	isFetchingTags: false,
 	tagList: [],
 	tag: '',
 	error: null
@@ -10,19 +10,20 @@ const initialState = {
 export default function tags(state = initialState, action) {
 	switch (action.type) {
 		case tagsTypes.FETCH_TAGS_BY_MOST_POPULAR_REQUEST:
-			return { ...state, inProgress: true };
+			return { ...state, isFetchingTags: true };
 		case tagsTypes.FETCH_TAGS_BY_MOST_POPULAR_DONE:
-			return { ...state, tagList: action.payload.tagList, inProgress: false };
+			return { ...state, tagList: action.payload.tagList, isFetchingTags: false };
 		case tagsTypes.FETCH_TAGS_BY_MOST_POPULAR_ERROR:
-			return { ...state, error: action.payload.error, inProgress: false };
+			return { ...state, error: action.payload.error, isFetchingTags: false };
 		case tagsTypes.GET_TAG_NAME:
 			return { ...state, tag: action.payload.tag };
 		case tagsTypes.REMOVE_TAG_NAME:
-			return { ...state, tag: null };
+			return { ...state, tag: '' };
 		case tagsTypes.UNLOAD_TAGS:
-			return {...state, tagList: [], tag: '', inProgress: false, error: null };
+			return { ...state, tagList: [], error: null };
+		case tagsTypes.CLEAR_TAGS_ERROR:
+			return { ...state, error: null };
 		default:
 			return state;
 	}
 }
-

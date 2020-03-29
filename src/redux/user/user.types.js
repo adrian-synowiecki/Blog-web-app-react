@@ -13,5 +13,5 @@ export default {
 
 	LOG_OUT: 'LOG_OUT',
 
-	CLEAR_ERROR: 'CLEAR_ERROR'
+	CLEAR_USER_ERROR: 'CLEAR_ERROR_USER'
 };

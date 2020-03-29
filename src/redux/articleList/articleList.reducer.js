@@ -1,11 +1,12 @@
 import articlesTypes from './articleList.types';
-import { favoriteArticlesListUpdate } from '../../utils/favoriteArticlesListUpdate';
+import { favoriteArticleListUpdate } from '../../utils/favoriteArticlesListUpdate';
 
 const initialState = {
 	isFetchingArticles: false,
+	inProgress: false,
 	articleList: null,
-	articlesError: null
-	/* 	userArticlesCount: null */
+	error: null,
+	userArticlesCount: null
 };
 
 export default function articlesReducer(state = initialState, action) {
@@ -14,7 +15,7 @@ export default function articlesReducer(state = initialState, action) {
 		case articlesTypes.FETCH_ARTICLES_BY_TAG_REQUEST:
 		case articlesTypes.FETCH_ARTICLES_BY_AUTHOR_REQUEST:
 		case articlesTypes.FETCH_FAVORITE_ARTICLES_REQUEST:
-			return { ...state, isFetchingArticles: true, articleList: null };
+			return { ...state, isFetchingArticles: true };
 
 		case articlesTypes.FETCH_ARTICLES_BY_MOST_RECENT_DONE:
 		case articlesTypes.FETCH_ARTICLES_BY_TAG_DONE:
@@ -23,34 +24,38 @@ export default function articlesReducer(state = initialState, action) {
 			return {
 				...state,
 				articleList: action.payload.articleList,
-				isFetchingArticles: false
-				/* 	userArticlesCount: action.payload.articlesCount */
+				isFetchingArticles: false,
+				userArticlesCount: action.payload.articlesCount
 			};
 
 		case articlesTypes.FETCH_ARTICLES_BY_MOST_RECENT_ERROR:
 		case articlesTypes.FETCH_ARTICLES_BY_TAG_ERROR:
 		case articlesTypes.FETCH_ARTICLES_BY_AUTHOR_ERROR:
 		case articlesTypes.FETCH_FAVORITE_ARTICLES_ERROR:
-			return { ...state, articlesError: action.payload.error, isFetchingArticles: false };
+			return { ...state, error: action.payload.error, isFetchingArticles: false };
 
 		case articlesTypes.FAVORITE_ARTICLE_REQUEST:
 		case articlesTypes.UNFAVORITE_ARTICLE_REQUEST:
-			return { ...state, isFetchingArticles: true };
+			return { ...state, inProgress: true };
 
 		case articlesTypes.ADD_ARTICLE_TO_FAVORITES_DONE:
 		case articlesTypes.REMOVE_ARTICLE_FROM_FAVORITES_DONE:
 			return {
 				...state,
-				articleList: favoriteArticlesListUpdate(state.articleList, action.payload.changedArticleData),
-				isFetchingArticles: false
+				articleList: favoriteArticleListUpdate(state.articleList, action.payload.changedArticleData),
+				inProgress: false
 			};
 
 		case articlesTypes.FAVORITE_ARTICLE_ERROR:
 		case articlesTypes.UNFAVORITE_ARTICLE_ERROR:
-			return { ...state, isFetchingArticles: false };
+			return { ...state, error: action.payload.error, inProgress: false };
 
 		case articlesTypes.UNLOAD_ARTICLES:
-			return { ...state, articleList: null, isFetchingArticles: false, error: null };
+			return { ...state, articleList: null, error: null };
+
+		case articlesTypes.CLEAR_ARTICLES_ERROR:
+			return { ...state, error: null };
+
 		default:
 			return state;
 	}

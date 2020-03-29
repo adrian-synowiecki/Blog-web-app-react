@@ -35,5 +35,5 @@ export const DateCreated = styled.p`
 	color: gray;
 	opacity: 0.8;
 	font-size: 1rem;
-	color: ${({ articleMeta }) => (articleMeta ? 'white' : 'gray')};
+	color: ${({ articleMeta }) => (articleMeta ? 'white' : '#7887AB')};
 `;

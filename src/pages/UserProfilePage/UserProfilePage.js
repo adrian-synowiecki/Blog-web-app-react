@@ -1,15 +1,14 @@
 import React, { useEffect, Fragment } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { isEmpty } from 'lodash';
 
 import {
 	fetchArticlesByAuthorRequest,
 	fetchFavoriteArticlesRequest,
 	unloadArticles
-} from '../../redux/articleList/articleList.actions';
+} from 'redux/articleList/articleList.actions'
 
-import Profile from '../../components/Profile/Profile';
+import Profile from 'components/Profile/Profile'
 
 function UserProfilePage({
 	currentUserData,
@@ -30,7 +29,7 @@ function UserProfilePage({
 		return () => {
 			unloadArticles();
 		};
-	}, []);
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	return (
 		<Fragment>
@@ -41,7 +40,7 @@ function UserProfilePage({
 				fetchArticlesByAuthorRequest={fetchArticlesByAuthorRequest}
 				fetchFavoriteArticlesRequest={fetchFavoriteArticlesRequest}
 				unloadArticles={unloadArticles}
-				username={username}
+			/* 	username={username} */
 				path={location.pathname}
 			/>
 		</Fragment>
@@ -50,8 +49,8 @@ function UserProfilePage({
 
 const mapStateToProps = (state) => ({
 	articleList: state.articleList.articleList,
-	currentUserData: state.currentUser.currentUserData,
-	isFetchingArticles: state.currentUser.isFetchingArticles
+	currentUserData: state.user.currentUserData,
+	isFetchingArticles: state.user.isFetchingArticles
 });
 
 const mapDispatchToProps = (dispatch) => ({

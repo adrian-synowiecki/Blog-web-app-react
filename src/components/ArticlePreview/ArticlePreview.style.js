@@ -21,8 +21,9 @@ export const ArticleContent = styled.div`
 
 export const ArticleTitle = styled(Link)`
 	text-decoration: none;
+	color: #061539;
+/* 	color:black; */
 	font-size: 1.9rem;
-	color: black;
 	font-weight: 500;
 	margin-top: 6rem;
 `;
@@ -31,6 +32,7 @@ export const ArticleTextPreview = styled(Link)`
 	text-decoration: none;
 	font-size: 1.2rem; 
 	color: gray; 
+	color: #061539;
 `;
 
 export const Span = styled(Link)`

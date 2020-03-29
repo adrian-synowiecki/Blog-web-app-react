@@ -1,25 +1,25 @@
 import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 
-import styles from '../../utils/styles';
+/* import styles from 'utils/styles'; */
 import {
 	fetchArticlesByMostRecentRequest,
 	addArticleToFavoritesRequest,
 	removeArticleFromFavoritesRequest,
 	fetchArticlesByTagRequest,
 	unloadArticles
-} from '../../redux/articleList/articleList.actions';
-import { fetchTagsByMostPopularRequest, getTagName, removeTagName, unloadTags } from '../../redux/tags/tags.actions';
-import { setCurrentPageNumber } from '../../redux/common/common.actions';
-import { logOut } from '../../redux/currentUser/currentUser.actions';
+} from 'redux/articleList/articleList.actions';
+import { fetchTagsByMostPopularRequest, getTagName, removeTagName, unloadTags } from 'redux/tags/tags.actions';
+import { setCurrentPageNumber } from 'redux/common/common.actions';
+import { logOut } from 'redux/user/user.actions';
 
 import * as S from './HomePage.styles';
 
-import ArticleList from '../../components/ArticleList/ArticleList';
-import Pagination from '../../components/Pagination/Pagination';
-import Tags from '../../components/Tags/Tags';
-import LoadingSpinner from '../../components/LoadingSpinner/LoadingSpinner';
-import Button from '../../components/Button/Button';
+import ArticleList from 'components/ArticleList/ArticleList';
+import Pagination from 'components/Pagination/Pagination';
+import Tags from 'components/TagList/TagList';
+import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
+import Button from 'components/Button/Button';
 
 function HomePage({
 	articleList,
@@ -45,7 +45,7 @@ function HomePage({
 			unloadArticles();
 			unloadTags();
 		};
-	}, []);
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	const handleClick = () => {
 		removeTagName();
@@ -64,7 +64,7 @@ function HomePage({
 				<S.NavLinkExtended
 					onClick={() => handleClick()}
 					to="/"
-					activeStyle={styles.activeLinkStyle}
+				/* 	activeStyle={styles.activeLinkStyle} */
 					isActive={() => {
 						if (tag) {
 							return false;
@@ -75,7 +75,7 @@ function HomePage({
 					Global Feed
 				</S.NavLinkExtended>
 				{tag && (
-					<S.NavLinkExtended tag to="/" activeStyle={styles.activeLinkStyle} onClick={() => handleClick()}>
+					<S.NavLinkExtended tag to="/"/*  activeStyle={styles.activeLinkStyle} */ onClick={() => handleClick()}>
 						{tag}
 					</S.NavLinkExtended>
 				)}
@@ -110,11 +110,11 @@ function HomePage({
 	);
 }
 
-const mapStateToProps = ({ articleList: { articleList }, tags: { tagList, tag }, common: { currentPageNumber } }) => ({
-	articleList,
-	tagList,
-	tag,
-	currentPageNumber
+const mapStateToProps = (state) => ({
+	articleList: state.articleList.articleList,
+	tagList: state.tags.tagList,
+	tag: state.tags.tag,
+	currentPageNumber: state.common.currentPageNumber
 });
 
 const mapDispatchToProps = (dispatch) => ({

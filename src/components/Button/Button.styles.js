@@ -7,13 +7,14 @@ export const ButtonContainer = styled.button`
 	text-decoration: none;
 	display: flex;
 	align-self: flex-end;
-	background: ${colors.green};
+	background:  #2E4272;
 	color: white;
 	padding: 1rem 2rem;
 	font-size: 1.6rem;
 	margin-top: 1rem;
 	text-align: center;
 	cursor: pointer;
+	
 	${({ disabled }) =>
 		disabled &&
 		css`
@@ -22,17 +23,11 @@ export const ButtonContainer = styled.button`
 		`};
 
 	&:hover {
-		background-color: #3e8e41;
-		opacity: 0.9;
+		background-color: #4F628E;
+	/* 	opacity: 0.8; */
 	}
 
-	/* 	&:disabled {
-	
-		opacity: .5;
-		cursor: not-allowed;
-	} 
- */
-	:focus {
+/* 	:focus {
 		outline: 0;
-	}
+	} */
 `;

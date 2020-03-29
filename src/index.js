@@ -1,30 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import { Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import configureStore, { history } from 'redux/store';
+import { ConnectedRouter } from 'connected-react-router';
 import { PersistGate } from 'redux-persist/integration/react';
-import { ThemeProvider } from '@material-ui/core/styles';
-import './index.css';
-import configureStore from './redux/store';
+import { ThemeProvider } from 'styled-components'
+import App from './App';
+import GlobalStyles from './global-styles';
 import { theme } from './utils/theme';
 
-import createHistory from 'history/createBrowserHistory';
-const history = createHistory();
 
-const { persistor, store } = configureStore();
+
+
+
+
+const { store, persistor } = configureStore();
 
 ReactDOM.render(
 	<Provider store={store}>
-		<Router history={history}>
+		<ConnectedRouter history={history} noInitialPop>
 			<PersistGate persistor={persistor}>
+				<GlobalStyles />
 				<ThemeProvider theme={theme}>
 					<App />
 				</ThemeProvider>
 			</PersistGate>
-		</Router>
+		</ConnectedRouter>
 	</Provider>,
 	document.getElementById('root')
 );
-
-export { history };

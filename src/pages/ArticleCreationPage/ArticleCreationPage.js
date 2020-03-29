@@ -1,21 +1,34 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
-import { createArticleRequest, updateArticleRequest } from '../../redux/article/article.actions';
+import { createArticleRequest, clearArticleError } from 'redux/article/article.actions';
 
-import ArticleForm from '../../components/ArticleForm/ArticleForm';
+import ArticleForm from 'components/ArticleForm/ArticleForm';
 
-function ArticleCreationPage({ createArticleRequest, updateArticleRequest }) {
+function ArticleCreationPage({ error, createArticleRequest, clearArticleError }) {
+	useEffect(() => {
+		return () => {
+			clearArticleError();
+		};
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+	window.onload = () => {
+		clearArticleError();
+	};
 	return (
 		<div>
-			<ArticleForm createArticleRequest={createArticleRequest} updateArticleRequest={updateArticleRequest} />
+			<ArticleForm error={error} createArticleRequest={createArticleRequest} />
 		</div>
 	);
 }
 
 const mapDispatchToProps = (dispatch) => ({
-	createArticleRequest: (ArticleDataObj) => dispatch(createArticleRequest(ArticleDataObj)),
-	updateArticleRequest: (slug, ArticleDataObj) => dispatch(updateArticleRequest(slug, ArticleDataObj))
+	createArticleRequest: (articleCreationData) => dispatch(createArticleRequest(articleCreationData)),
+	clearArticleError: () => dispatch(clearArticleError())
 });
 
-export default connect(mapDispatchToProps)(ArticleCreationPage);
+const mapStateToProps = (state) => ({
+	error: state.article.error
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleCreationPage);

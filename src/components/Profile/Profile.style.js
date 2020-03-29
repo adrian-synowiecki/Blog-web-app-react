@@ -2,8 +2,6 @@ import styled from 'styled-components/macro';
 
 import { NavLink } from 'react-router-dom';
 
-import colors from '../../utils/colors';
-
 export const ProfileContainer = styled.div``;
 
 export const UserInfo = styled.div`

@@ -3,20 +3,19 @@ import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { isEmpty } from 'lodash';
 
-import colors from '../../utils/colors';
-import { fetchArticleRequest } from '../../redux/article/article.actions';
+import colors from 'utils/colors';
+import { fetchArticleRequest, unloadArticle, deleteArticleRequest } from 'redux/article/article.actions';
 import {
 	fetchCommentsFromArticleRequest,
 	addCommentToArticleRequest,
 	removeCommentFromArticleRequest
-} from '../../redux/comments/comments.actions';
-import { unloadArticle } from '../../redux/article/article.actions';
+} from 'redux/comments/comments.actions';
 
-import ArticleMeta from '../../components/ArticleMeta/ArticleMeta';
-import Header from '../../components/Header/Header';
-import CommentForm from '../../components/CommentForm/CommentForm';
-import Comments from '../../components/Comments/Comments';
-import Tags from '../../components/Tags/Tags';
+import ArticleMeta from 'components/ArticleMeta/ArticleMeta';
+import Header from 'components/Header/Header';
+import CommentForm from 'components/CommentForm/CommentForm';
+import CommentList from 'components/CommentList/CommentList';
+import TagList from 'components/TagList/TagList';
 
 import { FullArticleText, Paragraph } from './ArticleOverviewPage.style';
 
@@ -27,7 +26,11 @@ function ArticleOverviewPage({
 	fetchArticleRequest,
 	fetchCommentsFromArticleRequest,
 	addCommentToArticleRequest,
-	unloadArticle
+	removeCommentFromArticleRequest,
+	unloadArticle,
+	deleteArticleRequest,
+	isFetchingArticle,
+	error
 }) {
 	const { articleSlug } = useParams();
 	const { body, tagList, author, title } = articleData;
@@ -38,28 +41,35 @@ function ArticleOverviewPage({
 		return () => {
 			unloadArticle();
 		};
-	}, []);
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	const canModify =
 		!isEmpty(currentUserData) && !isEmpty(articleData) && currentUserData.username === author.username;
 
 	return (
 		<div>
+			{error && <p>Not found</p>}
 			{!isEmpty(articleData) && (
 				<React.Fragment>
-					<Header ArticleHeader articleData={articleData} title={title} canModify={canModify} />
+					<Header
+						ArticleHeader
+						articleData={articleData}
+						deleteArticleRequest={deleteArticleRequest}
+						title={title}
+						canModify={canModify}
+					/>
 					<ArticleMeta ArticleMeta articleData={articleData} />
 					<FullArticleText>{body}</FullArticleText>
-					<Tags tagList={tagList} />
+					<TagList tagList={tagList} />
 					{isEmpty(currentUserData) ? (
 						<Paragraph>
-							<span style={{ color: colors.green }}>Sign in</span> or{' '}
-							<span style={{ color: colors.green }}>sign up</span> to add comments on this article
+						{/* 	<span style={{ color: colors.green }}>Sign in</span> or{' '} */}
+					{/* 		<span style={{ color: colors.green }}>sign up</span> to add comments on this article */}
 						</Paragraph>
 					) : (
 						<CommentForm addCommentToArticleRequest={addCommentToArticleRequest} />
 					)}
-					<Comments
+					<CommentList
 						currentUserData={currentUserData}
 						commentList={commentList}
 						removeCommentFromArticleRequest={removeCommentFromArticleRequest}
@@ -71,10 +81,15 @@ function ArticleOverviewPage({
 }
 
 const mapStateToProps = (state) => {
+	const { isFetchingArticle, articleData, error } = state.article;
+	const { currentUserData } = state.user;
+	const { commentList } = state.comments;
 	return {
-		articleData: state.article.articleData,
-		currentUserData: state.currentUser.currentUserData,
-		commentList: state.comments.commentList
+		articleData,
+		isFetchingArticle,
+		error,
+		currentUserData,
+		commentList
 	};
 };
 
@@ -84,8 +99,9 @@ const mapDispatchToProps = (dispatch) => {
 		unloadArticle: () => dispatch(unloadArticle()),
 		fetchCommentsFromArticleRequest: (articleSlug) => dispatch(fetchCommentsFromArticleRequest(articleSlug)),
 		addCommentToArticleRequest: (commentObj, slug) => dispatch(addCommentToArticleRequest(commentObj, slug)),
-		removeCommentFromArticleRequest: (commentData, slug, commentId) =>
-			dispatch(removeCommentFromArticleRequest(commentData, slug, commentId))
+		removeCommentFromArticleRequest: (articleSlug, commentToDeleteId) =>
+			dispatch(removeCommentFromArticleRequest(articleSlug, commentToDeleteId)),
+		deleteArticleRequest: (articleSlug) => dispatch(deleteArticleRequest(articleSlug))
 	};
 };
 

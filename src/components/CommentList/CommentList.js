@@ -10,7 +10,7 @@ import {
 	CommentUsername,
 	CommentCreatedAt,
 	DeleteComment
-} from './Comments.style.js';
+} from './CommentList.style.js';
 
 function Comment({ currentUserData, commentList, removeCommentFromArticleRequest }) {
 	const { articleSlug } = useParams();
@@ -28,7 +28,7 @@ function Comment({ currentUserData, commentList, removeCommentFromArticleRequest
 							{currentUserData.username === commentData.author.username && (
 								<DeleteComment
 									onClick={() =>
-										removeCommentFromArticleRequest(commentData, articleSlug, commentData.id)}
+										removeCommentFromArticleRequest(articleSlug, commentData.id)}
 								/>
 							)}
 						</CommentFooter>

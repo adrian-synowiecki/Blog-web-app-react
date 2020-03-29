@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
+import { ThemeContext } from 'styled-components';
 import { isEmpty } from 'lodash';
-import styles from '../../utils/styles';
 
 import {
 	ProfileContainer,
@@ -15,8 +15,8 @@ import {
 	NotFoundMessage
 } from './Profile.style';
 
-import ArticleList from '../ArticleList/ArticleList';
-import LoadingSpinner from '../LoadingSpinner/LoadingSpinner';
+import ArticleList from 'components/ArticleList/ArticleList';
+import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
 
 function Profile({
 	profileData,
@@ -25,26 +25,28 @@ function Profile({
 	fetchArticlesByAuthorRequest,
 	fetchFavoriteArticlesRequest,
 	unloadArticles,
-	path,
-	username
+	path
+	/* 	username */
 }) {
+	const themeContext = useContext(ThemeContext);
+	console.log(themeContext.colors.blue1);
+
+	const { username, image, bio } = profileData || {};
 	let profileLink;
 	let profileLinkFavorites;
 	let notFoundMessage;
-
 	if (path.includes('articleAuthorProfile')) {
-		profileLink = `/articleAuthorProfile/${profileData.username}`;
-		profileLinkFavorites = `/articleAuthorProfile/${profileData.username}/favorites`;
+		profileLink = `/articleAuthorProfile/${username}`;
+		profileLinkFavorites = `/articleAuthorProfile/${username}/favorites`;
 	} else if (path.includes('userProfile')) {
-		profileLink = `/userProfile/${profileData.username}`;
-		profileLinkFavorites = `/userProfile/${profileData.username}/favorites`;
+		profileLink = `/userProfile/${username}`;
+		profileLinkFavorites = `/userProfile/${username}/favorites`;
 	}
 	if (path.includes('favorites')) {
 		notFoundMessage = 'No favorite articles found.';
 	} else {
 		notFoundMessage = 'No articles found.';
 	}
-	console.log(isFetchingArticles, articleList);
 
 	const handleFetchArticlesByAuthorRequest = () => {
 		unloadArticles();
@@ -62,9 +64,9 @@ function Profile({
 					<LoadingSpinner />
 				) : (
 					<React.Fragment>
-						<ImageProfile src={profileData.image} />
-						<Username>{profileData.username}</Username>
-						<Bio>{profileData.bio}</Bio>
+						<ImageProfile src={image} />
+						<Username>{username}</Username>
+						<Bio>{bio}</Bio>
 					</React.Fragment>
 				)}
 			</UserInfo>
@@ -75,27 +77,29 @@ function Profile({
 						!isFetchingArticles && (
 							<Fragment>
 								<StyledNavLink
+									exact
 									isActive={() => {
 										if (!path.includes('favorites')) {
 											return true;
 										} else return false;
 									}}
-									exact
 									to={profileLink}
 									onClick={handleFetchArticlesByAuthorRequest}
-									activeStyle={styles.activeLinkStyle}
+									/* 		activeStyle={themeContext.theme.activeLinkStyle} */
+									activeStyle={{ ...themeContext.activeLinkStyle }}
 								>
 									My Articles
 								</StyledNavLink>
 								<StyledNavLink
-									sActive={() => {
+									isActive={() => {
 										if (path.includes('favorites')) {
 											return true;
 										} else return false;
 									}}
 									to={profileLinkFavorites}
 									onClick={handleFetchFavoriteArticlesRequest}
-									activeStyle={styles.activeLinkStyle}
+									/* 		activeStyle={themeContext.theme.activeLinkStyle} */
+									activeStyle={{ ...themeContext.activeLinkStyle }}
 								>
 									Favorited Articles
 								</StyledNavLink>
@@ -103,6 +107,7 @@ function Profile({
 						)}
 					</NavLinks>
 				</ArticlesChoice>
+
 				{articleList === null ? (
 					<LoadingSpinner center />
 				) : articleList.length > 0 ? (

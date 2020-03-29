@@ -1,7 +1,8 @@
 import React from 'react';
 
-import ArticlePreview from '../ArticlePreview/ArticlePreview';
 import { ArticlesContainer } from './ArticleList.style';
+
+import ArticlePreview from '../ArticlePreview/ArticlePreview';
 
 function ArticleList({ articleList, addArticleToFavoritesRequest, removeArticleFromFavoritesRequest }) {
 	return (

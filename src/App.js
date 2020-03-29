@@ -1,24 +1,24 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { setCurrentPageNumberToFirst } from './redux/common/common.actions';
-import { fetchArticlesByMostRecentRequest } from './redux/articleList/articleList.actions';
+import { setCurrentPageNumberToFirst } from 'redux/common/common.actions';
+import { fetchArticlesByMostRecentRequest } from 'redux/articleList/articleList.actions';
 
-import HomePage from './pages/HomePage/HomePage';
-import ArticleAuthorProfilePage from './pages/ArticleAuthorProfilePage/ArticleAuthorProfilePage';
-import UserProfilePage from './pages/UserProfilePage/UserProfilePage';
-import ArticleOverviewPage from './pages/ArticleOverviewPage/ArticleOverviewPage';
-import UserSettingsPage from './pages/UserSettingsPage/UserSettingsPage';
-import ArticleCreationPage from './pages/ArticleCreationPage/ArticleCreationPage';
-import EditArticlePage from './pages/EditArticlePage/EditArticlePage';
-import LoginPage from './pages/LoginPage/LoginPage';
-import SignUpPage from './pages/SignUpPage/SignUpPage';
-import Navbar from './components/Navbar/Navbar';
+import HomePage from 'pages/HomePage/HomePage';
+import ArticleAuthorProfilePage from 'pages/ArticleAuthorProfilePage/ArticleAuthorProfilePage';
+import UserProfilePage from 'pages/UserProfilePage/UserProfilePage';
+import ArticleOverviewPage from 'pages/ArticleOverviewPage/ArticleOverviewPage';
+import UserSettingsPage from 'pages/UserSettingsPage/UserSettingsPage';
+import ArticleCreationPage from 'pages/ArticleCreationPage/ArticleCreationPage';
+import EditArticlePage from 'pages/EditArticlePage/EditArticlePage';
+import LoginPage from 'pages/LoginPage/LoginPage';
+import SignUpPage from 'pages/SignUpPage/SignUpPage';
+import Navbar from 'components/Navbar/Navbar';
 
 function App({ currentUserData, isAuth, setCurrentPageNumberToFirst, fetchArticlesByMostRecentRequest }) {
 	return (
-		<div>
+		<Fragment>
 			<Navbar
 				currentUserData={currentUserData}
 				isAuth={isAuth}
@@ -27,49 +27,50 @@ function App({ currentUserData, isAuth, setCurrentPageNumberToFirst, fetchArticl
 			/>
 			<Switch>
 				{[ '/', '/page/:currentPageNumber' ].map((path) => (
-					<Route key={path} exact path={path}>
+					<Route exact key={path} path={path}>
 						<HomePage />
 					</Route>
 				))}
-				<Route path="/login">
+				<Route exact path="/login">
 					<LoginPage />
 				</Route>
-				<Route path="/signUp">
+				<Route exact path="/signUp">
 					<SignUpPage />
 				</Route>
-				<Route path="/userSettings">
-					<UserSettingsPage />
-				</Route>
-				/>
-				<Route path="/createNewArticle">
-					<ArticleCreationPage />
-				</Route>
-				<Route path="/editArticle/:articleSlug">
-					<EditArticlePage />
-				</Route>
-				<Route path="/article/:articleSlug">
+
+				<Route exact path="/article/:articleSlug">
 					<ArticleOverviewPage />
 				</Route>
-			{/* 	{[ '/articleAuthorProfile/:username', '/articleAuthorProfile/:username/favorites' ].map((path) => (
-					<Route exact key={path} path={path}>
-						<ArticleAuthorProfilePage />
-					</Route>
-				))} */}
-				<Route path={'/articleAuthorProfile/:username'}>
+				<Route path='/articleAuthorProfile/:username'>
 					<ArticleAuthorProfilePage />
 				</Route>
-				<Route path="/userProfile/:username">
-					<UserProfilePage />
-				</Route>
+				{isAuth ? (
+					<Fragment>
+						<Route exact path="/userSettings">
+							<UserSettingsPage />
+						</Route>
+						<Route exact path="/createNewArticle">
+							<ArticleCreationPage />
+						</Route>
+						<Route exact path="/editArticle/:articleSlug">
+							<EditArticlePage />
+						</Route>
+						<Route path="/userProfile/:username">
+							<UserProfilePage />
+						</Route>
+					</Fragment>
+				) : (
+					<Redirect to="/" />
+				)}
 				<Route path="*" render={({ history }) => history.goBack()} />
 			</Switch>
-		</div>
+		</Fragment>
 	);
 }
 
 const mapStateToProps = (state) => ({
-	currentUserData: state.currentUser.currentUserData,
-	isAuth: state.currentUser.isAuth
+	currentUserData: state.user.currentUserData,
+	isAuth: state.user.isAuth
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -12,7 +12,8 @@ export const Header = styled.header`
 	height: 17rem;
 	box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, .3), inset 0 -8px 8px -8px rgba(0, 0, 0, .3);
 	text-shadow: 0 0 black;
-	background: #5cb85c;
+	background: #2E4272;
+/* 	background:#175c9c; */
 `;
 
 export const HeadingsWrapper = styled.div`

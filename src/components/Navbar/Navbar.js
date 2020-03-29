@@ -3,6 +3,7 @@ import React from 'react';
 import { NavbarContainer, NavbarBrand, NavLinks, StyledLink } from './Navbar.style';
 
 function Navbar({ currentUserData, isAuth, fetchArticlesByMostRecentRequest, setCurrentPageNumberToFirst }) {
+	const { username } = currentUserData;
 	const handleClick = () => {
 		fetchArticlesByMostRecentRequest();
 		setCurrentPageNumberToFirst();
@@ -19,9 +20,7 @@ function Navbar({ currentUserData, isAuth, fetchArticlesByMostRecentRequest, set
 				{!isAuth && <StyledLink to="/signUp">Sign up</StyledLink>}
 				{isAuth && <StyledLink to="/createNewArticle">New Post</StyledLink>}
 				{isAuth && <StyledLink to="/userSettings">Settings</StyledLink>}
-				{isAuth && (
-					<StyledLink to={`/userProfile/${currentUserData.username}`}>{currentUserData.username}</StyledLink>
-				)}
+				{isAuth && <StyledLink to={`/userProfile/${username}`}>{username}</StyledLink>}
 			</NavLinks>
 		</NavbarContainer>
 	);

@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
 
 export const HeaderContainer = styled.header`
-	background: ${({ articleHeader }) => (articleHeader ? 'gray' : '#5cb85c')};
+/* 	background: ${({ articleHeader }) => (articleHeader ? 'gray' : '#2E4272')}; */
 	height: 19rem;
 	box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, .3), inset 0 -8px 8px -8px rgba(0, 0, 0, .3);
 	/* box-shadow: ${({ userProfileHeader }) =>
@@ -77,7 +77,7 @@ export const DeleteArticle = styled.button`
 	background: none;
 	border: 1px solid #d1245b;
 	margin-left: 1rem;
-	color:  #d1245b;
+	color: #d1245b;
 	cursor: pointer;
 
 	&:hover {

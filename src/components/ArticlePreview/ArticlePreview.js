@@ -1,16 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
-
-import {
-	addArticleToFavoritesRequest,
-	removeArticleFromFavoritesRequest,
-	fetchArticlesByTagRequest,
-} from '../../redux/articleList/articleList.actions'
-
-import ArticleMeta from '../ArticleMeta/ArticleMeta';
-import Tags from '../Tags/Tags';
 
 import * as S from './ArticlePreview.style';
+
+import ArticleMeta from '../ArticleMeta/ArticleMeta';
+import Tags from 'components/TagList/TagList'
 
 function ArticlePreview({
 	articleData,

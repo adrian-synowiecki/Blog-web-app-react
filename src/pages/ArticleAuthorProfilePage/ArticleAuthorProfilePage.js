@@ -1,20 +1,20 @@
 import React, { useEffect, Fragment } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { isEmpty } from 'lodash';
 
-import { fetchProfileByUsernameRequest, unloadProfile } from '../../redux/profile/profile.actions';
+import { fetchProfileByUsernameRequest, unloadProfile } from 'redux/profile/profile.actions';
 import {
 	fetchArticlesByAuthorRequest,
 	fetchFavoriteArticlesRequest,
 	unloadArticles
-} from '../../redux/articleList/articleList.actions';
+} from 'redux/articleList/articleList.actions';
 
-import Profile from '../../components/Profile/Profile';
+import Profile from 'components/Profile/Profile';
 
 function ArticleAuthorProfilePage({
 	profileData,
 	articleList,
+	error,
 	isFetchingArticles,
 	fetchArticlesByAuthorRequest,
 	fetchFavoriteArticlesRequest,
@@ -35,45 +35,33 @@ function ArticleAuthorProfilePage({
 			unloadArticles();
 			unloadProfile();
 		};
-	}, []);
-/* 
-	useEffect(
-		() => {
-			return () => {
-				unloadArticles();
-				unloadProfile();
-			};
-		},
-		[ articleList ]
-	); */
+	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	return (
 		<Fragment>
-			<Profile
-				profileData={profileData}
-				articleList={articleList}
-				isFetchingArticles={isFetchingArticles}
-				fetchArticlesByAuthorRequest={fetchArticlesByAuthorRequest}
-				fetchFavoriteArticlesRequest={fetchFavoriteArticlesRequest}
-				unloadArticles={unloadArticles}
-				username={username}
-				path={location.pathname}
-			/>
+			{error ? (
+				<p>Not Found</p>
+			) : (
+				<Profile
+					profileData={profileData}
+					articleList={articleList}
+					isFetchingArticles={isFetchingArticles}
+					fetchArticlesByAuthorRequest={fetchArticlesByAuthorRequest}
+					fetchFavoriteArticlesRequest={fetchFavoriteArticlesRequest}
+					unloadArticles={unloadArticles}
+					/* username={username} */
+					path={location.pathname}
+				/>
+			)}
 		</Fragment>
 	);
 }
 
-const mapStateToProps = ({
-	articleList: { isFetchingArticles, articleList, hasErrorArticles },
-	profile: { profileData, isFetchingProfileData },
-	currentUser: { isAuth }
-}) => ({
-	articleList,
-	isFetchingArticles,
-	hasErrorArticles,
-	profileData,
-	isFetchingProfileData,
-	isAuth
+const mapStateToProps = (state) => ({
+	articleList: state.articleList.articleList,
+	isFetchingArticles: state.article.isFetchingArticles,
+	profileData: state.profile.profileData,
+	error: state.profile.error
 });
 
 const mapDispatchToProps = (dispatch) => ({

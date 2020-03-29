@@ -14,15 +14,15 @@ function CommentForm({ addCommentToArticleRequest }) {
 					commentText: ''
 				}}
 				onSubmit={(values) => {
-					const commentObj = {
+					const commentData = {
 						comment: {
 							body: values.commentText
 						}
 					};
-					addCommentToArticleRequest(commentObj, articleSlug);
+					addCommentToArticleRequest(commentData, articleSlug);
 				}}
 			>
-				{({ errors, touched }) => (
+				{() => (
 					<StyledForm>
 						<StyledField name="commentText" component="textarea" placeholder="Write a comment" rows="4" />
 						<StyledButton type="submit">Post comment</StyledButton>

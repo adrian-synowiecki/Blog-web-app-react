@@ -6,13 +6,10 @@ export const NavbarContainer = styled.nav`
 	align-items: center;
 	background: white;
 	justify-content: space-between;
-
-
-	
 `;
 
 export const NavbarBrand = styled(Link)`
-	color: #5cb85c;
+	color: #2E4272;
 	text-decoration: none;
 	font-weight: 700;
 	font-size: 2.3rem;
@@ -30,8 +27,9 @@ export const NavLinks = styled.ul`
 
 export const StyledLink = styled(Link)`
 	text-decoration: none;
-	color: gray;
 	padding-right: 2rem;
 	font-size: 1.4rem;
-	
+	color: #2E4272;
+	/* color: green; */
+/* 	color: white; */
 `;
