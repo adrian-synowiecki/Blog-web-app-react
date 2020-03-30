@@ -13,6 +13,7 @@ import { fetchTagsByMostPopularRequest, getTagName, removeTagName, unloadTags } 
 import { setCurrentPageNumber } from 'redux/common/common.actions';
 import { logOut } from 'redux/user/user.actions';
 
+import Header from 'components/Header/Header';
 import ArticleList from 'components/ArticleList/ArticleList';
 import Pagination from 'components/Pagination/Pagination';
 import Tags from 'components/TagList/TagList';
@@ -52,17 +53,23 @@ function HomePage({
 
 	return (
 		<S.HomeContainer>
-			<S.Header>
+			{/* 	<S.Header>
 				<S.HeadingsWrapper>
 					<S.Heading>conduit</S.Heading>
 					<S.SubHeading>A place to share your knowledge</S.SubHeading>
 				</S.HeadingsWrapper>
-			</S.Header>
+			</S.Header> */}
+			<Header>
+				<S.HeadingsWrapper>
+					<S.Heading>conduit</S.Heading>
+					<S.SubHeading>A place to share your knowledge</S.SubHeading>
+				</S.HeadingsWrapper>
+			</Header>
 			<S.NavigationWrapper>
 				<S.NavLinkExtended
 					onClick={() => handleClick()}
 					to="/"
-				/* 	activeStyle={styles.activeLinkStyle} */
+					/* 	activeStyle={styles.activeLinkStyle} */
 					isActive={() => {
 						if (tag) {
 							return false;
@@ -73,7 +80,11 @@ function HomePage({
 					Global Feed
 				</S.NavLinkExtended>
 				{tag && (
-					<S.NavLinkExtended tag to="/"/*  activeStyle={styles.activeLinkStyle} */ onClick={() => handleClick()}>
+					<S.NavLinkExtended
+						tag
+						to="/"
+						/*  activeStyle={styles.activeLinkStyle} */ onClick={() => handleClick()}
+					>
 						{tag}
 					</S.NavLinkExtended>
 				)}

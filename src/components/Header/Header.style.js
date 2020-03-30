@@ -1,19 +1,19 @@
 import styled from 'styled-components/macro';
 
-import { Link } from 'react-router-dom';
+/* import { Link } from 'react-router-dom';  */
 
-export const HeaderContainer = styled.header`
+/* export const HeaderContainer = styled.header` */
 /* 	background: ${({ articleHeader }) => (articleHeader ? 'gray' : '#2E4272')}; */
-	height: 19rem;
-	box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, .3), inset 0 -8px 8px -8px rgba(0, 0, 0, .3);
-	/* box-shadow: ${({ userProfileHeader }) =>
+/* 	height: 19rem;
+	box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, .3), inset 0 -8px 8px -8px rgba(0, 0, 0, .3); */
+/* box-shadow: ${({ userProfileHeader }) =>
 		userProfileHeader
 			? 'none'
 			: 'inset 0 8px 8px -8px rgba(0, 0, 0, .3), inset 0 -8px 8px -8px rgba(0, 0, 0, .3)'}; */
-	text-shadow: 0 0 black;
-`;
+/* 	text-shadow: 0 0 black; */
+/* `; */
 
-export const HeaderWrapper = styled.div`
+/* export const HeaderWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: ${({ articleHeader }) => (articleHeader ? 'flex-start' : 'center')};
@@ -33,7 +33,7 @@ export const HeaderText = styled.p`
 	font-size: 2rem;
 	margin-left: ${({ articleHeader }) => articleHeader && '2rem'};
 	margin-top: ${({ articleHeader }) => (articleHeader ? '0.1rem' : '-2.5rem')};
-`;
+`; */
 
 /* export const FollowButtonExtended = styled(Link)`
 	margin-top: -4rem;
@@ -51,7 +51,7 @@ export const HeaderText = styled.p`
 	
 `; */
 
-export const ImageProfile = styled.img`
+/* export const ImageProfile = styled.img`
 	border-radius: 8rem;
 	margin-top: 2rem;
 	width: 11rem;
@@ -83,4 +83,10 @@ export const DeleteArticle = styled.button`
 	&:hover {
 		background: white;
 	}
+`;
+ */
+
+export const HeaderContainer = styled.div`
+	height: 19rem;
+	background-color: ${({ theme }) => theme.colors.blue1};
 `;

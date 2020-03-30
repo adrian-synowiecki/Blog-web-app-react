@@ -8,12 +8,12 @@ export const HomeContainer = styled.div`
 	flex-direction: column;
 `;
 
-export const Header = styled.header`
+/* export const Header = styled.header`
 	height: 17rem;
 	box-shadow: inset 0 8px 8px -8px rgba(0, 0, 0, .3), inset 0 -8px 8px -8px rgba(0, 0, 0, .3);
 	text-shadow: 0 0 black;
 	background: #2E4272;
-/* 	background:#175c9c; */
+	background:#175c9c;
 `;
 
 export const HeadingsWrapper = styled.div`
@@ -35,7 +35,7 @@ export const SubHeading = styled.p`
 	font-size: 2rem;
 	margin-left: 2rem;
 	margin-top: -2.5rem;
-`;
+`; */
 
 export const Row = styled.main`
 	display: flex;
@@ -80,3 +80,25 @@ export const NavLinkExtended = styled(({ tag, ...props }) => <NavLink {...props}
 	@media (min-width: 770px) {
 		width: 70%;
 	} */
+
+export const HeadingsWrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+`;
+
+export const Heading = styled.h1`
+	color: #edf5ef;
+	font-size: 5rem;
+	text-shadow: 0 1px 3px rgba(0, 0, 0, .9);
+	letter-spacing: 0.1rem;
+`;
+
+export const SubHeading = styled.h2`
+	color: #edf5ef;
+	font-size: 2rem;
+	font-weight: 400;
+	letter-spacing: 0.1rem;
+	margin-top: -2rem;
+	text-shadow: 0 1px 3px rgba(0, 0, 0, .9);
+`;

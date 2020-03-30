@@ -1,4 +1,4 @@
-import React from 'react';
+/* import React from 'react';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 
@@ -7,7 +7,7 @@ import { deleteArticleRequest } from '../../redux/article/article.actions';
 import * as S from './Header.style';
 
 function Header({ articleData, title, text, canModify, dispatch, push, ...props }) {
-	const { slug /* title */ } = articleData || {};
+	const { slug title } = articleData || {};
 	const handleDeleteArticle = () => {
 		deleteArticleRequest(slug);
 		push('/');
@@ -29,3 +29,14 @@ function Header({ articleData, title, text, canModify, dispatch, push, ...props 
 }
 
 export default connect(null, { push })(Header);
+ */
+
+import React from 'react';
+
+import * as S from './Header.style';
+
+function Header({ children, ...props }) {
+	return <S.HeaderContainer {...props}>{children}</S.HeaderContainer>;
+}
+
+export default Header;

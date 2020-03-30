@@ -1,35 +1,57 @@
-import styled from 'styled-components/macro';
-import { Link } from 'react-router-dom';
+import styled, { css } from 'styled-components/macro';
+import { NavLink, Link } from 'react-router-dom';
 
 export const NavbarContainer = styled.nav`
 	display: flex;
 	align-items: center;
-	background: white;
 	justify-content: space-between;
+	margin-bottom: 1rem;
 `;
 
 export const NavbarBrandExtended = styled(Link)`
-	color: #2E4272;
+	color: ${({ theme }) => theme.colors.blue1};
 	text-decoration: none;
 	font-weight: 700;
 	font-size: 2.3rem;
 	margin-left: 2rem;
-	margin-bottom: 0.5rem;
-
-
 `;
 
-export const NavLinks = styled.ul`
-	margin-bottom: 2rem;
-	display: flex;
-	margin-right: 2rem;
-`;
+export const NavLinks = styled.ul`margin-right: 2rem;`;
 
-export const LinkExtended = styled(Link)`
+/* export const NavLinkExtended = styled(NavLink)`
 	text-decoration: none;
-	padding-right: 2rem;
+	padding-bottom: 1rem;
+	margin-right: 2rem;
 	font-size: 1.4rem;
-	color: #2E4272;
-	/* color: green; */
-/* 	color: white; */
+	letter-spacing: 0.1rem;
+	color: ${({ theme }) => theme.colors.blue1};
+
+	&:hover {
+		opacity: 0.5;
+		border-bottom: ${({ theme }) => theme.activeLinkStyle.borderBottom};
+		color: 	${({ isActive }) => isActive && 'red'}	
+	}
+
+`; */
+
+const activeClassName = 'active';
+export const NavLinkExtended = styled(NavLink).attrs({
+	activeClassName: activeClassName
+})`
+	text-decoration: none;
+	padding-bottom: 1rem;
+	margin-right: 2rem;
+	font-size: 1.4rem;
+	letter-spacing: 0.1rem;
+	color: ${({ theme }) => theme.colors.blue1};
+
+	&:hover {
+		opacity: 0.5;
+		border-bottom: ${({ theme }) => theme.activeLinkStyle.borderBottom};
+	}
+  &.${activeClassName} {
+	&:hover {
+		 opacity: 0.8
+	};
+  }
 `;

@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ThemeContext } from 'styled-components';
 
 import * as S from './Navbar.style';
 
 function Navbar({ currentUserData, isAuth, fetchArticlesByMostRecentRequest, setCurrentPageNumberToFirst }) {
+	const themeContext = useContext(ThemeContext);
 	const { username } = currentUserData || {};
 	const handleClick = () => {
 		fetchArticlesByMostRecentRequest();
@@ -15,12 +17,40 @@ function Navbar({ currentUserData, isAuth, fetchArticlesByMostRecentRequest, set
 				conduit
 			</S.NavbarBrandExtended>
 			<S.NavLinks>
-				<S.LinkExtended to="/">Home</S.LinkExtended>
-				{!isAuth && <S.LinkExtended to="/login">Log in</S.LinkExtended>}
-				{!isAuth && <S.LinkExtended to="/signUp">Sign up</S.LinkExtended>}
-				{isAuth && <S.LinkExtended to="/createNewArticle">New Post</S.LinkExtended>}
-				{isAuth && <S.LinkExtended to="/userSettings">Settings</S.LinkExtended>}
-				{isAuth && <S.LinkExtended to={`/userProfile/${username}`}>{username}</S.LinkExtended>}
+				<S.NavLinkExtended exact activeStyle={themeContext.activeLinkStyle} to="/">
+					Home
+				</S.NavLinkExtended>
+				{!isAuth && (
+					<S.NavLinkExtended activeStyle={themeContext.activeLinkStyle} to="/login">
+						Log in
+					</S.NavLinkExtended>
+				)}
+				{!isAuth && (
+					<S.NavLinkExtended activeStyle={themeContext.activeLinkStyle} to="/signUp">
+						Sign up
+					</S.NavLinkExtended>
+				)}
+				{isAuth && (
+					<S.NavLinkExtended activeStyle={themeContext.activeLinkStyle} to="/createNewArticle">
+						New Post
+					</S.NavLinkExtended>
+				)}
+				{isAuth && (
+					<S.NavLinkExtended
+						/* isActive={() => {
+							return isActive;
+						}} */
+						activeStyle={themeContext.activeLinkStyle}
+						to="/userSettings"
+					>
+						Settings
+					</S.NavLinkExtended>
+				)}
+				{isAuth && (
+					<S.NavLinkExtended activeStyle={themeContext.activeLinkStyle} to={`/userProfile/${username}`}>
+						{username}
+					</S.NavLinkExtended>
+				)}
 			</S.NavLinks>
 		</S.NavbarContainer>
 	);
