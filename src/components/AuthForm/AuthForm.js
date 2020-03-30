@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Formik, Field } from 'formik';
 
-import { FormContainer, StyledForm, StyledTextField, Title, StyledLink } from './AuthForm.style';
+import * as S from './AuthForm.style'
 
 import ErrorList from 'components/ErrorList/ErrorList';
 import Button from 'components/Button/Button';
@@ -21,12 +21,12 @@ function AuthForm({ error, signUpPage, signUpRequest, loginRequest }) {
 	);
 
 	return (
-		<FormContainer>
-			<Title>{signUpPage ? 'SIGN UP' : 'LOG IN'}</Title>
+		<S.FormContainer>
+			<S.Title>{signUpPage ? 'SIGN UP' : 'LOG IN'}</S.Title>
 			{signUpPage ? (
-				<StyledLink to="/login">Have an account?</StyledLink>
+				<S.LinkExtended to="/login">Have an account?</S.LinkExtended>
 			) : (
-				<StyledLink to="/signUp">Need an account?</StyledLink>
+				<S.LinkExtended to="/signUp">Need an account?</S.LinkExtended>
 			)}
 			<Formik
 				ref={formikRef}
@@ -44,14 +44,14 @@ function AuthForm({ error, signUpPage, signUpRequest, loginRequest }) {
 				}}
 			>
 				{({ isSubmitting }) => (
-					<StyledForm>
+					<S.FormExtended>
 						{error && <ErrorList error={error} />}
 						{signUpPage && (
 							<Field
 								name="username"
 								type="text"
 								autocomplete="off"
-								component={StyledTextField}
+								component={S.TextFieldExtended}
 								label="Username"
 								margin="normal"
 								variant="outlined"
@@ -61,14 +61,14 @@ function AuthForm({ error, signUpPage, signUpRequest, loginRequest }) {
 							name="email"
 							type="email"
 							autocomplete="off"
-							component={StyledTextField}
+							component={S.TextFieldExtended}
 							label="Email"
 							margin="normal"
 							variant="outlined"
 						/>
 						<Field
 							name="password"
-							component={StyledTextField}
+							component={S.TextFieldExtended}
 							type="password"
 							inputProps={{
 								readOnly: isReadOnly,
@@ -82,10 +82,10 @@ function AuthForm({ error, signUpPage, signUpRequest, loginRequest }) {
 						<Button type="submit" disabled={isSubmitting} variant="contained">
 							{signUpPage ? 'SIGN UP' : 'LOG IN'}
 						</Button>
-					</StyledForm>
+					</S.FormExtended>
 				)}
 			</Formik>
-		</FormContainer>
+		</S.FormContainer>
 	);
 }
 

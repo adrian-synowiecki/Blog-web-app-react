@@ -11,7 +11,7 @@ export const ArticlePageLinksContainer = styled.div`
 	}
 `;
 
-export const StyledPageLink = styled(NavLink)`
+export const PageLinkExtended = styled(NavLink)`
     background: white;
     padding: .5rem 1rem; 
     color: ${colors.green};

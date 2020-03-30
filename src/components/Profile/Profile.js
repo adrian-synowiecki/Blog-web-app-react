@@ -2,21 +2,10 @@ import React, { Fragment, useContext } from 'react';
 import { ThemeContext } from 'styled-components';
 import { isEmpty } from 'lodash';
 
-import {
-	ProfileContainer,
-	UserInfo,
-	ImageProfile,
-	Username,
-	Bio,
-	ArticlesChoice,
-	StyledNavLink,
-	NavLinks,
-	ArticlesWrapper,
-	NotFoundMessage
-} from './Profile.style';
+import * as S from './Profile.style';
 
-import ArticleList from 'components/ArticleList/ArticleList';
-import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
+import ArticleList from 'components/ArticleList/ArticleList'
+import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner'
 
 function Profile({
 	profileData,
@@ -26,11 +15,8 @@ function Profile({
 	fetchFavoriteArticlesRequest,
 	unloadArticles,
 	path
-	/* 	username */
 }) {
 	const themeContext = useContext(ThemeContext);
-	console.log(themeContext.colors.blue1);
-
 	const { username, image, bio } = profileData || {};
 	let profileLink;
 	let profileLinkFavorites;
@@ -58,25 +44,25 @@ function Profile({
 		fetchFavoriteArticlesRequest(username);
 	};
 	return (
-		<ProfileContainer>
-			<UserInfo>
+		<S.ProfileContainer>
+			<S.UserInfo>
 				{isEmpty(profileData) ? (
 					<LoadingSpinner />
 				) : (
 					<React.Fragment>
-						<ImageProfile src={image} />
-						<Username>{username}</Username>
-						<Bio>{bio}</Bio>
+						<S.ImageProfile src={image} />
+						<S.Username>{username}</S.Username>
+						<S.Bio>{bio}</S.Bio>
 					</React.Fragment>
 				)}
-			</UserInfo>
-			<ArticlesWrapper>
-				<ArticlesChoice>
-					<NavLinks>
+			</S.UserInfo>
+			<S.ArticlesWrapper>
+				<S.ArticlesChoice>
+					<S.NavLinks>
 						{!isEmpty(profileData) &&
 						!isFetchingArticles && (
 							<Fragment>
-								<StyledNavLink
+								<S.NavLinkExtended
 									exact
 									isActive={() => {
 										if (!path.includes('favorites')) {
@@ -89,8 +75,8 @@ function Profile({
 									activeStyle={{ ...themeContext.activeLinkStyle }}
 								>
 									My Articles
-								</StyledNavLink>
-								<StyledNavLink
+								</S.NavLinkExtended>
+								<S.NavLinkExtended
 									isActive={() => {
 										if (path.includes('favorites')) {
 											return true;
@@ -102,21 +88,21 @@ function Profile({
 									activeStyle={{ ...themeContext.activeLinkStyle }}
 								>
 									Favorited Articles
-								</StyledNavLink>
+								</S.NavLinkExtended>
 							</Fragment>
 						)}
-					</NavLinks>
-				</ArticlesChoice>
+					</S.NavLinks>
+				</S.ArticlesChoice>
 
 				{articleList === null ? (
 					<LoadingSpinner center />
 				) : articleList.length > 0 ? (
 					<ArticleList articleList={articleList} />
 				) : (
-					<NotFoundMessage>{notFoundMessage}</NotFoundMessage>
+					<S.NotFoundMessage>{notFoundMessage}</S.NotFoundMessage>
 				)}
-			</ArticlesWrapper>
-		</ProfileContainer>
+			</S.ArticlesWrapper>
+		</S.ProfileContainer>
 	);
 }
 

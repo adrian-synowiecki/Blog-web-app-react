@@ -4,7 +4,7 @@ import { push } from 'connected-react-router';
 
 import colors from 'utils/colors';
 
-import { ArticlePageLinksContainer, StyledPageLink } from './Pagination.style';
+import * as S from './Pagination.style';
 
 function Pagination({ currentPageNumber, setCurrentPageNumber, fetchArticlesByMostRecentRequest, push }) {
 	const pageLinks = [];
@@ -32,25 +32,25 @@ function Pagination({ currentPageNumber, setCurrentPageNumber, fetchArticlesByMo
 	for (let i = 1; i <= 50; i++) {
 		pageLinks.push(
 			i === currentPageNumber ? (
-				<StyledPageLink
+				<S.PageLinkExtended
 					isActive={() => {
 						return true;
 					}}
 					key={i}
-			/* 		activeStyle={{ background: colors.green, color: 'white' }} */
+					/* 		activeStyle={{ background: colors.green, color: 'white' }} */
 					to
 				>
 					{i}
-				</StyledPageLink>
+				</S.PageLinkExtended>
 			) : (
-				<StyledPageLink key={i} onClick={() => handlePageChange(i)} to>
+				<S.PageLinkExtended key={i} onClick={() => handlePageChange(i)} to>
 					{i}
-				</StyledPageLink>
+				</S.PageLinkExtended>
 			)
 		);
 	}
 
-	return <ArticlePageLinksContainer>{pageLinks.map((pageLink) => pageLink)}</ArticlePageLinksContainer>;
+	return <S.ArticlePageLinksContainer>{pageLinks.map((pageLink) => pageLink)}</S.ArticlePageLinksContainer>;
 }
 
 export default connect(null, { push })(Pagination);

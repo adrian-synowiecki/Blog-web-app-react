@@ -19,7 +19,7 @@ export const ArticleContent = styled.div`
 	flex-direction: column;
 `;
 
-export const ArticleTitle = styled(Link)`
+export const ArticleTitleExtended = styled(Link)`
 	text-decoration: none;
 	color: #061539;
 /* 	color:black; */
@@ -28,14 +28,14 @@ export const ArticleTitle = styled(Link)`
 	margin-top: 6rem;
 `;
 
-export const ArticleTextPreview = styled(Link)`
+export const ArticleTextPreviewExtended = styled(Link)`
 	text-decoration: none;
 	font-size: 1.2rem; 
 	color: gray; 
 	color: #061539;
 `;
 
-export const Span = styled(Link)`
+export const SpanExtended = styled(Link)`
 	text-decoration: none;
   	margin-top: 1.5rem;
 	font-size: 1.2rem;  

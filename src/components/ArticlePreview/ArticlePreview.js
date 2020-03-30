@@ -3,7 +3,7 @@ import React from 'react';
 import * as S from './ArticlePreview.style';
 
 import ArticleMeta from '../ArticleMeta/ArticleMeta';
-import Tags from 'components/TagList/TagList'
+import TagList from 'components/TagList/TagList'
 
 function ArticlePreview({
 	articleData,
@@ -23,9 +23,9 @@ function ArticlePreview({
 			<S.ArticleLeftSide>
 				<ArticleMeta articleData={articleData} />
 				<S.ArticleContent>
-					<S.ArticleTitle to={`/article/${slug}`}>{title}</S.ArticleTitle>
-					<S.ArticleTextPreview to={`/article/${slug}`}>{description}</S.ArticleTextPreview>
-					<S.Span to={`/article/${slug}`}>Read more...</S.Span>
+					<S.ArticleTitleExtended to={`/article/${slug}`}>{title}</S.ArticleTitleExtended>
+					<S.ArticleTextPreviewExtended to={`/article/${slug}`}>{description}</S.ArticleTextPreviewExtended>
+					<S.SpanExtended to={`/article/${slug}`}>Read more...</S.SpanExtended>
 				</S.ArticleContent>
 			</S.ArticleLeftSide>
 			<S.ArticleRightSide>
@@ -33,7 +33,7 @@ function ArticlePreview({
 					<S.HeartIcon favorited={favorited} />
 					<S.FavoriteAddedCount favorited={favorited}>{favoritesCount}</S.FavoriteAddedCount>
 				</S.AddToFavorite>
-				{<Tags tagList={tagList} isArticlePreviewTags />}
+				<TagList tagList={tagList} isArticlePreviewTags />
 			</S.ArticleRightSide>
 		</S.ArticlePreviewContainer>
 	);

@@ -1,14 +1,13 @@
 import React from 'react';
-
 import { useParams } from 'react-router-dom';
 import { Formik } from 'formik';
 
-import { CommentContainer, StyledForm, StyledField, StyledButton } from './CommentForm.style';
+import * as S from './CommentForm.style'
 
 function CommentForm({ addCommentToArticleRequest }) {
 	const { articleSlug } = useParams();
 	return (
-		<CommentContainer>
+		<S.CommentContainer>
 			<Formik
 				initialValues={{
 					commentText: ''
@@ -23,13 +22,13 @@ function CommentForm({ addCommentToArticleRequest }) {
 				}}
 			>
 				{() => (
-					<StyledForm>
-						<StyledField name="commentText" component="textarea" placeholder="Write a comment" rows="4" />
-						<StyledButton type="submit">Post comment</StyledButton>
-					</StyledForm>
+					<S.FormExtended>
+						<S.FieldExtended name="commentText" component="textarea" placeholder="Write a comment" rows="4" />
+						<S.ButtonExtended type="submit">Post comment</S.ButtonExtended>
+					</S.FormExtended>
 				)}
 			</Formik>
-		</CommentContainer>
+		</S.CommentContainer>
 	);
 }
 

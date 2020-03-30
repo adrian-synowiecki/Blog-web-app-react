@@ -17,8 +17,8 @@ export const FormContainer = styled.div`
 
 export const Title = styled.h1`font-weight: 400;`;
 
-export const StyledLink = styled(Link)`
-	color: ${colors.green};
+export const LinkExtended = styled(Link)`
+/* 	color: ${colors.green}; */
 	margin-top: -1.5rem;
 	font-size: 1.4rem;
     text-decoration: none;
@@ -36,7 +36,7 @@ export const ErrorMessage = styled.li`
 	white-space: nowrap;
 `;
 
-export const StyledForm = styled(Form)`
+export const FormExtended = styled(Form)`
     width: 90%;
     display: flex;
     flex-direction: column;
@@ -48,10 +48,8 @@ export const StyledForm = styled(Form)`
 
 export const ErrorMessageWrapper = styled.ul`margin-left: -1rem;`;
 
-export const StyledTextField = styled(TextField)`
+export const TextFieldExtended = styled(TextField)`
     width: 100%;
-
-
 `;
 
 /* export const StyledButton = styled.button`

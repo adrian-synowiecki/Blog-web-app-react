@@ -35,7 +35,7 @@ export const HeaderText = styled.p`
 	margin-top: ${({ articleHeader }) => (articleHeader ? '0.1rem' : '-2.5rem')};
 `;
 
-export const FollowButton = styled(Link)`
+/* export const FollowButtonExtended = styled(Link)`
 	margin-top: -4rem;
 	margin-left: 80%;
 	margin-right: 5rem;
@@ -49,7 +49,7 @@ export const FollowButton = styled(Link)`
 	font-size: 1.2rem;
 	white-space: nowrap;
 	
-`;
+`; */
 
 export const ImageProfile = styled.img`
 	border-radius: 8rem;

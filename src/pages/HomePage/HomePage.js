@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 
-/* import styles from 'utils/styles'; */
+import * as S from './HomePage.styles';
 import {
 	fetchArticlesByMostRecentRequest,
 	addArticleToFavoritesRequest,
@@ -12,8 +12,6 @@ import {
 import { fetchTagsByMostPopularRequest, getTagName, removeTagName, unloadTags } from 'redux/tags/tags.actions';
 import { setCurrentPageNumber } from 'redux/common/common.actions';
 import { logOut } from 'redux/user/user.actions';
-
-import * as S from './HomePage.styles';
 
 import ArticleList from 'components/ArticleList/ArticleList';
 import Pagination from 'components/Pagination/Pagination';

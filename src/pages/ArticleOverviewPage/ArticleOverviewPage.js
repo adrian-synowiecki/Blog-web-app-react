@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { isEmpty } from 'lodash';
 
-import colors from 'utils/colors';
+import * as S from './ArticleOverviewPage.style'
 import { fetchArticleRequest, unloadArticle, deleteArticleRequest } from 'redux/article/article.actions';
 import {
 	fetchCommentsFromArticleRequest,
@@ -17,7 +17,7 @@ import CommentForm from 'components/CommentForm/CommentForm';
 import CommentList from 'components/CommentList/CommentList';
 import TagList from 'components/TagList/TagList';
 
-import { FullArticleText, Paragraph } from './ArticleOverviewPage.style';
+
 
 function ArticleOverviewPage({
 	articleData,
@@ -59,13 +59,13 @@ function ArticleOverviewPage({
 						canModify={canModify}
 					/>
 					<ArticleMeta ArticleMeta articleData={articleData} />
-					<FullArticleText>{body}</FullArticleText>
+					<S.FullArticleText>{body}</S.FullArticleText>
 					<TagList tagList={tagList} />
 					{isEmpty(currentUserData) ? (
-						<Paragraph>
+						<S.Paragraph>
 						{/* 	<span style={{ color: colors.green }}>Sign in</span> or{' '} */}
 					{/* 		<span style={{ color: colors.green }}>sign up</span> to add comments on this article */}
-						</Paragraph>
+						</S.Paragraph>
 					) : (
 						<CommentForm addCommentToArticleRequest={addCommentToArticleRequest} />
 					)}

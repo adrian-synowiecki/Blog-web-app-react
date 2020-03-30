@@ -3,35 +3,28 @@ import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 
 import { deleteArticleRequest } from '../../redux/article/article.actions';
-import {
-	HeaderContainer,
-	HeaderTitle,
-	HeaderText,
-	HeaderWrapper,
-	ArticleModify,
-	EditArticle,
-	DeleteArticle
-} from './Header.style';
+
+import * as S from './Header.style';
 
 function Header({ articleData, title, text, canModify, dispatch, push, ...props }) {
-	const { slug, /* title */ } = articleData || {};
+	const { slug /* title */ } = articleData || {};
 	const handleDeleteArticle = () => {
-	  deleteArticleRequest(slug);
+		deleteArticleRequest(slug);
 		push('/');
 	};
 	return (
-		<HeaderContainer {...props}>
-			<HeaderWrapper {...props}>
-				<HeaderTitle {...props}>{articleData ? articleData.title : title}</HeaderTitle>
+		<S.HeaderContainer {...props}>
+			<S.HeaderWrapper {...props}>
+				<S.HeaderTitle {...props}>{articleData ? articleData.title : title}</S.HeaderTitle>
 				{canModify && (
-					<ArticleModify>
-						<EditArticle onClick={() => push(`/editArticle/${slug}`)}>Edit Article</EditArticle>
-						<DeleteArticle onClick={handleDeleteArticle}>Delete Article</DeleteArticle>
-					</ArticleModify>
+					<S.ArticleModify>
+						<S.EditArticle onClick={() => push(`/editArticle/${slug}`)}>Edit Article</S.EditArticle>
+						<S.DeleteArticle onClick={handleDeleteArticle}>Delete Article</S.DeleteArticle>
+					</S.ArticleModify>
 				)}
-				<HeaderText {...props}>{text}</HeaderText>
-			</HeaderWrapper>
-		</HeaderContainer>
+				<S.HeaderText {...props}>{text}</S.HeaderText>
+			</S.HeaderWrapper>
+		</S.HeaderContainer>
 	);
 }
 

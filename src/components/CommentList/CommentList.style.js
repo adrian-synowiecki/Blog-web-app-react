@@ -14,37 +14,6 @@ export const CommentContainer = styled.div`
 	align-items: center;
 `;
 
-/* export const StyledForm = styled(Form)`
-    display: flex;
-    flex-direction: column;
-
-    width: 90%;
-    height: 13rem;
-    border: 1px solid rgba(0,0,0,0.1); 
-    background-color: rgba(180, 185, 194, 0.4); 
-
-`;
-
-export const StyledField = styled(Field)`
-	height: 3rem;
-	border: none;
-	padding: 3rem;
-
-	&::placeholder {
-		color: rgba(0, 0, 0, 0.5);
-		font-weight: 500;
-	}
-	&:focus {
-		outline-width: 0;
-	}
-`;
-
-export const StyledButton = styled(Button)`
-    padding: 0.4rem;
-    margin-left: auto;
-    margin-right: 2rem;
-    
-`; */
 
 export const CommentContent = styled.div`
 	display: flex;
@@ -77,7 +46,7 @@ export const CommentCreatedAt = styled.p`
 	/* margin-top: 1.3rem; */
 `;
 
-export const DeleteComment = styled(TrashCan)`
+export const DeleteCommentIcon = styled(TrashCan)`
 	width: 2rem;
 	height: 2rem;
 	margin-top: -1rem;

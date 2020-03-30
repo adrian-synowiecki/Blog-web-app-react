@@ -36,7 +36,7 @@ export const ArticlesWrapper = styled.div`
 	margin-top: 2rem;
 `;
 
-export const StyledNavLink = styled(NavLink)`
+export const NavLinkExtended = styled(NavLink)`
     color: gray;
     text-decoration: none;
     margin-left: 3rem;

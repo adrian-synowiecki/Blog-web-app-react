@@ -12,11 +12,11 @@ export const ArticleFormContainer = styled.div`
 	align-items: center;
 `;
 
-export const StyledForm = styled(Form)`
+export const FormExtended = styled(Form)`
     width: 90%;
 `;
 
-export const StyledTextField = styled(TextField)`
+export const TextFieldExtended = styled(TextField)`
     width: 100%;  
     label { 
       font-size: 1.4rem;     
@@ -37,6 +37,6 @@ export const StyledTextField = styled(TextField)`
   }
 `;
 
-export const StyledButton = styled(Button)`
+export const ButtonExtended = styled(Button)`
     margin-left: auto;
 `;

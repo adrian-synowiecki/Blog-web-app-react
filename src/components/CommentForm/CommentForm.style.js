@@ -14,7 +14,7 @@ export const CommentContainer = styled.div`
 	align-items: center;
 `;
 
-export const StyledForm = styled(Form)`
+export const FormExtended = styled(Form)`
     display: flex;
     flex-direction: column;
 /*     align-items: space-between;   */
@@ -25,7 +25,7 @@ export const StyledForm = styled(Form)`
 
 `;
 
-export const StyledField = styled(Field)`
+export const FieldExtended = styled(Field)`
 	height: 3rem;
 	border: none;
 	padding: 3rem;
@@ -39,7 +39,7 @@ export const StyledField = styled(Field)`
 	}
 `;
 
-export const StyledButton = styled(Button)`
+export const ButtonExtended = styled(Button)`
     padding: 0.4rem;
     margin-left: auto;
     margin-right: 2rem;

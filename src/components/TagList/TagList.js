@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { TagsContainer, StyledTag, Paragraph, TagsList } from './TagList.style';
+import * as S from './TagList.style';
 
 function Tags({ tagList, fetchArticlesByTagRequest, getTagName, isPopularTags, isArticlePreviewTags, flexEnd }) {
 	const onTagClick = (tag) => {
@@ -10,18 +10,18 @@ function Tags({ tagList, fetchArticlesByTagRequest, getTagName, isPopularTags, i
 		}
 	};
 	return (
-		<TagsContainer flexEnd={flexEnd} isArticlePreviewTags={isArticlePreviewTags}>
-			{isPopularTags && <Paragraph>Popular Tags</Paragraph>}
-			<TagsList>
+		<S.TagsContainer flexEnd={flexEnd} isArticlePreviewTags={isArticlePreviewTags}>
+			{isPopularTags && <S.Paragraph>Popular Tags</S.Paragraph>}
+			<S.TagsList>
 				{tagList.length > 0 &&
 					tagList.map((tag) => (
-						<StyledTag to={`/`} key={tag} onClick={() => onTagClick(tag)} isPopularTags={isPopularTags}>
+						<S.TagExtended to={`/`} key={tag} onClick={() => onTagClick(tag)} isPopularTags={isPopularTags}>
 							{tag}
-						</StyledTag>
+						</S.TagExtended>
 					))}
-					<p style={{color: '#7887AB'}}>tak tak tak tnie ttakl nie tak nie</p>
-			</TagsList>
-		</TagsContainer>
+				<p style={{ color: '#7887AB' }}>tak tak tak tnie ttakl nie tak nie</p>
+			</S.TagsList>
+		</S.TagsContainer>
 	);
 }
 

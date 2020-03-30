@@ -1,40 +1,30 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-import {
-	CommentContainer,
-	CommentContent,
-	CommentBlock,
-	CommentFooter,
-	CommentImage,
-	CommentUsername,
-	CommentCreatedAt,
-	DeleteComment
-} from './CommentList.style.js';
+import * as S from './CommentList.style';
 
 function Comment({ currentUserData, commentList, removeCommentFromArticleRequest }) {
 	const { articleSlug } = useParams();
 
 	return (
-		<CommentContainer>
+		<S.CommentContainer>
 			{commentList.length > 0 &&
 				commentList.map((commentData) => (
-					<CommentContent key={commentData.id}>
-						<CommentBlock>{commentData.body}</CommentBlock>
-						<CommentFooter>
-							<CommentImage>{commentData.image}</CommentImage>
-							<CommentUsername>{commentData.author.username}</CommentUsername>
-							<CommentCreatedAt>{commentData.createdAt}</CommentCreatedAt>
+					<S.CommentContent key={commentData.id}>
+						<S.CommentBlock>{commentData.body}</S.CommentBlock>
+						<S.CommentFooter>
+							<S.CommentImage>{commentData.image}</S.CommentImage>
+							<S.CommentUsername>{commentData.author.username}</S.CommentUsername>
+							<S.CommentCreatedAt>{commentData.createdAt}</S.CommentCreatedAt>
 							{currentUserData.username === commentData.author.username && (
-								<DeleteComment
-									onClick={() =>
-										removeCommentFromArticleRequest(articleSlug, commentData.id)}
+								<S.DeleteCommentIcon
+									onClick={() => removeCommentFromArticleRequest(articleSlug, commentData.id)}
 								/>
 							)}
-						</CommentFooter>
-					</CommentContent>
+						</S.CommentFooter>
+					</S.CommentContent>
 				))}
-		</CommentContainer>
+		</S.CommentContainer>
 	);
 }
 

@@ -5,19 +5,19 @@ import styled from 'styled-components/macro';
 import { Form } from 'formik';
 
 import { TextField } from 'formik-material-ui';
- 
+
 /*  import TextField from '@material-ui/core/TextField';  */
 
 export const UserSettingsContainer = styled.div`
 	display: flex;
 	align-items: center;
-  justify-content: center;
+	justify-content: center;
 	flex-direction: column;
 `;
 
 export const Title = styled.h1`font-weight: 400;`;
 
-export const StyledForm = styled(Form)`
+export const FormExtended = styled(Form)`
     width: 90%; 
     display: flex;
     flex-direction: column;
@@ -30,13 +30,19 @@ export const StyledForm = styled(Form)`
     }
 `;
 
-
-export const StyledTextField = styled(({ height, ...other }) => <TextField {...other} />)`
+/* 
+export const TextField = styled(({ height, ...other }) => <TextField {...other} />)`
     width: 100%;
 
 
   & .MuiInputBase-input {
     height: ${({ height }) => height && '10rem'};
   }
+`; */
+
+export const TextFieldExtended = styled(TextField)`
+    width: 100%;
+    & .MuiInputBase-input {
+    height: ${({ height }) => height && '10rem'};
+    }
 `;
- 

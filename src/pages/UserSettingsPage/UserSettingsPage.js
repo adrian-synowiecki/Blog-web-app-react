@@ -2,9 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { Formik, Field } from 'formik';
 
+import * as S from './UserSettingsPage.style'
 import { updateUserRequest, clearUserError } from 'redux/user/user.actions';
-
-import { UserSettingsContainer, Title, StyledTextField, StyledForm } from './UserSettingsPage.style';
 
 import Button from 'components/Button/Button';
 import ErrorList from 'components/ErrorList/ErrorList';
@@ -28,8 +27,8 @@ function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUser
 	};
 
 	return (
-		<UserSettingsContainer>
-			<Title>Your Settings</Title>
+		<S.UserSettingsContainer>
+			<S.Title>Your Settings</S.Title>
 			<Formik
 				ref={formikRef}
 				initialValues={{
@@ -51,12 +50,12 @@ function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUser
 				}}
 			>
 				{({ isSubmitting }) => (
-					<StyledForm>
+					<S.FormExtended>
 						{error && <ErrorList error={error} />}
 						<Field
 							name="image"
 							type="text"
-							component={StyledTextField}
+							component={S.TextFieldExtended}
 							margin="dense"
 							variant="outlined"
 							label="URL of profile picture"
@@ -65,7 +64,7 @@ function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUser
 						<Field
 							name="username"
 							type="text"
-							component={StyledTextField}
+							component={S.TextFieldExtended}
 							label="Username"
 							margin="normal"
 							variant="outlined"
@@ -74,7 +73,7 @@ function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUser
 						<Field
 							name="bio"
 							type="text"
-							component={StyledTextField}
+							component={S.TextFieldExtended}
 							height
 							margin="normal"
 							variant="outlined"
@@ -83,7 +82,7 @@ function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUser
 						<Field
 							name="email"
 							type="email"
-							component={StyledTextField}
+							component={S.TextFieldExtended}
 							autoComplete="current-email"
 							label="Email"
 							margin="normal"
@@ -92,7 +91,7 @@ function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUser
 
 						<Field
 							name="password"
-							component={StyledTextField}
+							component={S.TextFieldExtended}
 							type="password"
 							label="New Password"
 							margin="normal"
@@ -102,10 +101,10 @@ function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUser
 						<Button disabled={isSubmitting} type="submit">
 							Update Settings
 						</Button>
-					</StyledForm>
+					</S.FormExtended>
 				)}
 			</Formik>
-		</UserSettingsContainer>
+		</S.UserSettingsContainer>
 	);
 }
 

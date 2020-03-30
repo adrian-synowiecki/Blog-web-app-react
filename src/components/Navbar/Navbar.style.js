@@ -8,7 +8,7 @@ export const NavbarContainer = styled.nav`
 	justify-content: space-between;
 `;
 
-export const NavbarBrand = styled(Link)`
+export const NavbarBrandExtended = styled(Link)`
 	color: #2E4272;
 	text-decoration: none;
 	font-weight: 700;
@@ -25,7 +25,7 @@ export const NavLinks = styled.ul`
 	margin-right: 2rem;
 `;
 
-export const StyledLink = styled(Link)`
+export const LinkExtended = styled(Link)`
 	text-decoration: none;
 	padding-right: 2rem;
 	font-size: 1.4rem;

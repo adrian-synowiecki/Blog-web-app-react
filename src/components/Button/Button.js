@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { ButtonContainer } from './Button.styles';
+import * as S from './Button.styles'
 
 function Button({ children, ...props }) {
-	return <ButtonContainer {...props}>{children}</ButtonContainer>;
+	return <S.ButtonContainer {...props}>{children}</S.ButtonContainer>;
 }
 
 export default Button;

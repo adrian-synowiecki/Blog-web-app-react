@@ -40,7 +40,7 @@ export const TagsList = styled.div`
 	/* 	montent: flex-end; */
 `;
 
-export const StyledTag = styled(Link)`
+export const TagExtended = styled(Link)`
 /* 	flex-basis: 50%; */
 /* 	flex: 1; */
 /* direction: rtl; */
