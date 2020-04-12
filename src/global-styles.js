@@ -13,9 +13,10 @@ html {
 body {
 	margin: 0;
 	padding: 0;
-    background-color: #e4e7ed;
-    color: '#061539';
+    background-color: #fcfafa;
+	color: '#061539';
 	font-size: 1.6rem;
+	/* padding-top: 6.5rem; */
 	box-sizing: border-box;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;

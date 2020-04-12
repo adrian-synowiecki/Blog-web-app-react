@@ -26,14 +26,14 @@ export const TextFieldExtended = styled(TextField)`
         border-color: #BDC3C7;
     }
     &:hover fieldset {
-        border-color: #3e8e41;
+        border-color: ${({ theme }) => theme.colors.blue2}
     }
     &.Mui-focused fieldset {
-        border: 1px solid #3e8e41;
+        border: ${({ theme }) => `2px solid ${theme.colors.blue2}`}
     }
   }
     label.Mui-focused {
-      color: #3e8e41;
+      color: ${({ theme }) => theme.colors.blue2}
   }
 `;
 

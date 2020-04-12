@@ -11,7 +11,7 @@ export const ButtonContainer = styled.button`
 	color: white;
 	padding: 1rem 2rem;
 	font-size: 1.6rem;
-	margin-top: 1rem;
+	margin-top: 2rem;
 	text-align: center;
 	cursor: pointer;
 	

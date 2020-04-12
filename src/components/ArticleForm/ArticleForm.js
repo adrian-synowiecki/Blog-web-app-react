@@ -55,12 +55,11 @@ function ArticleForm({ articleToEdit, error, createArticleRequest, updateArticle
 							name="description"
 							component={S.TextFieldExtended}
 							label="What's this Article about?"
-							margin="dense"
+							margin="normal"
 							variant="outlined"
 						/>
 
 						<Field
-							body
 							name="body"
 							component={S.TextFieldExtended}
 							label="Wrtice your Article (in markdown)"

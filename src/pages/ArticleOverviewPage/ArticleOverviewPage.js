@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { isEmpty } from 'lodash';
 
-import * as S from './ArticleOverviewPage.style'
+import * as S from './ArticleOverviewPage.style';
 import { fetchArticleRequest, unloadArticle, deleteArticleRequest } from 'redux/article/article.actions';
 import {
 	fetchCommentsFromArticleRequest,
@@ -11,13 +11,10 @@ import {
 	removeCommentFromArticleRequest
 } from 'redux/comments/comments.actions';
 
-import ArticleMeta from 'components/ArticleMeta/ArticleMeta';
 import Header from 'components/Header/Header';
 import CommentForm from 'components/CommentForm/CommentForm';
 import CommentList from 'components/CommentList/CommentList';
 import TagList from 'components/TagList/TagList';
-
-
 
 function ArticleOverviewPage({
 	articleData,
@@ -42,7 +39,7 @@ function ArticleOverviewPage({
 			unloadArticle();
 		};
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
-
+	console.log(articleData);
 	const canModify =
 		!isEmpty(currentUserData) && !isEmpty(articleData) && currentUserData.username === author.username;
 
@@ -51,20 +48,22 @@ function ArticleOverviewPage({
 			{error && <p>Not found</p>}
 			{!isEmpty(articleData) && (
 				<React.Fragment>
-					<Header
-						ArticleHeader
-						articleData={articleData}
-						deleteArticleRequest={deleteArticleRequest}
-						title={title}
-						canModify={canModify}
-					/>
-					<ArticleMeta ArticleMeta articleData={articleData} />
+					<S.HeaderExtended>
+						<S.HeaderContentWrapper>
+							<S.ArticleTitle>{title}</S.ArticleTitle>
+							<S.ArticleMetaExtended articleData={articleData} articleOverviewPage />
+						</S.HeaderContentWrapper>
+					</S.HeaderExtended>
+
 					<S.FullArticleText>{body}</S.FullArticleText>
-					<TagList tagList={tagList} />
+
+					<S.TagListExtended tagList={tagList} />
+
 					{isEmpty(currentUserData) ? (
 						<S.Paragraph>
-						{/* 	<span style={{ color: colors.green }}>Sign in</span> or{' '} */}
-					{/* 		<span style={{ color: colors.green }}>sign up</span> to add comments on this article */}
+							<S.BlueSpanExtended to={'/login'}>Log in</S.BlueSpanExtended> or {''}
+							<S.BlueSpanExtended to={'/signUp'}>sign up</S.BlueSpanExtended> to add comments on this
+							article
 						</S.Paragraph>
 					) : (
 						<CommentForm addCommentToArticleRequest={addCommentToArticleRequest} />

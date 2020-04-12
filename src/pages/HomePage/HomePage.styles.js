@@ -43,6 +43,7 @@ export const Row = styled.main`
 	align-items: center;
 	position: relative;
 	min-height: 19rem;
+	margin-top: 7rem;
 
 	@media (min-width: 770px) {
 		align-items: flex-start;
@@ -51,7 +52,9 @@ export const Row = styled.main`
 	}
 `;
 
-export const NavigationWrapper = styled.div`display: flex;`;
+export const NavigationWrapper = styled.div`
+
+`;
 
 export const Paragraph = styled.p`
 	margin-right: auto;
@@ -67,13 +70,22 @@ export const Paragraph = styled.p`
 	 margin-left: ${props => props.tag && '3rem'} 
 `; */
 
-export const NavLinkExtended = styled(({ tag, ...props }) => <NavLink {...props} />)`
-  color: ${colors.green};
+const activeClassName = 'active';
+export const NavLinkExtended = styled(NavLink).attrs({
+	activeClassName: activeClassName
+})`
+  color: ${({ theme }) => theme.colors.blue1};
   text-decoration: none;
   margin-top: 3rem;
-  display: flex;
-  margin-left: ${(props) => props.tag && '3rem'}; 
-  padding: 1rem;
+  margin-left: ${({ tag }) => tag ? '14rem' : '1rem'}; 
+  padding: 1.5rem;
+  margin-top: 1.8rem;
+  position: absolute;
+
+  &.${activeClassName} {
+	border-bottom: ${({ theme }) => `2px solid ${theme.colors.blue1}`};
+	font-weight: bold;
+	}
 `;
 
 /* 	width: 100%;
@@ -82,6 +94,7 @@ export const NavLinkExtended = styled(({ tag, ...props }) => <NavLink {...props}
 	} */
 
 export const HeadingsWrapper = styled.div`
+	margin-top: -1rem;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -101,4 +114,10 @@ export const SubHeading = styled.h2`
 	letter-spacing: 0.1rem;
 	margin-top: -2rem;
 	text-shadow: 0 1px 3px rgba(0, 0, 0, .9);
+`;
+
+export const PopularTags = styled.p`
+	font-size: 1.4rem;
+	color: ${({ theme }) => theme.colors.blue1};
+	letter-spacing: 0.1rem;
 `;

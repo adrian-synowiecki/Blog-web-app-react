@@ -37,7 +37,7 @@ function Pagination({ currentPageNumber, setCurrentPageNumber, fetchArticlesByMo
 						return true;
 					}}
 					key={i}
-					/* 		activeStyle={{ background: colors.green, color: 'white' }} */
+							activeStyle={{ background: colors.green, color: 'white' }} 
 					to
 				>
 					{i}

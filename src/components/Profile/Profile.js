@@ -1,11 +1,10 @@
-import React, { Fragment, useContext } from 'react';
-import { ThemeContext } from 'styled-components';
+import React, { Fragment, useRef, useState, useEffect } from 'react';
 import { isEmpty } from 'lodash';
 
 import * as S from './Profile.style';
 
-import ArticleList from 'components/ArticleList/ArticleList'
-import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner'
+import ArticleList from 'components/ArticleList/ArticleList';
+import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
 
 function Profile({
 	profileData,
@@ -16,7 +15,9 @@ function Profile({
 	unloadArticles,
 	path
 }) {
-	const themeContext = useContext(ThemeContext);
+	const [ widths, setWidths ] = useState([]);
+	const [ leftMargins, setLeftMargins ] = useState([]);
+	let linkRefs = useRef([]);
 	const { username, image, bio } = profileData || {};
 	let profileLink;
 	let profileLinkFavorites;
@@ -34,6 +35,11 @@ function Profile({
 		notFoundMessage = 'No articles found.';
 	}
 
+	useEffect(() => {
+		setWidths(linkRefs.current.map((ref) => ref.offsetWidth));
+		setLeftMargins(linkRefs.current.map((ref) => ref.offsetLeft));
+	}, []);
+
 	const handleFetchArticlesByAuthorRequest = () => {
 		unloadArticles();
 		fetchArticlesByAuthorRequest(username);
@@ -43,6 +49,13 @@ function Profile({
 		unloadArticles();
 		fetchFavoriteArticlesRequest(username);
 	};
+
+	const addToLinkRefs = (el) => {
+		if (el && !linkRefs.current.includes(el)) {
+			linkRefs.current.push(el);
+		}
+	};
+
 	return (
 		<S.ProfileContainer>
 			<S.UserInfo>
@@ -59,38 +72,38 @@ function Profile({
 			<S.ArticlesWrapper>
 				<S.ArticlesChoice>
 					<S.NavLinks>
-						{!isEmpty(profileData) &&
-						!isFetchingArticles && (
-							<Fragment>
-								<S.NavLinkExtended
-									exact
-									isActive={() => {
-										if (!path.includes('favorites')) {
-											return true;
-										} else return false;
-									}}
-									to={profileLink}
-									onClick={handleFetchArticlesByAuthorRequest}
-									/* 		activeStyle={themeContext.theme.activeLinkStyle} */
-									activeStyle={{ ...themeContext.activeLinkStyle }}
-								>
-									My Articles
-								</S.NavLinkExtended>
-								<S.NavLinkExtended
-									isActive={() => {
-										if (path.includes('favorites')) {
-											return true;
-										} else return false;
-									}}
-									to={profileLinkFavorites}
-									onClick={handleFetchFavoriteArticlesRequest}
-									/* 		activeStyle={themeContext.theme.activeLinkStyle} */
-									activeStyle={{ ...themeContext.activeLinkStyle }}
-								>
-									Favorited Articles
-								</S.NavLinkExtended>
-							</Fragment>
-						)}
+						<Fragment>
+							<S.NavLinkExtended
+								ref={addToLinkRefs}
+								width={widths[0]}
+								marginLeft={leftMargins[0]}
+								exact
+								isActive={() => {
+									if (!path.includes('favorites')) {
+										return true;
+									} else return false;
+								}}
+								to={profileLink}
+								onClick={handleFetchArticlesByAuthorRequest}
+							>
+								My Articles
+							</S.NavLinkExtended>
+							<S.NavLinkExtended
+								ref={addToLinkRefs}
+								width={widths[1]}
+								marginLeft={leftMargins[1]}
+								isActive={() => {
+									if (path.includes('favorites')) {
+										return true;
+									} else return false;
+								}}
+								to={profileLinkFavorites}
+								onClick={handleFetchFavoriteArticlesRequest}
+							>
+								Favorited Articles
+							</S.NavLinkExtended>
+							<S.NavLinkUnderline />
+						</Fragment>
 					</S.NavLinks>
 				</S.ArticlesChoice>
 

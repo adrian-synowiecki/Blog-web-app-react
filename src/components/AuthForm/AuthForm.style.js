@@ -13,6 +13,7 @@ export const FormContainer = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	margin-top: 2rem;
 `;
 
 export const Title = styled.h1`font-weight: 400;`;

@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro';
 import { NavLink } from 'react-router-dom';
-import colors from '../../utils/colors';
+
 
 export const ArticlePageLinksContainer = styled.div`
 	margin-top: 3rem;
@@ -11,13 +11,20 @@ export const ArticlePageLinksContainer = styled.div`
 	}
 `;
 
-export const PageLinkExtended = styled(NavLink)`
-    background: white;
+const activeClassName = 'active';
+export const PageLinkExtended = styled(NavLink).attrs({
+	activeClassName: activeClassName
+})`
     padding: .5rem 1rem; 
-    color: ${colors.green};
+    border: 1px solid rgba(0,0,0,0.1);
+    color: ${({ theme }) => theme.colors.blue2};
     text-decoration: none;
 
-    :hover {
+    &:hover {
         text-decoration: underline;
     }
+
+    &.${activeClassName} {
+        background: ${({ theme }) => theme.colors.blue2};
+	}
 `;

@@ -87,6 +87,7 @@ export const DeleteArticle = styled.button`
  */
 
 export const HeaderContainer = styled.div`
-	height: 19rem;
+	height: 17rem;
 	background-color: ${({ theme }) => theme.colors.blue1};
+	overflow: auto;
 `;

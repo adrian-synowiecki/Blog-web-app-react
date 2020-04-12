@@ -3,32 +3,34 @@
 	padding-left: 5px;
 	padding-top: 5px;
 	cursor: text;
-	border: 1px solid rgba(0, 0, 0, 0.23);
+	border: 1px solid #bdc3c7;
 	border-radius: 4px;
+	margin-top: 1.5rem;
+	box-sizing: border-box;
+	
+}
+
+.react-tagsinput:hover {
+	border-color: #2e4272;
 	
 }
 
 .react-tagsinput--focused {
-	border-color: #3e8e41;
+	box-shadow: 0 0 0 1pt #2e4272;
 }
 
-/* .react-tagsinput--focused .react-tagsinput-input {
-	width: 80px;
-} */
 
 .react-tagsinput-tag {
-	background-color:  #3e8e41;
+	background-color: #2e4272;
 	border-radius: 2px;
-	border: 1px solid #3e8e41;
+	border: 1px solid #2e4272;
 	display: inline-block;
-	font-family: sans-serif;
 	font-size: 13px;
 	font-weight: 400;
 	margin-bottom: 5px;
 	margin-right: 5px;
 	padding: 5px;
 	color: white;
-
 }
 
 .react-tagsinput-remove {

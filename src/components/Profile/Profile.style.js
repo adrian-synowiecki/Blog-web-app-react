@@ -36,16 +36,39 @@ export const ArticlesWrapper = styled.div`
 	margin-top: 2rem;
 `;
 
-export const NavLinkExtended = styled(NavLink)`
-    color: gray;
-    text-decoration: none;
-    margin-left: 3rem;
-    font-size: 1.2rem;
-    padding: 1rem 1.5rem;
+export const NavLinkUnderline = styled.div`
+	height: 0.3rem;
+	background-color: ${({ theme }) => theme.colors.blue1};
+	transition: 0.4s ease;
+	width: 0;
+	margin-top: 1rem;
+`;
+
+const activeClassName = 'active';
+export const NavLinkExtended = styled(NavLink).attrs({
+	activeClassName: activeClassName
+})`
+	text-decoration: none;
+	margin-left: 2rem;
+	font-size: 1.4rem;
+	letter-spacing: 0.1rem;
+	color: ${({ theme }) => theme.colors.blue1};
+	&:hover {
+	/* 	opacity: 0.6; */
+		color: ${({ theme }) => theme.colors.blue3};
+	}
+	&.${activeClassName} {
+		font-weight: bold;
+	
+	~ ${NavLinkUnderline} {
+			width: ${({ width }) => width && `${width}px`}; 
+			margin-left: ${({ marginLeft }) => `${marginLeft}px`};
+		}
+	}
 `;
 
 export const NotFoundMessage = styled.p`
-    margin-top: 3rem;
-    font-size: 1.3rem;
-    margin-left: 3rem;
+	margin-top: 3rem;
+	font-size: 1.3rem;
+	margin-left: 3rem;
 `;

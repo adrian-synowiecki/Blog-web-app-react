@@ -16,7 +16,7 @@ import { logOut } from 'redux/user/user.actions';
 import Header from 'components/Header/Header';
 import ArticleList from 'components/ArticleList/ArticleList';
 import Pagination from 'components/Pagination/Pagination';
-import Tags from 'components/TagList/TagList';
+import TagList from 'components/TagList/TagList';
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
 import Button from 'components/Button/Button';
 
@@ -27,13 +27,10 @@ function HomePage({
 	currentPageNumber,
 	setCurrentPageNumber,
 	logOut,
-	addArticleToFavoritesRequest,
-	removeArticleFromFavoritesRequest,
 	fetchTagsByMostPopularRequest,
 	fetchArticlesByTagRequest,
 	fetchArticlesByMostRecentRequest,
 	removeTagName,
-	getTagName,
 	unloadArticles,
 	unloadTags
 }) {
@@ -88,29 +85,23 @@ function HomePage({
 						{tag}
 					</S.NavLinkExtended>
 				)}
-				<Button onClick={() => logOut()}>LOG OUT</Button>
+				{/* <Button onClick={() => logOut()}>LOG OUT</Button> */}
 			</S.NavigationWrapper>
 			<S.Row>
 				{articleList === null ? (
 					<LoadingSpinner center />
 				) : (
 					<Fragment>
-						<ArticleList
-							articleList={articleList}
-							addArticleToFavoritesRequest={addArticleToFavoritesRequest}
-							removeArticleFromFavoritesRequest={removeArticleFromFavoritesRequest}
-						/>
+						<ArticleList articleList={articleList} />
 						<Pagination
 							currentPageNumber={currentPageNumber}
 							fetchArticlesByMostRecentRequest={fetchArticlesByMostRecentRequest}
 							setCurrentPageNumber={setCurrentPageNumber}
 						/>
 						{tagList.length > 0 && (
-							<Tags
-								tagList={tagList}
-								fetchArticlesByTagRequest={fetchArticlesByTagRequest}
-								getTagName={getTagName}
-							/>
+							<TagList tagList={tagList} arePopularTags>
+								<S.PopularTags>Popular Tags</S.PopularTags>
+							</TagList>
 						)}
 					</Fragment>
 				)}
@@ -128,12 +119,10 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 	fetchArticlesByMostRecentRequest: (offSet) => dispatch(fetchArticlesByMostRecentRequest(offSet)),
-	fetchArticlesByTagRequest: (tag) => dispatch(fetchArticlesByTagRequest(tag)),
 	addArticleToFavoritesRequest: (articleSlug) => dispatch(addArticleToFavoritesRequest(articleSlug)),
 	removeArticleFromFavoritesRequest: (articleSlug) => dispatch(removeArticleFromFavoritesRequest(articleSlug)),
 	unloadArticles: () => dispatch(unloadArticles()),
 	fetchTagsByMostPopularRequest: () => dispatch(fetchTagsByMostPopularRequest()),
-	getTagName: (tag) => dispatch(getTagName(tag)),
 	removeTagName: () => dispatch(removeTagName()),
 	unloadTags: () => dispatch(unloadTags()),
 	setCurrentPageNumber: (currentPageNumber) => dispatch(setCurrentPageNumber(currentPageNumber)),

@@ -4,17 +4,10 @@ import * as S from './ArticleList.style';
 
 import ArticlePreview from '../ArticlePreview/ArticlePreview';
 
-function ArticleList({ articleList, addArticleToFavoritesRequest, removeArticleFromFavoritesRequest }) {
+function ArticleList({ articleList }) {
 	return (
 		<S.ArticlesContainer>
-			{articleList.map((articleData) => (
-				<ArticlePreview
-					articleData={articleData}
-					addArticleToFavoritesRequest={addArticleToFavoritesRequest}
-					removeArticleFromFavoritesRequest={removeArticleFromFavoritesRequest}
-					key={articleData.slug}
-				/>
-			))}
+			{articleList.map((articleData) => <ArticlePreview articleData={articleData} key={articleData.slug} />)}
 		</S.ArticlesContainer>
 	);
 }

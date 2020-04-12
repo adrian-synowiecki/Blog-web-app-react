@@ -12,18 +12,19 @@ function CommentForm({ addCommentToArticleRequest }) {
 				initialValues={{
 					commentText: ''
 				}}
-				onSubmit={(values) => {
+				onSubmit={(values, actions) => {
 					const commentData = {
 						comment: {
 							body: values.commentText
 						}
 					};
 					addCommentToArticleRequest(commentData, articleSlug);
+					actions.resetForm()
 				}}
 			>
 				{() => (
 					<S.FormExtended>
-						<S.FieldExtended name="commentText" component="textarea" placeholder="Write a comment" rows="4" />
+						<S.FieldExtended name="commentText" component="textarea" placeholder="Write a comment..." rows="3" />
 						<S.ButtonExtended type="submit">Post comment</S.ButtonExtended>
 					</S.FormExtended>
 				)}
