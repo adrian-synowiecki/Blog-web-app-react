@@ -1,7 +1,8 @@
 import styled from 'styled-components/macro';
-import colors from '../../utils/colors';
-import { ReactComponent as Heart } from '../../assets/iconmonstr-favorite-1.svg';
 import { Link } from 'react-router-dom';
+
+import { ReactComponent as Heart } from 'assets/iconmonstr-favorite-1.svg';
+import ArticleMeta from 'components/ArticleMeta/ArticleMeta';
 
 export const ArticlePreviewContainer = styled.div`
 	display: flex;
@@ -9,20 +10,22 @@ export const ArticlePreviewContainer = styled.div`
 	border-top: 1px solid rgba(0, 0, 0, .1);
 	border-bottom: 1px solid rgba(0, 0, 0, .1);
 	position: relative;
+	margin-left: 2rem;
+	margin-right: 2rem;
 `;
 
-export const ArticleLeftSide = styled.div`
-/* width: 20rem; */
+export const ArticleLeftSide = styled.div``;
+
+export const ArticleMetaExtended = styled(ArticleMeta)`
+	margin-top: 3rem; 
+ 	position: absolute; 
 `;
 
 export const ArticleContent = styled.div`
 	display: flex;
 	flex-direction: column;
-	width: 25rem;
-	flex-wrap: wrap;
-	margin-left: 1rem;
+	width: 30rem;
 `;
-
 
 export const ArticleTitleExtended = styled(Link)`
 	text-decoration: none;
@@ -61,7 +64,7 @@ export const HeartIcon = styled(Heart)`
  `;
 
 export const FavoriteAddedCount = styled.span`
-	color: ${({ favorited }) => (favorited ? 'white' : `${colors.green}`)};
+	color: ${({ favorited }) => (favorited ? 'white' : `green`)}; // fix green color
 	margin-top: 0.5rem;
 	margin-left: 0.1rem;
 `;
@@ -82,7 +85,6 @@ export const AddToFavorite = styled.button`
 	&:hover ${HeartIcon} {
 		fill: white;
 	}
-
 	&:hover ${FavoriteAddedCount} {
 		color: white;
 	}

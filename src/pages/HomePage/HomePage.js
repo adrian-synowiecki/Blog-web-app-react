@@ -2,23 +2,13 @@ import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import * as S from './HomePage.styles';
-import {
-	fetchArticlesByMostRecentRequest,
-	addArticleToFavoritesRequest,
-	removeArticleFromFavoritesRequest,
-	fetchArticlesByTagRequest,
-	unloadArticles
-} from 'redux/articleList/articleList.actions';
-import { fetchTagsByMostPopularRequest, getTagName, removeTagName, unloadTags } from 'redux/tags/tags.actions';
+import { fetchArticlesByMostRecentRequest, unloadArticles } from 'redux/articleList/articleList.actions';
+import { fetchTagsByMostPopularRequest, removeTagName, unloadTags } from 'redux/tags/tags.actions';
 import { setCurrentPageNumber } from 'redux/common/common.actions';
-import { logOut } from 'redux/user/user.actions';
 
 import Header from 'components/Header/Header';
 import ArticleList from 'components/ArticleList/ArticleList';
-import Pagination from 'components/Pagination/Pagination';
-import TagList from 'components/TagList/TagList';
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
-import Button from 'components/Button/Button';
 
 function HomePage({
 	articleList,
@@ -26,9 +16,7 @@ function HomePage({
 	tag,
 	currentPageNumber,
 	setCurrentPageNumber,
-	logOut,
 	fetchTagsByMostPopularRequest,
-	fetchArticlesByTagRequest,
 	fetchArticlesByMostRecentRequest,
 	removeTagName,
 	unloadArticles,
@@ -50,12 +38,6 @@ function HomePage({
 
 	return (
 		<S.HomeContainer>
-			{/* 	<S.Header>
-				<S.HeadingsWrapper>
-					<S.Heading>conduit</S.Heading>
-					<S.SubHeading>A place to share your knowledge</S.SubHeading>
-				</S.HeadingsWrapper>
-			</S.Header> */}
 			<Header>
 				<S.HeadingsWrapper>
 					<S.Heading>conduit</S.Heading>
@@ -66,7 +48,6 @@ function HomePage({
 				<S.NavLinkExtended
 					onClick={() => handleClick()}
 					to="/"
-					/* 	activeStyle={styles.activeLinkStyle} */
 					isActive={() => {
 						if (tag) {
 							return false;
@@ -77,35 +58,30 @@ function HomePage({
 					Global Feed
 				</S.NavLinkExtended>
 				{tag && (
-					<S.NavLinkExtended
-						tag
-						to="/"
-						/*  activeStyle={styles.activeLinkStyle} */ onClick={() => handleClick()}
-					>
+					<S.NavLinkExtended tag to="/" onClick={() => handleClick()}>
 						{tag}
 					</S.NavLinkExtended>
 				)}
-				{/* <Button onClick={() => logOut()}>LOG OUT</Button> */}
 			</S.NavigationWrapper>
-			<S.Row>
+			<S.FlexHomeWrapper>
 				{articleList === null ? (
 					<LoadingSpinner center />
 				) : (
 					<Fragment>
 						<ArticleList articleList={articleList} />
-						<Pagination
+						<S.PaginationExtended
 							currentPageNumber={currentPageNumber}
 							fetchArticlesByMostRecentRequest={fetchArticlesByMostRecentRequest}
 							setCurrentPageNumber={setCurrentPageNumber}
 						/>
 						{tagList.length > 0 && (
-							<TagList tagList={tagList} arePopularTags>
+							<S.TagListExtended tagList={tagList} arePopularTags>
 								<S.PopularTags>Popular Tags</S.PopularTags>
-							</TagList>
+							</S.TagListExtended>
 						)}
 					</Fragment>
 				)}
-			</S.Row>
+			</S.FlexHomeWrapper>
 		</S.HomeContainer>
 	);
 }
@@ -119,14 +95,11 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
 	fetchArticlesByMostRecentRequest: (offSet) => dispatch(fetchArticlesByMostRecentRequest(offSet)),
-	addArticleToFavoritesRequest: (articleSlug) => dispatch(addArticleToFavoritesRequest(articleSlug)),
-	removeArticleFromFavoritesRequest: (articleSlug) => dispatch(removeArticleFromFavoritesRequest(articleSlug)),
 	unloadArticles: () => dispatch(unloadArticles()),
 	fetchTagsByMostPopularRequest: () => dispatch(fetchTagsByMostPopularRequest()),
 	removeTagName: () => dispatch(removeTagName()),
 	unloadTags: () => dispatch(unloadTags()),
-	setCurrentPageNumber: (currentPageNumber) => dispatch(setCurrentPageNumber(currentPageNumber)),
-	logOut: () => dispatch(logOut())
+	setCurrentPageNumber: (currentPageNumber) => dispatch(setCurrentPageNumber(currentPageNumber))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

@@ -15,6 +15,8 @@ import EditArticlePage from 'pages/EditArticlePage/EditArticlePage';
 import LoginPage from 'pages/LoginPage/LoginPage';
 import SignUpPage from 'pages/SignUpPage/SignUpPage';
 import Navbar from 'components/Navbar/Navbar';
+import NotFound from 'components/NotFound/NotFound';
+import PrivateRoute from 'components/PrivateRoute/PrivateRoute';
 
 function App({ currentUserData, isAuth, setCurrentPageNumberToFirst, fetchArticlesByMostRecentRequest }) {
 	return (
@@ -31,38 +33,33 @@ function App({ currentUserData, isAuth, setCurrentPageNumberToFirst, fetchArticl
 						<HomePage />
 					</Route>
 				))}
-				<Route exact path="/login">
+				<Route path="/login">
 					<LoginPage />
 				</Route>
-				<Route exact path="/signUp">
+				<Route path="/signUp">
 					<SignUpPage />
 				</Route>
-
-				<Route exact path="/article/:articleSlug">
+				<Route path="/article/:articleSlug">
 					<ArticleOverviewPage />
 				</Route>
-				<Route path='/articleAuthorProfile/:username'>
+				<Route path="/articleAuthorProfile/:username">
 					<ArticleAuthorProfilePage />
 				</Route>
-				{isAuth ? (
-					<Fragment>
-						<Route exact path="/userSettings">
-							<UserSettingsPage />
-						</Route>
-						<Route exact path="/createNewArticle">
-							<ArticleCreationPage />
-						</Route>
-						<Route exact path="/editArticle/:articleSlug">
-							<EditArticlePage />
-						</Route>
-						<Route path="/userProfile/:username">
-							<UserProfilePage />
-						</Route>
-					</Fragment>
-				) : (
-					<Redirect to="/" />
-				)}
-				<Route path="*" render={({ history }) => history.goBack()} />
+				<PrivateRoute path="/userSettings">
+					<UserSettingsPage />
+				</PrivateRoute>
+				<PrivateRoute path="/createNewArticle">
+					<ArticleCreationPage />
+				</PrivateRoute>
+				<PrivateRoute path="/editArticle/:articleSlug">
+					<EditArticlePage />
+				</PrivateRoute>
+				<PrivateRoute path="/userProfile/:username">
+					<UserProfilePage />
+				</PrivateRoute>
+				<Route path="*">
+					<NotFound>404 Page Not Found</NotFound>
+				</Route>
 			</Switch>
 		</Fragment>
 	);

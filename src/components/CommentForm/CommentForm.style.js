@@ -1,11 +1,7 @@
 import styled from 'styled-components/macro';
-
 import { Form, Field } from 'formik';
-import { TextField } from 'formik-material-ui';
-import { ReactComponent as TrashCan } from '../../assets/trash.svg';
 
-import colors from '../../utils/colors';
-import Button from '../Button/Button';
+import Button from 'components/Button/Button';
 
 export const CommentContainer = styled.div`
 	display: flex;
@@ -20,7 +16,6 @@ export const FormExtended = styled(Form)`
 	flex-direction: column;
 	background-color: rgba(180, 185, 194, 0.4); 
 	border: 1px solid rgba(0,0,0,0.01); 
-
 `;
 
 export const FieldExtended = styled(Field)`
@@ -34,11 +29,10 @@ export const FieldExtended = styled(Field)`
 	&::placeholder {
 		opacity: 0.8;
 		font-weight: 400;
-		
 	}
-
 `;
 
 export const ButtonExtended = styled(Button)`
 	margin: 1rem 1rem 1rem 0rem;
+	align-self: flex-end;
 `;

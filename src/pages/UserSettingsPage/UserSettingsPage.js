@@ -1,14 +1,15 @@
 import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
 import { Formik, Field } from 'formik';
 
-import * as S from './UserSettingsPage.style'
-import { updateUserRequest, clearUserError } from 'redux/user/user.actions';
+import * as S from './UserSettingsPage.style';
+import { updateUserRequest, clearUserError, logOut } from 'redux/user/user.actions';
 
 import Button from 'components/Button/Button';
 import ErrorList from 'components/ErrorList/ErrorList';
 
-function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUserError }) {
+function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUserError, logOut, push }) {
 	const formikRef = useRef(null);
 	useEffect(
 		() => {
@@ -26,9 +27,14 @@ function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUser
 		clearUserError();
 	};
 
+	const handleLogout = () => {
+		logOut();
+		push('/')
+	};
+
 	return (
 		<S.UserSettingsContainer>
-			<S.Title>Your Settings</S.Title>
+			<S.Title>Profile Settings</S.Title>
 			<Formik
 				ref={formikRef}
 				initialValues={{
@@ -56,7 +62,7 @@ function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUser
 							name="image"
 							type="text"
 							component={S.TextFieldExtended}
-							margin="dense"
+							margin="normal"
 							variant="outlined"
 							label="URL of profile picture"
 						/>
@@ -97,10 +103,14 @@ function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUser
 							margin="normal"
 							variant="outlined"
 						/>
-
-						<Button disabled={isSubmitting} type="submit">
-							Update Settings
-						</Button>
+						<S.ButtonsWrapper>
+							<S.LogoutButton disabled={isSubmitting} type="submit" onClick={handleLogout}>
+								Click here to logout
+							</S.LogoutButton>
+							<Button disabled={isSubmitting} type="submit">
+								Update Settings
+							</Button>
+						</S.ButtonsWrapper>
 					</S.FormExtended>
 				)}
 			</Formik>
@@ -118,7 +128,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		updateUserRequest: (userUpdateData) => dispatch(updateUserRequest(userUpdateData)),
-		clearUserError: () => dispatch(clearUserError())
+		clearUserError: () => dispatch(clearUserError()),
+		logOut: () => dispatch(logOut()),
+		push: (path) => dispatch(push(path))
 	};
 };
 

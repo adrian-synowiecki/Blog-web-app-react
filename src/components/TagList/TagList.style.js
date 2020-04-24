@@ -7,9 +7,9 @@ export const TagListContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-end;
-	margin-top: 3rem;
+/* 	margin-top: 3rem;
 	margin-left: 1rem;
-	margin-bottom: 3rem;
+	margin-bottom: 3rem; */
 /* 	background: ${({ theme }) => theme.colors.blue3}; */
 /* 	margin-bottom: ${({ arePopularTags }) => arePopularTags && '3rem'}; */
 	/* margin-bottom: 3rem; */

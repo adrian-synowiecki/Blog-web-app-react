@@ -24,7 +24,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	loginRequest: (userLoginData) => dispatch(loginRequest(userLoginData)),
+	loginRequest: (userLoginData, from) => dispatch(loginRequest(userLoginData, from)),
 	clearUserError: () => dispatch(clearUserError())
 });
 

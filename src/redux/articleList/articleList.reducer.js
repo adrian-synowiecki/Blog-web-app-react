@@ -1,5 +1,5 @@
 import articlesTypes from './articleList.types';
-import { favoriteArticleListUpdate } from '../../utils/favoriteArticlesListUpdate';
+import { favoriteArticleListUpdate } from './favoriteArticlesListUpdate';
 
 const initialState = {
 	isFetchingArticles: false,

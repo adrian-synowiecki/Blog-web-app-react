@@ -1,32 +1,34 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
 
 import { addArticleToFavoritesRequest, removeArticleFromFavoritesRequest } from 'redux/articleList/articleList.actions';
 
 import * as S from './ArticlePreview.style';
 
-import ArticleMeta from '../ArticleMeta/ArticleMeta';
 import TagList from 'components/TagList/TagList';
 
 function ArticlePreview({
 	articleData,
+	isAuth,
 	addArticleToFavoritesRequest,
 	removeArticleFromFavoritesRequest,
 	getTagName,
-	fetchArticlesByTagRequest
+	fetchArticlesByTagRequest,
+	push
 }) {
 	const { favorited, slug, title, description, favoritesCount, tagList } = articleData;
 	const handleAddingToFavorite = () => {
-		if (favorited) {
-			removeArticleFromFavoritesRequest(slug);
-		} else {
-			addArticleToFavoritesRequest(slug);
-		}
+		if (isAuth) {
+			if (favorited) {
+				removeArticleFromFavoritesRequest(slug);
+			} else addArticleToFavoritesRequest(slug);
+		} else push('/signUp');
 	};
 	return (
 		<S.ArticlePreviewContainer>
 			<S.ArticleLeftSide>
-				<ArticleMeta articleData={articleData} absolute />
+				<S.ArticleMetaExtended articleData={articleData} />
 				<S.ArticleContent>
 					<S.ArticleTitleExtended to={`/article/${slug}`}>{title}</S.ArticleTitleExtended>
 					<S.ArticleTextPreviewExtended to={`/article/${slug}`}>{description}</S.ArticleTextPreviewExtended>
@@ -48,9 +50,14 @@ function ArticlePreview({
 	);
 }
 
-const mapDispatchToProps = (dispatch) => ({
-	addArticleToFavoritesRequest: (articleSlug) => dispatch(addArticleToFavoritesRequest(articleSlug)),
-	removeArticleFromFavoritesRequest: (articleSlug) => dispatch(removeArticleFromFavoritesRequest(articleSlug))
+const mapStateToProps = (state) => ({
+	isAuth: state.user.isAuth
 });
 
-export default connect(null, mapDispatchToProps)(ArticlePreview);
+const mapDispatchToProps = (dispatch) => ({
+	addArticleToFavoritesRequest: (articleSlug) => dispatch(addArticleToFavoritesRequest(articleSlug)),
+	removeArticleFromFavoritesRequest: (articleSlug) => dispatch(removeArticleFromFavoritesRequest(articleSlug)),
+	push: (path) => dispatch(push(path))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ArticlePreview);

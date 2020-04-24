@@ -1,18 +1,13 @@
 import styled from 'styled-components/macro';
 
-import { Form, Field } from 'formik';
-import { TextField } from 'formik-material-ui';
-import { ReactComponent as TrashCan } from '../../assets/trash.svg';
+import { ReactComponent as TrashCan } from 'assets/trash.svg'
 
-import colors from '../../utils/colors';
-import Button from '../Button/Button';
-
-export const CommentListContainer = styled.div`
+export const CommentListContainer = styled.ul`
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
 	align-items: center;
-	margin-bottom: 1rem;
+	padding: 0;
 `;
 
 export const CommentContent = styled.div`
@@ -40,7 +35,7 @@ export const CommentImage = styled.img`
 export const CommentUsername = styled.p`
 	color: ${({ theme }) => theme.colors.blue2};
 	font-size: 1.2rem;
-	margin-left: 3rem;
+	margin-left: 2rem;
 	font-weight: 600;
 `;
 
@@ -57,4 +52,8 @@ export const DeleteCommentIcon = styled(TrashCan)`
 	margin-left: auto;
 	margin-right: 3rem;
 	cursor: pointer;
+	fill: ${({ theme }) => theme.colors.blue2};
+	&:hover {
+		fill: ${({ theme }) => theme.colors.blue3};
+	}
 `;

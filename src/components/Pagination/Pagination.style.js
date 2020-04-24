@@ -3,9 +3,10 @@ import { NavLink } from 'react-router-dom';
 
 
 export const ArticlePageLinksContainer = styled.div`
-	margin-top: 3rem;
 	display: flex;
-	flex-wrap: wrap;
+    flex-wrap: wrap;
+    /* position: absolute; */
+   /*  bottom: 0; */
 	@media (min-width: 770px) {
 		order: 3;
 	}
@@ -26,5 +27,6 @@ export const PageLinkExtended = styled(NavLink).attrs({
 
     &.${activeClassName} {
         background: ${({ theme }) => theme.colors.blue2};
+        color: white;
 	}
 `;

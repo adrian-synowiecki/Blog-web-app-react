@@ -1,59 +1,95 @@
-import styled from 'styled-components/macro';
+import styled, { css } from 'styled-components/macro';
 import { NavLink, Link } from 'react-router-dom';
+
+import { ReactComponent as Home } from 'assets/home.svg';
+import { ReactComponent as NewPost } from 'assets/newPost.svg';
+import { ReactComponent as Settings } from 'assets/settings.svg';
+import { ReactComponent as User } from 'assets/user.svg';
 
 export const NavbarContainer = styled.nav`
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
-/* 	background-color: ${({ theme }) => theme.colors.blue2};  */
 	background-color: #fcfafa;
 	position: sticky;
-  	top: 0;
-	width: 100%;
+	top: 0;
 	z-index: 999;
-    box-shadow: 0 4px 2px -2px rgba(0,0,0,.1);
+	box-shadow: 0 4px 2px -2px rgba(0, 0, 0, .1);
+	height: ${({ isOpenHamburgerMenu }) => (isOpenHamburgerMenu ? 'auto' : '5rem')};
 `;
 
 export const NavbarBrandExtended = styled(Link)`
 	color: ${({ theme }) => theme.colors.blue1};
 	text-decoration: none;
 	font-weight: 700;
-	font-size: 2.3rem;
+	font-size: 2.7rem;
 	margin-left: 2rem;
 `;
 
 export const NavLinks = styled.ul`
-	position: relative;
-	margin-right: 2rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	padding: 0;
+`;
+const iconStyles = css`
+	width: 2rem;
+	height: 2rem;
+	margin-right: 1rem;
+	fill: ${({ theme }) => theme.colors.blue2};
 `;
 
-export const NavLinkUnderline = styled.div`
-	height: 0.3rem;
-	background-color: ${({ theme }) => theme.colors.blue1};
-	transition: 0.4s ease;
-	width: 0;
+const iconHoverStyles = css`fill: ${({ theme }) => theme.colors.blue1};`;
+
+export const HomeIcon = styled(Home)`
+	${iconStyles}
+`;
+
+export const NewPostIcon = styled(NewPost)`
+	${iconStyles}
+`;
+
+export const SettingsIcon = styled(Settings)`
+	${iconStyles}
+`;
+
+export const UserIcon = styled(User)`
+	${iconStyles}
 `;
 
 const activeClassName = 'active';
 export const NavLinkExtended = styled(NavLink).attrs({
 	activeClassName: activeClassName
 })`
-	display: inline-block;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-bottom: 3px solid transparent;
 	text-decoration: none;
 	padding-bottom: 1rem;
-	margin-right: 2rem;
-	font-size: 1.4rem;
+	font-size: 1.3rem;
 	letter-spacing: 0.1rem;
+	margin-top: 1rem;
 	color: ${({ theme }) => theme.colors.blue1};
 	&:hover {
-		color: ${({ theme }) => theme.colors.blue3};
-	}
-	&.${activeClassName} {
-		font-weight: bold;
-	~ ${NavLinkUnderline} {
-			width: ${({ width }) => width && `${width}px`}; 
-			margin-left: ${({ marginLeft }) => `${marginLeft}px`};
+		opacity: 0.8;
+		border-bottom: ${({ theme }) => `3px solid ${theme.colors.blue1}`};
+		${NewPostIcon} {
+			${iconHoverStyles}
+		}
+		${HomeIcon} {
+			${iconHoverStyles}
+		}
+		${SettingsIcon} {
+			${iconHoverStyles}
+		}
+		${UserIcon} {
+			${iconHoverStyles}
 		}
 	}
-
+	&.${activeClassName} {
+		text-shadow: 1px 0px 0px black;
+		border-bottom: ${({ theme }) => `3px solid ${theme.colors.blue1}`};
+	}
 `;

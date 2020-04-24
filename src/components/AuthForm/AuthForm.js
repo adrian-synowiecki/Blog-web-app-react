@@ -1,18 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Formik, Field } from 'formik';
+import { useLocation } from 'react-router-dom';
 
-import * as S from './AuthForm.style'
+import * as S from './AuthForm.style';
 
 import ErrorList from 'components/ErrorList/ErrorList';
-import Button from 'components/Button/Button';
 
 function AuthForm({ error, signUpPage, signUpRequest, loginRequest }) {
 	const [ isReadOnly, setReadOnly ] = useState(true);
 	const formikRef = useRef(null);
+	let location = useLocation();
+	let { from } = location.state || { from: { pathname: '/' } };
 	const handleFocus = () => {
 		setReadOnly(false);
 	};
-
 	useEffect(
 		() => {
 			formikRef.current.setSubmitting(false);
@@ -40,7 +41,7 @@ function AuthForm({ error, signUpPage, signUpRequest, loginRequest }) {
 						}
 					};
 
-					signUpPage ? signUpRequest(userObj) : loginRequest(userObj);
+					signUpPage ? signUpRequest(userObj) : loginRequest(userObj, from);
 				}}
 			>
 				{({ isSubmitting }) => (
@@ -79,9 +80,9 @@ function AuthForm({ error, signUpPage, signUpRequest, loginRequest }) {
 							margin="normal"
 							variant="outlined"
 						/>
-						<Button type="submit" disabled={isSubmitting} variant="contained">
+						<S.ButtonExtended type="submit" disabled={isSubmitting} variant="contained">
 							{signUpPage ? 'SIGN UP' : 'LOG IN'}
-						</Button>
+						</S.ButtonExtended>
 					</S.FormExtended>
 				)}
 			</Formik>

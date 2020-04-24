@@ -1,15 +1,19 @@
 import styled from 'styled-components/macro';
-
 import { Form } from 'formik';
-
 import { TextField } from 'formik-material-ui';
 
-import Button from '../Button/Button';
+import Button from 'components/Button/Button'
 
 export const ArticleFormContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+`;
+
+export const CreateArticle = styled.h1`
+	font-weight: 500;
+	color: ${({ theme }) => theme.colors.blue2};
+	letter-spacing: 0.2rem;
 `;
 
 export const FormExtended = styled(Form)`
@@ -38,5 +42,6 @@ export const TextFieldExtended = styled(TextField)`
 `;
 
 export const ButtonExtended = styled(Button)`
-    margin-left: auto;
+    margin-top: 2rem;
+    width: 100%;
 `;

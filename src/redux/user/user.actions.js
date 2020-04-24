@@ -1,4 +1,4 @@
-import userTypes from './user.types'
+import userTypes from './user.types';
 
 // sign up
 export const signUpRequest = (userCreationData) => ({
@@ -8,16 +8,17 @@ export const signUpRequest = (userCreationData) => ({
 export const signUpDone = (currentUserData) => ({
 	type: userTypes.SIGN_UP_DONE,
 	payload: { currentUserData }
-})
+});
 export const signUpError = (error) => ({
 	type: userTypes.SIGN_UP_ERROR,
 	payload: { error }
 });
 
 // log in
-export const loginRequest = (userLoginData) => ({
+export const loginRequest = (userLoginData, from) => ({
 	type: userTypes.LOGIN_REQUEST,
-	userLoginData
+	userLoginData,
+	from
 });
 export const loginDone = (currentUserData) => ({
 	type: userTypes.LOGIN_DONE,
@@ -44,8 +45,8 @@ export const updateUserError = (error) => ({
 
 export const logOut = () => ({
 	type: userTypes.LOG_OUT
-})
+});
 
 export const clearUserError = () => ({
 	type: userTypes.CLEAR_USER_ERROR
-})
+});

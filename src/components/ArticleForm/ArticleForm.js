@@ -3,7 +3,7 @@ import { Formik, Field } from 'formik';
 import TagsInput from 'react-tagsinput';
 
 import * as S from './ArticleForm.style';
-import 'utils/react-tags-input.css';
+import './react-tags-input.css';
 
 import ErrorList from 'components/ErrorList/ErrorList';
 
@@ -20,6 +20,7 @@ function ArticleForm({ articleToEdit, error, createArticleRequest, updateArticle
 
 	return (
 		<S.ArticleFormContainer>
+			<S.CreateArticle>Create New Article</S.CreateArticle>
 			<Formik
 				ref={formikRef}
 				initialValues={{

@@ -9,21 +9,25 @@ function Comment({ currentUserData, commentList, removeCommentFromArticleRequest
 	return (
 		<S.CommentListContainer>
 			{commentList.length > 0 &&
-				commentList.map((commentData) => (
-					<S.CommentContent key={commentData.id}>
-						<S.CommentText>{commentData.body}</S.CommentText>
-						<S.CommentFooter>
-							<S.CommentImage src={commentData.author.image} />
-							<S.CommentUsername>{commentData.author.username}</S.CommentUsername>
-							<S.CommentCreatedAt>{commentData.createdAt}</S.CommentCreatedAt>
-							{currentUserData.username === commentData.author.username && (
-								<S.DeleteCommentIcon
-									onClick={() => removeCommentFromArticleRequest(articleSlug, commentData.id)}
-								/>
-							)}
-						</S.CommentFooter>
-					</S.CommentContent>
-				))}
+				commentList.map((commentData) => {
+					const { id, body, createdAt, author: { image, username } } = commentData;
+					const createdAtDate = new Date(createdAt).toDateString();
+					return (
+						<S.CommentContent key={id}>
+							<S.CommentText>{body}</S.CommentText>
+							<S.CommentFooter>
+								<S.CommentImage src={image} />
+								<S.CommentUsername>{username}</S.CommentUsername>
+								<S.CommentCreatedAt>{createdAtDate}</S.CommentCreatedAt>
+								{currentUserData.username === username && (
+									<S.DeleteCommentIcon
+										onClick={() => removeCommentFromArticleRequest(articleSlug, id)}
+									/>
+								)}
+							</S.CommentFooter>
+						</S.CommentContent>
+					);
+				})}
 		</S.CommentListContainer>
 	);
 }

@@ -1,21 +1,21 @@
-import React from 'react';
-
 import styled from 'styled-components/macro';
-
 import { Form } from 'formik';
-
 import { TextField } from 'formik-material-ui';
 
-/*  import TextField from '@material-ui/core/TextField';  */
+import Button from 'components/Button/Button';
 
 export const UserSettingsContainer = styled.div`
 	display: flex;
 	align-items: center;
-	justify-content: center;
 	flex-direction: column;
 `;
 
-export const Title = styled.h1`font-weight: 400;`;
+export const Title = styled.h1`
+	font-weight: 500;
+	color: ${({ theme }) => theme.colors.blue2};
+  letter-spacing: 0.2rem;
+  
+`;
 
 export const FormExtended = styled(Form)`
     width: 90%; 
@@ -23,26 +23,31 @@ export const FormExtended = styled(Form)`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-top: -2rem;
-
     @media (min-width: 600px) {
       width: 45rem;    
     }
 `;
-
-/* 
-export const TextField = styled(({ height, ...other }) => <TextField {...other} />)`
-    width: 100%;
-
-
-  & .MuiInputBase-input {
-    height: ${({ height }) => height && '10rem'};
-  }
-`; */
 
 export const TextFieldExtended = styled(TextField)`
     width: 100%;
     & .MuiInputBase-input {
     height: ${({ height }) => height && '10rem'};
     }
+`;
+
+export const LogoutButton = styled(Button)`
+  background-color: white;
+  border: 1px solid #b85c5c;
+  color: #b85c5c;
+  &:hover {
+    background-color: #b85c5c;
+    color: white;
+	}
+`;
+
+export const ButtonsWrapper = styled.div`
+	display: flex;
+	justify-content: space-between;
+  width: 100%;
+  margin-top: 2rem;
 `;

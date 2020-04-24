@@ -9,7 +9,6 @@ import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
 function Profile({
 	profileData,
 	articleList,
-	isFetchingArticles,
 	fetchArticlesByAuthorRequest,
 	fetchFavoriteArticlesRequest,
 	unloadArticles,
@@ -35,10 +34,13 @@ function Profile({
 		notFoundMessage = 'No articles found.';
 	}
 
-	useEffect(() => {
-		setWidths(linkRefs.current.map((ref) => ref.offsetWidth));
-		setLeftMargins(linkRefs.current.map((ref) => ref.offsetLeft));
-	}, []);
+	useEffect(
+		() => {
+			setWidths(linkRefs.current.map((ref) => ref.offsetWidth));
+			setLeftMargins(linkRefs.current.map((ref) => ref.offsetLeft));
+		},
+		[ profileData ]
+	);
 
 	const handleFetchArticlesByAuthorRequest = () => {
 		unloadArticles();
@@ -62,15 +64,16 @@ function Profile({
 				{isEmpty(profileData) ? (
 					<LoadingSpinner />
 				) : (
-					<React.Fragment>
+					<Fragment>
 						<S.ImageProfile src={image} />
 						<S.Username>{username}</S.Username>
 						<S.Bio>{bio}</S.Bio>
-					</React.Fragment>
+					</Fragment>
 				)}
 			</S.UserInfo>
+
 			<S.ArticlesWrapper>
-				<S.ArticlesChoice>
+				{!isEmpty(profileData) && (
 					<S.NavLinks>
 						<Fragment>
 							<S.NavLinkExtended
@@ -105,7 +108,7 @@ function Profile({
 							<S.NavLinkUnderline />
 						</Fragment>
 					</S.NavLinks>
-				</S.ArticlesChoice>
+				)}
 
 				{articleList === null ? (
 					<LoadingSpinner center />

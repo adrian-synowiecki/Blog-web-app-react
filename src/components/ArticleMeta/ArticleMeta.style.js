@@ -2,9 +2,6 @@ import styled from 'styled-components/macro';
 
 export const ArticleMetaContainer = styled.div`
 	display: flex;
-	margin-top: 3rem;
-	position: absolute;
-	margin-left: 1rem;
 `;
 
 export const ImageProfile = styled.img`
@@ -14,7 +11,7 @@ export const ImageProfile = styled.img`
 	border-radius: 8rem;
 `;
 
-export const FlexWrapperCol = styled.div`
+export const FlexWrapper = styled.div`
 	display: flex;
 	width: 35rem;
 	flex-wrap: wrap;
@@ -25,7 +22,10 @@ export const FlexWrapperCol = styled.div`
 
 export const AuthorName = styled.p`
 	margin-top: -0.7rem;
-	color: ${({ theme, articleOverviewPage }) => (articleOverviewPage ? '#e6e6e1' : theme.colors.blue2)};
+	color: ${({ theme, articleOverviewPage }) => (articleOverviewPage ? '#e6e6e1' : theme.colors.blue1)};
+	&:hover {
+		text-decoration: underline;
+	}
 `;
 
 export const DateCreated = styled.p`

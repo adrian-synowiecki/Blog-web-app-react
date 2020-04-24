@@ -5,20 +5,17 @@
 	cursor: text;
 	border: 1px solid #bdc3c7;
 	border-radius: 4px;
-	margin-top: 1.5rem;
+	margin-top: 1.7rem;
 	box-sizing: border-box;
-	
 }
 
 .react-tagsinput:hover {
 	border-color: #2e4272;
-	
 }
 
 .react-tagsinput--focused {
 	box-shadow: 0 0 0 1pt #2e4272;
 }
-
 
 .react-tagsinput-tag {
 	background-color: #2e4272;

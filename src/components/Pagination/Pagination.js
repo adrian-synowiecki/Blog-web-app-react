@@ -2,11 +2,9 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 
-import colors from 'utils/colors';
-
 import * as S from './Pagination.style';
 
-function Pagination({ currentPageNumber, setCurrentPageNumber, fetchArticlesByMostRecentRequest, push }) {
+function Pagination({ currentPageNumber, setCurrentPageNumber, fetchArticlesByMostRecentRequest, push, className }) {
 	const pageLinks = [];
 
 	useEffect(
@@ -37,7 +35,6 @@ function Pagination({ currentPageNumber, setCurrentPageNumber, fetchArticlesByMo
 						return true;
 					}}
 					key={i}
-							activeStyle={{ background: colors.green, color: 'white' }} 
 					to
 				>
 					{i}
@@ -50,7 +47,11 @@ function Pagination({ currentPageNumber, setCurrentPageNumber, fetchArticlesByMo
 		);
 	}
 
-	return <S.ArticlePageLinksContainer>{pageLinks.map((pageLink) => pageLink)}</S.ArticlePageLinksContainer>;
+	return (
+		<S.ArticlePageLinksContainer className={className}>
+			{pageLinks.map((pageLink) => pageLink)}
+		</S.ArticlePageLinksContainer>
+	);
 }
 
 export default connect(null, { push })(Pagination);
