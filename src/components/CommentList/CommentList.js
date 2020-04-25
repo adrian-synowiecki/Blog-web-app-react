@@ -1,9 +1,9 @@
-import React from 'react';
+/* import React from 'react';
 import { useParams } from 'react-router-dom';
 
 import * as S from './CommentList.style';
 
-function Comment({ currentUserData, commentList, removeCommentFromArticleRequest }) {
+function CommentList({ currentUserData, commentList, removeCommentFromArticleRequest }) {
 	const { articleSlug } = useParams();
 
 	return (
@@ -32,4 +32,26 @@ function Comment({ currentUserData, commentList, removeCommentFromArticleRequest
 	);
 }
 
-export default Comment;
+export default CommentList;
+ */
+
+import React from 'react';
+import { useParams } from 'react-router-dom';
+
+import * as S from './CommentList.style';
+
+import CommentListItem from './CommentListItem/CommentListItem';
+
+function CommentList({ commentList }) {
+	const { articleSlug } = useParams();
+
+	return (
+		<S.CommentListContainer>
+			{commentList.map((commentData) => {
+				return <CommentListItem commentData={commentData} articleSlug={articleSlug} />;
+			})}
+		</S.CommentListContainer>
+	);
+}
+
+export default CommentList;

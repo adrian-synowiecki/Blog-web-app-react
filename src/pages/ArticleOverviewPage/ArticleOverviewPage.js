@@ -6,18 +6,11 @@ import { isEmpty } from 'lodash';
 
 import * as S from './ArticleOverviewPage.style';
 import { fetchArticleRequest, unloadArticle, deleteArticleRequest } from 'redux/article/article.actions';
-import {
-	fetchCommentsFromArticleRequest,
-	addCommentToArticleRequest,
-	removeCommentFromArticleRequest
-} from 'redux/comments/comments.actions';
+import { fetchCommentsFromArticleRequest, addCommentToArticleRequest } from 'redux/comments/comments.actions';
 
 import NotFound from 'components/NotFound/NotFound';
-import Header from 'components/Header/Header';
 import CommentForm from 'components/CommentForm/CommentForm';
-import CommentList from 'components/CommentList/CommentList';
-import TagList from 'components/TagList/TagList';
-import Button from 'components/Button/Button';
+import ArticleMeta from 'components/ArticleMeta/ArticleMeta';
 
 function ArticleOverviewPage({
 	articleData,
@@ -43,9 +36,6 @@ function ArticleOverviewPage({
 			unloadArticle();
 		};
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
-	console.log(articleData);
-	const canModify =
-		!isEmpty(currentUserData) && !isEmpty(articleData) && currentUserData.username === author.username;
 
 	return (
 		<Fragment>
@@ -55,7 +45,7 @@ function ArticleOverviewPage({
 					<S.HeaderExtended>
 						<S.HeaderContentWrapper>
 							<S.ArticleTitle>{title}</S.ArticleTitle>
-							<S.ArticleMetaExtended articleData={articleData} articleOverviewPage />
+							<ArticleMeta articleData={articleData} articleOverviewPage />
 						</S.HeaderContentWrapper>
 					</S.HeaderExtended>
 					<S.FullArticleText>{body}</S.FullArticleText>
@@ -69,11 +59,7 @@ function ArticleOverviewPage({
 					) : (
 						<CommentForm addCommentToArticleRequest={addCommentToArticleRequest} />
 					)}
-					<S.CommentListExtended
-						currentUserData={currentUserData}
-						commentList={commentList}
-						removeCommentFromArticleRequest={removeCommentFromArticleRequest}
-					/>
+					<S.CommentListExtended commentList={commentList} />
 				</Fragment>
 			)}
 		</Fragment>
@@ -98,8 +84,6 @@ const mapDispatchToProps = (dispatch) => ({
 	unloadArticle: () => dispatch(unloadArticle()),
 	fetchCommentsFromArticleRequest: (articleSlug) => dispatch(fetchCommentsFromArticleRequest(articleSlug)),
 	addCommentToArticleRequest: (commentObj, slug) => dispatch(addCommentToArticleRequest(commentObj, slug)),
-	removeCommentFromArticleRequest: (articleSlug, commentToDeleteId) =>
-		dispatch(removeCommentFromArticleRequest(articleSlug, commentToDeleteId)),
 	deleteArticleRequest: (articleSlug) => dispatch(deleteArticleRequest(articleSlug)),
 	push: (path) => dispatch(push(path))
 });

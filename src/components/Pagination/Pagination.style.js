@@ -5,8 +5,6 @@ import { NavLink } from 'react-router-dom';
 export const ArticlePageLinksContainer = styled.div`
 	display: flex;
     flex-wrap: wrap;
-    /* position: absolute; */
-   /*  bottom: 0; */
 	@media (min-width: 770px) {
 		order: 3;
 	}

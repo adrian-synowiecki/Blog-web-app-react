@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Formik } from 'formik';
 
-import * as S from './CommentForm.style'
+import * as S from './CommentForm.style';
 
 function CommentForm({ addCommentToArticleRequest }) {
 	const { articleSlug } = useParams();
@@ -19,13 +19,20 @@ function CommentForm({ addCommentToArticleRequest }) {
 						}
 					};
 					addCommentToArticleRequest(commentData, articleSlug);
-					actions.resetForm()
+					actions.resetForm();
 				}}
 			>
-				{() => (
+				{({ isSubmitting }) => (
 					<S.FormExtended>
-						<S.FieldExtended name="commentText" component="textarea" placeholder="Write a comment..." rows="3" />
-						<S.ButtonExtended type="submit">Post comment</S.ButtonExtended>
+						<S.FieldExtended
+							name="commentText"
+							component="textarea"
+							placeholder="Write a comment..."
+							rows="3"
+						/>
+						<S.ButtonExtended disabled={isSubmitting} type="submit">
+							Post comment
+						</S.ButtonExtended>
 					</S.FormExtended>
 				)}
 			</Formik>

@@ -24,7 +24,13 @@ export const PageNotFoundWrapper = styled.div`
 
 export const PageNotFound = styled.h2`color: ${({ theme }) => theme.colors.blue2};`;
 
-export const HeaderContentWrapper = styled.div`${horizontalMargins};`;
+export const HeaderContentWrapper = styled.div`
+	${horizontalMargins};
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	justify-content: space-around;
+`;
 
 export const HeaderExtended = styled(Header)`
 	background-color: ${({ theme }) => theme.colors.blue2};
@@ -36,11 +42,11 @@ export const ArticleTitle = styled.h1`
 	letter-spacing: 0.1rem;
 	font-weight: 400;
 	overflow-wrap: break-word;
+	margin: 0;
 `;
 
 export const ArticleMetaExtended = styled(ArticleMeta)`
-	margin-left: 0;
-	position: static;
+
 `;
 
 export const FullArticleText = styled.p`

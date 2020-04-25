@@ -1,16 +1,8 @@
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 
-/* import { ReactComponent as TrashCan } from 'assets/trash.svg' */
+import { ReactComponent as TrashCan } from 'assets/trash.svg';
 
-export const CommentListContainer = styled.ul`
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-	align-items: center;
-	padding: 0;
-`;
-
-/* export const CommentContent = styled.div`
+export const CommentListItemContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	border: 1px solid rgba(0, 0, 0, 0.01);
@@ -57,4 +49,3 @@ export const DeleteCommentIcon = styled(TrashCan)`
 		fill: ${({ theme }) => theme.colors.blue3};
 	}
 `;
- */
