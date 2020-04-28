@@ -6,9 +6,10 @@ import { fetchArticlesByMostRecentRequest, unloadArticles } from 'redux/articleL
 import { fetchTagsByMostPopularRequest, removeTagName, unloadTags } from 'redux/tags/tags.actions';
 import { setCurrentPageNumber } from 'redux/common/common.actions';
 
-import Header from 'components/Header/Header';
 import ArticleList from 'components/ArticleList/ArticleList';
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
+import TagList from 'components/TagList/TagList';
+import Pagination from 'components/Pagination/Pagination';
 
 function HomePage({
 	articleList,
@@ -37,15 +38,13 @@ function HomePage({
 	};
 
 	return (
-		<S.HomeContainer>
-			<Header>
-				<S.HeadingsWrapper>
-					<S.Heading>conduit</S.Heading>
-					<S.SubHeading>A place to share your knowledge</S.SubHeading>
-				</S.HeadingsWrapper>
-			</Header>
-			<S.NavigationWrapper>
-				<S.NavLinkExtended
+		<Fragment>
+			<S.HomeHeaderWrapper>
+				<S.HomeHeading>conduit</S.HomeHeading>
+				<S.HomeSubHeading>A place to share your knowledge</S.HomeSubHeading>
+			</S.HomeHeaderWrapper>
+			<S.HomeWrapper>
+				<S.HomeNavLinkItem
 					onClick={() => handleClick()}
 					to="/"
 					isActive={() => {
@@ -56,33 +55,31 @@ function HomePage({
 					}}
 				>
 					Global Feed
-				</S.NavLinkExtended>
+				</S.HomeNavLinkItem>
 				{tag && (
-					<S.NavLinkExtended tag to="/" onClick={() => handleClick()}>
+					<S.HomeNavLinkItem tag to="/" onClick={() => handleClick()}>
 						{tag}
-					</S.NavLinkExtended>
+					</S.HomeNavLinkItem>
 				)}
-			</S.NavigationWrapper>
-			<S.FlexHomeWrapper>
 				{articleList === null ? (
 					<LoadingSpinner center />
 				) : (
 					<Fragment>
 						<ArticleList articleList={articleList} />
-						<S.PaginationExtended
+						<S.HomePagination
 							currentPageNumber={currentPageNumber}
 							fetchArticlesByMostRecentRequest={fetchArticlesByMostRecentRequest}
 							setCurrentPageNumber={setCurrentPageNumber}
 						/>
 						{tagList.length > 0 && (
-							<S.TagListExtended tagList={tagList} arePopularTags>
-								<S.PopularTags>Popular Tags</S.PopularTags>
-							</S.TagListExtended>
+							<TagList tagList={tagList} arePopularTags>
+								<S.HomePopularTags>Popular Tags</S.HomePopularTags>
+							</TagList>
 						)}
 					</Fragment>
 				)}
-			</S.FlexHomeWrapper>
-		</S.HomeContainer>
+			</S.HomeWrapper>
+		</Fragment>
 	);
 }
 

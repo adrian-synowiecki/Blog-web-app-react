@@ -22,12 +22,12 @@ function AuthForm({ error, signUpPage, signUpRequest, loginRequest }) {
 	);
 
 	return (
-		<S.FormContainer>
-			<S.Title>{signUpPage ? 'SIGN UP' : 'LOG IN'}</S.Title>
+		<S.AuthFormContainer>
+			<S.AuthFormTitle>{signUpPage ? 'SIGN UP' : 'LOG IN'}</S.AuthFormTitle>
 			{signUpPage ? (
-				<S.LinkExtended to="/login">Have an account?</S.LinkExtended>
+				<S.LinkToAuth to="/login">Have an account?</S.LinkToAuth>
 			) : (
-				<S.LinkExtended to="/signUp">Need an account?</S.LinkExtended>
+				<S.LinkToAuth to="/signUp">Need an account?</S.LinkToAuth>
 			)}
 			<Formik
 				ref={formikRef}
@@ -40,19 +40,18 @@ function AuthForm({ error, signUpPage, signUpRequest, loginRequest }) {
 							password: values.password
 						}
 					};
-
 					signUpPage ? signUpRequest(userObj) : loginRequest(userObj, from);
 				}}
 			>
 				{({ isSubmitting }) => (
-					<S.FormExtended>
+					<S.AuthForm>
 						{error && <ErrorList error={error} />}
 						{signUpPage && (
 							<Field
 								name="username"
 								type="text"
 								autocomplete="off"
-								component={S.TextFieldExtended}
+								component={S.AuthFormTextField}
 								label="Username"
 								margin="normal"
 								variant="outlined"
@@ -62,14 +61,14 @@ function AuthForm({ error, signUpPage, signUpRequest, loginRequest }) {
 							name="email"
 							type="email"
 							autocomplete="off"
-							component={S.TextFieldExtended}
+							component={S.AuthFormTextField}
 							label="Email"
 							margin="normal"
 							variant="outlined"
 						/>
 						<Field
 							name="password"
-							component={S.TextFieldExtended}
+							component={S.AuthFormTextField}
 							type="password"
 							inputProps={{
 								readOnly: isReadOnly,
@@ -80,13 +79,13 @@ function AuthForm({ error, signUpPage, signUpRequest, loginRequest }) {
 							margin="normal"
 							variant="outlined"
 						/>
-						<S.ButtonExtended type="submit" disabled={isSubmitting} variant="contained">
+						<S.AuthFormButton type="submit" disabled={isSubmitting} variant="contained">
 							{signUpPage ? 'SIGN UP' : 'LOG IN'}
-						</S.ButtonExtended>
-					</S.FormExtended>
+						</S.AuthFormButton>
+					</S.AuthForm>
 				)}
 			</Formik>
-		</S.FormContainer>
+		</S.AuthFormContainer>
 	);
 }
 

@@ -18,47 +18,44 @@ function Navbar({ currentUserData, isAuth, fetchArticlesByMostRecentRequest, set
 	return (
 		<S.NavbarContainer isOpenHamburgerMenu={isOpenHamburgerMenu}>
 			{!isOpenHamburgerMenu && (
-				<S.NavbarBrandExtended onClick={() => handleClick()} to="/">
+				<S.NavbarBrand onClick={() => handleClick()} to="/">
 					conduit
-				</S.NavbarBrandExtended>
+				</S.NavbarBrand>
 			)}
 			{isOpenHamburgerMenu && (
-				<S.NavLinks>
-					<S.NavLinkExtended exact to="/" onClick={() => handleClick('toggle')}>
+				<S.NavLinksWrapper>
+					<S.NavLinkItem exact to="/" onClick={() => handleClick('toggle')}>
 						<S.HomeIcon /> Home
-					</S.NavLinkExtended>
+					</S.NavLinkItem>
 					{!isAuth && (
-						<S.NavLinkExtended to="/login" onClick={() => toggleHamburgerMenu(!isOpenHamburgerMenu)}>
+						<S.NavLinkItem to="/login" onClick={() => toggleHamburgerMenu(!isOpenHamburgerMenu)}>
 							Log in
-						</S.NavLinkExtended>
+						</S.NavLinkItem>
 					)}
 					{!isAuth && (
-						<S.NavLinkExtended to="/signUp" onClick={() => toggleHamburgerMenu(!isOpenHamburgerMenu)}>
+						<S.NavLinkItem to="/signUp" onClick={() => toggleHamburgerMenu(!isOpenHamburgerMenu)}>
 							Sign up
-						</S.NavLinkExtended>
+						</S.NavLinkItem>
 					)}
 					{isAuth && (
-						<S.NavLinkExtended
-							to="/createNewArticle"
-							onClick={() => toggleHamburgerMenu(!isOpenHamburgerMenu)}
-						>
+						<S.NavLinkItem to="/createNewArticle" onClick={() => toggleHamburgerMenu(!isOpenHamburgerMenu)}>
 							<S.NewPostIcon /> New Post
-						</S.NavLinkExtended>
+						</S.NavLinkItem>
 					)}
 					{isAuth && (
-						<S.NavLinkExtended to="/userSettings" onClick={() => toggleHamburgerMenu(!isOpenHamburgerMenu)}>
+						<S.NavLinkItem to="/userSettings" onClick={() => toggleHamburgerMenu(!isOpenHamburgerMenu)}>
 							<S.SettingsIcon /> Settings
-						</S.NavLinkExtended>
+						</S.NavLinkItem>
 					)}
 					{isAuth && (
-						<S.NavLinkExtended
+						<S.NavLinkItem
 							to={`/userProfile/${username}`}
 							onClick={() => toggleHamburgerMenu(!isOpenHamburgerMenu)}
 						>
 							<S.UserIcon /> {username}
-						</S.NavLinkExtended>
+						</S.NavLinkItem>
 					)}
-				</S.NavLinks>
+				</S.NavLinksWrapper>
 			)}
 			<button
 				className={`hamburger ${isOpenHamburgerMenu ? 'hamburger--elastic is-active' : ''}`}

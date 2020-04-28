@@ -60,64 +60,60 @@ function Profile({
 
 	return (
 		<S.ProfileContainer>
-			<S.UserInfo>
+			<S.ProfileCredentialsWrapper>
 				{isEmpty(profileData) ? (
 					<LoadingSpinner />
 				) : (
 					<Fragment>
-						<S.ImageProfile src={image} />
-						<S.Username>{username}</S.Username>
-						<S.Bio>{bio}</S.Bio>
+						<S.ProfileImage src={image} />
+						<S.ProfileUsername>{username}</S.ProfileUsername>
+						<S.ProfileBio>{bio}</S.ProfileBio>
 					</Fragment>
 				)}
-			</S.UserInfo>
-
-			<S.ArticlesWrapper>
+			</S.ProfileCredentialsWrapper>
+			<S.ProfileWrapper>
 				{!isEmpty(profileData) && (
-					<S.NavLinks>
-						<Fragment>
-							<S.NavLinkExtended
-								ref={addToLinkRefs}
-								width={widths[0]}
-								marginLeft={leftMargins[0]}
-								exact
-								isActive={() => {
-									if (!path.includes('favorites')) {
-										return true;
-									} else return false;
-								}}
-								to={profileLink}
-								onClick={handleFetchArticlesByAuthorRequest}
-							>
-								My Articles
-							</S.NavLinkExtended>
-							<S.NavLinkExtended
-								ref={addToLinkRefs}
-								width={widths[1]}
-								marginLeft={leftMargins[1]}
-								isActive={() => {
-									if (path.includes('favorites')) {
-										return true;
-									} else return false;
-								}}
-								to={profileLinkFavorites}
-								onClick={handleFetchFavoriteArticlesRequest}
-							>
-								Favorited Articles
-							</S.NavLinkExtended>
-							<S.NavLinkUnderline />
-						</Fragment>
-					</S.NavLinks>
+					<S.ProfileNavLinksWrapper>
+						<S.ProfileNavLink
+							ref={addToLinkRefs}
+							width={widths[0]}
+							marginLeft={leftMargins[0]}
+							exact
+							isActive={() => {
+								if (!path.includes('favorites')) {
+									return true;
+								} else return false;
+							}}
+							to={profileLink}
+							onClick={handleFetchArticlesByAuthorRequest}
+						>
+							My Articles
+						</S.ProfileNavLink>
+						<S.ProfileNavLink
+							ref={addToLinkRefs}
+							width={widths[1]}
+							marginLeft={leftMargins[1]}
+							isActive={() => {
+								if (path.includes('favorites')) {
+									return true;
+								} else return false;
+							}}
+							to={profileLinkFavorites}
+							onClick={handleFetchFavoriteArticlesRequest}
+						>
+							Favorited Articles
+						</S.ProfileNavLink>
+						<S.ProfileNavLinkUnderline />
+					</S.ProfileNavLinksWrapper>
 				)}
-
 				{articleList === null ? (
 					<LoadingSpinner center />
 				) : articleList.length > 0 ? (
 					<ArticleList articleList={articleList} />
 				) : (
-					<S.NotFoundMessage>{notFoundMessage}</S.NotFoundMessage>
+					<S.ProfileNotFoundMessage>{notFoundMessage}</S.ProfileNotFoundMessage>
 				)}
-			</S.ArticlesWrapper>
+			</S.ProfileWrapper>
 		</S.ProfileContainer>
 	);
 }

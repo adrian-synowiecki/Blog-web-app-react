@@ -9,25 +9,21 @@ import { fetchArticleRequest, unloadArticle, deleteArticleRequest } from 'redux/
 import { fetchCommentsFromArticleRequest, addCommentToArticleRequest } from 'redux/comments/comments.actions';
 
 import NotFound from 'components/NotFound/NotFound';
-import CommentForm from 'components/CommentForm/CommentForm';
+/* import CommentForm from 'components/CommentForm/CommentForm'; */
 import ArticleMeta from 'components/ArticleMeta/ArticleMeta';
+import TagList from 'components/TagList/TagList';
+import CommentList from 'components/CommentList/CommentList';
 
 function ArticleOverviewPage({
 	articleData,
-	currentUserData,
+	isAuth,
 	commentList,
 	fetchArticleRequest,
-	fetchCommentsFromArticleRequest,
 	addCommentToArticleRequest,
-	removeCommentFromArticleRequest,
-	unloadArticle,
-	deleteArticleRequest,
-	isFetchingArticle,
-	error,
-	push
+	error
 }) {
 	const { articleSlug } = useParams();
-	const { body, tagList, author, title } = articleData || {};
+	const { body, tagList, title } = articleData || {};
 
 	useEffect(() => {
 		fetchArticleRequest(articleSlug);
@@ -39,27 +35,27 @@ function ArticleOverviewPage({
 
 	return (
 		<Fragment>
-			{error && <NotFound>404 Page Not Found</NotFound>}
+			{error && <NotFound />}
 			{!isEmpty(articleData) && (
 				<Fragment>
-					<S.HeaderExtended>
-						<S.HeaderContentWrapper>
-							<S.ArticleTitle>{title}</S.ArticleTitle>
-							<ArticleMeta articleData={articleData} articleOverviewPage />
-						</S.HeaderContentWrapper>
-					</S.HeaderExtended>
-					<S.FullArticleText>{body}</S.FullArticleText>
-					<S.TagListExtended tagList={tagList} />
-					{isEmpty(currentUserData) ? (
-						<S.Paragraph>
-							<S.BlueSpanExtended to={'/login'}>Log in</S.BlueSpanExtended> or {''}
-							<S.BlueSpanExtended to={'/signUp'}>sign up</S.BlueSpanExtended> to add comments on this
-							article
-						</S.Paragraph>
-					) : (
-						<CommentForm addCommentToArticleRequest={addCommentToArticleRequest} />
-					)}
-					<S.CommentListExtended commentList={commentList} />
+					<S.OverviewHeaderWrapper>
+						<S.ArticleTitle>{title}</S.ArticleTitle>
+						<ArticleMeta articleData={articleData} articleOverviewPage />
+					</S.OverviewHeaderWrapper>
+					<S.OverviewWrapper>
+						<S.ArticleText>{body}</S.ArticleText>
+						<TagList tagList={tagList} />
+						{isAuth ? (
+							<S.CommentForm addCommentToArticleRequest={addCommentToArticleRequest} />
+						) : (
+							<S.AuthInvite>
+								<S.AuthInviteSpan to={'/login'}>Log in</S.AuthInviteSpan> or {''}
+								<S.AuthInviteSpan to={'/signUp'}>sign up</S.AuthInviteSpan> to add comments on this
+								article
+							</S.AuthInvite>
+						)}
+						<CommentList commentList={commentList} />
+					</S.OverviewWrapper>
 				</Fragment>
 			)}
 		</Fragment>
@@ -67,15 +63,15 @@ function ArticleOverviewPage({
 }
 
 const mapStateToProps = (state) => {
-	const { isFetchingArticle, articleData, error } = state.article;
-	const { currentUserData } = state.user;
+	const { articleData, error } = state.article;
+	const { currentUserData, isAuth } = state.user;
 	const { commentList } = state.comments;
 	return {
 		articleData,
-		isFetchingArticle,
 		error,
 		currentUserData,
-		commentList
+		commentList,
+		isAuth
 	};
 };
 
@@ -84,7 +80,7 @@ const mapDispatchToProps = (dispatch) => ({
 	unloadArticle: () => dispatch(unloadArticle()),
 	fetchCommentsFromArticleRequest: (articleSlug) => dispatch(fetchCommentsFromArticleRequest(articleSlug)),
 	addCommentToArticleRequest: (commentObj, slug) => dispatch(addCommentToArticleRequest(commentObj, slug)),
-	deleteArticleRequest: (articleSlug) => dispatch(deleteArticleRequest(articleSlug)),
+	/* 	deleteArticleRequest: (articleSlug) => dispatch(deleteArticleRequest(articleSlug)), */
 	push: (path) => dispatch(push(path))
 });
 

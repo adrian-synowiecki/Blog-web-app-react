@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 export const ProfileContainer = styled.div`margin-top: 2rem;`;
 
-export const UserInfo = styled.div`
+export const ProfileCredentialsWrapper = styled.div`
 	/* margin-top: 5rem; */
 	display: flex;
 	flex-direction: column;
@@ -13,40 +13,40 @@ export const UserInfo = styled.div`
 	padding-left: 2rem;
 	padding-right: 2rem;
 	/* margin-bottom: 5rem; */
-/* 	min-height: 20rem; */
- 	min-height: 15rem; 
+	/* 	min-height: 20rem; */
+	min-height: 15rem;
 `;
-export const ImageProfile = styled.img`
+export const ProfileImage = styled.img`
 	border-radius: 8rem;
 	/* 	margin-top: 2rem; */
 	width: 11rem;
 	height: 11rem;
 `;
 
-export const Username = styled.h1`
+export const ProfileUsername = styled.h1`
 	/* margin-bottom: 3rem; */
 	color: ${({ theme }) => theme.colors.blue2};
 `;
 
-export const Bio = styled.p`
+export const ProfileBio = styled.p`
 	color: black;
 	margin-top: -1rem;
 	color: ${({ theme }) => theme.colors.blue2};
 	font-size: 1.5rem;
 `;
 
-export const NavLinks = styled.div`
-	position: absolute;
-	margin-top: -3.3rem;
-`;
-
-export const ArticlesWrapper = styled.div`
+export const ProfileWrapper = styled.div`
 	min-height: 18rem;
 	margin-top: 5rem;
 	position: relative;
 `;
 
-export const NavLinkUnderline = styled.div`
+export const ProfileNavLinksWrapper = styled.div`
+	position: absolute;
+	margin-top: -3.3rem;
+`;
+
+export const ProfileNavLinkUnderline = styled.div`
 	height: 0.3rem;
 	background-color: ${({ theme }) => theme.colors.blue1};
 	transition: 0.4s ease;
@@ -55,7 +55,7 @@ export const NavLinkUnderline = styled.div`
 `;
 
 const activeClassName = 'active';
-export const NavLinkExtended = styled(NavLink).attrs({
+export const ProfileNavLink = styled(NavLink).attrs({
 	activeClassName: activeClassName
 })`
 	text-decoration: none;
@@ -70,14 +70,14 @@ export const NavLinkExtended = styled(NavLink).attrs({
 	&.${activeClassName} {
 		font-weight: bold;
 	
-	~ ${NavLinkUnderline} {
+	~ ${ProfileNavLinkUnderline} {
 			width: ${({ width }) => width && `${width}px`}; 
 			margin-left: ${({ marginLeft }) => `${marginLeft}px`};
 		}
 	}
 `;
 
-export const NotFoundMessage = styled.p`
+export const ProfileNotFoundMessage = styled.p`
 	font-size: 1.3rem;
 	margin-left: 2rem;
 	padding-top: 2rem;

@@ -23,7 +23,7 @@ export default function currentUserReducer(state = initialState, action) {
 			return { ...state, error: action.payload.error };
 
 		case userTypes.LOG_OUT:
-			return { ...state, currentUser: {}, isAuth: false, error: null };
+			return { ...state, currentUserData: {}, isAuth: false, error: null };
 
 		case userTypes.CLEAR_USER_ERROR:
 			return { ...state, error: null };

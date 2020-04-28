@@ -10,14 +10,14 @@ function ArticleMeta({ articleData, articleOverviewPage, className }) {
 	return (
 		<S.ArticleMetaContainer className={className}>
 			<Link to={`/articleAuthorProfile/${username}`}>
-				<S.ImageProfile src={image} />
+				<S.ArticleMetaImageProfile src={image} />
 			</Link>
-			<S.FlexWrapper>
+			<S.ArticleMetaWrapper>
 				<Link to={`/articleAuthorProfile/${username}`} style={{ textDecoration: 'none' }}>
-					<S.AuthorName articleOverviewPage={articleOverviewPage}>{username}</S.AuthorName>
+					<S.ArticleMetaAuthorName articleOverviewPage={articleOverviewPage}>{username}</S.ArticleMetaAuthorName>
 				</Link>
-				<S.DateCreated articleOverviewPage={articleOverviewPage}>{createdAtDate}</S.DateCreated>
-			</S.FlexWrapper>
+				<S.ArticleMetaDateCreated articleOverviewPage={articleOverviewPage}>{createdAtDate}</S.ArticleMetaDateCreated>
+			</S.ArticleMetaWrapper>
 		</S.ArticleMetaContainer>
 	);
 }

@@ -6,6 +6,7 @@ import { addArticleToFavoritesRequest, removeArticleFromFavoritesRequest } from 
 
 import * as S from './ArticlePreview.style';
 
+import ArticleMeta from 'components/ArticleMeta/ArticleMeta';
 import TagList from 'components/TagList/TagList';
 
 function ArticlePreview({
@@ -25,27 +26,20 @@ function ArticlePreview({
 			} else addArticleToFavoritesRequest(slug);
 		} else push('/signUp');
 	};
+
 	return (
 		<S.ArticlePreviewContainer>
-			<S.ArticleLeftSide>
-				<S.ArticleMetaExtended articleData={articleData} />
-				<S.ArticleContent>
-					<S.ArticleTitleExtended to={`/article/${slug}`}>{title}</S.ArticleTitleExtended>
-					<S.ArticleTextPreviewExtended to={`/article/${slug}`}>{description}</S.ArticleTextPreviewExtended>
-					<S.ReadMoreExtended to={`/article/${slug}`}>Read more...</S.ReadMoreExtended>
-				</S.ArticleContent>
-			</S.ArticleLeftSide>
-			<S.ArticleRightSide>
-				<S.AddToFavorite favorited={favorited} onClick={handleAddingToFavorite}>
-					<S.HeartIcon favorited={favorited} />
-					<S.FavoriteAddedCount favorited={favorited}>{favoritesCount}</S.FavoriteAddedCount>
-				</S.AddToFavorite>
-				<TagList
-					tagList={tagList}
-					getTagName={getTagName}
-					fetchArticlesByTagRequest={fetchArticlesByTagRequest}
-				/>
-			</S.ArticleRightSide>
+			<ArticleMeta articleData={articleData} />
+			<S.PreviewWrapper>
+				<S.PreviewTitle to={`/article/${slug}`}>{title}</S.PreviewTitle>
+				<S.PreviewText to={`/article/${slug}`}>{description}</S.PreviewText>
+				<S.PreviewReadMore to={`/article/${slug}`}>Read more...</S.PreviewReadMore>
+			</S.PreviewWrapper>
+			<TagList tagList={tagList} getTagName={getTagName} fetchArticlesByTagRequest={fetchArticlesByTagRequest} />
+			<S.PreviewAddToFavoriteWrapper favorited={favorited} onClick={handleAddingToFavorite}>
+				<S.PreviewHeartIcon favorited={favorited} />
+				<S.PreviewFavoriteAddedCount favorited={favorited}>{favoritesCount}</S.PreviewFavoriteAddedCount>
+			</S.PreviewAddToFavoriteWrapper>
 		</S.ArticlePreviewContainer>
 	);
 }

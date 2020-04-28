@@ -6,22 +6,19 @@ import { getTagName } from 'redux/tags/tags.actions';
 
 import * as S from './TagList.style';
 
-function Tags({ tagList, fetchArticlesByTagRequest, getTagName, className, children }) {
+function TagList({ tagList, fetchArticlesByTagRequest, getTagName, children }) {
 	const onTagClick = (tag) => {
 		getTagName(tag);
 		fetchArticlesByTagRequest(tag);
 	};
 	return (
-		<S.TagListContainer className={className}>
+		<S.TagListContainer>
 			{children}
-			<S.TagList>
-				{tagList.length > 0 &&
-					tagList.map((tag) => (
-						<S.TagExtended to={`/`} key={tag} onClick={() => onTagClick(tag)}>
-							{tag}
-						</S.TagExtended>
-					))}
-			</S.TagList>
+			{tagList.map((tag) => (
+				<S.Tag to={`/`} key={tag} onClick={() => onTagClick(tag)}>
+					{tag}
+				</S.Tag>
+			))}
 		</S.TagListContainer>
 	);
 }
@@ -30,4 +27,4 @@ const mapDispatchToProps = (dispatch) => ({
 	getTagName: (tag) => dispatch(getTagName(tag))
 });
 
-export default connect(null, mapDispatchToProps)(Tags);
+export default connect(null, mapDispatchToProps)(TagList);

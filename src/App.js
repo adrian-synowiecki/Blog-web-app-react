@@ -1,15 +1,15 @@
 import React, { Fragment } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { setCurrentPageNumberToFirst } from 'redux/common/common.actions';
 import { fetchArticlesByMostRecentRequest } from 'redux/articleList/articleList.actions';
 
 import HomePage from 'pages/HomePage/HomePage';
-import ArticleAuthorProfilePage from 'pages/ArticleAuthorProfilePage/ArticleAuthorProfilePage';
-import UserProfilePage from 'pages/UserProfilePage/UserProfilePage';
+import UserProfilePage from 'pages/UserProfilePage/UserProfilePage'
+import CurrentUserProfilePage from 'pages/CurrentUserProfilePage/CurrentUserProfilePage';
 import ArticleOverviewPage from 'pages/ArticleOverviewPage/ArticleOverviewPage';
-import UserSettingsPage from 'pages/UserSettingsPage/UserSettingsPage';
+import CurrentUserSettingsPage from 'pages/CurrentUserSettingsPage/CurrentUserSettingsPage';
 import ArticleCreationPage from 'pages/ArticleCreationPage/ArticleCreationPage';
 import EditArticlePage from 'pages/EditArticlePage/EditArticlePage';
 import LoginPage from 'pages/LoginPage/LoginPage';
@@ -43,10 +43,10 @@ function App({ currentUserData, isAuth, setCurrentPageNumberToFirst, fetchArticl
 					<ArticleOverviewPage />
 				</Route>
 				<Route path="/articleAuthorProfile/:username">
-					<ArticleAuthorProfilePage />
+					<CurrentUserProfilePage />
 				</Route>
 				<PrivateRoute path="/userSettings">
-					<UserSettingsPage />
+					<CurrentUserSettingsPage />
 				</PrivateRoute>
 				<PrivateRoute path="/createNewArticle">
 					<ArticleCreationPage />

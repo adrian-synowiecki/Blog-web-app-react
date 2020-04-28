@@ -3,46 +3,41 @@ import styled from 'styled-components';
 import { ReactComponent as TrashCan } from 'assets/trash.svg';
 
 export const CommentListItemContainer = styled.div`
-	display: flex;
-	flex-direction: column;
 	border: 1px solid rgba(0, 0, 0, 0.01);
-	width: 90%;
-	margin-top: 1rem;
+	width: 100%;
 `;
 
-export const CommentText = styled.div`padding: 3rem;`;
+export const CommentText = styled.div`padding: 5rem 2rem;`;
 
-export const CommentFooter = styled.div`
+export const CommentFooterWrapper = styled.div`
 	display: flex;
 	align-items: center;
 	background-color: rgba(180, 185, 194, 0.4);
+	padding: 2rem;
 `;
 export const CommentImage = styled.img`
 	width: 2.5rem;
 	height: 2.5rem;
 	border-radius: 8rem;
-	margin-left: 3rem;
 `;
 
 export const CommentUsername = styled.p`
 	color: ${({ theme }) => theme.colors.blue2};
 	font-size: 1.2rem;
-	margin-left: 2rem;
 	font-weight: 600;
+	margin-left: 1rem;
 `;
 
 export const CommentCreatedAt = styled.p`
-	padding-left: 1rem;
 	color: gray;
 	font-size: 0.9rem;
-	margin-top: 1.1rem;
+	margin-left: 1rem;
 `;
 
-export const DeleteCommentIcon = styled(TrashCan)`
+export const RemoveCommentIcon = styled(TrashCan)`
 	width: 2rem;
 	height: 2rem;
 	margin-left: auto;
-	margin-right: 3rem;
 	cursor: pointer;
 	fill: ${({ theme }) => theme.colors.blue2};
 	&:hover {

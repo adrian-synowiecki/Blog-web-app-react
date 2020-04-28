@@ -4,20 +4,19 @@ import { TextField } from 'formik-material-ui';
 
 import Button from 'components/Button/Button';
 
-export const UserSettingsContainer = styled.div`
+export const UserSettingsPageContainer = styled.div`
 	display: flex;
 	align-items: center;
 	flex-direction: column;
 `;
 
-export const Title = styled.h1`
+export const SetttingsTitle = styled.h1`
 	font-weight: 500;
 	color: ${({ theme }) => theme.colors.blue2};
-  letter-spacing: 0.2rem;
-  
+	letter-spacing: 0.2rem;
 `;
 
-export const FormExtended = styled(Form)`
+export const SettingsForm = styled(Form)`
     width: 90%; 
     display: flex;
     flex-direction: column;
@@ -28,7 +27,7 @@ export const FormExtended = styled(Form)`
     }
 `;
 
-export const TextFieldExtended = styled(TextField)`
+export const SettingsTextField = styled(TextField)`
     width: 100%;
     & .MuiInputBase-input {
     height: ${({ height }) => height && '10rem'};
@@ -45,9 +44,9 @@ export const LogoutButton = styled(Button)`
 	}
 `;
 
-export const ButtonsWrapper = styled.div`
+export const SettingsButtonsWrapper = styled.div`
 	display: flex;
 	justify-content: space-between;
-  width: 100%;
-  margin-top: 2rem;
+	width: 100%;
+	margin-top: 2rem;
 `;

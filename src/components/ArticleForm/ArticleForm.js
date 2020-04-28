@@ -20,7 +20,7 @@ function ArticleForm({ articleToEdit, error, createArticleRequest, updateArticle
 
 	return (
 		<S.ArticleFormContainer>
-			<S.CreateArticle>Create New Article</S.CreateArticle>
+			<S.CreateNewArticle>Create New Article</S.CreateNewArticle>
 			<Formik
 				ref={formikRef}
 				initialValues={{
@@ -42,11 +42,11 @@ function ArticleForm({ articleToEdit, error, createArticleRequest, updateArticle
 				}}
 			>
 				{({ isSubmitting, values, setFieldValue }) => (
-					<S.FormExtended>
+					<S.ArticleForm>
 						{error && <ErrorList error={error} />}
 						<Field
 							name="title"
-							component={S.TextFieldExtended}
+							component={S.ArticleFormTextField}
 							label="Article Title"
 							margin="normal"
 							variant="outlined"
@@ -54,7 +54,7 @@ function ArticleForm({ articleToEdit, error, createArticleRequest, updateArticle
 
 						<Field
 							name="description"
-							component={S.TextFieldExtended}
+							component={S.ArticleFormTextField}
 							label="What's this Article about?"
 							margin="normal"
 							variant="outlined"
@@ -62,7 +62,7 @@ function ArticleForm({ articleToEdit, error, createArticleRequest, updateArticle
 
 						<Field
 							name="body"
-							component={S.TextFieldExtended}
+							component={S.ArticleFormTextField}
 							label="Wrtice your Article (in markdown)"
 							multiline
 							rows="10"
@@ -75,10 +75,10 @@ function ArticleForm({ articleToEdit, error, createArticleRequest, updateArticle
 								setFieldValue('tagList', tagList);
 							}}
 						/>
-						<S.ButtonExtended disabled={isSubmitting} type="submit">
+						<S.ArticleFormButton disabled={isSubmitting} type="submit">
 							Publish Article
-						</S.ButtonExtended>
-					</S.FormExtended>
+						</S.ArticleFormButton>
+					</S.ArticleForm>
 				)}
 			</Formik>
 		</S.ArticleFormContainer>

@@ -17,7 +17,7 @@ export const NavbarContainer = styled.nav`
 	height: ${({ isOpenHamburgerMenu }) => (isOpenHamburgerMenu ? 'auto' : '5rem')};
 `;
 
-export const NavbarBrandExtended = styled(Link)`
+export const NavbarBrand = styled(Link)`
 	color: ${({ theme }) => theme.colors.blue1};
 	text-decoration: none;
 	font-weight: 700;
@@ -25,7 +25,7 @@ export const NavbarBrandExtended = styled(Link)`
 	margin-left: 2rem;
 `;
 
-export const NavLinks = styled.ul`
+export const NavLinksWrapper = styled.ul`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -33,6 +33,7 @@ export const NavLinks = styled.ul`
 	width: 100%;
 	padding: 0;
 `;
+
 const iconStyles = css`
 	width: 2rem;
 	height: 2rem;
@@ -59,7 +60,7 @@ export const UserIcon = styled(User)`
 `;
 
 const activeClassName = 'active';
-export const NavLinkExtended = styled(NavLink).attrs({
+export const NavLinkItem = styled(NavLink).attrs({
 	activeClassName: activeClassName
 })`
 	display: flex;

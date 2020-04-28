@@ -9,7 +9,7 @@ import Button from 'components/Button/Button';
 function NotFound({ children, push }) {
 	return (
 		<S.NotFoundContainer>
-			<S.NotFound>{children}</S.NotFound>
+			<S.NotFound>404 Page Not Found</S.NotFound>
 			<Button onClick={() => push('/')}>Click to go back</Button>
 		</S.NotFoundContainer>
 	);

@@ -4,7 +4,7 @@ import * as S from './ErrorList.style';
 
 function ErrorList({ error }) {
 	return (
-		<S.ErrorMessageWrapper>
+		<S.ErrorMessageContainer>
 			{Object.keys(error).map((errorKey) =>
 				error[errorKey].map((errorMessage) => (
 					<S.ErrorMessage>
@@ -12,7 +12,7 @@ function ErrorList({ error }) {
 					</S.ErrorMessage>
 				))
 			)}
-		</S.ErrorMessageWrapper>
+		</S.ErrorMessageContainer>
 	);
 }
 

@@ -5,33 +5,34 @@ import { TextField } from 'formik-material-ui';
 
 import Button from 'components/Button/Button'
 
-export const FormContainer = styled.div`
+export const AuthFormContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 `;
 
-export const Title = styled.h1`font-weight: 400;`;
+export const AuthFormTitle = styled.h1`font-weight: 400;`;
 
-export const LinkExtended = styled(Link)`
+export const LinkToAuth = styled(Link)`
 	margin-top: -1.5rem;
 	font-size: 1.4rem;
 	text-decoration: none;
+	color: ${({theme}) => theme.colors.blue2};
     &:hover {
         text-decoration: underline;
     }
 `;
 
-export const FormExtended = styled(Form)`
+export const AuthForm = styled(Form)`
 	width: 90%;
 `;
 
-export const TextFieldExtended = styled(TextField)`
+export const AuthFormTextField = styled(TextField)`
     width: 100%;
 `;
 
-export const ButtonExtended = styled(Button)`
+export const AuthFormButton = styled(Button)`
 	margin-top: 2rem;
 	width: 100%;
 `

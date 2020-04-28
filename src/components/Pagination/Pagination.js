@@ -30,7 +30,7 @@ function Pagination({ currentPageNumber, setCurrentPageNumber, fetchArticlesByMo
 	for (let i = 1; i <= 50; i++) {
 		pageLinks.push(
 			i === currentPageNumber ? (
-				<S.PageLinkExtended
+				<S.PageLink
 					isActive={() => {
 						return true;
 					}}
@@ -38,20 +38,16 @@ function Pagination({ currentPageNumber, setCurrentPageNumber, fetchArticlesByMo
 					to
 				>
 					{i}
-				</S.PageLinkExtended>
+				</S.PageLink>
 			) : (
-				<S.PageLinkExtended key={i} onClick={() => handlePageChange(i)} to>
+				<S.PageLink key={i} onClick={() => handlePageChange(i)} to>
 					{i}
-				</S.PageLinkExtended>
+				</S.PageLink>
 			)
 		);
 	}
 
-	return (
-		<S.ArticlePageLinksContainer className={className}>
-			{pageLinks.map((pageLink) => pageLink)}
-		</S.ArticlePageLinksContainer>
-	);
+	return <S.PaginationContainer className={className}>{pageLinks.map((pageLink) => pageLink)}</S.PaginationContainer>;
 }
 
 export default connect(null, { push })(Pagination);

@@ -11,14 +11,14 @@ function CommentListItem({ commentData, currentUserData, removeCommentFromArticl
 	return (
 		<S.CommentListItemContainer key={id}>
 			<S.CommentText>{body}</S.CommentText>
-			<S.CommentFooter>
+			<S.CommentFooterWrapper>
 				<S.CommentImage src={image} />
 				<S.CommentUsername>{username}</S.CommentUsername>
 				<S.CommentCreatedAt>{createdAtDate}</S.CommentCreatedAt>
 				{currentUserData.username === username && (
-					<S.DeleteCommentIcon onClick={() => removeCommentFromArticleRequest(articleSlug, id)} />
+					<S.RemoveCommentIcon onClick={() => removeCommentFromArticleRequest(articleSlug, id)} />
 				)}
-			</S.CommentFooter>
+			</S.CommentFooterWrapper>
 		</S.CommentListItemContainer>
 	);
 }

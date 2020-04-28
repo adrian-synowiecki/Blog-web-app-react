@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import { Formik, Field } from 'formik';
 
-import * as S from './UserSettingsPage.style';
+import * as S from './CurrentUserSettingsPage.style';
 import { updateUserRequest, clearUserError, logOut } from 'redux/user/user.actions';
 
 import Button from 'components/Button/Button';
@@ -29,12 +29,12 @@ function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUser
 
 	const handleLogout = () => {
 		logOut();
-		push('/')
+		push('/');
 	};
 
 	return (
-		<S.UserSettingsContainer>
-			<S.Title>Profile Settings</S.Title>
+		<S.UserSettingsPageContainer>
+			<S.SetttingsTitle>Profile Settings</S.SetttingsTitle>
 			<Formik
 				ref={formikRef}
 				initialValues={{
@@ -56,12 +56,12 @@ function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUser
 				}}
 			>
 				{({ isSubmitting }) => (
-					<S.FormExtended>
+					<S.SettingsForm>
 						{error && <ErrorList error={error} />}
 						<Field
 							name="image"
 							type="text"
-							component={S.TextFieldExtended}
+							component={S.SettingsTextField}
 							margin="normal"
 							variant="outlined"
 							label="URL of profile picture"
@@ -70,7 +70,7 @@ function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUser
 						<Field
 							name="username"
 							type="text"
-							component={S.TextFieldExtended}
+							component={S.SettingsTextField}
 							label="Username"
 							margin="normal"
 							variant="outlined"
@@ -79,7 +79,7 @@ function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUser
 						<Field
 							name="bio"
 							type="text"
-							component={S.TextFieldExtended}
+							component={S.SettingsTextField}
 							height
 							margin="normal"
 							variant="outlined"
@@ -88,7 +88,7 @@ function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUser
 						<Field
 							name="email"
 							type="email"
-							component={S.TextFieldExtended}
+							component={S.SettingsTextField}
 							autoComplete="current-email"
 							label="Email"
 							margin="normal"
@@ -97,24 +97,28 @@ function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUser
 
 						<Field
 							name="password"
-							component={S.TextFieldExtended}
+							component={S.SettingsTextField}
 							type="password"
 							label="New Password"
 							margin="normal"
 							variant="outlined"
 						/>
-						<S.ButtonsWrapper>
-							<S.LogoutButton disabled={isSubmitting} type="submit" onClick={handleLogout}>
+						<S.SettingsButtonsWrapper>
+							<S.LogoutButton
+								disabled={isSubmitting}
+								type="submit"
+								onClick={handleLogout}
+							>
 								Click here to logout
 							</S.LogoutButton>
 							<Button disabled={isSubmitting} type="submit">
 								Update Settings
 							</Button>
-						</S.ButtonsWrapper>
-					</S.FormExtended>
+						</S.SettingsButtonsWrapper>
+					</S.SettingsForm>
 				)}
 			</Formik>
-		</S.UserSettingsContainer>
+		</S.UserSettingsPageContainer>
 	);
 }
 

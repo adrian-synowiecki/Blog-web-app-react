@@ -2,7 +2,6 @@ import React, { useEffect, Fragment } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { fetchProfileByUsernameRequest, unloadProfile } from 'redux/profile/profile.actions';
 import {
 	fetchArticlesByAuthorRequest,
 	fetchFavoriteArticlesRequest,
@@ -10,63 +9,51 @@ import {
 } from 'redux/articleList/articleList.actions';
 
 import Profile from 'components/Profile/Profile';
-import NotFound from 'components/NotFound/NotFound';
 
-function ArticleAuthorProfilePage({
-	profileData,
+function UserProfilePage({
+	currentUserData,
 	articleList,
-	error,
+	isFetchingArticles,
 	fetchArticlesByAuthorRequest,
 	fetchFavoriteArticlesRequest,
-	fetchProfileByUsernameRequest,
-	unloadArticles,
-	unloadProfile
+	unloadArticles
 }) {
 	const { username } = useParams();
 	let location = useLocation();
 
 	useEffect(() => {
-		fetchProfileByUsernameRequest(username);
 		if (location.pathname.includes('favorites')) {
 			fetchFavoriteArticlesRequest(username);
 		} else fetchArticlesByAuthorRequest(username);
 
 		return () => {
 			unloadArticles();
-			unloadProfile();
 		};
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	return (
-		<Fragment>
-			{error ? (
-				<NotFound />
-			) : (
-				<Profile
-					profileData={profileData}
-					articleList={articleList}
-					fetchArticlesByAuthorRequest={fetchArticlesByAuthorRequest}
-					fetchFavoriteArticlesRequest={fetchFavoriteArticlesRequest}
-					unloadArticles={unloadArticles}
-					path={location.pathname}
-				/>
-			)}
-		</Fragment>
+		<Profile
+			profileData={currentUserData}
+			articleList={articleList}
+			isFetchingArticles={isFetchingArticles}
+			fetchArticlesByAuthorRequest={fetchArticlesByAuthorRequest}
+			fetchFavoriteArticlesRequest={fetchFavoriteArticlesRequest}
+			unloadArticles={unloadArticles}
+			path={location.pathname}
+		/>
 	);
 }
 
 const mapStateToProps = (state) => ({
 	articleList: state.articleList.articleList,
-	profileData: state.profile.profileData,
-	error: state.profile.error
+	currentUserData: state.user.currentUserData,
+	isFetchingArticles: state.user.isFetchingArticles
 });
 
 const mapDispatchToProps = (dispatch) => ({
 	fetchArticlesByAuthorRequest: (username) => dispatch(fetchArticlesByAuthorRequest(username)),
 	fetchFavoriteArticlesRequest: (username) => dispatch(fetchFavoriteArticlesRequest(username)),
-	unloadArticles: () => dispatch(unloadArticles()),
-	fetchProfileByUsernameRequest: (username) => dispatch(fetchProfileByUsernameRequest(username)),
-	unloadProfile: () => dispatch(unloadProfile())
+	unloadArticles: () => dispatch(unloadArticles())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArticleAuthorProfilePage);
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfilePage);
