@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Formik, Field } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import TagsInput from 'react-tagsinput';
 
 import * as S from './ArticleForm.style';
@@ -17,18 +17,29 @@ function ArticleForm({ articleToEdit, error, createArticleRequest, updateArticle
 		},
 		[ error ]
 	);
-
+	
 	return (
 		<S.ArticleFormContainer>
-			<S.CreateNewArticle>Create New Article</S.CreateNewArticle>
+			<S.Title>{articleToEdit ? 'Edit Article' : 'Create New Article'}</S.Title>
 			<Formik
 				ref={formikRef}
-				initialValues={{
-					title: articleToEdit ? `${title}` : '',
-					description: articleToEdit ? `${description}` : '',
-					body: articleToEdit ? `${body}` : '',
-					tagList: []
-				}}
+				initialValues={
+					articleToEdit ? (
+						{
+							title: `${title}`,
+							description: `${description}`,
+							body: `${body}`,
+							tagList: articleToEdit.tagList
+						}
+					) : (
+						{
+							title: '',
+							description: '',
+							body: '',
+							tagList: []
+						}
+					)
+				}
 				onSubmit={(values) => {
 					const articleData = {
 						article: {
@@ -42,19 +53,18 @@ function ArticleForm({ articleToEdit, error, createArticleRequest, updateArticle
 				}}
 			>
 				{({ isSubmitting, values, setFieldValue }) => (
-					<S.ArticleForm>
+					<Form style={{ width: '100%' }}>
 						{error && <ErrorList error={error} />}
 						<Field
 							name="title"
-							component={S.ArticleFormTextField}
+							component={S.TextField}
 							label="Article Title"
 							margin="normal"
 							variant="outlined"
 						/>
-
 						<Field
 							name="description"
-							component={S.ArticleFormTextField}
+							component={S.TextField}
 							label="What's this Article about?"
 							margin="normal"
 							variant="outlined"
@@ -62,7 +72,7 @@ function ArticleForm({ articleToEdit, error, createArticleRequest, updateArticle
 
 						<Field
 							name="body"
-							component={S.ArticleFormTextField}
+							component={S.TextField}
 							label="Wrtice your Article (in markdown)"
 							multiline
 							rows="10"
@@ -75,10 +85,10 @@ function ArticleForm({ articleToEdit, error, createArticleRequest, updateArticle
 								setFieldValue('tagList', tagList);
 							}}
 						/>
-						<S.ArticleFormButton disabled={isSubmitting} type="submit">
+						<S.CreateAndEditArticleButton disabled={isSubmitting} type="submit">
 							Publish Article
-						</S.ArticleFormButton>
-					</S.ArticleForm>
+						</S.CreateAndEditArticleButton>
+					</Form>
 				)}
 			</Formik>
 		</S.ArticleFormContainer>

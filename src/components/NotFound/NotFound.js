@@ -6,10 +6,10 @@ import * as S from './NotFound.style';
 
 import Button from 'components/Button/Button';
 
-function NotFound({ children, push }) {
+function NotFound({ push }) {
 	return (
 		<S.NotFoundContainer>
-			<S.NotFound>404 Page Not Found</S.NotFound>
+			<S.NotFoundMessage>404 Page Not Found</S.NotFoundMessage>
 			<Button onClick={() => push('/')}>Click to go back</Button>
 		</S.NotFoundContainer>
 	);
@@ -19,4 +19,4 @@ const mapDispatchToProps = (dispatch) => ({
 	push: (path) => dispatch(push(path))
 });
 
-export default connect(null, mapDispatchToProps)(NotFound);
+export default connect(null, { mapDispatchToProps })(NotFound);

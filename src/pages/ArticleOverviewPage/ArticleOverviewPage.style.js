@@ -4,25 +4,26 @@ import styled from 'styled-components/macro';
 import HeaderComponent from 'components/Header/Header';
 import CommentFormComponent from 'components/CommentForm/CommentForm';
 
-export const OverviewWrapper = styled.div`margin: 3rem 2rem;`;
-
-export const OverviewHeaderWrapper = styled(HeaderComponent)`
+export const Header = styled(HeaderComponent)`
 	background-color: ${({ theme }) => theme.colors.blue2};
-	height: 16rem;
+	min-height: 16rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
-	padding: 0 2rem;
+	padding: 2rem 2rem;
 `;
 
-export const ArticleTitle = styled.h1`
+export const Title = styled.h1`
 	color: #edede8;
 	letter-spacing: 0.1rem;
 	font-weight: 400;
 	overflow-wrap: break-word;
+	margin-bottom: 2rem;
 `;
 
-export const ArticleText = styled.p`
+export const Wrapper = styled.div`margin: 3rem 2rem;`;
+
+export const Text = styled.p`
 	margin-bottom: 3rem;
 	overflow-wrap: break-word;
 `;

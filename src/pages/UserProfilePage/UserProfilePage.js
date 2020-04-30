@@ -12,10 +12,11 @@ import {
 import Profile from 'components/Profile/Profile';
 import NotFound from 'components/NotFound/NotFound';
 
-function ArticleAuthorProfilePage({
+function UserProfilePage({
 	profileData,
 	articleList,
 	error,
+	isFetchingProfileData,
 	fetchArticlesByAuthorRequest,
 	fetchFavoriteArticlesRequest,
 	fetchProfileByUsernameRequest,
@@ -27,6 +28,7 @@ function ArticleAuthorProfilePage({
 
 	useEffect(() => {
 		fetchProfileByUsernameRequest(username);
+		console.log('dhuhyhyuhyuhyus')
 		if (location.pathname.includes('favorites')) {
 			fetchFavoriteArticlesRequest(username);
 		} else fetchArticlesByAuthorRequest(username);
@@ -36,7 +38,7 @@ function ArticleAuthorProfilePage({
 			unloadProfile();
 		};
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
-
+	
 	return (
 		<Fragment>
 			{error ? (
@@ -58,7 +60,6 @@ function ArticleAuthorProfilePage({
 const mapStateToProps = (state) => ({
 	articleList: state.articleList.articleList,
 	profileData: state.profile.profileData,
-	error: state.profile.error
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -69,4 +70,4 @@ const mapDispatchToProps = (dispatch) => ({
 	unloadProfile: () => dispatch(unloadProfile())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArticleAuthorProfilePage);
+export default connect(mapStateToProps, mapDispatchToProps)(UserProfilePage);

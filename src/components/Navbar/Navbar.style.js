@@ -17,7 +17,7 @@ export const NavbarContainer = styled.nav`
 	height: ${({ isOpenHamburgerMenu }) => (isOpenHamburgerMenu ? 'auto' : '5rem')};
 `;
 
-export const NavbarBrand = styled(Link)`
+export const Brand = styled(Link)`
 	color: ${({ theme }) => theme.colors.blue1};
 	text-decoration: none;
 	font-weight: 700;
@@ -31,7 +31,7 @@ export const NavLinksWrapper = styled.ul`
 	justify-content: center;
 	align-items: center;
 	width: 100%;
-	padding: 0;
+	list-style: none;
 `;
 
 const iconStyles = css`

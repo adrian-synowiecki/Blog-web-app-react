@@ -1,17 +1,17 @@
 import styled from 'styled-components/macro';
 import { NavLink } from 'react-router-dom';
 
-import Pagination from 'components/Pagination/Pagination';
-import Header from 'components/Header/Header';
+import PaginationComponent from 'components/Pagination/Pagination';
+import HeaderComponent from 'components/Header/Header';
 
-export const HomeHeaderWrapper = styled(Header)`
+export const Header = styled(HeaderComponent)`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-evenly;
 `;
 
-export const HomeHeading = styled.h1`
+export const Heading = styled.h1`
 	color: #edf5ef;
 	font-size: 5rem;
 	text-shadow: 0 1px 3px rgba(0, 0, 0, .9);
@@ -19,7 +19,7 @@ export const HomeHeading = styled.h1`
 	margin: 0;
 `;
 
-export const HomeSubHeading = styled.h2`
+export const SubHeading = styled.h2`
 	color: #edf5ef;
 	font-size: 2rem;
 	font-weight: 400;
@@ -29,12 +29,12 @@ export const HomeSubHeading = styled.h2`
 	margin-top: -3rem;
 `;
 
-export const HomeWrapper = styled.main`
+export const Wrapper = styled.main`
 	min-height: 19rem;
 	margin: 3rem 2rem;
 `;
 
-export const HomeNavLinkItem = styled(NavLink)`
+export const NavLinkItem = styled(NavLink)`
 	color: ${({ theme }) => theme.colors.blue1};
 	text-decoration: none;
 	margin-left: ${({ tag }) => tag && '2rem'};  
@@ -46,12 +46,12 @@ export const HomeNavLinkItem = styled(NavLink)`
 	}
 `;
 
-export const HomePagination = styled(Pagination)`
+export const Pagination = styled(PaginationComponent)`
 	margin-top: 3rem;
 	margin-bottom: 3rem;
 `;
 
-export const HomePopularTags = styled.h2`
+export const PopularTags = styled.h2`
 	font-size: 1.4rem;
 	margin-bottom: 1rem;
 	color: ${({ theme }) => theme.colors.blue1};

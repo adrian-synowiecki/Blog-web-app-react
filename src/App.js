@@ -6,7 +6,7 @@ import { setCurrentPageNumberToFirst } from 'redux/common/common.actions';
 import { fetchArticlesByMostRecentRequest } from 'redux/articleList/articleList.actions';
 
 import HomePage from 'pages/HomePage/HomePage';
-import UserProfilePage from 'pages/UserProfilePage/UserProfilePage'
+import UserProfilePage from 'pages/UserProfilePage/UserProfilePage';
 import CurrentUserProfilePage from 'pages/CurrentUserProfilePage/CurrentUserProfilePage';
 import ArticleOverviewPage from 'pages/ArticleOverviewPage/ArticleOverviewPage';
 import CurrentUserSettingsPage from 'pages/CurrentUserSettingsPage/CurrentUserSettingsPage';
@@ -43,7 +43,7 @@ function App({ currentUserData, isAuth, setCurrentPageNumberToFirst, fetchArticl
 					<ArticleOverviewPage />
 				</Route>
 				<Route path="/articleAuthorProfile/:username">
-					<CurrentUserProfilePage />
+					<UserProfilePage />
 				</Route>
 				<PrivateRoute path="/userSettings">
 					<CurrentUserSettingsPage />
@@ -55,7 +55,7 @@ function App({ currentUserData, isAuth, setCurrentPageNumberToFirst, fetchArticl
 					<EditArticlePage />
 				</PrivateRoute>
 				<PrivateRoute path="/userProfile/:username">
-					<UserProfilePage />
+					<CurrentUserProfilePage />
 				</PrivateRoute>
 				<Route path="*">
 					<NotFound>404 Page Not Found</NotFound>

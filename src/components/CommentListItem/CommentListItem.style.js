@@ -7,28 +7,28 @@ export const CommentListItemContainer = styled.div`
 	width: 100%;
 `;
 
-export const CommentText = styled.div`padding: 5rem 2rem;`;
+export const Text = styled.div`padding: 5rem 2rem;`;
 
-export const CommentFooterWrapper = styled.div`
+export const FooterWrapper = styled.div`
 	display: flex;
 	align-items: center;
 	background-color: rgba(180, 185, 194, 0.4);
 	padding: 2rem;
 `;
-export const CommentImage = styled.img`
+export const AuthorImage = styled.img`
 	width: 2.5rem;
 	height: 2.5rem;
 	border-radius: 8rem;
 `;
 
-export const CommentUsername = styled.p`
+export const Username = styled.p`
 	color: ${({ theme }) => theme.colors.blue2};
 	font-size: 1.2rem;
 	font-weight: 600;
 	margin-left: 1rem;
 `;
 
-export const CommentCreatedAt = styled.p`
+export const CreatedAt = styled.p`
 	color: gray;
 	font-size: 0.9rem;
 	margin-left: 1rem;

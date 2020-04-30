@@ -9,7 +9,6 @@ import { fetchArticleRequest, unloadArticle, deleteArticleRequest } from 'redux/
 import { fetchCommentsFromArticleRequest, addCommentToArticleRequest } from 'redux/comments/comments.actions';
 
 import NotFound from 'components/NotFound/NotFound';
-/* import CommentForm from 'components/CommentForm/CommentForm'; */
 import ArticleMeta from 'components/ArticleMeta/ArticleMeta';
 import TagList from 'components/TagList/TagList';
 import CommentList from 'components/CommentList/CommentList';
@@ -19,6 +18,7 @@ function ArticleOverviewPage({
 	isAuth,
 	commentList,
 	fetchArticleRequest,
+	fetchCommentsFromArticleRequest,
 	addCommentToArticleRequest,
 	error
 }) {
@@ -38,12 +38,12 @@ function ArticleOverviewPage({
 			{error && <NotFound />}
 			{!isEmpty(articleData) && (
 				<Fragment>
-					<S.OverviewHeaderWrapper>
-						<S.ArticleTitle>{title}</S.ArticleTitle>
+					<S.Header>
+						<S.Title>{title}</S.Title>
 						<ArticleMeta articleData={articleData} articleOverviewPage />
-					</S.OverviewHeaderWrapper>
-					<S.OverviewWrapper>
-						<S.ArticleText>{body}</S.ArticleText>
+					</S.Header>
+					<S.Wrapper>
+						<S.Text>{body}</S.Text>
 						<TagList tagList={tagList} />
 						{isAuth ? (
 							<S.CommentForm addCommentToArticleRequest={addCommentToArticleRequest} />
@@ -55,7 +55,7 @@ function ArticleOverviewPage({
 							</S.AuthInvite>
 						)}
 						<CommentList commentList={commentList} />
-					</S.OverviewWrapper>
+					</S.Wrapper>
 				</Fragment>
 			)}
 		</Fragment>

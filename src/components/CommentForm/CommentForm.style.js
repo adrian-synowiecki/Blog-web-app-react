@@ -1,14 +1,14 @@
 import styled from 'styled-components/macro';
-import { Form, Field } from 'formik';
+import { Form as FormComponent, Field as FieldComponent } from 'formik';
 
 import Button from 'components/Button/Button';
 
-export const CommentForm = styled(Form)`	
+export const Form = styled(FormComponent)`	
 	background-color: rgba(180, 185, 194, 0.4); 
 	border: 1px solid rgba(0,0,0,0.01); 
 `;
 
-export const CommentFormField = styled(Field)`
+export const Field = styled(FieldComponent)`
 	border: none;
 	padding: 3rem;
 	resize: vertical;
@@ -23,7 +23,7 @@ export const CommentFormField = styled(Field)`
 	}
 `;
 
-export const CommentFormButton = styled(Button)`
+export const CreateCommentButton = styled(Button)`
 	margin: 1rem 1rem 1rem auto; 
 	display: block;
 `;

@@ -5,7 +5,10 @@ import * as profileActions from './profile.actions';
 import profileTypes from './profile.types';
 
 function* fetchProfileByUsernameAsync(action) {
+	console.log('YES');
+	console.log(action.username)
 	try {
+		console.log('YES');
 		const response = yield call(api.fetchUserProfileFromAPI, action.username);
 		yield put(profileActions.fetchProfileByUsernameDone(response.data.profile));
 	} catch (error) {
@@ -14,5 +17,5 @@ function* fetchProfileByUsernameAsync(action) {
 }
 
 export default function* watchProfileSaga() {
-	yield all([ yield takeLatest(profileTypes.FETCH_PROFILE_BY_USERNAME_REQUEST, fetchProfileByUsernameAsync) ]);
+	yield all([ takeLatest(profileTypes.FETCH_PROFILE_BY_USERNAME_REQUEST, fetchProfileByUsernameAsync) ]);
 }

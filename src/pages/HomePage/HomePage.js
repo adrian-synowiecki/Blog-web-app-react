@@ -39,12 +39,12 @@ function HomePage({
 
 	return (
 		<Fragment>
-			<S.HomeHeaderWrapper>
-				<S.HomeHeading>conduit</S.HomeHeading>
-				<S.HomeSubHeading>A place to share your knowledge</S.HomeSubHeading>
-			</S.HomeHeaderWrapper>
-			<S.HomeWrapper>
-				<S.HomeNavLinkItem
+			<S.Header>
+				<S.Heading>conduit</S.Heading>
+				<S.SubHeading>A place to share your knowledge</S.SubHeading>
+			</S.Header>
+			<S.Wrapper>
+				<S.NavLinkItem
 					onClick={() => handleClick()}
 					to="/"
 					isActive={() => {
@@ -55,30 +55,32 @@ function HomePage({
 					}}
 				>
 					Global Feed
-				</S.HomeNavLinkItem>
+				</S.NavLinkItem>
 				{tag && (
-					<S.HomeNavLinkItem tag to="/" onClick={() => handleClick()}>
+					<S.NavLinkItem tag to="/" onClick={() => handleClick()}>
 						{tag}
-					</S.HomeNavLinkItem>
+					</S.NavLinkItem>
 				)}
 				{articleList === null ? (
 					<LoadingSpinner center />
 				) : (
-					<Fragment>
-						<ArticleList articleList={articleList} />
-						<S.HomePagination
-							currentPageNumber={currentPageNumber}
-							fetchArticlesByMostRecentRequest={fetchArticlesByMostRecentRequest}
-							setCurrentPageNumber={setCurrentPageNumber}
-						/>
-						{tagList.length > 0 && (
-							<TagList tagList={tagList} arePopularTags>
-								<S.HomePopularTags>Popular Tags</S.HomePopularTags>
-							</TagList>
-						)}
-					</Fragment>
+					articleList.length > 0 && (
+						<Fragment>
+							<ArticleList articleList={articleList} />
+							<S.Pagination
+								currentPageNumber={currentPageNumber}
+								fetchArticlesByMostRecentRequest={fetchArticlesByMostRecentRequest}
+								setCurrentPageNumber={setCurrentPageNumber}
+							/>
+							{tagList.length > 0 && (
+								<TagList tagList={tagList} arePopularTags>
+									<S.PopularTags>Popular Tags</S.PopularTags>
+								</TagList>
+							)}
+						</Fragment>
+					)
 				)}
-			</S.HomeWrapper>
+			</S.Wrapper>
 		</Fragment>
 	);
 }

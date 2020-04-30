@@ -30,16 +30,16 @@ function ArticlePreview({
 	return (
 		<S.ArticlePreviewContainer>
 			<ArticleMeta articleData={articleData} />
-			<S.PreviewWrapper>
-				<S.PreviewTitle to={`/article/${slug}`}>{title}</S.PreviewTitle>
-				<S.PreviewText to={`/article/${slug}`}>{description}</S.PreviewText>
-				<S.PreviewReadMore to={`/article/${slug}`}>Read more...</S.PreviewReadMore>
-			</S.PreviewWrapper>
+			<S.Wrapper>
+				<S.Title to={`/article/${slug}`}>{title}</S.Title>
+				<S.Text to={`/article/${slug}`}>{description}</S.Text>
+				<S.ReadMore to={`/article/${slug}`}>Read more...</S.ReadMore>
+			</S.Wrapper>
 			<TagList tagList={tagList} getTagName={getTagName} fetchArticlesByTagRequest={fetchArticlesByTagRequest} />
-			<S.PreviewAddToFavoriteWrapper favorited={favorited} onClick={handleAddingToFavorite}>
-				<S.PreviewHeartIcon favorited={favorited} />
-				<S.PreviewFavoriteAddedCount favorited={favorited}>{favoritesCount}</S.PreviewFavoriteAddedCount>
-			</S.PreviewAddToFavoriteWrapper>
+			<S.AddToFavoriteWrapper favorited={favorited} onClick={handleAddingToFavorite}>
+				<S.HeartIcon favorited={favorited} />
+				<S.FavoriteAddedCount favorited={favorited}>{favoritesCount}</S.FavoriteAddedCount>
+			</S.AddToFavoriteWrapper>
 		</S.ArticlePreviewContainer>
 	);
 }

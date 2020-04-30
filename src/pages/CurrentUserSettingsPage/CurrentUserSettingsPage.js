@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
-import { Formik, Field } from 'formik';
+import { Formik, Form, Field } from 'formik';
 
 import * as S from './CurrentUserSettingsPage.style';
 import { updateUserRequest, clearUserError, logOut } from 'redux/user/user.actions';
@@ -34,7 +34,7 @@ function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUser
 
 	return (
 		<S.UserSettingsPageContainer>
-			<S.SetttingsTitle>Profile Settings</S.SetttingsTitle>
+			<S.Title>Profile Settings</S.Title>
 			<Formik
 				ref={formikRef}
 				initialValues={{
@@ -56,12 +56,12 @@ function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUser
 				}}
 			>
 				{({ isSubmitting }) => (
-					<S.SettingsForm>
+					<Form style={{ width: '100%' }}>
 						{error && <ErrorList error={error} />}
 						<Field
 							name="image"
 							type="text"
-							component={S.SettingsTextField}
+							component={S.TextField}
 							margin="normal"
 							variant="outlined"
 							label="URL of profile picture"
@@ -70,17 +70,17 @@ function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUser
 						<Field
 							name="username"
 							type="text"
-							component={S.SettingsTextField}
+							component={S.TextField}
 							label="Username"
 							margin="normal"
 							variant="outlined"
 						/>
 
 						<Field
+							bio
 							name="bio"
 							type="text"
-							component={S.SettingsTextField}
-							height
+							component={S.TextField}					
 							margin="normal"
 							variant="outlined"
 							label="Short bio about you"
@@ -88,7 +88,7 @@ function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUser
 						<Field
 							name="email"
 							type="email"
-							component={S.SettingsTextField}
+							component={S.TextField}
 							autoComplete="current-email"
 							label="Email"
 							margin="normal"
@@ -97,25 +97,21 @@ function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUser
 
 						<Field
 							name="password"
-							component={S.SettingsTextField}
+							component={S.TextField}
 							type="password"
 							label="New Password"
 							margin="normal"
 							variant="outlined"
 						/>
-						<S.SettingsButtonsWrapper>
-							<S.LogoutButton
-								disabled={isSubmitting}
-								type="submit"
-								onClick={handleLogout}
-							>
+						<S.ButtonsWrapper>
+							<S.LogoutButton disabled={isSubmitting} type="submit" onClick={handleLogout}>
 								Click here to logout
 							</S.LogoutButton>
 							<Button disabled={isSubmitting} type="submit">
 								Update Settings
 							</Button>
-						</S.SettingsButtonsWrapper>
-					</S.SettingsForm>
+						</S.ButtonsWrapper>
+					</Form>
 				)}
 			</Formik>
 		</S.UserSettingsPageContainer>

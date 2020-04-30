@@ -1,37 +1,42 @@
 import styled from 'styled-components/macro';
-import { Form } from 'formik';
-import { TextField } from 'formik-material-ui';
+import { Form as FormComponent } from 'formik';
+import { TextField as TextFieldComponent } from 'formik-material-ui';
 
 import Button from 'components/Button/Button';
 
 export const UserSettingsPageContainer = styled.div`
 	display: flex;
 	align-items: center;
-	flex-direction: column;
+  flex-direction: column;
+  margin: 3rem 2rem;
 `;
 
-export const SetttingsTitle = styled.h1`
+export const Title = styled.h1`
 	font-weight: 500;
 	color: ${({ theme }) => theme.colors.blue2};
 	letter-spacing: 0.2rem;
 `;
 
-export const SettingsForm = styled(Form)`
-    width: 90%; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    @media (min-width: 600px) {
-      width: 45rem;    
-    }
-`;
-
-export const SettingsTextField = styled(TextField)`
+export const TextField = styled(TextFieldComponent)`
     width: 100%;
     & .MuiInputBase-input {
-    height: ${({ height }) => height && '10rem'};
+       height: ${({ bio }) => bio && '10rem'};
     }
+    .MuiOutlinedInput-root {
+        fieldset {
+        border-color: #BDC3C7;
+    }
+    &:hover fieldset {
+        border-color: ${({ theme }) => theme.colors.blue2}
+    }
+    &.Mui-focused fieldset {
+        border: ${({ theme }) => `2px solid ${theme.colors.blue2}`}
+    }
+  }
+    label.Mui-focused {
+      color: ${({ theme }) => theme.colors.blue2}
+  }
+
 `;
 
 export const LogoutButton = styled(Button)`
@@ -44,9 +49,8 @@ export const LogoutButton = styled(Button)`
 	}
 `;
 
-export const SettingsButtonsWrapper = styled.div`
+export const ButtonsWrapper = styled.div`
 	display: flex;
 	justify-content: space-between;
-	width: 100%;
 	margin-top: 2rem;
 `;

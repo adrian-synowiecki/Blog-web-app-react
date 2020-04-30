@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import * as S from './CommentList.style';
 
-import CommentListItem from '../CommentListItem/CommentListItem';
+import CommentListItem from 'components/CommentListItem/CommentListItem';
 
 function CommentList({ commentList, className }) {
 	const { articleSlug } = useParams();

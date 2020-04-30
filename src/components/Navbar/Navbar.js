@@ -18,42 +18,57 @@ function Navbar({ currentUserData, isAuth, fetchArticlesByMostRecentRequest, set
 	return (
 		<S.NavbarContainer isOpenHamburgerMenu={isOpenHamburgerMenu}>
 			{!isOpenHamburgerMenu && (
-				<S.NavbarBrand onClick={() => handleClick()} to="/">
+				<S.Brand onClick={() => handleClick()} to="/">
 					conduit
-				</S.NavbarBrand>
+				</S.Brand>
 			)}
 			{isOpenHamburgerMenu && (
 				<S.NavLinksWrapper>
-					<S.NavLinkItem exact to="/" onClick={() => handleClick('toggle')}>
-						<S.HomeIcon /> Home
-					</S.NavLinkItem>
+					<li>
+						<S.NavLinkItem exact to="/" onClick={() => handleClick('toggle')}>
+							<S.HomeIcon /> Home
+						</S.NavLinkItem>
+					</li>
 					{!isAuth && (
-						<S.NavLinkItem to="/login" onClick={() => toggleHamburgerMenu(!isOpenHamburgerMenu)}>
-							Log in
-						</S.NavLinkItem>
+						<li>
+							<S.NavLinkItem to="/login" onClick={() => toggleHamburgerMenu(!isOpenHamburgerMenu)}>
+								Log in
+							</S.NavLinkItem>
+						</li>
 					)}
 					{!isAuth && (
-						<S.NavLinkItem to="/signUp" onClick={() => toggleHamburgerMenu(!isOpenHamburgerMenu)}>
-							Sign up
-						</S.NavLinkItem>
+						<li>
+							<S.NavLinkItem to="/signUp" onClick={() => toggleHamburgerMenu(!isOpenHamburgerMenu)}>
+								Sign up
+							</S.NavLinkItem>
+						</li>
 					)}
 					{isAuth && (
-						<S.NavLinkItem to="/createNewArticle" onClick={() => toggleHamburgerMenu(!isOpenHamburgerMenu)}>
-							<S.NewPostIcon /> New Post
-						</S.NavLinkItem>
+						<li>
+							<S.NavLinkItem
+								to="/createNewArticle"
+								onClick={() => toggleHamburgerMenu(!isOpenHamburgerMenu)}
+							>
+								<S.NewPostIcon /> New Post
+							</S.NavLinkItem>
+						</li>
 					)}
 					{isAuth && (
-						<S.NavLinkItem to="/userSettings" onClick={() => toggleHamburgerMenu(!isOpenHamburgerMenu)}>
-							<S.SettingsIcon /> Settings
-						</S.NavLinkItem>
+						<li>
+							<S.NavLinkItem to="/userSettings" onClick={() => toggleHamburgerMenu(!isOpenHamburgerMenu)}>
+								<S.SettingsIcon /> Settings
+							</S.NavLinkItem>
+						</li>
 					)}
 					{isAuth && (
-						<S.NavLinkItem
-							to={`/userProfile/${username}`}
-							onClick={() => toggleHamburgerMenu(!isOpenHamburgerMenu)}
-						>
-							<S.UserIcon /> {username}
-						</S.NavLinkItem>
+						<li>
+							<S.NavLinkItem
+								to={`/userProfile/${username}`}
+								onClick={() => toggleHamburgerMenu(!isOpenHamburgerMenu)}
+							>
+								<S.UserIcon /> {username}
+							</S.NavLinkItem>
+						</li>
 					)}
 				</S.NavLinksWrapper>
 			)}

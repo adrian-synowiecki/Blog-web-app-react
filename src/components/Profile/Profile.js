@@ -60,21 +60,21 @@ function Profile({
 
 	return (
 		<S.ProfileContainer>
-			<S.ProfileCredentialsWrapper>
+			<S.CredentialsWrapper>
 				{isEmpty(profileData) ? (
-					<LoadingSpinner />
+					<LoadingSpinner center />
 				) : (
 					<Fragment>
-						<S.ProfileImage src={image} />
-						<S.ProfileUsername>{username}</S.ProfileUsername>
-						<S.ProfileBio>{bio}</S.ProfileBio>
+						<S.UserImage src={image} />
+						<S.Username>{username}</S.Username>
+						<S.Bio>{bio}</S.Bio>
 					</Fragment>
 				)}
-			</S.ProfileCredentialsWrapper>
-			<S.ProfileWrapper>
+			</S.CredentialsWrapper>
+			<S.Wrapper>
 				{!isEmpty(profileData) && (
-					<S.ProfileNavLinksWrapper>
-						<S.ProfileNavLink
+					<Fragment>
+						<S.NavLink
 							ref={addToLinkRefs}
 							width={widths[0]}
 							marginLeft={leftMargins[0]}
@@ -88,8 +88,8 @@ function Profile({
 							onClick={handleFetchArticlesByAuthorRequest}
 						>
 							My Articles
-						</S.ProfileNavLink>
-						<S.ProfileNavLink
+						</S.NavLink>
+						<S.NavLink
 							ref={addToLinkRefs}
 							width={widths[1]}
 							marginLeft={leftMargins[1]}
@@ -102,18 +102,18 @@ function Profile({
 							onClick={handleFetchFavoriteArticlesRequest}
 						>
 							Favorited Articles
-						</S.ProfileNavLink>
-						<S.ProfileNavLinkUnderline />
-					</S.ProfileNavLinksWrapper>
+						</S.NavLink>
+						<S.NavLinkUnderline />
+					</Fragment>
 				)}
 				{articleList === null ? (
 					<LoadingSpinner center />
 				) : articleList.length > 0 ? (
 					<ArticleList articleList={articleList} />
 				) : (
-					<S.ProfileNotFoundMessage>{notFoundMessage}</S.ProfileNotFoundMessage>
+					<S.NotFoundMessage>{notFoundMessage}</S.NotFoundMessage>
 				)}
-			</S.ProfileWrapper>
+			</S.Wrapper>
 		</S.ProfileContainer>
 	);
 }

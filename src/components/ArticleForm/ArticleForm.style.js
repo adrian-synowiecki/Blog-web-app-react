@@ -1,6 +1,5 @@
 import styled from 'styled-components/macro';
-import { Form } from 'formik';
-import { TextField } from 'formik-material-ui';
+import { TextField as TextFieldComponent } from 'formik-material-ui';
 
 import Button from 'components/Button/Button';
 
@@ -8,19 +7,16 @@ export const ArticleFormContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	margin: 3rem 2rem;
 `;
 
-export const CreateNewArticle = styled.h1`
+export const Title = styled.h1`
 	font-weight: 500;
 	color: ${({ theme }) => theme.colors.blue2};
 	letter-spacing: 0.2rem;
 `;
 
-export const ArticleForm = styled(Form)`
-    width: 90%;
-`;
-
-export const ArticleFormTextField = styled(TextField)`
+export const TextField = styled(TextFieldComponent)`
     width: 100%;  
     label { 
       font-size: 1.4rem;     
@@ -39,9 +35,10 @@ export const ArticleFormTextField = styled(TextField)`
     label.Mui-focused {
       color: ${({ theme }) => theme.colors.blue2}
   }
+ /*  ${({ theme }) => theme.inputStyles} */
 `;
 
-export const ArticleFormButton = styled(Button)`
+export const CreateAndEditArticleButton = styled(Button)`
     margin-top: 2rem;
     width: 100%;
 `;

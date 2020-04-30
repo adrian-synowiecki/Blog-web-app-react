@@ -13,7 +13,6 @@ import Profile from 'components/Profile/Profile';
 function UserProfilePage({
 	currentUserData,
 	articleList,
-	isFetchingArticles,
 	fetchArticlesByAuthorRequest,
 	fetchFavoriteArticlesRequest,
 	unloadArticles
@@ -35,7 +34,6 @@ function UserProfilePage({
 		<Profile
 			profileData={currentUserData}
 			articleList={articleList}
-			isFetchingArticles={isFetchingArticles}
 			fetchArticlesByAuthorRequest={fetchArticlesByAuthorRequest}
 			fetchFavoriteArticlesRequest={fetchFavoriteArticlesRequest}
 			unloadArticles={unloadArticles}
@@ -47,7 +45,6 @@ function UserProfilePage({
 const mapStateToProps = (state) => ({
 	articleList: state.articleList.articleList,
 	currentUserData: state.user.currentUserData,
-	isFetchingArticles: state.user.isFetchingArticles
 });
 
 const mapDispatchToProps = (dispatch) => ({

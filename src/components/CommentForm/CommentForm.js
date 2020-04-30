@@ -22,17 +22,17 @@ function CommentForm({ addCommentToArticleRequest, className }) {
 			}}
 		>
 			{({ isSubmitting }) => (
-				<S.CommentForm className={className}>
-					<S.CommentFormField
+				<S.Form className={className}>
+					<S.Field
 						name="commentText"
 						component="textarea"
 						placeholder="Write a comment..."
 						rows="3"
 					/>
-					<S.CommentFormButton disabled={isSubmitting} type="submit">
+					<S.CreateCommentButton disabled={isSubmitting} type="submit">
 						Post comment
-					</S.CommentFormButton>
-				</S.CommentForm>
+					</S.CreateCommentButton>
+				</S.Form>
 			)}
 		</Formik>
 	);

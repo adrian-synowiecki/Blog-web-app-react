@@ -2,18 +2,18 @@ import styled from 'styled-components/macro';
 
 export const ArticleMetaContainer = styled.div`display: flex;`;
 
-export const ArticleMetaImageProfile = styled.img`
+export const ImageProfile = styled.img`
 	width: 3rem;
 	height: 3rem;
 	border-radius: 8rem;
 `;
 
-export const ArticleMetaWrapper = styled.div`
+export const Wrapper = styled.div`
 	margin-top: -0.4rem;
 	margin-left: 0.4rem;
 `;
 
-export const ArticleMetaAuthorName = styled.p`
+export const AuthorName = styled.p`
 	width: 27rem;
 	margin: 0;
 	font-weight: 500;
@@ -23,7 +23,7 @@ export const ArticleMetaAuthorName = styled.p`
 	}
 `;
 
-export const ArticleMetaDateCreated = styled.p`
+export const DateCreated = styled.p`
 	color: gray;
 	opacity: 0.8;
 	font-size: 1rem;

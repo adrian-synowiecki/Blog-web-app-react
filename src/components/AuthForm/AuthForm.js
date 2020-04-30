@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Formik, Field } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import { useLocation } from 'react-router-dom';
 
 import * as S from './AuthForm.style';
@@ -23,7 +23,7 @@ function AuthForm({ error, signUpPage, signUpRequest, loginRequest }) {
 
 	return (
 		<S.AuthFormContainer>
-			<S.AuthFormTitle>{signUpPage ? 'SIGN UP' : 'LOG IN'}</S.AuthFormTitle>
+			<S.Title>{signUpPage ? 'SIGN UP' : 'LOG IN'}</S.Title>
 			{signUpPage ? (
 				<S.LinkToAuth to="/login">Have an account?</S.LinkToAuth>
 			) : (
@@ -44,14 +44,14 @@ function AuthForm({ error, signUpPage, signUpRequest, loginRequest }) {
 				}}
 			>
 				{({ isSubmitting }) => (
-					<S.AuthForm>
+					<Form style={{ width: '100%' }}>
 						{error && <ErrorList error={error} />}
 						{signUpPage && (
 							<Field
 								name="username"
 								type="text"
 								autocomplete="off"
-								component={S.AuthFormTextField}
+								component={S.TextField}
 								label="Username"
 								margin="normal"
 								variant="outlined"
@@ -61,14 +61,14 @@ function AuthForm({ error, signUpPage, signUpRequest, loginRequest }) {
 							name="email"
 							type="email"
 							autocomplete="off"
-							component={S.AuthFormTextField}
+							component={S.TextField}
 							label="Email"
 							margin="normal"
 							variant="outlined"
 						/>
 						<Field
 							name="password"
-							component={S.AuthFormTextField}
+							component={S.TextField}
 							type="password"
 							inputProps={{
 								readOnly: isReadOnly,
@@ -79,10 +79,10 @@ function AuthForm({ error, signUpPage, signUpRequest, loginRequest }) {
 							margin="normal"
 							variant="outlined"
 						/>
-						<S.AuthFormButton type="submit" disabled={isSubmitting} variant="contained">
+						<S.SignUpAndLogInButton type="submit" disabled={isSubmitting} variant="contained">
 							{signUpPage ? 'SIGN UP' : 'LOG IN'}
-						</S.AuthFormButton>
-					</S.AuthForm>
+						</S.SignUpAndLogInButton>
+					</Form>
 				)}
 			</Formik>
 		</S.AuthFormContainer>

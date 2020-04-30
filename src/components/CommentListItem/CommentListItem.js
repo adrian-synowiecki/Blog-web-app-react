@@ -10,15 +10,15 @@ function CommentListItem({ commentData, currentUserData, removeCommentFromArticl
 	const createdAtDate = new Date(createdAt).toDateString();
 	return (
 		<S.CommentListItemContainer key={id}>
-			<S.CommentText>{body}</S.CommentText>
-			<S.CommentFooterWrapper>
-				<S.CommentImage src={image} />
-				<S.CommentUsername>{username}</S.CommentUsername>
-				<S.CommentCreatedAt>{createdAtDate}</S.CommentCreatedAt>
+			<S.Text>{body}</S.Text>
+			<S.FooterWrapper>
+				<S.AuthorImage src={image} />
+				<S.Username>{username}</S.Username>
+				<S.CreatedAt>{createdAtDate}</S.CreatedAt>
 				{currentUserData.username === username && (
 					<S.RemoveCommentIcon onClick={() => removeCommentFromArticleRequest(articleSlug, id)} />
 				)}
-			</S.CommentFooterWrapper>
+			</S.FooterWrapper>
 		</S.CommentListItemContainer>
 	);
 }
