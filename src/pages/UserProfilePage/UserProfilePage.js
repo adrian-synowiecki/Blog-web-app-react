@@ -16,7 +16,6 @@ function UserProfilePage({
 	profileData,
 	articleList,
 	error,
-	isFetchingProfileData,
 	fetchArticlesByAuthorRequest,
 	fetchFavoriteArticlesRequest,
 	fetchProfileByUsernameRequest,
@@ -28,7 +27,7 @@ function UserProfilePage({
 
 	useEffect(() => {
 		fetchProfileByUsernameRequest(username);
-		console.log('dhuhyhyuhyuhyus')
+		console.log('dhuhyhyuhyuhyus');
 		if (location.pathname.includes('favorites')) {
 			fetchFavoriteArticlesRequest(username);
 		} else fetchArticlesByAuthorRequest(username);
@@ -38,7 +37,7 @@ function UserProfilePage({
 			unloadProfile();
 		};
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
-	
+
 	return (
 		<Fragment>
 			{error ? (
@@ -60,6 +59,7 @@ function UserProfilePage({
 const mapStateToProps = (state) => ({
 	articleList: state.articleList.articleList,
 	profileData: state.profile.profileData,
+	error: state.profile.error
 });
 
 const mapDispatchToProps = (dispatch) => ({

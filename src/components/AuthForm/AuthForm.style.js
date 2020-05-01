@@ -1,6 +1,5 @@
 import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
-import { TextField as TextFieldComponent } from 'formik-material-ui';
 
 import Button from 'components/Button/Button';
 
@@ -20,27 +19,6 @@ export const LinkToAuth = styled(Link)`
     &:hover {
         text-decoration: underline;
     }
-`;
-
-export const TextField = styled(TextFieldComponent)`
-	width: 100%;
-	& .MuiInputBase-input {
-       height: ${({ bio }) => bio && '10rem'};
-    }
-    .MuiOutlinedInput-root {
-        fieldset {
-        border-color: #BDC3C7;
-    }
-    &:hover fieldset {
-        border-color: ${({ theme }) => theme.colors.blue2}
-    }
-    &.Mui-focused fieldset {
-        border: ${({ theme }) => `2px solid ${theme.colors.blue2}`}
-    }
-  }
-    label.Mui-focused {
-      color: ${({ theme }) => theme.colors.blue2}
-  }
 `;
 
 export const SignUpAndLogInButton = styled(Button)`

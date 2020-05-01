@@ -18,7 +18,7 @@ const { store, persistor } = configureStore();
 
 ReactDOM.render(
 	<Provider store={store}>
-		<ConnectedRouter history={history} noInitialPop>
+		<ConnectedRouter history={history} >
 			<PersistGate persistor={persistor}>
 				<GlobalStyles />
 				<ThemeProvider theme={theme}>

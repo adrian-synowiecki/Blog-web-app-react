@@ -8,6 +8,7 @@ import { updateUserRequest, clearUserError, logOut } from 'redux/user/user.actio
 
 import Button from 'components/Button/Button';
 import ErrorList from 'components/ErrorList/ErrorList';
+import Input from 'components/Input/Input';
 
 function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUserError, logOut, push }) {
 	const formikRef = useRef(null);
@@ -58,51 +59,11 @@ function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUser
 				{({ isSubmitting }) => (
 					<Form style={{ width: '100%' }}>
 						{error && <ErrorList error={error} />}
-						<Field
-							name="image"
-							type="text"
-							component={S.TextField}
-							margin="normal"
-							variant="outlined"
-							label="URL of profile picture"
-						/>
-
-						<Field
-							name="username"
-							type="text"
-							component={S.TextField}
-							label="Username"
-							margin="normal"
-							variant="outlined"
-						/>
-
-						<Field
-							bio
-							name="bio"
-							type="text"
-							component={S.TextField}					
-							margin="normal"
-							variant="outlined"
-							label="Short bio about you"
-						/>
-						<Field
-							name="email"
-							type="email"
-							component={S.TextField}
-							autoComplete="current-email"
-							label="Email"
-							margin="normal"
-							variant="outlined"
-						/>
-
-						<Field
-							name="password"
-							component={S.TextField}
-							type="password"
-							label="New Password"
-							margin="normal"
-							variant="outlined"
-						/>
+						<Input name="image" type="text" label="URL of profile picture" />
+						<Input name="username" type="text" label="Username" />
+						<Input name="bio" type="text" multiline rows="5" label="Short bio about you" />
+						<Input name="email" type="email" label="Email" />
+						<Input name="password" type="password" label="New Password" />
 						<S.ButtonsWrapper>
 							<S.LogoutButton disabled={isSubmitting} type="submit" onClick={handleLogout}>
 								Click here to logout

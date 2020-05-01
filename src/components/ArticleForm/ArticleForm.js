@@ -6,6 +6,7 @@ import * as S from './ArticleForm.style';
 import './react-tags-input.css';
 
 import ErrorList from 'components/ErrorList/ErrorList';
+import Input from 'components/Input/Input';
 
 function ArticleForm({ articleToEdit, error, createArticleRequest, updateArticleRequest }) {
 	const { title, description, body, slug } = articleToEdit || {};
@@ -17,7 +18,7 @@ function ArticleForm({ articleToEdit, error, createArticleRequest, updateArticle
 		},
 		[ error ]
 	);
-	
+
 	return (
 		<S.ArticleFormContainer>
 			<S.Title>{articleToEdit ? 'Edit Article' : 'Create New Article'}</S.Title>
@@ -55,30 +56,9 @@ function ArticleForm({ articleToEdit, error, createArticleRequest, updateArticle
 				{({ isSubmitting, values, setFieldValue }) => (
 					<Form style={{ width: '100%' }}>
 						{error && <ErrorList error={error} />}
-						<Field
-							name="title"
-							component={S.TextField}
-							label="Article Title"
-							margin="normal"
-							variant="outlined"
-						/>
-						<Field
-							name="description"
-							component={S.TextField}
-							label="What's this Article about?"
-							margin="normal"
-							variant="outlined"
-						/>
-
-						<Field
-							name="body"
-							component={S.TextField}
-							label="Wrtice your Article (in markdown)"
-							multiline
-							rows="10"
-							margin="normal"
-							variant="outlined"
-						/>
+						<Input name="title" label="Article Title" />
+						<Input name="description" label="What's this Article about?" />
+						<Input name="body" label="Wrtice your Article (in markdown)" multiline rows="10" />
 						<TagsInput
 							value={values.tagList}
 							onChange={(tagList) => {

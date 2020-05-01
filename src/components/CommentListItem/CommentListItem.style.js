@@ -34,7 +34,7 @@ export const CreatedAt = styled.p`
 	margin-left: 1rem;
 `;
 
-export const RemoveCommentIcon = styled(TrashCan)`
+export const TrashCanIcon = styled(TrashCan)`
 	width: 2rem;
 	height: 2rem;
 	margin-left: auto;

@@ -16,8 +16,10 @@ import CommentList from 'components/CommentList/CommentList';
 function ArticleOverviewPage({
 	articleData,
 	isAuth,
+	currentUserData,
 	commentList,
 	fetchArticleRequest,
+	unloadArticle,
 	fetchCommentsFromArticleRequest,
 	addCommentToArticleRequest,
 	error
@@ -32,6 +34,8 @@ function ArticleOverviewPage({
 			unloadArticle();
 		};
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
+	const canModifyArticle =
+		!isEmpty(articleData) && !isEmpty(currentUserData) && articleData.author.username === currentUserData.username;
 
 	return (
 		<Fragment>
@@ -40,9 +44,29 @@ function ArticleOverviewPage({
 				<Fragment>
 					<S.Header>
 						<S.Title>{title}</S.Title>
-						<ArticleMeta articleData={articleData} articleOverviewPage />
+						<S.Wrapper>
+							<ArticleMeta articleData={articleData} articleOverviewPage />
+							<S.IconsWrapper>
+								{canModifyArticle && (
+									<S.ModifyButton>
+										<S.IconWrapper>
+											<S.ModifyIcon />
+										</S.IconWrapper>
+										Modify article
+									</S.ModifyButton>
+								)}
+								{canModifyArticle && (
+									<S.DeleteButton>
+										<S.IconWrapper includePadding>
+											<S.TrashCanIcon />
+										</S.IconWrapper>
+										Delete article
+									</S.DeleteButton>
+								)}
+							</S.IconsWrapper>
+						</S.Wrapper>
 					</S.Header>
-					<S.Wrapper>
+					<S.MainWrapper>
 						<S.Text>{body}</S.Text>
 						<TagList tagList={tagList} />
 						{isAuth ? (
@@ -55,7 +79,7 @@ function ArticleOverviewPage({
 							</S.AuthInvite>
 						)}
 						<CommentList commentList={commentList} />
-					</S.Wrapper>
+					</S.MainWrapper>
 				</Fragment>
 			)}
 		</Fragment>

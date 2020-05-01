@@ -5,7 +5,7 @@ export default createGlobalStyle`
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	font-family: "Segoe UI", "Roboto", sans-serif, BlinkMacSystemFont, "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+	font-family: "Roboto", sans-serif, BlinkMacSystemFont, "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
 		"Droid Sans", "Helvetica Neue";
 }
 

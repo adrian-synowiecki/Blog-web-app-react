@@ -29,7 +29,6 @@ export const Text = styled(Link)`
 	margin-bottom: 1rem;
 	color: ${({ theme }) => theme.colors.blue2};
 	overflow-wrap: break-word;
-	
 `;
 
 export const ReadMore = styled(Link)`
@@ -37,7 +36,6 @@ export const ReadMore = styled(Link)`
 	margin-bottom: 1rem;
 	font-size: 1.1rem;  
 	color: ${({ theme }) => theme.colors.blue3};
-/* 	overflow-wrap: break-word; */
 `;
 
 export const HeartIcon = styled(Heart)`

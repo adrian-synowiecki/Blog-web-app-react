@@ -1,5 +1,6 @@
 import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 
 import * as S from './HomePage.styles';
 import { fetchArticlesByMostRecentRequest, unloadArticles } from 'redux/articleList/articleList.actions';
@@ -23,7 +24,9 @@ function HomePage({
 	unloadArticles,
 	unloadTags
 }) {
+	const location = useLocation();
 	useEffect(() => {
+		/* window.localStorage.clear('offset') */
 		fetchArticlesByMostRecentRequest(window.localStorage.getItem('offSet'));
 		fetchTagsByMostPopularRequest();
 		return () => {
@@ -36,7 +39,7 @@ function HomePage({
 		removeTagName();
 		fetchArticlesByMostRecentRequest(window.localStorage.getItem('offSet'));
 	};
-
+	console.log(location.pathname)
 	return (
 		<Fragment>
 			<S.Header>

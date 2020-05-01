@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import * as S from './AuthForm.style';
 
 import ErrorList from 'components/ErrorList/ErrorList';
+import Input from 'components/Input/Input';
 
 function AuthForm({ error, signUpPage, signUpRequest, loginRequest }) {
 	const [ isReadOnly, setReadOnly ] = useState(true);
@@ -46,38 +47,17 @@ function AuthForm({ error, signUpPage, signUpRequest, loginRequest }) {
 				{({ isSubmitting }) => (
 					<Form style={{ width: '100%' }}>
 						{error && <ErrorList error={error} />}
-						{signUpPage && (
-							<Field
-								name="username"
-								type="text"
-								autocomplete="off"
-								component={S.TextField}
-								label="Username"
-								margin="normal"
-								variant="outlined"
-							/>
-						)}
-						<Field
-							name="email"
-							type="email"
-							autocomplete="off"
-							component={S.TextField}
-							label="Email"
-							margin="normal"
-							variant="outlined"
-						/>
-						<Field
+						{signUpPage && <Input name="username" type="text" autocomplete="off" label="Username" />}
+						<Input name="email" type="email" autocomplete="off" label="Email" />
+						<Input
 							name="password"
-							component={S.TextField}
 							type="password"
 							inputProps={{
 								readOnly: isReadOnly,
 								autoComplete: 'off'
 							}}
-							onFocus={handleFocus}
+							handleFocus={handleFocus}
 							label="Password"
-							margin="normal"
-							variant="outlined"
 						/>
 						<S.SignUpAndLogInButton type="submit" disabled={isSubmitting} variant="contained">
 							{signUpPage ? 'SIGN UP' : 'LOG IN'}

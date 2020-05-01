@@ -9,10 +9,12 @@ import {
 } from 'redux/articleList/articleList.actions';
 
 import Profile from 'components/Profile/Profile';
+import NotFound from 'components/NotFound/NotFound';
 
 function UserProfilePage({
 	currentUserData,
 	articleList,
+	error,
 	fetchArticlesByAuthorRequest,
 	fetchFavoriteArticlesRequest,
 	unloadArticles
@@ -31,20 +33,27 @@ function UserProfilePage({
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	return (
-		<Profile
-			profileData={currentUserData}
-			articleList={articleList}
-			fetchArticlesByAuthorRequest={fetchArticlesByAuthorRequest}
-			fetchFavoriteArticlesRequest={fetchFavoriteArticlesRequest}
-			unloadArticles={unloadArticles}
-			path={location.pathname}
-		/>
+		<Fragment>
+			{error ? (
+				<NotFound />
+			) : (
+				<Profile
+					profileData={currentUserData}
+					articleList={articleList}
+					fetchArticlesByAuthorRequest={fetchArticlesByAuthorRequest}
+					fetchFavoriteArticlesRequest={fetchFavoriteArticlesRequest}
+					unloadArticles={unloadArticles}
+					path={location.pathname}
+				/>
+			)}
+		</Fragment>
 	);
 }
 
 const mapStateToProps = (state) => ({
 	articleList: state.articleList.articleList,
 	currentUserData: state.user.currentUserData,
+	error: state.user.error
 });
 
 const mapDispatchToProps = (dispatch) => ({

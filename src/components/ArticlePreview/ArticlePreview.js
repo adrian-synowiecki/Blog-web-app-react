@@ -18,7 +18,7 @@ function ArticlePreview({
 	fetchArticlesByTagRequest,
 	push
 }) {
-	const { favorited, slug, title, description, favoritesCount, tagList } = articleData;
+	const { favorited, slug, title, description, favoritesCount, tagList } = articleData || {};
 	const handleAddingToFavorite = () => {
 		if (isAuth) {
 			if (favorited) {
