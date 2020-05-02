@@ -1,45 +1,62 @@
 import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+/* import { animateScroll as scroll } from 'react-scroll'; */
 
 import * as S from './HomePage.styles';
-import { fetchArticlesByMostRecentRequest, unloadArticles } from 'redux/articleList/articleList.actions';
+import {
+	fetchArticlesByMostRecentRequest,
+	fetchArticlesByTagRequest,
+	unloadArticles
+} from 'redux/articleList/articleList.actions';
 import { fetchTagsByMostPopularRequest, removeTagName, unloadTags } from 'redux/tags/tags.actions';
-import { setCurrentPageNumber } from 'redux/common/common.actions';
+import { setOffSet } from 'redux/common/common.actions';
 
 import ArticleList from 'components/ArticleList/ArticleList';
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
 import TagList from 'components/TagList/TagList';
-import Pagination from 'components/Pagination/Pagination';
 
 function HomePage({
 	articleList,
 	tagList,
 	tag,
-	currentPageNumber,
-	setCurrentPageNumber,
+	offSet,
+	articlesCount,
+	setOffSet,
 	fetchTagsByMostPopularRequest,
+	fetchArticlesByTagRequest,
 	fetchArticlesByMostRecentRequest,
 	removeTagName,
 	unloadArticles,
 	unloadTags
 }) {
-	const location = useLocation();
-	useEffect(() => {
-		/* window.localStorage.clear('offset') */
-		fetchArticlesByMostRecentRequest(window.localStorage.getItem('offSet'));
-		fetchTagsByMostPopularRequest();
-		return () => {
-			unloadArticles();
-			unloadTags();
-		};
-	}, []); // eslint-disable-line react-hooks/exhaustive-deps
+	let { currentPageNumber } = useParams();
+	useEffect(
+		() => {
+			handlePageChange(currentPageNumber);
+			fetchTagsByMostPopularRequest();
+			return () => {
+				unloadArticles();
+				unloadTags();
+			};
+		},
+		[ currentPageNumber ]
+	); // eslint-disable-line react-hooks/exhaustive-deps
 
 	const handleClick = () => {
 		removeTagName();
-		fetchArticlesByMostRecentRequest(window.localStorage.getItem('offSet'));
+		unloadArticles();
+		fetchArticlesByMostRecentRequest(offSet);
 	};
-	console.log(location.pathname)
+
+	const handlePageChange = (currentPageNumber) => {
+		const offSet = currentPageNumber === 1 ? 0 : (currentPageNumber - 1) * 20;
+		if (tag) {
+			fetchArticlesByTagRequest(tag, offSet);
+		} else fetchArticlesByMostRecentRequest(offSet);
+		setOffSet(offSet);
+	};
+
 	return (
 		<Fragment>
 			<S.Header>
@@ -72,11 +89,11 @@ function HomePage({
 							<ArticleList articleList={articleList} />
 							<S.Pagination
 								currentPageNumber={currentPageNumber}
-								fetchArticlesByMostRecentRequest={fetchArticlesByMostRecentRequest}
-								setCurrentPageNumber={setCurrentPageNumber}
+								articlesCount={articlesCount}
+								articleList={articleList}
 							/>
 							{tagList.length > 0 && (
-								<TagList tagList={tagList} arePopularTags>
+								<TagList tagList={tagList}>
 									<S.PopularTags>Popular Tags</S.PopularTags>
 								</TagList>
 							)}
@@ -92,16 +109,18 @@ const mapStateToProps = (state) => ({
 	articleList: state.articleList.articleList,
 	tagList: state.tags.tagList,
 	tag: state.tags.tag,
-	currentPageNumber: state.common.currentPageNumber
+	offSet: state.common.offSet,
+	articlesCount: state.articleList.articlesCount
 });
 
 const mapDispatchToProps = (dispatch) => ({
 	fetchArticlesByMostRecentRequest: (offSet) => dispatch(fetchArticlesByMostRecentRequest(offSet)),
+	fetchArticlesByTagRequest: (tag, offSet) => dispatch(fetchArticlesByTagRequest(tag, offSet)),
 	unloadArticles: () => dispatch(unloadArticles()),
 	fetchTagsByMostPopularRequest: () => dispatch(fetchTagsByMostPopularRequest()),
 	removeTagName: () => dispatch(removeTagName()),
 	unloadTags: () => dispatch(unloadTags()),
-	setCurrentPageNumber: (currentPageNumber) => dispatch(setCurrentPageNumber(currentPageNumber))
+	setOffSet: (offSet) => dispatch(setOffSet(offSet))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

@@ -11,10 +11,13 @@ export default createGlobalStyle`
 
 html {
 	font-size: 62.5%;
+	/* height: 100%;
+	overflow:auto; */
 }
 
 body {
-    background-color: #fcfafa;
+	background-color: #fcfafa;
+/* 	height: 100%;  */
 	color: '#061539';
 	font-size: 1.6rem;
 	-webkit-font-smoothing: antialiased;

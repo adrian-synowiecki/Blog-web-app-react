@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { fetchArticlesByTagRequest } from 'redux/articleList/articleList.actions';
+import { fetchArticlesByTagRequest, unloadArticles } from 'redux/articleList/articleList.actions';
 import { getTagName } from 'redux/tags/tags.actions';
 
 import * as S from './TagList.style';
 
-function TagList({ tagList, fetchArticlesByTagRequest, getTagName, children }) {
+function TagList({ tagList, fetchArticlesByTagRequest, getTagName, unloadArticles, children }) {
 	const onTagClick = (tag) => {
+		unloadArticles();
 		getTagName(tag);
 		fetchArticlesByTagRequest(tag);
 	};
@@ -24,7 +25,8 @@ function TagList({ tagList, fetchArticlesByTagRequest, getTagName, children }) {
 }
 const mapDispatchToProps = (dispatch) => ({
 	fetchArticlesByTagRequest: (tag) => dispatch(fetchArticlesByTagRequest(tag)),
-	getTagName: (tag) => dispatch(getTagName(tag))
+	getTagName: (tag) => dispatch(getTagName(tag)),
+	unloadArticles: () => dispatch(unloadArticles())
 });
 
 export default connect(null, mapDispatchToProps)(TagList);

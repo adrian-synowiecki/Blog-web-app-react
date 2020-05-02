@@ -12,7 +12,6 @@ function Navbar({ currentUserData, isAuth, fetchArticlesByMostRecentRequest, set
 			toggleHamburgerMenu(!isOpenHamburgerMenu);
 		}
 		fetchArticlesByMostRecentRequest();
-		setCurrentPageNumberToFirst();
 	};
 
 	return (

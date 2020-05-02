@@ -7,7 +7,7 @@ import * as api from './articleList.api';
 function* fetchArticlesByMostRecentAsync(action) {
 	try {
 		const response = yield call(api.fetchArticlesFromAPI, action.offSet);
-		yield put(articlesActions.fetchArticlesByMostRecentDone(response.data.articles));
+		yield put(articlesActions.fetchArticlesByMostRecentDone(response.data.articles, response.data.articlesCount));
 	} catch (error) {
 		yield put(articlesActions.fetchArticlesByMostRecentError(error));
 	}
@@ -32,9 +32,11 @@ function* fetchFavoriteArticlesAsync(action) {
 }
 
 function* fetchArticlesByTagAsync(action) {
+	const { tag, offSet } = action;
 	try {
-		const response = yield call(api.fetchArticlesByTagFromAPI, action.tag);
-		yield put(articlesActions.fetchArticlesByTagDone(response.data.articles));
+		const response = yield call(api.fetchArticlesByTagFromAPI, tag, offSet);
+		console.log(response);
+		yield put(articlesActions.fetchArticlesByTagDone(response.data.articles, response.data.articlesCount));
 	} catch (error) {
 		yield put(articlesActions.fetchArticlesByTagError(error));
 	}

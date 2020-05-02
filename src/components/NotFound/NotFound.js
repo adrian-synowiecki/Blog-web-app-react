@@ -15,8 +15,4 @@ function NotFound({ push }) {
 	);
 }
 
-const mapDispatchToProps = (dispatch) => ({
-	push: (path) => dispatch(push(path))
-});
-
-export default connect(null, { mapDispatchToProps })(NotFound);
+export default connect(null, { push })(NotFound);

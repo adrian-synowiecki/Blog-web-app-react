@@ -1,7 +1,7 @@
-import axiosInstance from '../../utils/axios'
+import axiosInstance from 'utils/axios'
 
-export const fetchArticlesFromAPI = (offset) => {
-    return axiosInstance.get(`api/articles?offset=${offset ? offset : 0}`);
+export const fetchArticlesFromAPI = (offSet) => {
+    return axiosInstance.get(`api/articles?offset=${offSet ? offSet : 0}`);
 }
 
 export const fetchArticlesByAuthorFromAPI = (username) => {
@@ -12,10 +12,10 @@ export const fetchFavoriteArticlesFromAPI = (username) => {
     return axiosInstance.get(`api/articles?favorited=${username}`);
 }
 
-export const fetchArticlesByTagFromAPI = (tag) => {
+export const fetchArticlesByTagFromAPI = (tag, offSet) => {
     return axiosInstance.get(`api/articles?tag=${tag}`)
 }
-
+/* &offset=${offSet ? offSet : 0} */
 export const addArticleToFavoritesInApi = (articleSlug) => {
     return axiosInstance.post(`api/articles/${articleSlug}/favorite`);
 }

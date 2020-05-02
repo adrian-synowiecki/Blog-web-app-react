@@ -3,10 +3,10 @@ import { favoriteArticleListUpdate } from './favoriteArticlesListUpdate';
 
 const initialState = {
 	isFetchingArticles: false,
-	inProgress: false,
+	articlesCount: null,
 	articleList: null,
-	error: null,
-	userArticlesCount: null
+	inProgress: false,
+	error: null
 };
 
 export default function articlesReducer(state = initialState, action) {
@@ -25,7 +25,7 @@ export default function articlesReducer(state = initialState, action) {
 				...state,
 				articleList: action.payload.articleList,
 				isFetchingArticles: false,
-				userArticlesCount: action.payload.articlesCount
+				articlesCount: action.payload.articlesCount
 			};
 
 		case articlesTypes.FETCH_ARTICLES_BY_MOST_RECENT_ERROR:

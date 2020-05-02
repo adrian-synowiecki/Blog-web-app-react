@@ -19,7 +19,6 @@ function* fetchArticleAsync(action) {
 function* createArticleAsync(action) {
 	try {
 		yield call(api.createArticleInAPI, action.articleCreationData);
-		yield put(commonActions.setCurrentPageNumberToFirst());
 		yield put(push('/'));
 	} catch (error) {
 		yield put(articleActions.createArticleError(error.response.data.errors));
@@ -30,7 +29,6 @@ function* updateArticleAsync(action) {
 	const { articleSlug, articleToUpdateData } = action;
 	try {
 		yield call(api.updateArticleInAPI, articleSlug, articleToUpdateData);
-		yield put(commonActions.setCurrentPageNumberToFirst());
 		yield put(push('/'));
 	} catch (error) {
 		yield put(articleActions.updateArticleError(error.response.data.errors));
@@ -41,7 +39,6 @@ function* deleteArticleAsync(action) {
 	try {
 		yield call(api.deleteArticleInAPI, action.articleSlug);
 		yield put(articleActions.deleteArticleDone());
-		yield put(commonActions.setCurrentPageNumberToFirst());
 		yield put(push('/'));
 	} catch (error) {
 		yield put(articleActions.deleteArticleError(error));

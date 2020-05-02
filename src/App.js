@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { setCurrentPageNumberToFirst } from 'redux/common/common.actions';
 import { fetchArticlesByMostRecentRequest } from 'redux/articleList/articleList.actions';
 
 import HomePage from 'pages/HomePage/HomePage';
@@ -71,7 +70,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	setCurrentPageNumberToFirst: () => dispatch(setCurrentPageNumberToFirst()),
 	fetchArticlesByMostRecentRequest: () => dispatch(fetchArticlesByMostRecentRequest())
 });
 

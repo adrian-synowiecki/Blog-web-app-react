@@ -1,46 +1,18 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import { push } from 'connected-react-router';
+import React from 'react';
 
 import * as S from './Pagination.style';
 
-function Pagination({ currentPageNumber, setCurrentPageNumber, fetchArticlesByMostRecentRequest, push, className }) {
+function Pagination({ articlesCount, articleList, className }) {
 	const pageLinks = [];
 
-	useEffect(
-		() => {
-			window.localStorage.setItem('currentPageNumber', currentPageNumber);
-			if (currentPageNumber !== 1) {
-				push(`/page/${currentPageNumber}`);
-			} else {
-				push(`/`);
-			}
-
-			/* window.scrollTo(0, 0); */
-		},
-		[ currentPageNumber ]
-	);
-
-	const handlePageChange = (index) => {
-		setCurrentPageNumber(index);
-		const offSet = index === 1 ? 0 : (index - 1) * 20;
-		window.localStorage.setItem('offSet', offSet);
-		fetchArticlesByMostRecentRequest(offSet);
-	};
-	for (let i = 1; i <= 50; i++) {
+	for (let i = 1; i <= articlesCount / articleList.length; i++) {
 		pageLinks.push(
-			i === currentPageNumber ? (
-				<S.PageLink
-					isActive={() => {
-						return true;
-					}}
-					key={i}
-					to
-				>
+			i === 1 ? (
+				<S.PageLink exact to={`/`} key={i}>
 					{i}
 				</S.PageLink>
 			) : (
-				<S.PageLink key={i} onClick={() => handlePageChange(i)} to>
+				<S.PageLink to={`/page/${i}`} key={i}>
 					{i}
 				</S.PageLink>
 			)
@@ -50,4 +22,4 @@ function Pagination({ currentPageNumber, setCurrentPageNumber, fetchArticlesByMo
 	return <S.PaginationContainer className={className}>{pageLinks.map((pageLink) => pageLink)}</S.PaginationContainer>;
 }
 
-export default connect(null, { push })(Pagination);
+export default Pagination;

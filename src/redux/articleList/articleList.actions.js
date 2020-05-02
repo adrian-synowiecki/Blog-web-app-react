@@ -5,9 +5,9 @@ export const fetchArticlesByMostRecentRequest = (offSet) => ({
 	type: articlesTypes.FETCH_ARTICLES_BY_MOST_RECENT_REQUEST,
 	offSet
 });
-export const fetchArticlesByMostRecentDone = (articleList) => ({
+export const fetchArticlesByMostRecentDone = (articleList, articlesCount) => ({
 	type: articlesTypes.FETCH_ARTICLES_BY_MOST_RECENT_DONE,
-	payload: { articleList }
+	payload: { articleList, articlesCount }
 });
 export const fetchArticlesByMostRecentError = (error) => ({
 	type: articlesTypes.FETCH_ARTICLES_BY_MOST_RECENT_ERROR,
@@ -43,13 +43,14 @@ export const fetchArticlesByAuthorError = (error) => ({
 });
 
 // fetch articles by tag
-export const fetchArticlesByTagRequest = (tag) => ({
+export const fetchArticlesByTagRequest = (tag, offSet) => ({
 	type: articlesTypes.FETCH_ARTICLES_BY_TAG_REQUEST,
-	tag
+	tag,
+	offSet
 });
-export const fetchArticlesByTagDone = (articleList) => ({
+export const fetchArticlesByTagDone = (articleList, articlesCount) => ({
 	type: articlesTypes.FETCH_ARTICLES_BY_TAG_DONE,
-	payload: { articleList }
+	payload: { articleList, articlesCount }
 });
 export const fetchArticlesByTagError = (error) => ({
 	type: articlesTypes.FETCH_ARTICLES_BY_TAG_ERROR,

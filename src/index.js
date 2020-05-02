@@ -9,11 +9,6 @@ import App from './App';
 import GlobalStyles from './global-styles';
 import { theme } from './utils/theme';
 
-
-
-
-
-
 const { store, persistor } = configureStore();
 
 ReactDOM.render(
