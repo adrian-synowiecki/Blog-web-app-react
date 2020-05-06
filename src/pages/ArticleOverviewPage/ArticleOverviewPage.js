@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { isEmpty } from 'lodash';
 
 import * as S from './ArticleOverviewPage.style';
@@ -48,20 +48,24 @@ function ArticleOverviewPage({
 							<ArticleMeta articleData={articleData} articleOverviewPage />
 							<S.IconsWrapper>
 								{canModifyArticle && (
-									<S.ModifyButton>
-										<S.IconWrapper>
-											<S.ModifyIcon />
-										</S.IconWrapper>
-										Modify article
-									</S.ModifyButton>
-								)}
-								{canModifyArticle && (
-									<S.DeleteButton>
-										<S.IconWrapper includePadding>
-											<S.TrashCanIcon />
-										</S.IconWrapper>
-										Delete article
-									</S.DeleteButton>
+									<Fragment>
+										<Link to="/editArticle/:articleSlug" style={{ textDecoration: 'none' }}>
+											<S.ModifyButton>
+												<S.IconWrapper>
+													<S.ModifyIcon />
+												</S.IconWrapper>
+												Modify article
+											</S.ModifyButton>
+										</Link>
+										<Link style={{ textDecoration: 'none' }}>
+											<S.DeleteButton>
+												<S.IconWrapper includePadding>
+													<S.TrashCanIcon />
+												</S.IconWrapper>
+												Delete article
+											</S.DeleteButton>
+										</Link>
+									</Fragment>
 								)}
 							</S.IconsWrapper>
 						</S.Wrapper>
@@ -78,6 +82,7 @@ function ArticleOverviewPage({
 								article
 							</S.AuthInvite>
 						)}
+
 						<CommentList commentList={commentList} />
 					</S.MainWrapper>
 				</Fragment>

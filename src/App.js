@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { fetchArticlesByMostRecentRequest } from 'redux/articleList/articleList.actions';
 
-import HomePage from 'pages/HomePage/HomePage';
+import MainPage from 'pages/MainPage/MainPage';
 import UserProfilePage from 'pages/UserProfilePage/UserProfilePage';
 import CurrentUserProfilePage from 'pages/CurrentUserProfilePage/CurrentUserProfilePage';
 import ArticleOverviewPage from 'pages/ArticleOverviewPage/ArticleOverviewPage';
@@ -27,9 +27,9 @@ function App({ currentUserData, isAuth, setCurrentPageNumberToFirst, fetchArticl
 				fetchArticlesByMostRecentRequest={fetchArticlesByMostRecentRequest}
 			/>
 			<Switch>
-				{[ '/', '/page/:currentPageNumber' ].map((path) => (
+				{[ '/', '/page/:currentPageNumber', '/tag/:tag', '/tag/:tag/:currentPageNumber' ].map((path) => (
 					<Route exact key={path} path={path}>
-						<HomePage />
+						<MainPage />
 					</Route>
 				))}
 				<Route path="/login">

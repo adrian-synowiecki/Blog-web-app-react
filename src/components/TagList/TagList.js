@@ -6,17 +6,12 @@ import { getTagName } from 'redux/tags/tags.actions';
 
 import * as S from './TagList.style';
 
-function TagList({ tagList, fetchArticlesByTagRequest, getTagName, unloadArticles, children }) {
-	const onTagClick = (tag) => {
-		unloadArticles();
-		getTagName(tag);
-		fetchArticlesByTagRequest(tag);
-	};
+function TagList({ tagList, children }) {
 	return (
 		<S.TagListContainer>
 			{children}
 			{tagList.map((tag) => (
-				<S.Tag to={`/`} key={tag} onClick={() => onTagClick(tag)}>
+				<S.Tag to={`/tag/${tag}`} key={tag}>
 					{tag}
 				</S.Tag>
 			))}

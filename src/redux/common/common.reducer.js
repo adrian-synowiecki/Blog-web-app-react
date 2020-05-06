@@ -7,9 +7,6 @@ const initialState = {
 
 export default (state = initialState, action) => {
 	switch (action.type) {
-		case commonTypes.SET_CURRENT_PAGE_NUMBER:
-			return { currentPageNumber: action.payload.currentPageNumber };
-
 		case commonTypes.SET_OFF_SET:
 			return { ...state, offSet: action.offSet };
 		default:

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { isEmpty } from 'lodash';
@@ -6,6 +6,7 @@ import { isEmpty } from 'lodash';
 import { fetchArticleRequest, updateArticleRequest, unloadArticle } from 'redux/article/article.actions';
 
 import ArticleForm from 'components/ArticleForm/ArticleForm';
+import NotFound from 'components/NotFound/NotFound';
 
 function EditArticlePage({ error, articleToEdit, fetchArticleRequest, updateArticleRequest, unloadArticle }) {
 	const { articleSlug } = useParams();
@@ -18,11 +19,12 @@ function EditArticlePage({ error, articleToEdit, fetchArticleRequest, updateArti
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	return (
-		<div>
+		<Fragment>
+			{error && <NotFound>404 Article Could Not Be Found</NotFound>}
 			{!isEmpty(articleToEdit) && (
 				<ArticleForm articleToEdit={articleToEdit} error={error} updateArticleRequest={updateArticleRequest} />
 			)}
-		</div>
+		</Fragment>
 	);
 }
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 
 import { createArticleRequest, clearArticleError } from 'redux/article/article.actions';
@@ -16,9 +16,9 @@ function ArticleCreationPage({ error, createArticleRequest, clearArticleError })
 		clearArticleError();
 	};
 	return (
-		<div>
+		<Fragment>
 			<ArticleForm error={error} createArticleRequest={createArticleRequest} />
-		</div>
+		</Fragment>
 	);
 }
 

@@ -1,18 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { push } from 'connected-react-router';
+import { goBack } from 'connected-react-router';
 
 import * as S from './NotFound.style';
 
 import Button from 'components/Button/Button';
 
-function NotFound({ push }) {
+function NotFound({ children, goBack }) {
 	return (
 		<S.NotFoundContainer>
-			<S.NotFoundMessage>404 Page Not Found</S.NotFoundMessage>
-			<Button onClick={() => push('/')}>Click to go back</Button>
+			<S.NotFoundMessage>{children}</S.NotFoundMessage>
+			<Button onClick={() => goBack()} style={{ marginTop: '1rem' }}>
+				Click to go back
+			</Button>
 		</S.NotFoundContainer>
 	);
 }
 
-export default connect(null, { push })(NotFound);
+export default connect(null, { goBack })(NotFound);

@@ -9,6 +9,7 @@ export const NotFoundContainer = styled.div`
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	width: 100%;
 `;
 
 export const NotFoundMessage = styled.h2`color: ${({ theme }) => theme.colors.blue2};`;

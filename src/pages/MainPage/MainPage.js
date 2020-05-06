@@ -1,9 +1,8 @@
 import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
-/* import { animateScroll as scroll } from 'react-scroll'; */
 
-import * as S from './HomePage.styles';
+import * as S from './MainPage.style';
 import {
 	fetchArticlesByMostRecentRequest,
 	fetchArticlesByTagRequest,
@@ -16,10 +15,9 @@ import ArticleList from 'components/ArticleList/ArticleList';
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
 import TagList from 'components/TagList/TagList';
 
-function HomePage({
+function MainPage({
 	articleList,
 	tagList,
-	tag,
 	offSet,
 	articlesCount,
 	setOffSet,
@@ -30,7 +28,7 @@ function HomePage({
 	unloadArticles,
 	unloadTags
 }) {
-	let { currentPageNumber } = useParams();
+	let { tag, currentPageNumber } = useParams();
 	useEffect(
 		() => {
 			handlePageChange(currentPageNumber);
@@ -40,17 +38,17 @@ function HomePage({
 				unloadTags();
 			};
 		},
-		[ currentPageNumber ]
+		[ currentPageNumber, tag ]
 	); // eslint-disable-line react-hooks/exhaustive-deps
 
 	const handleClick = () => {
 		removeTagName();
-		unloadArticles();
 		fetchArticlesByMostRecentRequest(offSet);
 	};
 
 	const handlePageChange = (currentPageNumber) => {
-		const offSet = currentPageNumber === 1 ? 0 : (currentPageNumber - 1) * 20;
+		const numberOfArticlesOnPage = 20;
+		const offSet = currentPageNumber === 1 ? 0 : (currentPageNumber - 1) * numberOfArticlesOnPage;
 		if (tag) {
 			fetchArticlesByTagRequest(tag, offSet);
 		} else fetchArticlesByMostRecentRequest(offSet);
@@ -91,6 +89,7 @@ function HomePage({
 								currentPageNumber={currentPageNumber}
 								articlesCount={articlesCount}
 								articleList={articleList}
+								tag={tag}
 							/>
 							{tagList.length > 0 && (
 								<TagList tagList={tagList}>
@@ -123,4 +122,4 @@ const mapDispatchToProps = (dispatch) => ({
 	setOffSet: (offSet) => dispatch(setOffSet(offSet))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

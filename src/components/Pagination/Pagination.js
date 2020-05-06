@@ -2,17 +2,17 @@ import React from 'react';
 
 import * as S from './Pagination.style';
 
-function Pagination({ articlesCount, articleList, className }) {
+function Pagination({ articlesCount, tag, articleList, className }) {
 	const pageLinks = [];
 
 	for (let i = 1; i <= articlesCount / articleList.length; i++) {
 		pageLinks.push(
 			i === 1 ? (
-				<S.PageLink exact to={`/`} key={i}>
+				<S.PageLink exact to={tag ? `/tag/${tag}` : `/`} key={i}>
 					{i}
 				</S.PageLink>
 			) : (
-				<S.PageLink to={`/page/${i}`} key={i}>
+				<S.PageLink to={tag ? `/tag/${tag}/${i}` : `/page/${i}`} key={i}>
 					{i}
 				</S.PageLink>
 			)

@@ -34,18 +34,15 @@ function UserProfilePage({
 
 	return (
 		<Fragment>
-			{error ? (
-				<NotFound />
-			) : (
-				<Profile
-					profileData={currentUserData}
-					articleList={articleList}
-					fetchArticlesByAuthorRequest={fetchArticlesByAuthorRequest}
-					fetchFavoriteArticlesRequest={fetchFavoriteArticlesRequest}
-					unloadArticles={unloadArticles}
-					path={location.pathname}
-				/>
-			)}
+			{error && <NotFound />}
+			<Profile
+				profileData={currentUserData}
+				articleList={articleList}
+				fetchArticlesByAuthorRequest={fetchArticlesByAuthorRequest}
+				fetchFavoriteArticlesRequest={fetchFavoriteArticlesRequest}
+				unloadArticles={unloadArticles}
+				path={location.pathname}
+			/>
 		</Fragment>
 	);
 }
