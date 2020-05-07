@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro';
 import { NavLink as NavLinkComponent } from 'react-router-dom';
 
-export const ProfileContainer = styled.div`margin: 3rem 2rem;`;
+export const ProfilePageContainer = styled.div`margin: 3rem 2rem;`;
 
 export const CredentialsWrapper = styled.div`
 	display: flex;
@@ -48,7 +48,7 @@ export const NavLink = styled(NavLinkComponent)`
 	letter-spacing: 0.1rem;
 	color: ${({ theme }) => theme.colors.blue1};
 	&:hover {
-		color: ${({ theme }) => theme.colors.blue3};
+		opacity: 0.8;
 	}
 	&.active {
 		text-shadow: .25px 0px .1px,

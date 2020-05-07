@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 import { fetchArticlesByMostRecentRequest } from 'redux/articleList/articleList.actions';
 
 import MainPage from 'pages/MainPage/MainPage';
-import UserProfilePage from 'pages/UserProfilePage/UserProfilePage';
-import CurrentUserProfilePage from 'pages/CurrentUserProfilePage/CurrentUserProfilePage';
+/* import UserProfilePage from 'pages/UserProfilePage/UserProfilePage'; */
+/* import CurrentUserProfilePage from 'pages/CurrentUserProfilePage/CurrentUserProfilePage'; */
+import ProfilePage from 'pages/ProfilePage/ProfilePage';
 import ArticleOverviewPage from 'pages/ArticleOverviewPage/ArticleOverviewPage';
 import CurrentUserSettingsPage from 'pages/CurrentUserSettingsPage/CurrentUserSettingsPage';
 import ArticleCreationPage from 'pages/ArticleCreationPage/ArticleCreationPage';
@@ -41,9 +42,12 @@ function App({ currentUserData, isAuth, setCurrentPageNumberToFirst, fetchArticl
 				<Route path="/article/:articleSlug">
 					<ArticleOverviewPage />
 				</Route>
-				<Route path="/articleAuthorProfile/:username">
-					<UserProfilePage />
+				<Route path="/profile/:username">
+					<ProfilePage />
 				</Route>
+				{/* 	<Route path="/articleAuthorProfile/:username">
+					<UserProfilePage />
+				</Route> */}
 				<PrivateRoute path="/userSettings">
 					<CurrentUserSettingsPage />
 				</PrivateRoute>
@@ -52,9 +56,6 @@ function App({ currentUserData, isAuth, setCurrentPageNumberToFirst, fetchArticl
 				</PrivateRoute>
 				<PrivateRoute path="/editArticle/:articleSlug">
 					<EditArticlePage />
-				</PrivateRoute>
-				<PrivateRoute path="/userProfile/:username">
-					<CurrentUserProfilePage />
 				</PrivateRoute>
 				<Route path="*">
 					<NotFound>404 Page Not Found</NotFound>

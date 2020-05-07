@@ -35,7 +35,7 @@ function ArticleOverviewPage({
 		};
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 	const canModifyArticle =
-		!isEmpty(articleData) && !isEmpty(currentUserData) && articleData.author.username === currentUserData.username;
+		articleData.author && currentUserData.username && articleData.author.username === currentUserData.username;
 
 	return (
 		<Fragment>

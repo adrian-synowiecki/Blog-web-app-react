@@ -9,11 +9,11 @@ function ArticleMeta({ articleData, articleOverviewPage, className }) {
 
 	return (
 		<S.ArticleMetaContainer className={className}>
-			<Link to={`/articleAuthorProfile/${username}`}>
+			<Link to={`/profile/${username}`}>
 				<S.ImageProfile src={image} />
 			</Link>
 			<S.Wrapper>
-				<Link to={`/articleAuthorProfile/${username}`} style={{ textDecoration: 'none' }}>
+				<Link to={`/profile/${username}`} style={{ textDecoration: 'none' }}>
 					<S.AuthorName articleOverviewPage={articleOverviewPage}>{username}</S.AuthorName>
 				</Link>
 				<S.DateCreated articleOverviewPage={articleOverviewPage}>{createdAtDate}</S.DateCreated>
