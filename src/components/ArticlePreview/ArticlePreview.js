@@ -22,8 +22,8 @@ function ArticlePreview({
 	const handleAddingToFavorite = () => {
 		if (isAuth) {
 			if (favorited) {
-				removeArticleFromFavoritesRequest(slug);
-			} else addArticleToFavoritesRequest(slug);
+				removeArticleFromFavoritesRequest(slug, false, favoritesCount - 1);
+			} else addArticleToFavoritesRequest(slug, true, favoritesCount + 1);
 		} else push('/signUp');
 	};
 
@@ -49,8 +49,10 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	addArticleToFavoritesRequest: (articleSlug) => dispatch(addArticleToFavoritesRequest(articleSlug)),
-	removeArticleFromFavoritesRequest: (articleSlug) => dispatch(removeArticleFromFavoritesRequest(articleSlug)),
+	addArticleToFavoritesRequest: (articleSlug, isFavorited, favoritesCount) =>
+		dispatch(addArticleToFavoritesRequest(articleSlug, isFavorited, favoritesCount)),
+	removeArticleFromFavoritesRequest: (articleSlug, isFavorited, favoritesCount) =>
+		dispatch(removeArticleFromFavoritesRequest(articleSlug, isFavorited, favoritesCount)),
 	push: (path) => dispatch(push(path))
 });
 

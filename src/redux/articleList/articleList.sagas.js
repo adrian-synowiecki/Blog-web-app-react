@@ -44,8 +44,10 @@ function* fetchArticlesByTagAsync(action) {
 
 function* addArticleToFavoritesAsync(action) {
 	try {
-		const response = yield call(api.addArticleToFavoritesInApi, action.articleSlug);
-		yield put(articlesActions.addArticleToFavoritesDone(response.data.article));
+		yield put(
+			articlesActions.addArticleToFavoritesDone(action.articleSlug, action.isFavorited, action.favoritesCount)
+		);
+		yield call(api.addArticleToFavoritesInApi, action.articleSlug);
 	} catch (error) {
 		yield put(articlesActions.addArticleToFavoritesError(error));
 	}
@@ -53,8 +55,14 @@ function* addArticleToFavoritesAsync(action) {
 
 function* removeArticleFromFavoritesAsync(action) {
 	try {
-		const response = yield call(api.removeArticleFromFavoritesFromApi, action.articleSlug);
-		yield put(articlesActions.removeArticleFromFavoritesDone(response.data.article));
+		yield put(
+			articlesActions.removeArticleFromFavoritesDone(
+				action.articleSlug,
+				action.isFavorited,
+				action.favoritesCount
+			)
+		);
+		yield call(api.removeArticleFromFavoritesFromApi, action.articleSlug);
 	} catch (error) {
 		yield put(articlesActions.removeArticleFromFavoritesError(error));
 	}

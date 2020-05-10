@@ -58,13 +58,15 @@ export const fetchArticlesByTagError = (error) => ({
 });
 
 // add article to favorites
-export const addArticleToFavoritesRequest = (articleSlug) => ({
+export const addArticleToFavoritesRequest = (articleSlug, isFavorited, favoritesCount) => ({
 	type: articlesTypes.ADD_ARTICLE_TO_FAVORITES_REQUEST,
-	articleSlug
+	articleSlug,
+	isFavorited,
+	favoritesCount
 });
-export const addArticleToFavoritesDone = (changedArticleData) => ({
+export const addArticleToFavoritesDone = (articleSlug, isFavorited, favoritesCount) => ({
 	type: articlesTypes.ADD_ARTICLE_TO_FAVORITES_DONE,
-	payload: { changedArticleData }
+	payload: { articleSlug, isFavorited, favoritesCount }
 });
 export const addArticleToFavoritesError = (error) => ({
 	type: articlesTypes.ADD_ARTICLE_TO_FAVORITES_ERROR,
@@ -72,13 +74,15 @@ export const addArticleToFavoritesError = (error) => ({
 });
 
 // remove article from favorites
-export const removeArticleFromFavoritesRequest = (articleSlug) => ({
+export const removeArticleFromFavoritesRequest = (articleSlug, isFavorited, favoritesCount) => ({
 	type: articlesTypes.REMOVE_ARTICLE_FROM_FAVORITES_REQUEST,
-	articleSlug
+	articleSlug,
+	isFavorited,
+	favoritesCount
 });
-export const removeArticleFromFavoritesDone = (changedArticleData) => ({
+export const removeArticleFromFavoritesDone = (articleSlug, isFavorited, favoritesCount) => ({
 	type: articlesTypes.REMOVE_ARTICLE_FROM_FAVORITES_DONE,
-	payload: { changedArticleData }
+	payload: { articleSlug, isFavorited, favoritesCount }
 });
 export const removeArticleFromFavoritesError = (error) => ({
 	type: articlesTypes.REMOVE_ARTICLE_FROM_FAVORITES_ERROR,

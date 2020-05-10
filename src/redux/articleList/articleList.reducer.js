@@ -42,7 +42,12 @@ export default function articlesReducer(state = initialState, action) {
 		case articlesTypes.REMOVE_ARTICLE_FROM_FAVORITES_DONE:
 			return {
 				...state,
-				articleList: favoriteArticleListUpdate(state.articleList, action.payload.changedArticleData),
+				articleList: favoriteArticleListUpdate(
+					state.articleList,
+					action.payload.articleSlug,
+					action.payload.isFavorited,
+					action.payload.favoritesCount
+				),
 				inProgress: false
 			};
 
