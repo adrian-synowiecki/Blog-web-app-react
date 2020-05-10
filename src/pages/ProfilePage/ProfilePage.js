@@ -1,7 +1,6 @@
 import React, { Fragment, useRef, useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
-
 import { isEmpty } from 'lodash';
 
 import {

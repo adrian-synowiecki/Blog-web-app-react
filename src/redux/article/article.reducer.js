@@ -17,7 +17,7 @@ export default function articleReducer(state = initialState, action) {
 		case articleTypes.FETCH_ARTICLE_DONE:
 			return { ...state, articleData: action.payload.articleData, isFetchingArticle: false };
 		case articleTypes.DELETE_ARTICLE_DONE:
-			return { ...state, inProgress: false };
+			return { ...state, articleData: {}, inProgress: false };
 
 		case articleTypes.FETCH_ARTICLE_ERROR:
 			return { ...state, error: action.payload.error, isFetchingArticle: false };

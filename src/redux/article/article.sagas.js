@@ -1,8 +1,7 @@
 import { all, put, call, takeLatest } from 'redux-saga/effects';
-import { push } from 'connected-react-router';
+import { push, goBack } from 'connected-react-router';
 
 import * as articleActions from './article.actions';
-import * as  commonActions from 'redux/common/common.actions';
 import * as api from './article.api';
 import articleTypes from './article.types';
 
@@ -29,7 +28,7 @@ function* updateArticleAsync(action) {
 	const { articleSlug, articleToUpdateData } = action;
 	try {
 		yield call(api.updateArticleInAPI, articleSlug, articleToUpdateData);
-		yield put(push('/'));
+		yield put(goBack());
 	} catch (error) {
 		yield put(articleActions.updateArticleError(error.response.data.errors));
 	}
@@ -39,7 +38,7 @@ function* deleteArticleAsync(action) {
 	try {
 		yield call(api.deleteArticleInAPI, action.articleSlug);
 		yield put(articleActions.deleteArticleDone());
-		yield put(push('/'));
+		yield put(goBack());
 	} catch (error) {
 		yield put(articleActions.deleteArticleError(error));
 	}

@@ -8,7 +8,7 @@ import { fetchArticleRequest, updateArticleRequest, unloadArticle } from 'redux/
 import ArticleForm from 'components/ArticleForm/ArticleForm';
 import NotFound from 'components/NotFound/NotFound';
 
-function EditArticlePage({ error, articleToEdit, fetchArticleRequest, updateArticleRequest, unloadArticle }) {
+function EditArticlePage({ error, articleToEdit, username, fetchArticleRequest, updateArticleRequest, unloadArticle }) {
 	const { articleSlug } = useParams();
 
 	useEffect(() => {
@@ -20,9 +20,14 @@ function EditArticlePage({ error, articleToEdit, fetchArticleRequest, updateArti
 
 	return (
 		<Fragment>
-			{error && <NotFound>404 Article Could Not Be Found</NotFound>}
-			{!isEmpty(articleToEdit) && (
+			{error && <NotFound>404 Article Not Found</NotFound>}
+			{!isEmpty(articleToEdit) &&
+			articleToEdit.author.username === username && (
 				<ArticleForm articleToEdit={articleToEdit} error={error} updateArticleRequest={updateArticleRequest} />
+			)}
+			{!isEmpty(articleToEdit) &&
+			articleToEdit.author.username !== username && (
+				<NotFound>You Have No Permission To Edit This Article</NotFound>
 			)}
 		</Fragment>
 	);
@@ -30,7 +35,8 @@ function EditArticlePage({ error, articleToEdit, fetchArticleRequest, updateArti
 
 const mapStateToProps = (state) => ({
 	articleToEdit: state.article.articleData,
-	error: state.article.error
+	error: state.article.error,
+	username: state.user.currentUserData
 });
 
 const mapDispatchToProps = (dispatch) => ({

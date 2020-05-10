@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import './hamburgers.css';
 import * as S from './Navbar.style';
 
-function Navbar({ currentUserData, isAuth, fetchArticlesByMostRecentRequest, setCurrentPageNumberToFirst }) {
+function Navbar({ currentUserData, isAuth, fetchArticlesByMostRecentRequest }) {
 	const [ isOpenHamburgerMenu, toggleHamburgerMenu ] = useState(false);
-	const { username } = currentUserData || {};
+	const { username } = currentUserData;
 
 	const handleClick = (toggle) => {
 		if (toggle) {
@@ -62,7 +62,7 @@ function Navbar({ currentUserData, isAuth, fetchArticlesByMostRecentRequest, set
 					{isAuth && (
 						<li>
 							<S.NavLinkItem
-								to={`/userProfile/${username}`}
+								to={`/profile/${username}`}
 								onClick={() => toggleHamburgerMenu(!isOpenHamburgerMenu)}
 							>
 								<S.UserIcon /> {username}

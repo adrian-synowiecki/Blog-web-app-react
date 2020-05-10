@@ -1,11 +1,15 @@
 import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { push } from 'connected-react-router';
 import { useParams, Link } from 'react-router-dom';
 import { isEmpty } from 'lodash';
 
 import * as S from './ArticleOverviewPage.style';
-import { fetchArticleRequest, unloadArticle, deleteArticleRequest } from 'redux/article/article.actions';
+import {
+	fetchArticleRequest,
+	unloadArticle,
+	deleteArticleRequest,
+	clearArticleError
+} from 'redux/article/article.actions';
 import { fetchCommentsFromArticleRequest, addCommentToArticleRequest } from 'redux/comments/comments.actions';
 
 import NotFound from 'components/NotFound/NotFound';
@@ -19,27 +23,32 @@ function ArticleOverviewPage({
 	currentUserData,
 	commentList,
 	fetchArticleRequest,
+	clearArticleError,
 	unloadArticle,
 	fetchCommentsFromArticleRequest,
 	addCommentToArticleRequest,
+	deleteArticleRequest,
 	error
 }) {
 	const { articleSlug } = useParams();
-	const { body, tagList, title } = articleData || {};
-
-	useEffect(() => {
-		fetchArticleRequest(articleSlug);
-		fetchCommentsFromArticleRequest(articleSlug);
-		return () => {
-			unloadArticle();
-		};
-	}, []); // eslint-disable-line react-hooks/exhaustive-deps
+	const { body, tagList, title, slug } = articleData;
+	useEffect(
+		() => {
+			fetchArticleRequest(articleSlug);
+			fetchCommentsFromArticleRequest(articleSlug);
+			return () => {
+				unloadArticle();
+				clearArticleError();
+			};
+		},
+		[ articleSlug ] // eslint-disable-line react-hooks/exhaustive-deps
+	);
 	const canModifyArticle =
-		articleData.author && currentUserData.username && articleData.author.username === currentUserData.username;
+		!isEmpty(articleData) && !isEmpty(currentUserData) && articleData.author.username === currentUserData.username;
 
 	return (
 		<Fragment>
-			{error && <NotFound />}
+			{error && <NotFound>404 Article Not Found</NotFound>}
 			{!isEmpty(articleData) && (
 				<Fragment>
 					<S.Header>
@@ -49,7 +58,7 @@ function ArticleOverviewPage({
 							<S.IconsWrapper>
 								{canModifyArticle && (
 									<Fragment>
-										<Link to="/editArticle/:articleSlug" style={{ textDecoration: 'none' }}>
+										<Link to={`/editArticle/${slug}`} style={{ textDecoration: 'none' }}>
 											<S.ModifyButton>
 												<S.IconWrapper>
 													<S.ModifyIcon />
@@ -57,14 +66,12 @@ function ArticleOverviewPage({
 												Modify article
 											</S.ModifyButton>
 										</Link>
-										<Link style={{ textDecoration: 'none' }}>
-											<S.DeleteButton>
-												<S.IconWrapper includePadding>
-													<S.TrashCanIcon />
-												</S.IconWrapper>
-												Delete article
-											</S.DeleteButton>
-										</Link>
+										<S.DeleteButton onClick={() => deleteArticleRequest(slug)}>
+											<S.IconWrapper includePadding>
+												<S.TrashCanIcon />
+											</S.IconWrapper>
+											Delete article
+										</S.DeleteButton>
 									</Fragment>
 								)}
 							</S.IconsWrapper>
@@ -82,7 +89,6 @@ function ArticleOverviewPage({
 								article
 							</S.AuthInvite>
 						)}
-
 						<CommentList commentList={commentList} />
 					</S.MainWrapper>
 				</Fragment>
@@ -109,8 +115,8 @@ const mapDispatchToProps = (dispatch) => ({
 	unloadArticle: () => dispatch(unloadArticle()),
 	fetchCommentsFromArticleRequest: (articleSlug) => dispatch(fetchCommentsFromArticleRequest(articleSlug)),
 	addCommentToArticleRequest: (commentObj, slug) => dispatch(addCommentToArticleRequest(commentObj, slug)),
-	/* 	deleteArticleRequest: (articleSlug) => dispatch(deleteArticleRequest(articleSlug)), */
-	push: (path) => dispatch(push(path))
+	deleteArticleRequest: (articleSlug) => dispatch(deleteArticleRequest(articleSlug)),
+	clearArticleError: () => dispatch(clearArticleError())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArticleOverviewPage);

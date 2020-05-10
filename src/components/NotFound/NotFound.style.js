@@ -12,4 +12,6 @@ export const NotFoundContainer = styled.div`
 	width: 100%;
 `;
 
-export const NotFoundMessage = styled.h2`color: ${({ theme }) => theme.colors.blue2};`;
+export const NotFoundMessage = styled.h2`color: ${({ theme }) => theme.colors.blue2};
+	margin-bottom: 0.3rem;
+`;
