@@ -17,7 +17,12 @@ function Navbar({ currentUserData, isAuth, fetchArticlesByMostRecentRequest }) {
 	return (
 		<S.NavbarContainer isOpenHamburgerMenu={isOpenHamburgerMenu}>
 			{!isOpenHamburgerMenu && (
-				<S.Brand onClick={() => handleClick()} to="/">
+				<S.Brand
+					onClick={() => handleClick()}
+					to="/"
+					whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+					whileTap={{ scale: 0.95, transition: { duration: 0.2 } }}
+				>
 					conduit
 				</S.Brand>
 			)}

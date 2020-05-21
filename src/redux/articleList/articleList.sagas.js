@@ -35,13 +35,29 @@ function* fetchArticlesByTagAsync(action) {
 	const { tag, offSet } = action;
 	try {
 		const response = yield call(api.fetchArticlesByTagFromAPI, tag, offSet);
-		console.log(response);
 		yield put(articlesActions.fetchArticlesByTagDone(response.data.articles, response.data.articlesCount));
 	} catch (error) {
 		yield put(articlesActions.fetchArticlesByTagError(error));
 	}
 }
 
+function* updateFavoriteArticlesAsync(action) {
+	const { articleSlug, isFavorited, favoritesCount } = action;
+	console.log(action)
+	try {
+		if (isFavorited) {
+			yield put(articlesActions.updateFavoriteArticlesDone(articleSlug, false, favoritesCount - 1));
+			yield call(api.removeArticleFromFavoritesFromApi, articleSlug);
+		} else {
+			yield put(articlesActions.updateFavoriteArticlesDone(articleSlug, true, favoritesCount + 1));
+			yield call(api.addArticleToFavoritesInApi, articleSlug);
+		}
+	} catch (error) {
+		yield put(articlesActions.updateFavoriteArticlesError(error));
+	}
+}
+
+/* 
 function* addArticleToFavoritesAsync(action) {
 	try {
 		yield put(
@@ -66,7 +82,7 @@ function* removeArticleFromFavoritesAsync(action) {
 	} catch (error) {
 		yield put(articlesActions.removeArticleFromFavoritesError(error));
 	}
-}
+} */
 
 export default function* watchArticlesSaga() {
 	yield all([
@@ -74,7 +90,6 @@ export default function* watchArticlesSaga() {
 		yield takeLatest(articlesTypes.FETCH_ARTICLES_BY_AUTHOR_REQUEST, fetchArticlesByAuthorAsync),
 		yield takeLatest(articlesTypes.FETCH_FAVORITE_ARTICLES_REQUEST, fetchFavoriteArticlesAsync),
 		yield takeLatest(articlesTypes.FETCH_ARTICLES_BY_TAG_REQUEST, fetchArticlesByTagAsync),
-		yield takeLatest(articlesTypes.ADD_ARTICLE_TO_FAVORITES_REQUEST, addArticleToFavoritesAsync),
-		yield takeLatest(articlesTypes.REMOVE_ARTICLE_FROM_FAVORITES_REQUEST, removeArticleFromFavoritesAsync)
+		yield takeLatest(articlesTypes.UPDATE_FAVORITE_ARTICLES_REQUEST, updateFavoriteArticlesAsync)
 	]);
 }

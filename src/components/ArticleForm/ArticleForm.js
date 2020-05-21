@@ -60,6 +60,7 @@ function ArticleForm({ articleToEdit, error, createArticleRequest, updateArticle
 						<Input name="description" label="What's this Article about?" />
 						<Input name="body" label="Wrtice your Article (in markdown)" multiline rows="10" />
 						<TagsInput
+							inputProps={{ placeholder: 'Add a tag and press enter' }}
 							value={values.tagList}
 							onChange={(tagList) => {
 								setFieldValue('tagList', tagList);

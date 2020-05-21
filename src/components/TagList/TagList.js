@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { fetchArticlesByTagRequest, unloadArticles } from 'redux/articleList/articleList.actions';
-import { getTagName } from 'redux/tags/tags.actions';
 
 import * as S from './TagList.style';
 
@@ -20,7 +19,6 @@ function TagList({ tagList, children }) {
 }
 const mapDispatchToProps = (dispatch) => ({
 	fetchArticlesByTagRequest: (tag) => dispatch(fetchArticlesByTagRequest(tag)),
-	getTagName: (tag) => dispatch(getTagName(tag)),
 	unloadArticles: () => dispatch(unloadArticles())
 });
 

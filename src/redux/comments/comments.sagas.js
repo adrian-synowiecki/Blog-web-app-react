@@ -26,8 +26,8 @@ function* addCommentToArticleAsync(action) {
 function* removeCommentFromArticleAsync(action) {
 	const { articleSlug, commentToDeleteId } = action;
 	try {
-		yield call(api.removeCommentFromArticle, articleSlug, commentToDeleteId);
 		yield put(commentsActions.removeCommentFromArticleDone(commentToDeleteId));
+		yield call(api.removeCommentFromArticle, articleSlug, commentToDeleteId);
 	} catch (error) {
 		yield put(commentsActions.removeCommentFromArticleError(error));
 	}

@@ -2,9 +2,9 @@ import { all, put, call, takeLatest } from 'redux-saga/effects';
 import { push, goBack } from 'connected-react-router';
 
 import * as articleActions from './article.actions';
+import * as commonActions from 'redux/common/common.actions';
 import * as api from './article.api';
 import articleTypes from './article.types';
-
 
 function* fetchArticleAsync(action) {
 	try {
@@ -36,9 +36,10 @@ function* updateArticleAsync(action) {
 
 function* deleteArticleAsync(action) {
 	try {
-		yield call(api.deleteArticleInAPI, action.articleSlug);
-		yield put(articleActions.deleteArticleDone());
+		yield put(commonActions.toggleArticleSnackbar(true));
 		yield put(goBack());
+		yield put(articleActions.deleteArticleDone());
+		yield call(api.deleteArticleInAPI, action.articleSlug);
 	} catch (error) {
 		yield put(articleActions.deleteArticleError(error));
 	}

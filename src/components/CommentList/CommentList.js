@@ -10,9 +10,9 @@ function CommentList({ commentList, className }) {
 
 	return (
 		<S.CommentListContainer className={className}>
-			{commentList.map((commentData) => {
-				return <CommentListItem commentData={commentData} articleSlug={articleSlug} />;
-			})}
+			{commentList.map((commentData, index) => (
+				<CommentListItem commentData={commentData} articleSlug={articleSlug} key={commentData.id} index={index} />
+			))}
 		</S.CommentListContainer>
 	);
 }

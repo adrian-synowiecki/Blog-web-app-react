@@ -23,12 +23,7 @@ function CommentForm({ addCommentToArticleRequest, className }) {
 		>
 			{({ isSubmitting }) => (
 				<S.Form className={className}>
-					<S.Field
-						name="commentText"
-						component="textarea"
-						placeholder="Write a comment..."
-						rows="3"
-					/>
+					<S.Field name="commentText" component="textarea" placeholder="Write a comment..." rows="3" />
 					<S.CreateCommentButton disabled={isSubmitting} type="submit">
 						Post comment
 					</S.CreateCommentButton>

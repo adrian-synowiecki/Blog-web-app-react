@@ -1,9 +1,11 @@
 import styled from 'styled-components/macro';
+import { motion } from 'framer-motion';
 import { NavLink as NavLinkComponent } from 'react-router-dom';
+import MuiAlertComponent from '@material-ui/lab/Alert';
 
 export const ProfilePageContainer = styled.div`margin: 3rem 2rem;`;
 
-export const CredentialsWrapper = styled.div`
+export const CredentialsWrapper = styled(motion.div)`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -63,4 +65,14 @@ export const NavLink = styled(NavLinkComponent)`
 export const NotFoundMessage = styled.p`
 	font-size: 1.3rem;
 	margin-top: 2rem;
+`;
+
+export const MuiAlert = styled(MuiAlertComponent)`
+	.MuiAlert-message  {
+		font-size: 1.2rem;
+	}
+	.MuiSvgIcon-fontSizeSmall {
+		font-size: 1.6rem;
+		margin-top: -0.2rem;
+	}
 `;

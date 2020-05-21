@@ -10,11 +10,10 @@ import rootReducer from './root-reducer';
 
 export const history = createBrowserHistory();
 
-
 const persistConfig = {
 	key: 'root',
 	storage,
-	blacklist: [ 'router' ]
+	blacklist: [ 'article', 'profile', 'articleList', 'comments' ]
 };
 
 const sagaMiddleware = createSagaMiddleware();

@@ -24,6 +24,5 @@ export const LinkToAuth = styled(Link)`
 export const SignUpAndLogInButton = styled(Button)`
 	margin-top: 2rem;
 	width: 100%;
+
 `;
-
-

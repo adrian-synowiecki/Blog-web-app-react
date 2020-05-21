@@ -12,10 +12,6 @@ export const fetchTagsByMostPopularError = (error) => ({
 	payload: { error }
 });
 
-export const getTagName = (tag) => ({
-	type: tagsTypes.GET_TAG_NAME,
-	payload: { tag }
-});
 export const removeTagName = () => ({
 	type: tagsTypes.REMOVE_TAG_NAME
 });

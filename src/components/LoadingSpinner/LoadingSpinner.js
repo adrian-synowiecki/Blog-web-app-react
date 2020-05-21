@@ -13,9 +13,6 @@ function LoadingSpinner({ center, className }) {
 					transform: 'translate(-50%, -50%)'
 				}
 			}
-			classes={{
-				root: { color: '#1bc27c' }
-			}}
 		/>
 	);
 }

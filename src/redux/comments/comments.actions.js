@@ -30,10 +30,11 @@ export const fetchCommentsFromArticleError = (error) => ({
 });
 
 // remove comment from article
-export const removeCommentFromArticleRequest = ( articleSlug, commentToDeleteId) => ({
+export const removeCommentFromArticleRequest = (articleSlug, commentToDeleteId) => ({
 	type: commentsTypes.REMOVE_COMMENT_FROM_ARTICLE_REQUEST,
 	articleSlug,
 	commentToDeleteId,
+	
 });
 export const removeCommentFromArticleDone = (commentToDeleteId) => ({
 	type: commentsTypes.REMOVE_COMMENT_FROM_ARTICLE_DONE,

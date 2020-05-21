@@ -28,8 +28,7 @@ export default function commentsReducer(state = initialState, action) {
 					(commentData) => commentData.id !== action.payload.commentToDeleteId
 				),
 				inProgress: false
-			};
-
+			};                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
 		case commentsTypes.ADD_COMMENT_TO_ARTICLE_ERROR:
 			return { ...state, error: action.payload.error };
 		case commentsTypes.FETCH_COMMENTS_FROM_ARTICLE_ERROR:

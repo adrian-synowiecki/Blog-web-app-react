@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components/macro';
 import { NavLink, Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 import { ReactComponent as Home } from 'assets/home.svg';
 import { ReactComponent as NewPost } from 'assets/newPost.svg';
@@ -17,13 +18,14 @@ export const NavbarContainer = styled.nav`
 	height: ${({ isOpenHamburgerMenu }) => (isOpenHamburgerMenu ? 'auto' : '5rem')};
 `;
 
-export const Brand = styled(Link)`
+export const Brand = motion.custom(styled(Link)`
 	color: ${({ theme }) => theme.colors.blue1};
 	text-decoration: none;
 	font-weight: 700;
 	font-size: 2.7rem;
 	margin-left: 2rem;
-`;
+
+`);
 
 export const NavLinksWrapper = styled.ul`
 	display: flex;

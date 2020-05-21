@@ -1,13 +1,15 @@
 import React, { Fragment, useRef, useState, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { isEmpty } from 'lodash';
+import Snackbar from '@material-ui/core/Snackbar';
 
 import {
 	fetchArticlesByAuthorRequest,
 	fetchFavoriteArticlesRequest,
 	unloadArticles
 } from 'redux/articleList/articleList.actions';
+import { toggleArticleSnackbar } from 'redux/common/common.actions';
 
 import { fetchProfileByUsernameRequest, unloadProfile, clearProfileError } from 'redux/profile/profile.actions';
 
@@ -22,6 +24,8 @@ function ProfilePage({
 	profileData,
 	error,
 	isFetchingProfileData,
+	toggleArticleSnackbar,
+	isOpenArticleSnackbar,
 	fetchArticlesByAuthorRequest,
 	fetchFavoriteArticlesRequest,
 	clearProfileError,
@@ -36,16 +40,19 @@ function ProfilePage({
 	let location = useLocation();
 	const { image, bio } = profileData;
 
-	useEffect(() => {
-		fetchProfileByUsernameRequest(username);
-		fetchArticlesByAuthorRequest(username);
-		return () => {
-			unloadArticles();
-			unloadProfile();
-			clearProfileError();
-		};
-	}, []);
-
+	useEffect(
+		() => {
+			fetchProfileByUsernameRequest(username);
+			fetchArticlesByAuthorRequest(username);
+			return () => {
+				linkRefs.current = [];
+				unloadArticles();
+				unloadProfile();
+				clearProfileError();
+			};
+		},
+		[ username ]
+	);
 	useEffect(
 		() => {
 			setWidths(linkRefs.current.map((ref) => ref.offsetWidth));
@@ -73,26 +80,37 @@ function ProfilePage({
 
 	const addToLinkRefs = (el) => {
 		if (el && !linkRefs.current.includes(el)) {
-			linkRefs.current.push(el);
+			if (el.offsetWidth) {
+				linkRefs.current.push(el);
+			}
 		}
+	};
+
+	const handleClose = (event, reason) => {
+		if (reason === 'clickaway') {
+			return;
+		}
+		toggleArticleSnackbar(false);
 	};
 
 	return (
 		<S.ProfilePageContainer>
-			{error && (
-				<NotFound hasError clearError={clearProfileError}>
-					404 Profile Not Found
-				</NotFound>
-			)}
-			{isFetchingProfileData && (
+			{error && <NotFound>404 Profile Not Found</NotFound>}
+			{isFetchingProfileData &&
+			isEmpty(profileData) && (
 				<S.CredentialsWrapper>
 					<LoadingSpinner center />
 				</S.CredentialsWrapper>
 			)}
 			{!isEmpty(profileData) && (
 				<Fragment>
-					<S.CredentialsWrapper>
-						<S.UserImage src={image} />
+					<S.CredentialsWrapper
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1, transition: { ease: 'easeOut', duration: 0.5 } }}
+					>
+						<S.UserImage
+							src={image ? image : 'https://static.productionready.io/images/smiley-cyrus.jpg'}
+						/>
 						<S.Username>{profileData.username}</S.Username>
 						<S.Bio>{bio}</S.Bio>
 					</S.CredentialsWrapper>
@@ -128,6 +146,22 @@ function ProfilePage({
 					</S.Wrapper>
 				</Fragment>
 			)}
+			<Snackbar
+				open={isOpenArticleSnackbar}
+				autoHideDuration={5000}
+				anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+				onClose={handleClose}
+			>
+				<S.MuiAlert
+					classes={{ fontSize: '30rem' }}
+					onClose={handleClose}
+					severity="success"
+					elevation={6}
+					variant="filled"
+				>
+					Article removed successfully!
+				</S.MuiAlert>
+			</Snackbar>
 		</S.ProfilePageContainer>
 	);
 }
@@ -135,7 +169,8 @@ const mapStateToProps = (state) => ({
 	articleList: state.articleList.articleList,
 	profileData: state.profile.profileData,
 	isFetchingProfileData: state.profile.isFetchingProfileData,
-	error: state.profile.error
+	error: state.profile.error,
+	isOpenArticleSnackbar: state.common.isOpenArticleSnackbar
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -144,7 +179,8 @@ const mapDispatchToProps = (dispatch) => ({
 	fetchProfileByUsernameRequest: (username) => dispatch(fetchProfileByUsernameRequest(username)),
 	unloadArticles: () => dispatch(unloadArticles()),
 	unloadProfile: () => dispatch(unloadProfile()),
-	clearProfileError: () => dispatch(clearProfileError())
+	clearProfileError: () => dispatch(clearProfileError()),
+	toggleArticleSnackbar: (isOpenArticleSnackbar) => dispatch(toggleArticleSnackbar(isOpenArticleSnackbar))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfilePage);

@@ -1,8 +1,11 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 import { fetchArticlesByMostRecentRequest } from 'redux/articleList/articleList.actions';
+/* import { setIsOpenSnackbar } from 'redux/common/common.actions'; */
 
 import MainPage from 'pages/MainPage/MainPage';
 import ProfilePage from 'pages/ProfilePage/ProfilePage';
@@ -16,8 +19,7 @@ import Navbar from 'components/Navbar/Navbar';
 import NotFound from 'components/NotFound/NotFound';
 import PrivateRoute from 'components/PrivateRoute/PrivateRoute';
 
-function App({ currentUserData, isAuth, fetchArticlesByMostRecentRequest, pathname }) {
-	console.log(pathname);
+function App({ currentUserData, isAuth, fetchArticlesByMostRecentRequest }) {
 	return (
 		<Fragment>
 			<Navbar

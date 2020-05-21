@@ -1,10 +1,13 @@
 import styled from 'styled-components/macro';
-import { TextField as TextFieldComponent } from 'formik-material-ui';
+import { TextField as TextField } from 'formik-material-ui';
 
-export const TextFieldContainer = styled(TextFieldComponent)`
+export const TextFieldContainer = styled(TextField)`
     width: 100%;  
+    
     label { 
-      font-size: 1.4rem;     
+       font-size: 1.4rem;    
+       background-color: white;
+       padding-right: 1rem;
     }
     .MuiOutlinedInput-root {
         fieldset {
@@ -14,7 +17,7 @@ export const TextFieldContainer = styled(TextFieldComponent)`
         border-color: ${({ theme }) => theme.colors.blue2}
     }
     &.Mui-focused fieldset {
-        border: ${({ theme }) => `2px solid ${theme.colors.blue2}`}
+        border: ${({ theme }) => `2px solid ${theme.colors.blue2}`};
     }
   }
     label.Mui-focused {

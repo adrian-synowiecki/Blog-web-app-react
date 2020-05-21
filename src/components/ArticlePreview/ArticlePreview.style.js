@@ -1,9 +1,10 @@
 import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 import { ReactComponent as Heart } from 'assets/iconmonstr-favorite-1.svg';
 
-export const ArticlePreviewContainer = styled.div`
+export const ArticlePreviewContainer = styled(motion.li)`
 	margin-top: 2rem;
 	position: relative;
 `;
@@ -39,16 +40,16 @@ export const ReadMore = styled(Link)`
 `;
 
 export const HeartIcon = styled(Heart)`
-	fill: ${({ favorited, theme }) => (favorited ? 'white' : `${theme.colors.blue1}`)};
+	fill: ${({ favorited, theme }) => (favorited ? '#fff' : `${theme.colors.blue1}`)};
 	width: 1.2rem;
  `;
 
 export const FavoriteAddedCount = styled.span`
-	color: ${({ favorited }) => (favorited ? 'white' : `green`)}; // fix green color
+	color: ${({ favorited, theme }) => (favorited ? '#fff' : `${theme.colors.blue1}`)};
 	margin-left: 0.2rem;
 `;
 
-export const AddToFavoriteWrapper = styled.button`
+export const UpdateFavoriteArticles = styled(motion.button)`
 	position: absolute;
 	display: flex;
 	align-items: center;
@@ -56,18 +57,22 @@ export const AddToFavoriteWrapper = styled.button`
 	top: 0;
 	right: 0;
 	background-color: white;
-	width: 3rem;
+	padding: 0rem 0.4rem;
+	outline: 0;
 	border: ${({ theme }) => `1px solid ${theme.colors.blue3}`};
-	border-radius: 0.5rem;
+	border-radius: 0.4rem;
 	cursor: pointer;
 	background-color: ${({ theme, favorited }) => favorited && theme.colors.blue1};
 	&:hover {
 		background-color: ${({ theme }) => theme.colors.blue1};
+		transition: 0.3s;
 		${HeartIcon} {
 			fill: white;
+			transition: 0.3s;
 		}
 		${FavoriteAddedCount} {
 			color: white;
+			transition: 0.3s;
 		}
 	}
 `;

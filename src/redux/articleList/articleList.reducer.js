@@ -1,5 +1,4 @@
 import articlesTypes from './articleList.types';
-import { favoriteArticleListUpdate } from './favoriteArticlesListUpdate';
 
 const initialState = {
 	isFetchingArticles: false,
@@ -21,11 +20,12 @@ export default function articlesReducer(state = initialState, action) {
 		case articlesTypes.FETCH_ARTICLES_BY_TAG_DONE:
 		case articlesTypes.FETCH_ARTICLES_BY_AUTHOR_DONE:
 		case articlesTypes.FETCH_FAVORITE_ARTICLES_DONE:
+			const { payload: { articleList, articlesCount } } = action;
 			return {
 				...state,
-				articleList: action.payload.articleList,
+				articleList: articleList,
 				isFetchingArticles: false,
-				articlesCount: action.payload.articlesCount
+				articlesCount: articlesCount
 			};
 
 		case articlesTypes.FETCH_ARTICLES_BY_MOST_RECENT_ERROR:
@@ -34,25 +34,27 @@ export default function articlesReducer(state = initialState, action) {
 		case articlesTypes.FETCH_FAVORITE_ARTICLES_ERROR:
 			return { ...state, error: action.payload.error, isFetchingArticles: false };
 
-		case articlesTypes.FAVORITE_ARTICLE_REQUEST:
-		case articlesTypes.UNFAVORITE_ARTICLE_REQUEST:
+		case articlesTypes.UPDATE_FAVORITE_ARTICLES_REQUEST:
 			return { ...state, inProgress: true };
 
-		case articlesTypes.ADD_ARTICLE_TO_FAVORITES_DONE:
-		case articlesTypes.REMOVE_ARTICLE_FROM_FAVORITES_DONE:
+		case articlesTypes.UPDATE_FAVORITE_ARTICLES_DONE:
+			const { payload: { articleSlug, isFavoritedModified, favoritesCountModified } } = action;
 			return {
 				...state,
-				articleList: favoriteArticleListUpdate(
-					state.articleList,
-					action.payload.articleSlug,
-					action.payload.isFavorited,
-					action.payload.favoritesCount
-				),
+				articleList: state.articleList.map((articleData) => {
+					if (articleData.slug === articleSlug) {
+						return {
+							...articleData,
+							favorited: isFavoritedModified,
+							favoritesCount: favoritesCountModified
+						};
+					}
+					return articleData;
+				}),
 				inProgress: false
 			};
 
-		case articlesTypes.FAVORITE_ARTICLE_ERROR:
-		case articlesTypes.UNFAVORITE_ARTICLE_ERROR:
+		case articlesTypes.UPDATE_FAVORITE_ARTICLES_ERROR:
 			return { ...state, error: action.payload.error, inProgress: false };
 
 		case articlesTypes.UNLOAD_ARTICLES:

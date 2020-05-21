@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
+import { motion } from 'framer-motion';
 
-export const ButtonContainer = styled.button`
+export const ButtonContainer = styled(motion.button)`
 	border-radius: 0.5rem;
 	border: none;
 	text-decoration: none;
@@ -10,13 +11,19 @@ export const ButtonContainer = styled.button`
 	font-size: 1.6rem;
 	text-align: center;
 	cursor: pointer;
+	outline: 0;
 	${({ disabled }) =>
 		disabled &&
 		css`
-			opacity: 0.8;
+			opacity: 0.6;
 			cursor: not-allowed;
 		`};
 	&:hover {
-		opacity: 0.9;
+		background-color: #23335c;
+		transition: 0.3s;
 	}
+	&:active {
+		background-color: ${({ theme }) => theme.colors.blue2};
+	}
+
 `;

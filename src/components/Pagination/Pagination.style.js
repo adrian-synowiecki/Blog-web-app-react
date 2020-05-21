@@ -10,7 +10,7 @@ export const PageLink = styled(NavLink)`
     text-decoration: none;
     display: inline-block;
     &:hover {
-        text-decoration: underline;
+        background-color: #dcdcdb;
     }
     &.active {
         background: ${({ theme }) => theme.colors.blue2};

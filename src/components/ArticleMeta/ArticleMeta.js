@@ -10,7 +10,9 @@ function ArticleMeta({ articleData, articleOverviewPage, className }) {
 	return (
 		<S.ArticleMetaContainer className={className}>
 			<Link to={`/profile/${username}`}>
-				<S.ImageProfile src={image} />
+				<S.ImageProfile
+					src={image ? image : 'https://static.productionready.io/images/smiley-cyrus.jpg'}
+				/>
 			</Link>
 			<S.Wrapper>
 				<Link to={`/profile/${username}`} style={{ textDecoration: 'none' }}>

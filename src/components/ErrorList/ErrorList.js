@@ -2,9 +2,9 @@ import React from 'react';
 
 import * as S from './ErrorList.style';
 
-function ErrorList({ error }) {
+function ErrorList({ error, className }) {
 	return (
-		<S.ErrorMessageContainer>
+		<S.ErrorMessageContainer className={className}>
 			{Object.keys(error).map((errorKey) =>
 				error[errorKey].map((errorMessage) => (
 					<S.ErrorMessage>

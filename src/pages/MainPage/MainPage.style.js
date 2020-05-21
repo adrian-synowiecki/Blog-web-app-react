@@ -1,8 +1,15 @@
 import styled from 'styled-components/macro';
 import { NavLink } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 import PaginationComponent from 'components/Pagination/Pagination';
 import HeaderComponent from 'components/Header/Header';
+
+export const MainPageContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	height: calc(100vh - 5rem);
+`;
 
 export const Header = styled(HeaderComponent)`
 	display: flex;
@@ -11,7 +18,7 @@ export const Header = styled(HeaderComponent)`
 	justify-content: space-evenly;
 `;
 
-export const Heading = styled.h1`
+export const Heading = styled(motion.h1)`
 	color: #edf5ef;
 	font-size: 5rem;
 	text-shadow: 0 1px 3px rgba(0, 0, 0, .9);
@@ -19,7 +26,7 @@ export const Heading = styled.h1`
 	margin: 0;
 `;
 
-export const SubHeading = styled.h2`
+export const SubHeading = styled(motion.h2)`
 	color: #edf5ef;
 	font-size: 2rem;
 	font-weight: 400;
@@ -30,21 +37,23 @@ export const SubHeading = styled.h2`
 `;
 
 export const Wrapper = styled.main`
-	min-height: 19rem;
 	margin: 3rem 2rem;
+	position: relative;
+	flex: 1;
 `;
 
-export const NavLinkItem = styled(NavLink)`
+export const NavLinkItem = motion.custom(styled(NavLink)`
 	color: ${({ theme }) => theme.colors.blue1};
 	text-decoration: none;
 	margin-left: ${({ tag }) => tag && '2rem'};  
 	padding: 1.5rem; 
 	display: inline-block;
   	&.active {
-		border-bottom: ${({ theme }) => `3px solid ${theme.colors.blue1}`};
-		font-weight: bold;
-	}
-`;
+	border-bottom: ${({ theme }) => `3px solid ${theme.colors.blue1}`};
+	font-weight: bold;
+}
+
+`);
 
 export const Pagination = styled(PaginationComponent)`
 	margin-top: 3rem;

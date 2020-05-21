@@ -29,6 +29,7 @@ function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUser
 	};
 
 	const handleLogout = () => {
+		localStorage.removeItem('token');
 		logOut();
 		push('/');
 	};

@@ -6,6 +6,11 @@ export const ImageProfile = styled.img`
 	width: 3rem;
 	height: 3rem;
 	border-radius: 8rem;
+
+	&:hover {
+		transform: scale(1.03);
+		transition: 0.1s;
+	}
 `;
 
 export const Wrapper = styled.div`

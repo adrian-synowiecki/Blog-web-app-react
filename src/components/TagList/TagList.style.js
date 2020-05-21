@@ -8,15 +8,20 @@ export const Tag = styled(Link)`
 	background-color: ${({ theme }) => theme.colors.blue2};
 	border-radius: 1rem;
     padding: 0.5rem 1rem;
-	font-weight: 300;
-	color: white;
+	color: #fff;
 	display: inline-block;
     font-size: 1.1rem;
 	text-decoration: none;
 	margin-top: 0.2rem;
 	margin-right: 0.2rem;
 	&:hover {
-		opacity: 0.9;
+		background-color: #23335c;
 		cursor: pointer;
+		transition: 0.2s;
 	}
+	&:active {
+		transform: scale(0.95);
+		transition-duration: 0.2s;
+	}
+
 `;

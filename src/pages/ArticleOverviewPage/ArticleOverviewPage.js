@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect, useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import { isEmpty } from 'lodash';
@@ -11,17 +11,23 @@ import {
 	clearArticleError
 } from 'redux/article/article.actions';
 import { fetchCommentsFromArticleRequest, addCommentToArticleRequest } from 'redux/comments/comments.actions';
+import { toggleArticleDialog } from 'redux/common/common.actions';
 
 import NotFound from 'components/NotFound/NotFound';
 import ArticleMeta from 'components/ArticleMeta/ArticleMeta';
 import TagList from 'components/TagList/TagList';
 import CommentList from 'components/CommentList/CommentList';
+import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
+import Dialog from 'components/Dialog/Dialog';
 
 function ArticleOverviewPage({
 	articleData,
 	isAuth,
 	currentUserData,
 	commentList,
+	isOpenArticleDialog,
+	toggleArticleDialog,
+	isFetchingArticleData,
 	fetchArticleRequest,
 	clearArticleError,
 	unloadArticle,
@@ -46,9 +52,14 @@ function ArticleOverviewPage({
 	const canModifyArticle =
 		!isEmpty(articleData) && !isEmpty(currentUserData) && articleData.author.username === currentUserData.username;
 
+	window.onbeforeunload = function() {
+		unloadArticle();
+	};
+
 	return (
 		<Fragment>
 			{error && <NotFound>404 Article Not Found</NotFound>}
+			{isFetchingArticleData && isEmpty(articleData) && <LoadingSpinner center />}
 			{!isEmpty(articleData) && (
 				<Fragment>
 					<S.Header>
@@ -66,12 +77,20 @@ function ArticleOverviewPage({
 												Modify article
 											</S.ModifyButton>
 										</Link>
-										<S.DeleteButton onClick={() => deleteArticleRequest(slug)}>
+										<S.DeleteButton onClick={() => toggleArticleDialog(true)}>
 											<S.IconWrapper includePadding>
 												<S.TrashCanIcon />
 											</S.IconWrapper>
 											Delete article
 										</S.DeleteButton>
+										<Dialog
+											isOpen={isOpenArticleDialog}
+											slug={slug}
+											toggleDialog={toggleArticleDialog}
+											deleteRequest={deleteArticleRequest}
+										>
+											Are you sure you want to delete this article?
+										</Dialog>
 									</Fragment>
 								)}
 							</S.IconsWrapper>
@@ -84,8 +103,8 @@ function ArticleOverviewPage({
 							<S.CommentForm addCommentToArticleRequest={addCommentToArticleRequest} />
 						) : (
 							<S.AuthInvite>
-								<S.AuthInviteSpan to={'/login'}>Log in</S.AuthInviteSpan> or {''}
-								<S.AuthInviteSpan to={'/signUp'}>sign up</S.AuthInviteSpan> to add comments on this
+								<S.AuthInviteSpan to="/login">Log in</S.AuthInviteSpan> or {''}
+								<S.AuthInviteSpan to="/signUp">sign up</S.AuthInviteSpan> to add comments on this
 								article
 							</S.AuthInvite>
 						)}
@@ -98,15 +117,18 @@ function ArticleOverviewPage({
 }
 
 const mapStateToProps = (state) => {
-	const { articleData, error } = state.article;
+	const { articleData, isFetchingArticleData, error } = state.article;
 	const { currentUserData, isAuth } = state.user;
 	const { commentList } = state.comments;
+	const { isOpenArticleDialog } = state.common;
 	return {
 		articleData,
+		isFetchingArticleData,
 		error,
 		currentUserData,
 		commentList,
-		isAuth
+		isAuth,
+		isOpenArticleDialog
 	};
 };
 
@@ -116,7 +138,9 @@ const mapDispatchToProps = (dispatch) => ({
 	fetchCommentsFromArticleRequest: (articleSlug) => dispatch(fetchCommentsFromArticleRequest(articleSlug)),
 	addCommentToArticleRequest: (commentObj, slug) => dispatch(addCommentToArticleRequest(commentObj, slug)),
 	deleteArticleRequest: (articleSlug) => dispatch(deleteArticleRequest(articleSlug)),
-	clearArticleError: () => dispatch(clearArticleError())
+	clearArticleError: (isOpenSnackbar) => dispatch(clearArticleError(isOpenSnackbar)),
+	toggleArticleDialog: (isOpenDeletionArticleDialog) =>
+		dispatch(toggleArticleDialog(isOpenDeletionArticleDialog))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArticleOverviewPage);

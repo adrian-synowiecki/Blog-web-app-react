@@ -6,18 +6,11 @@ import * as S from './NotFound.style';
 
 import Button from 'components/Button/Button';
 
-function NotFound({ children, goBack, clearError, hasError }) {
-	const handleOnClick = () => {
-		goBack();
-		if (hasError) {
-			clearError();
-		}
-	};
-
+function NotFound({ children, goBack }) {
 	return (
 		<S.NotFoundContainer>
 			<S.NotFoundMessage>{children}</S.NotFoundMessage>
-			<Button onClick={handleOnClick} style={{ marginTop: '1rem' }}>
+			<Button onClick={() => goBack()} style={{ marginTop: '1rem' }}>
 				Click to go back
 			</Button>
 		</S.NotFoundContainer>

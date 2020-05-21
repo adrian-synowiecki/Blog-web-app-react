@@ -59,7 +59,12 @@ function AuthForm({ error, signUpPage, signUpRequest, loginRequest }) {
 							handleFocus={handleFocus}
 							label="Password"
 						/>
-						<S.SignUpAndLogInButton type="submit" disabled={isSubmitting} variant="contained">
+						<S.SignUpAndLogInButton
+							type="submit"
+							disabled={isSubmitting}
+							variant="contained"
+							whileTap={{ scale: 1 }}
+						>
 							{signUpPage ? 'SIGN UP' : 'LOG IN'}
 						</S.SignUpAndLogInButton>
 					</Form>

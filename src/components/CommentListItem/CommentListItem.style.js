@@ -1,8 +1,9 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 import { ReactComponent as TrashCan } from 'assets/trash.svg';
 
-export const CommentListItemContainer = styled.div`
+export const CommentListItemContainer = styled(motion.li)`
 	border: 1px solid rgba(0, 0, 0, 0.01);
 	width: 100%;
 `;
@@ -14,6 +15,7 @@ export const FooterWrapper = styled.div`
 	align-items: center;
 	background-color: rgba(180, 185, 194, 0.4);
 	padding: 2rem;
+	/* padding-right: 0rem; */
 `;
 export const AuthorImage = styled.img`
 	width: 2.5rem;
@@ -34,13 +36,13 @@ export const CreatedAt = styled.p`
 	margin-left: 1rem;
 `;
 
-export const TrashCanIcon = styled(TrashCan)`
+export const TrashCanIcon = motion.custom(styled(TrashCan)`
 	width: 2rem;
 	height: 2rem;
 	margin-left: auto;
 	cursor: pointer;
-	fill: ${({ theme }) => theme.colors.blue2};
+	fill: #d12449;
 	&:hover {
-		fill: ${({ theme }) => theme.colors.blue3};
+		filter: brightness(90%);
 	}
-`;
+`);

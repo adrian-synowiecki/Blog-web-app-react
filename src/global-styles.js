@@ -20,4 +20,9 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+
+ul {
+	list-style: none;
+}
+
 `;

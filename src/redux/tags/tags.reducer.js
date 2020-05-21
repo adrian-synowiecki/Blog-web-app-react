@@ -3,7 +3,6 @@ import tagsTypes from './tags.types';
 const initialState = {
 	isFetchingTags: false,
 	tagList: [],
-	tag: '',
 	error: null
 };
 
@@ -17,8 +16,6 @@ export default function tags(state = initialState, action) {
 			return { ...state, error: action.payload.error, isFetchingTags: false };
 		case tagsTypes.GET_TAG_NAME:
 			return { ...state, tag: action.payload.tag };
-		case tagsTypes.REMOVE_TAG_NAME:
-			return { ...state, tag: '' };
 		case tagsTypes.UNLOAD_TAGS:
 			return { ...state, tagList: [], error: null };
 		case tagsTypes.CLEAR_TAGS_ERROR:

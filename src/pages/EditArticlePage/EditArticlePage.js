@@ -18,6 +18,10 @@ function EditArticlePage({ error, articleToEdit, username, fetchArticleRequest, 
 		};
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+	if (!isEmpty(articleToEdit)) {
+
+	}
+
 	return (
 		<Fragment>
 			{error && <NotFound>404 Article Not Found</NotFound>}
@@ -36,7 +40,7 @@ function EditArticlePage({ error, articleToEdit, username, fetchArticleRequest, 
 const mapStateToProps = (state) => ({
 	articleToEdit: state.article.articleData,
 	error: state.article.error,
-	username: state.user.currentUserData
+	username: state.user.currentUserData.username
 });
 
 const mapDispatchToProps = (dispatch) => ({

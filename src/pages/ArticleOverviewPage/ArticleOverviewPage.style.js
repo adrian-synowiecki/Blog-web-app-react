@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components/macro';
+import Button from '@material-ui/core/Button';
 
 import { ReactComponent as TrashCan } from 'assets/trash.svg';
 import { ReactComponent as Modify } from 'assets/modify.svg';
@@ -29,7 +30,6 @@ export const Wrapper = styled.div`
 	align-items: center;
 `;
 
-
 const buttonStyles = css`
 	display: flex;
 	align-items: center;
@@ -41,25 +41,46 @@ const buttonStyles = css`
 	padding: 0.3rem 0.5rem;
 	font-size: 1.1rem;
 	&:hover {
-		opacity: 0.9;
+		filter: brightness(97%);
 	}
 	&:active {
-		opacity: 0.8;
+		filter: brightness(90%);
 	}
 `;
 
 export const DeleteButton = styled.button`
 	${buttonStyles};
 	background-color: #d12449;
-
 `;
 
 export const ModifyButton = styled.button`
 	${buttonStyles};
-	background-color: #55abb5;
+	background-color: #e3af34;
 	margin-right: 3rem;
-
 `;
+
+/* export const DeleteButtonInDialog = styled(Button)`
+	&& {
+		background-color: #d12449;
+		color: #e6eced;
+		&:hover {
+			filter: brightness(95%);
+			background-color: #d12449;
+		}
+		
+	}	
+`;
+
+export const CancelButtonInDialog = styled(Button)`
+	&& {
+		background-color: #3cba77;
+		color: #e6eced;
+		&:hover {
+			filter: brightness(95%);
+			background-color: #3cba77;
+		}
+	}
+`; */
 
 export const IconsWrapper = styled.div`display: flex;`;
 
@@ -93,6 +114,7 @@ export const MainWrapper = styled.div`margin: 3rem 2rem;`;
 export const Text = styled.p`
 	margin-bottom: 3rem;
 	overflow-wrap: break-word;
+	line-height: 1.5;
 `;
 
 export const CommentForm = styled(CommentFormComponent)`
