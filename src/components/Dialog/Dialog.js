@@ -12,6 +12,7 @@ function Dialog({ isOpen, toggleDialog, slug, id, deleteRequest, commentDialog, 
 			toggleDialog(0);
 		} else toggleDialog(false);
 	};
+	
 	const handleDeleteRequest = () => {
 		handleDialogClose();
 		if (commentDialog) {

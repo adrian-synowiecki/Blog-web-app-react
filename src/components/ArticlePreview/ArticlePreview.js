@@ -18,17 +18,17 @@ function ArticlePreview({ articleData, isAuth, updateFavoriteArticlesRequest, fe
 	};
 
 	const variants = {
-		visible: (i) => ({
+		animate: (i) => ({
 			opacity: 1,
 			transition: {
-				delay: i * 0.10
+				delay: i * 0.05
 			}
 		}),
-		hidden: { opacity: 0 }
+		initial: { opacity: 0 }
 	};
 
 	return (
-		<S.ArticlePreviewContainer initial="hidden" animate="visible" custom={i} variants={variants}>
+		<S.ArticlePreviewContainer initial="initial" animate="animate" custom={i} variants={variants}>
 			<ArticleMeta articleData={articleData} />
 			<S.Wrapper>
 				<S.Title to={`/article/${slug}`}>{title}</S.Title>
@@ -36,11 +36,7 @@ function ArticlePreview({ articleData, isAuth, updateFavoriteArticlesRequest, fe
 				<S.ReadMore to={`/article/${slug}`}>Read more...</S.ReadMore>
 			</S.Wrapper>
 			<TagList tagList={tagList} fetchArticlesByTagRequest={fetchArticlesByTagRequest} />
-			<S.UpdateFavoriteArticles
-				whileTap={{ scale: 0.95, transition: { duration: 0.2 } }}
-				favorited={favorited}
-				onClick={handleUpdateFavoriteArticleRequest}
-			>
+			<S.UpdateFavoriteArticles favorited={favorited} onClick={handleUpdateFavoriteArticleRequest}>
 				<S.HeartIcon favorited={favorited} />
 				<S.FavoriteAddedCount favorited={favorited}>{favoritesCount}</S.FavoriteAddedCount>
 			</S.UpdateFavoriteArticles>

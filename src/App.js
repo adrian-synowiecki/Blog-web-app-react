@@ -1,11 +1,9 @@
-import React, { Fragment, useState } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React, { Fragment } from 'react';
+import { Switch, Route, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
+import { AnimatePresence } from 'framer-motion';
 
 import { fetchArticlesByMostRecentRequest } from 'redux/articleList/articleList.actions';
-/* import { setIsOpenSnackbar } from 'redux/common/common.actions'; */
 
 import MainPage from 'pages/MainPage/MainPage';
 import ProfilePage from 'pages/ProfilePage/ProfilePage';
@@ -27,45 +25,46 @@ function App({ currentUserData, isAuth, fetchArticlesByMostRecentRequest }) {
 				isAuth={isAuth}
 				fetchArticlesByMostRecentRequest={fetchArticlesByMostRecentRequest}
 			/>
-			<Switch>
-				{[ '/', '/page/:currentPageNumber', '/tag/:tag', '/tag/:tag/:currentPageNumber' ].map((path) => (
-					<Route exact key={path} path={path}>
-						<MainPage />
+			<AnimatePresence>
+				<Switch>
+					{[ '/', '/page/:currentPageNumber', '/tag/:tag', '/tag/:tag/:currentPageNumber' ].map((path) => (
+						<Route exact key={path} path={path}>
+							<MainPage />
+						</Route>
+					))}
+					<Route path="/login">
+						<LoginPage />
 					</Route>
-				))}
-				<Route path="/login">
-					<LoginPage />
-				</Route>
-				<Route path="/signUp">
-					<SignUpPage />
-				</Route>
-				<Route path="/article/:articleSlug">
-					<ArticleOverviewPage />
-				</Route>
-				<Route path="/profile/:username">
-					<ProfilePage />
-				</Route>
-				<PrivateRoute path="/userSettings">
-					<CurrentUserSettingsPage />
-				</PrivateRoute>
-				<PrivateRoute path="/createNewArticle">
-					<ArticleCreationPage />
-				</PrivateRoute>
-				<PrivateRoute path="/editArticle/:articleSlug">
-					<EditArticlePage />
-				</PrivateRoute>
-				<Route path="*">
-					<NotFound>404 Page Not Found</NotFound>
-				</Route>
-			</Switch>
+					<Route path="/signUp">
+						<SignUpPage />
+					</Route>
+					<Route path="/article/:articleSlug">
+						<ArticleOverviewPage />
+					</Route>
+					<Route path="/profile/:username">
+						<ProfilePage />
+					</Route>
+					<PrivateRoute path="/userSettings">
+						<CurrentUserSettingsPage />
+					</PrivateRoute>
+					<PrivateRoute path="/createNewArticle">
+						<ArticleCreationPage />
+					</PrivateRoute>
+					<PrivateRoute path="/editArticle/:articleSlug">
+						<EditArticlePage />
+					</PrivateRoute>
+					<Route path="*">
+						<NotFound>404 Page Not Found</NotFound>
+					</Route>
+				</Switch>
+			</AnimatePresence>
 		</Fragment>
 	);
 }
 
 const mapStateToProps = (state) => ({
 	currentUserData: state.user.currentUserData,
-	isAuth: state.user.isAuth,
-	pathname: state.router.location.pathname
+	isAuth: state.user.isAuth
 });
 
 const mapDispatchToProps = (dispatch) => ({

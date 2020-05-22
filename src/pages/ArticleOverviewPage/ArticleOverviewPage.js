@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
 import { isEmpty } from 'lodash';
 
+import variants from 'utils/variants';
 import * as S from './ArticleOverviewPage.style';
 import {
 	fetchArticleRequest,
@@ -63,8 +64,10 @@ function ArticleOverviewPage({
 			{!isEmpty(articleData) && (
 				<Fragment>
 					<S.Header>
-						<S.Title>{title}</S.Title>
-						<S.Wrapper>
+						<S.Title initial="initial" animate="animate" variants={variants}>
+							{title}
+						</S.Title>
+						<S.Wrapper initial="initial" animate="animate" variants={variants}>
 							<ArticleMeta articleData={articleData} articleOverviewPage />
 							<S.IconsWrapper>
 								{canModifyArticle && (
@@ -96,7 +99,7 @@ function ArticleOverviewPage({
 							</S.IconsWrapper>
 						</S.Wrapper>
 					</S.Header>
-					<S.MainWrapper>
+					<S.MainWrapper initial="initial" animate="animate" variants={variants}>
 						<S.Text>{body}</S.Text>
 						<TagList tagList={tagList} />
 						{isAuth ? (
@@ -139,8 +142,7 @@ const mapDispatchToProps = (dispatch) => ({
 	addCommentToArticleRequest: (commentObj, slug) => dispatch(addCommentToArticleRequest(commentObj, slug)),
 	deleteArticleRequest: (articleSlug) => dispatch(deleteArticleRequest(articleSlug)),
 	clearArticleError: (isOpenSnackbar) => dispatch(clearArticleError(isOpenSnackbar)),
-	toggleArticleDialog: (isOpenDeletionArticleDialog) =>
-		dispatch(toggleArticleDialog(isOpenDeletionArticleDialog))
+	toggleArticleDialog: (isOpenDeletionArticleDialog) => dispatch(toggleArticleDialog(isOpenDeletionArticleDialog))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ArticleOverviewPage);

@@ -109,7 +109,9 @@ function ProfilePage({
 						animate={{ opacity: 1, transition: { ease: 'easeOut', duration: 0.5 } }}
 					>
 						<S.UserImage
-							src={image ? image : 'https://static.productionready.io/images/smiley-cyrus.jpg'}
+							src={image}
+							onError={(e) =>
+								(e.target.src = 'https://static.productionready.io/images/smiley-cyrus.jpg')}
 						/>
 						<S.Username>{profileData.username}</S.Username>
 						<S.Bio>{bio}</S.Bio>
@@ -121,7 +123,6 @@ function ProfilePage({
 							ref={addToLinkRefs}
 							width={widths[0]}
 							marginLeft={leftMargins[0]}
-							onClick={handleFetchingArticlesByAuthorRequest}
 							exact
 						>
 							My Articles
@@ -165,13 +166,18 @@ function ProfilePage({
 		</S.ProfilePageContainer>
 	);
 }
-const mapStateToProps = (state) => ({
-	articleList: state.articleList.articleList,
-	profileData: state.profile.profileData,
-	isFetchingProfileData: state.profile.isFetchingProfileData,
-	error: state.profile.error,
-	isOpenArticleSnackbar: state.common.isOpenArticleSnackbar
-});
+const mapStateToProps = (state) => {
+	const { profileData, isFetchingProfileData, error } = state.profile;
+	const { articleList } = state.articleList;
+	const { isOpenArticleSnackbar } = state.common;
+	return {
+		profileData,
+		isFetchingProfileData,
+		error,
+		articleList,
+		isOpenArticleSnackbar
+	};
+};
 
 const mapDispatchToProps = (dispatch) => ({
 	fetchArticlesByAuthorRequest: (username) => dispatch(fetchArticlesByAuthorRequest(username)),

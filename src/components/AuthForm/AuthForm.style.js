@@ -1,9 +1,10 @@
 import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 import Button from 'components/Button/Button';
 
-export const AuthFormContainer = styled.div`
+export const AuthFormContainer = styled(motion.div)`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -24,5 +25,4 @@ export const LinkToAuth = styled(Link)`
 export const SignUpAndLogInButton = styled(Button)`
 	margin-top: 2rem;
 	width: 100%;
-
 `;

@@ -40,7 +40,12 @@ export const NavLinkUnderline = styled.div`
 	height: 0.3rem;
 	background-color: ${({ theme }) => theme.colors.blue1};
 	transition: 0.4s ease;
-	margin-top: 1rem;
+	margin-top: 1.2rem;
+	width: 0;
+	/* &:active {
+		transform: scale(0.95);
+		transition: 0.2s;
+	} */
 `;
 
 export const NavLink = styled(NavLinkComponent)`
@@ -48,7 +53,12 @@ export const NavLink = styled(NavLinkComponent)`
 	margin-right: 2rem;
 	font-size: 1.4rem;
 	letter-spacing: 0.1rem;
+	display: inline-block;
 	color: ${({ theme }) => theme.colors.blue1};
+	&:active {
+		transform: scale(0.95);
+		transition: 0.2s;
+	}
 	&:hover {
 		opacity: 0.8;
 	}
@@ -60,6 +70,7 @@ export const NavLink = styled(NavLinkComponent)`
 			margin-left: ${({ marginLeft }) => `${marginLeft}px`};
 		}
 	}
+
 `;
 
 export const NotFoundMessage = styled.p`

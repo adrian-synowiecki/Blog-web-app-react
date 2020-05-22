@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Formik, Form, Field } from 'formik';
 import { useLocation } from 'react-router-dom';
 
+import variants from 'utils/variants';
 import * as S from './AuthForm.style';
 
 import ErrorList from 'components/ErrorList/ErrorList';
@@ -22,8 +23,10 @@ function AuthForm({ error, signUpPage, signUpRequest, loginRequest }) {
 		[ error ]
 	);
 
+
+
 	return (
-		<S.AuthFormContainer>
+		<S.AuthFormContainer initial="initial" animate="animate" variants={variants}>
 			<S.Title>{signUpPage ? 'SIGN UP' : 'LOG IN'}</S.Title>
 			{signUpPage ? (
 				<S.LinkToAuth to="/login">Have an account?</S.LinkToAuth>
@@ -59,12 +62,7 @@ function AuthForm({ error, signUpPage, signUpRequest, loginRequest }) {
 							handleFocus={handleFocus}
 							label="Password"
 						/>
-						<S.SignUpAndLogInButton
-							type="submit"
-							disabled={isSubmitting}
-							variant="contained"
-							whileTap={{ scale: 1 }}
-						>
+						<S.SignUpAndLogInButton type="submit" disabled={isSubmitting} variant="contained">
 							{signUpPage ? 'SIGN UP' : 'LOG IN'}
 						</S.SignUpAndLogInButton>
 					</Form>

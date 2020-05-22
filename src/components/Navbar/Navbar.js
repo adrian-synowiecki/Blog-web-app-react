@@ -7,7 +7,7 @@ function Navbar({ currentUserData, isAuth, fetchArticlesByMostRecentRequest }) {
 	const [ isOpenHamburgerMenu, toggleHamburgerMenu ] = useState(false);
 	const { username } = currentUserData;
 
-	const handleClick = (toggle) => {
+	const handleFetching = (toggle) => {
 		if (toggle) {
 			toggleHamburgerMenu(!isOpenHamburgerMenu);
 		}
@@ -18,7 +18,7 @@ function Navbar({ currentUserData, isAuth, fetchArticlesByMostRecentRequest }) {
 		<S.NavbarContainer isOpenHamburgerMenu={isOpenHamburgerMenu}>
 			{!isOpenHamburgerMenu && (
 				<S.Brand
-					onClick={() => handleClick()}
+					onClick={() => handleFetching()}
 					to="/"
 					whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
 					whileTap={{ scale: 0.95, transition: { duration: 0.2 } }}
@@ -29,7 +29,7 @@ function Navbar({ currentUserData, isAuth, fetchArticlesByMostRecentRequest }) {
 			{isOpenHamburgerMenu && (
 				<S.NavLinksWrapper>
 					<li>
-						<S.NavLinkItem exact to="/" onClick={() => handleClick('toggle')}>
+						<S.NavLinkItem exact to="/" onClick={() => handleFetching('toggle')}>
 							<S.HomeIcon /> Home
 						</S.NavLinkItem>
 					</li>

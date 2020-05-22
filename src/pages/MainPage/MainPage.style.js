@@ -11,12 +11,14 @@ export const MainPageContainer = styled.div`
 	height: calc(100vh - 5rem);
 `;
 
-export const Header = styled(HeaderComponent)`
+
+export const HeadingsWrapper = styled(motion.div)`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-evenly;
-`;
+	height: 100%;
+`
 
 export const Heading = styled(motion.h1)`
 	color: #edf5ef;
@@ -42,7 +44,7 @@ export const Wrapper = styled.main`
 	flex: 1;
 `;
 
-export const NavLinkItem = motion.custom(styled(NavLink)`
+export const NavLinkItem = styled(NavLink)`
 	color: ${({ theme }) => theme.colors.blue1};
 	text-decoration: none;
 	margin-left: ${({ tag }) => tag && '2rem'};  
@@ -51,9 +53,12 @@ export const NavLinkItem = motion.custom(styled(NavLink)`
   	&.active {
 	border-bottom: ${({ theme }) => `3px solid ${theme.colors.blue1}`};
 	font-weight: bold;
+	&:active {
+		transform: scale(0.95);
+		transition: 0.3s;
+	}
 }
-
-`);
+`;
 
 export const Pagination = styled(PaginationComponent)`
 	margin-top: 3rem;

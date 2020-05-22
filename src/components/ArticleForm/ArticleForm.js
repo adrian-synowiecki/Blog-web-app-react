@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react';
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form } from 'formik';
 import TagsInput from 'react-tagsinput';
 
+import variants from 'utils/variants';
 import * as S from './ArticleForm.style';
 import './react-tags-input.css';
 
@@ -20,7 +21,7 @@ function ArticleForm({ articleToEdit, error, createArticleRequest, updateArticle
 	);
 
 	return (
-		<S.ArticleFormContainer>
+		<S.ArticleFormContainer initial="initial" animate="animate" variants={variants}>
 			<S.Title>{articleToEdit ? 'Edit Article' : 'Create New Article'}</S.Title>
 			<Formik
 				ref={formikRef}

@@ -1,4 +1,4 @@
-import axiosInstance from '../../utils/axios'
+import axiosInstance from 'utils/axios'
 
 export const signUpInAPI = (userCreationData) => {
     return  axiosInstance.post('api/users', JSON.stringify(userCreationData));

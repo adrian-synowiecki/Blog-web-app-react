@@ -1,4 +1,4 @@
-import axiosInstance from "../../utils/axios";
+import axiosInstance from 'utils/axios'
 
 export const fetchCommentsFromArticleFromAPI = (articleSlug) => {
     return axiosInstance.get(`api/articles/${articleSlug}/comments`);

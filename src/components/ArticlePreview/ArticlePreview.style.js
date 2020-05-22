@@ -75,4 +75,8 @@ export const UpdateFavoriteArticles = styled(motion.button)`
 			transition: 0.3s;
 		}
 	}
+	&:active {
+		transform: scale(0.90);
+		transition: 0.2s;
+	}
 `;

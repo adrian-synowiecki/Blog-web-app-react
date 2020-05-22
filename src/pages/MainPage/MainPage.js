@@ -2,7 +2,9 @@ import React, { useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import { useParams, Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
+import variants from 'utils/variants';
 import * as S from './MainPage.style';
 import {
 	fetchArticlesByMostRecentRequest,
@@ -16,6 +18,7 @@ import ArticleList from 'components/ArticleList/ArticleList';
 import LoadingSpinner from 'components/LoadingSpinner/LoadingSpinner';
 import TagList from 'components/TagList/TagList';
 import NotFound from 'components/NotFound/NotFound';
+import Header from 'components/Header/Header';
 
 function MainPage({
 	articleList,
@@ -44,7 +47,7 @@ function MainPage({
 		[ currentPageNumber, tag ]
 	); // eslint-disable-line react-hooks/exhaustive-deps
 
-	const handleClick = () => {
+	const handleFetching = () => {
 		removeTagName();
 		fetchArticlesByMostRecentRequest(offSet);
 	};
@@ -60,25 +63,15 @@ function MainPage({
 
 	return (
 		<S.MainPageContainer>
-			<S.Header>
-				<S.Heading
-					initial={{ opacity: 0, y: 10 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ ease: 'easeOut', duration: 0.5 }}
-				>
-					conduit
-				</S.Heading>
-				<S.SubHeading
-					initial={{ opacity: 0, y: 10 }}
-					animate={{ opacity: 1, y: 0 }}
-					transition={{ ease: 'easeOut', duration: 0.5 }}
-				>
-					A place to share your knowledge
-				</S.SubHeading>
-			</S.Header>
+			<Header>
+				<S.HeadingsWrapper initial="initial" animate="animate" variants={variants}>
+					<S.Heading>conduit</S.Heading>
+					<S.SubHeading>A place to share your knowledge</S.SubHeading>
+				</S.HeadingsWrapper>
+			</Header>
 			<S.Wrapper>
 				<S.NavLinkItem
-					onClick={() => handleClick()}
+					onClick={() => handleFetching()}
 					to="/"
 					isActive={() => {
 						if (tag) {
@@ -86,17 +79,11 @@ function MainPage({
 						}
 						return true;
 					}}
-					whileTap={{ scale: 0.95, transition: { duration: 0.2 } }}
 				>
 					Global Feed
 				</S.NavLinkItem>
 				{tag && (
-					<S.NavLinkItem
-						tag
-						to="/"
-						onClick={() => handleClick()}
-						whileTap={{ scale: 0.95, transition: { duration: 0.2 } }}
-					>
+					<S.NavLinkItem tag to="/" onClick={() => handleFetching()}>
 						{tag}
 					</S.NavLinkItem>
 				)}

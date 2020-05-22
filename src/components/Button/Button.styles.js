@@ -23,7 +23,12 @@ export const ButtonContainer = styled(motion.button)`
 		transition: 0.3s;
 	}
 	&:active {
-		background-color: ${({ theme }) => theme.colors.blue2};
+	/* 	background-color: ${({ theme }) => theme.colors.blue2}; */
+		transform: scale(0.95);
+		transition: 0.2s;
+	}
+	&:focus {
+/* 		background-color: ${({ theme }) => theme.colors.blue2}; */
 	}
 
 `;

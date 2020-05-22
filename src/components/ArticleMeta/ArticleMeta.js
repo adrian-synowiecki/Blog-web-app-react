@@ -11,7 +11,8 @@ function ArticleMeta({ articleData, articleOverviewPage, className }) {
 		<S.ArticleMetaContainer className={className}>
 			<Link to={`/profile/${username}`}>
 				<S.ImageProfile
-					src={image ? image : 'https://static.productionready.io/images/smiley-cyrus.jpg'}
+					src={image}
+					onError={(e) => (e.target.src = 'https://static.productionready.io/images/smiley-cyrus.jpg')}
 				/>
 			</Link>
 			<S.Wrapper>

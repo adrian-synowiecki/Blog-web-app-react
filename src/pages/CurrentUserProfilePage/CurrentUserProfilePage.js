@@ -47,11 +47,15 @@ function UserProfilePage({
 	);
 }
 
-const mapStateToProps = (state) => ({
-	articleList: state.articleList.articleList,
-	currentUserData: state.user.currentUserData,
-	error: state.user.error
-});
+const mapStateToProps = (state) => {
+	const { currentUserData, error } = state.user;
+	const { articleList } = state.articleList;
+	return {
+		currentUserData,
+		error,
+		articleList
+	};
+};
 
 const mapDispatchToProps = (dispatch) => ({
 	fetchArticlesByAuthorRequest: (username) => dispatch(fetchArticlesByAuthorRequest(username)),

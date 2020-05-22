@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components/macro';
+import { motion } from "framer-motion";
 import Button from '@material-ui/core/Button';
 
 import { ReactComponent as TrashCan } from 'assets/trash.svg';
@@ -7,6 +8,7 @@ import { ReactComponent as Modify } from 'assets/modify.svg';
 
 import HeaderComponent from 'components/Header/Header';
 import CommentFormComponent from 'components/CommentForm/CommentForm';
+
 
 export const Header = styled(HeaderComponent)`
 	background-color: ${({ theme }) => theme.colors.blue2};
@@ -17,7 +19,7 @@ export const Header = styled(HeaderComponent)`
 	padding: 2rem 2rem;
 `;
 
-export const Title = styled.h1`
+export const Title = styled(motion.h1)`
 	color: #edede8;
 	letter-spacing: 0.1rem;
 	font-weight: 400;
@@ -25,7 +27,7 @@ export const Title = styled.h1`
 	margin-bottom: 2rem;
 `;
 
-export const Wrapper = styled.div`
+export const Wrapper = styled(motion.div)`
 	display: flex;
 	align-items: center;
 `;
@@ -109,7 +111,7 @@ export const ModifyIcon = styled(Modify)`
 	fill: #55abb5;
 `;
 
-export const MainWrapper = styled.div`margin: 3rem 2rem;`;
+export const MainWrapper = styled(motion.div)`margin: 3rem 2rem;`;
 
 export const Text = styled.p`
 	margin-bottom: 3rem;

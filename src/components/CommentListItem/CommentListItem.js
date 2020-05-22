@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { isEmpty } from 'lodash';
+import { AnimatePresence } from 'framer-motion';
 
 import { removeCommentFromArticleRequest } from 'redux/comments/comments.actions';
 import { toggleCommentDialog } from 'redux/common/common.actions';
@@ -24,17 +25,32 @@ function CommentListItem({
 		!isEmpty(commentData) && !isEmpty(currentUserData) && username === currentUserData.username;
 
 	const variants = {
-		visible: (index) => ({
+		initial: {
+			opacity: 0
+		},
+		animate: (index) => ({
 			opacity: 1,
 			transition: {
 				delay: index * 0.1
 			}
 		}),
-		hidden: { opacity: 0 }
+		exit: {
+			opacity: 0,
+			transition: {
+				delay: 0.1
+			}
+		}
 	};
-	console.log(id);
+
 	return (
-		<S.CommentListItemContainer initial="hidden" animate="visible" custom={index} variants={variants}>
+		<S.CommentListItemContainer
+			key={id}
+			variants={variants}
+			initial="initial"
+			animate="animate"
+			exit="exit"
+			custom={index}
+		>
 			<S.Text>{body}</S.Text>
 			<S.FooterWrapper>
 				<S.AuthorImage src={image ? image : 'https://static.productionready.io/images/smiley-cyrus.jpg'} />

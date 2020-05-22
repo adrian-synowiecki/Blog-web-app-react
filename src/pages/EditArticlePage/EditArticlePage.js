@@ -19,7 +19,6 @@ function EditArticlePage({ error, articleToEdit, username, fetchArticleRequest, 
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
 	if (!isEmpty(articleToEdit)) {
-
 	}
 
 	return (
@@ -37,11 +36,15 @@ function EditArticlePage({ error, articleToEdit, username, fetchArticleRequest, 
 	);
 }
 
-const mapStateToProps = (state) => ({
-	articleToEdit: state.article.articleData,
-	error: state.article.error,
-	username: state.user.currentUserData.username
-});
+const mapStateToProps = (state) => {
+	const { articleToEdit, error } = state.article;
+	const { username } = state.user.currentUserData;
+	return {
+		articleToEdit,
+		error,
+		username
+	};
+};
 
 const mapDispatchToProps = (dispatch) => ({
 	updateArticleRequest: (articleSlug, articleToUpdateData) =>

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import { Formik, Form, Field } from 'formik';
 
+import variants from 'utils/variants';
 import * as S from './CurrentUserSettingsPage.style';
 import { updateUserRequest, clearUserError, logOut } from 'redux/user/user.actions';
 
@@ -35,7 +36,7 @@ function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUser
 	};
 
 	return (
-		<S.UserSettingsPageContainer>
+		<S.UserSettingsPageContainer initial="initial" animate="animate" variants={variants}>
 			<S.Title>Profile Settings</S.Title>
 			<Formik
 				ref={formikRef}
@@ -81,9 +82,10 @@ function UserSettingsPage({ currentUserData, error, updateUserRequest, clearUser
 }
 
 const mapStateToProps = (state) => {
+	const { currentUserData, error } = state.user;
 	return {
-		currentUserData: state.user.currentUserData,
-		error: state.user.error
+		currentUserData,
+		error
 	};
 };
 

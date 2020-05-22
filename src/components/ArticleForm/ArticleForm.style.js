@@ -1,8 +1,9 @@
 import styled from 'styled-components/macro';
+import { motion } from "framer-motion";
 
 import Button from 'components/Button/Button';
 
-export const ArticleFormContainer = styled.div`
+export const ArticleFormContainer = styled(motion.div)`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
