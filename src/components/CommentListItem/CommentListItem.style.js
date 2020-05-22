@@ -15,7 +15,6 @@ export const FooterWrapper = styled.div`
 	align-items: center;
 	background-color: rgba(180, 185, 194, 0.4);
 	padding: 2rem;
-	/* padding-right: 0rem; */
 `;
 export const AuthorImage = styled.img`
 	width: 2.5rem;
@@ -24,14 +23,14 @@ export const AuthorImage = styled.img`
 `;
 
 export const Username = styled.p`
-	color: ${({ theme }) => theme.colors.blue2};
+	color: var(--blue-2);
 	font-size: 1.2rem;
 	font-weight: 600;
 	margin-left: 1rem;
 `;
 
 export const CreatedAt = styled.p`
-	color: gray;
+	color: var(--gray);
 	font-size: 0.9rem;
 	margin-left: 1rem;
 `;

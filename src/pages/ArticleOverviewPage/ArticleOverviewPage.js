@@ -58,7 +58,7 @@ function ArticleOverviewPage({
 	};
 
 	return (
-		<Fragment>
+		<S.ArticleOverviewPageContainer>
 			{error && <NotFound>404 Article Not Found</NotFound>}
 			{isFetchingArticleData && isEmpty(articleData) && <LoadingSpinner center />}
 			{!isEmpty(articleData) && (
@@ -115,7 +115,7 @@ function ArticleOverviewPage({
 					</S.MainWrapper>
 				</Fragment>
 			)}
-		</Fragment>
+		</S.ArticleOverviewPageContainer>
 	);
 }
 

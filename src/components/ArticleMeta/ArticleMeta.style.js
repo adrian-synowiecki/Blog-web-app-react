@@ -6,7 +6,6 @@ export const ImageProfile = styled.img`
 	width: 3rem;
 	height: 3rem;
 	border-radius: 8rem;
-
 	&:hover {
 		transform: scale(1.03);
 		transition: 0.1s;
@@ -21,15 +20,14 @@ export const Wrapper = styled.div`
 export const AuthorName = styled.p`
 	width: 20rem;
 	font-weight: 500;
-	color: ${({ theme, articleOverviewPage }) => (articleOverviewPage ? '#e6e6e1' : theme.colors.blue1)};
+	color: ${({ articleOverviewPage }) => (articleOverviewPage ? 'var(--white)' : 'var(--blue-1)')};
 	&:hover {
 		text-decoration: underline;
 	}
 `;
 
 export const DateCreated = styled.p`
-	color: gray;
 	opacity: 0.8;
 	font-size: 1rem;
-	color: ${({ theme, articleOverviewPage }) => (articleOverviewPage ? '#e8e7e3' : theme.colors.blue3)};
+	color: ${({ articleOverviewPage }) => (articleOverviewPage ? 'var(--gray)' : 'var(--blue-3)')};
 `;

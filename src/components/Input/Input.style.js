@@ -1,12 +1,11 @@
 import styled from 'styled-components/macro';
-import { TextField as TextField } from 'formik-material-ui';
+import { TextField } from 'formik-material-ui';
 
 export const TextFieldContainer = styled(TextField)`
     width: 100%;  
-    
     label { 
        font-size: 1.4rem;    
-       background-color: white;
+       background-color: var(--white);
        padding-right: 1rem;
     }
     .MuiOutlinedInput-root {
@@ -14,13 +13,13 @@ export const TextFieldContainer = styled(TextField)`
         border-color: #BDC3C7;
     }
     &:hover fieldset {
-        border-color: ${({ theme }) => theme.colors.blue2}
+        border-color: var(--blue-2);
     }
     &.Mui-focused fieldset {
-        border: ${({ theme }) => `2px solid ${theme.colors.blue2}`};
+      border: 2px solid var(--blue-2);
     }
   }
     label.Mui-focused {
-      color: ${({ theme }) => theme.colors.blue2}
+      color: var(--blue-2);
   }
 `;

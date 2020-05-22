@@ -7,7 +7,7 @@ export const ArticleFormContainer = styled(motion.div)`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin: 3rem 2rem;
+	margin: var(--container-margin);
 `;
 
 export const Title = styled.h1`

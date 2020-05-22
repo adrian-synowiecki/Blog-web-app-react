@@ -1,6 +1,19 @@
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
+
+:root {
+	font-size: 62.5%;
+	--main-text-color: #061539;
+	--hover-color: #23335c;
+	--blue-1: #162955;
+	--blue-2: #2E4272;
+	--blue-3: #7887AB;
+	--white: #fff;
+	--gray: #e8e7e3;
+	--container-margin: 3rem 2rem;
+}
+
 * {
 	box-sizing: border-box;
 	margin: 0;
@@ -9,13 +22,9 @@ export default createGlobalStyle`
 		"Droid Sans", "Helvetica Neue";
 }
 
-html {
-	font-size: 62.5%;
-}
 
 body {
-	background-color: #fcfafa;
-	color: '#061539';
+	color: var(--main-text-color);
 	font-size: 1.6rem;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;

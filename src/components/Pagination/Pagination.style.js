@@ -9,11 +9,15 @@ export const PageLink = styled(NavLink)`
     color: ${({ theme }) => theme.colors.blue2};
     text-decoration: none;
     display: inline-block;
+    border: none;
     &:hover {
         background-color: #dcdcdb;
     }
     &.active {
-        background: ${({ theme }) => theme.colors.blue2};
-        color: white;
+        background-color: var(--blue-2);
+        color: var(--white);
+        &:hover {
+            background-color: var(--hover-color);
+        }
 	}
 `;

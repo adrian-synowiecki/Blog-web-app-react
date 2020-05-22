@@ -10,7 +10,7 @@ import { ReactComponent as User } from 'assets/user.svg';
 export const NavbarContainer = styled.nav`
 	display: flex;
 	align-items: center;
-	background-color: #fcfafa;
+	background-color: var(--white);
 	position: sticky;
 	top: 0;
 	z-index: 999;
@@ -19,12 +19,11 @@ export const NavbarContainer = styled.nav`
 `;
 
 export const Brand = motion.custom(styled(Link)`
-	color: ${({ theme }) => theme.colors.blue1};
+	color: var(--blue-1);
 	text-decoration: none;
 	font-weight: 700;
 	font-size: 2.7rem;
 	margin-left: 2rem;
-
 `);
 
 export const NavLinksWrapper = styled.ul`
@@ -40,10 +39,10 @@ const iconStyles = css`
 	width: 2rem;
 	height: 2rem;
 	margin-right: 1rem;
-	fill: ${({ theme }) => theme.colors.blue2};
+	fill: var(--blue-2);
 `;
 
-const iconHoverStyles = css`fill: ${({ theme }) => theme.colors.blue1};`;
+const iconHoverStyles = css`fill: var(--blue-1);`;
 
 export const HomeIcon = styled(Home)`
 	${iconStyles}
@@ -74,10 +73,10 @@ export const NavLinkItem = styled(NavLink).attrs({
 	font-size: 1.3rem;
 	letter-spacing: 0.1rem;
 	margin-top: 1rem;
-	color: ${({ theme }) => theme.colors.blue1};
+	color: var(--blue-1);
 	&:hover {
 		opacity: 0.8;
-		border-bottom: ${({ theme }) => `3px solid ${theme.colors.blue1}`};
+		border-bottom: 3px solid var(--blue-1);
 		${NewPostIcon} {
 			${iconHoverStyles}
 		}
@@ -93,6 +92,6 @@ export const NavLinkItem = styled(NavLink).attrs({
 	}
 	&.${activeClassName} {
 		text-shadow: 1px 0px 0px black;
-		border-bottom: ${({ theme }) => `3px solid ${theme.colors.blue1}`};
+		border-bottom: 3px solid var(--blue-1);
 	}
 `;

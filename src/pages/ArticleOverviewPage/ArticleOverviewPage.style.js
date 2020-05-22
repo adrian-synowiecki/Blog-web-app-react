@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components/macro';
-import { motion } from "framer-motion";
-import Button from '@material-ui/core/Button';
+import { motion } from 'framer-motion';
 
 import { ReactComponent as TrashCan } from 'assets/trash.svg';
 import { ReactComponent as Modify } from 'assets/modify.svg';
@@ -9,6 +8,7 @@ import { ReactComponent as Modify } from 'assets/modify.svg';
 import HeaderComponent from 'components/Header/Header';
 import CommentFormComponent from 'components/CommentForm/CommentForm';
 
+export const ArticleOverviewPageContainer = styled.div`--remove-color: #d12449;`;
 
 export const Header = styled(HeaderComponent)`
 	background-color: ${({ theme }) => theme.colors.blue2};
@@ -20,7 +20,7 @@ export const Header = styled(HeaderComponent)`
 `;
 
 export const Title = styled(motion.h1)`
-	color: #edede8;
+	color: var(--white);
 	letter-spacing: 0.1rem;
 	font-weight: 400;
 	overflow-wrap: break-word;
@@ -39,7 +39,7 @@ const buttonStyles = css`
 	outline: none;
 	border-radius: 8rem;
 	cursor: pointer;
-	color: #e6eced;
+	color: var(--white);
 	padding: 0.3rem 0.5rem;
 	font-size: 1.1rem;
 	&:hover {
@@ -52,7 +52,7 @@ const buttonStyles = css`
 
 export const DeleteButton = styled.button`
 	${buttonStyles};
-	background-color: #d12449;
+	background-color: var(--remove-color);
 `;
 
 export const ModifyButton = styled.button`
@@ -61,33 +61,10 @@ export const ModifyButton = styled.button`
 	margin-right: 3rem;
 `;
 
-/* export const DeleteButtonInDialog = styled(Button)`
-	&& {
-		background-color: #d12449;
-		color: #e6eced;
-		&:hover {
-			filter: brightness(95%);
-			background-color: #d12449;
-		}
-		
-	}	
-`;
-
-export const CancelButtonInDialog = styled(Button)`
-	&& {
-		background-color: #3cba77;
-		color: #e6eced;
-		&:hover {
-			filter: brightness(95%);
-			background-color: #3cba77;
-		}
-	}
-`; */
-
 export const IconsWrapper = styled.div`display: flex;`;
 
 export const IconWrapper = styled.div`
-	background-color: white;
+	background-color: var(--white);
 	padding: ${({ includePadding }) => includePadding && '0.6rem'};
 	border-radius: 8rem;
 	display: flex;
@@ -100,18 +77,18 @@ export const TrashCanIcon = styled(TrashCan)`
 	height: 1.8rem;
 	background-color: white;
 	border-radius: 8rem;
-	fill: #ba3f3f;
+	fill: var(--remove-color);
 `;
 
 export const ModifyIcon = styled(Modify)`
 	width: 3rem;
 	height: 3rem;
-	background-color: white;
+	background-color: var(--white);
 	border-radius: 8rem;
 	fill: #55abb5;
 `;
 
-export const MainWrapper = styled(motion.div)`margin: 3rem 2rem;`;
+export const MainWrapper = styled(motion.div)`margin: var(--container-margin)`;
 
 export const Text = styled.p`
 	margin-bottom: 3rem;
@@ -130,7 +107,7 @@ export const AuthInvite = styled.p`
 `;
 
 export const AuthInviteSpan = styled(Link)`
-	color: ${({ theme }) => theme.colors.blue2};
+	color: (--blue-2);
     font-weight: 500;
     text-decoration: none;
 `;

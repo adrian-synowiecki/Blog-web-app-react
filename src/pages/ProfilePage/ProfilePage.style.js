@@ -22,11 +22,11 @@ export const UserImage = styled.img`
 
 export const Username = styled.h1`
 	margin-top: 0.5rem;
-	color: ${({ theme }) => theme.colors.blue2};
+	color: var(--blue-2);
 `;
 
 export const Bio = styled.p`
-	color: ${({ theme }) => theme.colors.blue2};
+	color: var(--blue-2);
 	font-size: 1.5rem;
 `;
 
@@ -38,14 +38,10 @@ export const Wrapper = styled.div`
 
 export const NavLinkUnderline = styled.div`
 	height: 0.3rem;
-	background-color: ${({ theme }) => theme.colors.blue1};
+	background-color: var(--blue-1);
 	transition: 0.4s ease;
 	margin-top: 1.2rem;
 	width: 0;
-	/* &:active {
-		transform: scale(0.95);
-		transition: 0.2s;
-	} */
 `;
 
 export const NavLink = styled(NavLinkComponent)`
@@ -54,7 +50,7 @@ export const NavLink = styled(NavLinkComponent)`
 	font-size: 1.4rem;
 	letter-spacing: 0.1rem;
 	display: inline-block;
-	color: ${({ theme }) => theme.colors.blue1};
+	color: var(--blue-1);
 	&:active {
 		transform: scale(0.95);
 		transition: 0.2s;

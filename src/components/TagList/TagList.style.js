@@ -15,7 +15,7 @@ export const Tag = styled(Link)`
 	margin-top: 0.2rem;
 	margin-right: 0.2rem;
 	&:hover {
-		background-color: #23335c;
+		background-color: var(--hover-color);
 		cursor: pointer;
 		transition: 0.2s;
 	}

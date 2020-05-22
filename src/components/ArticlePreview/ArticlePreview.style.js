@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
 
 export const Title = styled(Link)`
 	text-decoration: none;
-	color: ${({ theme }) => theme.colors.blue1};
+	color: var(--blue-1);
 	font-size: 1.9rem;
 	font-weight: 500;
 	overflow-wrap: break-word;
@@ -28,7 +28,7 @@ export const Text = styled(Link)`
 	font-size: 1.2rem;  
 	margin-top: 0.2rem;
 	margin-bottom: 1rem;
-	color: ${({ theme }) => theme.colors.blue2};
+	color: var(--blue-2);
 	overflow-wrap: break-word;
 `;
 
@@ -36,16 +36,16 @@ export const ReadMore = styled(Link)`
 	text-decoration: none;
 	margin-bottom: 1rem;
 	font-size: 1.1rem;  
-	color: ${({ theme }) => theme.colors.blue3};
+	color: var(--blue-3);
 `;
 
 export const HeartIcon = styled(Heart)`
-	fill: ${({ favorited, theme }) => (favorited ? '#fff' : `${theme.colors.blue1}`)};
+	fill: ${({ favorited }) => (favorited ? 'var(--white)' : 'var(--blue-1)')};
 	width: 1.2rem;
  `;
 
 export const FavoriteAddedCount = styled.span`
-	color: ${({ favorited, theme }) => (favorited ? '#fff' : `${theme.colors.blue1}`)};
+	color: ${({ favorited }) => (favorited ? 'var(--white)' : 'var(--blue-1)')};
 	margin-left: 0.2rem;
 `;
 
@@ -56,10 +56,10 @@ export const UpdateFavoriteArticles = styled(motion.button)`
 	justify-content: center;
 	top: 0;
 	right: 0;
-	background-color: white;
+	background-color: var(--white);
 	padding: 0rem 0.4rem;
 	outline: 0;
-	border: ${({ theme }) => `1px solid ${theme.colors.blue3}`};
+	border: 1px solid var(--blue-3);
 	border-radius: 0.4rem;
 	cursor: pointer;
 	background-color: ${({ theme, favorited }) => favorited && theme.colors.blue1};
@@ -67,11 +67,11 @@ export const UpdateFavoriteArticles = styled(motion.button)`
 		background-color: ${({ theme }) => theme.colors.blue1};
 		transition: 0.3s;
 		${HeartIcon} {
-			fill: white;
+			fill: var(--white);
 			transition: 0.3s;
 		}
 		${FavoriteAddedCount} {
-			color: white;
+			color: var(--white);
 			transition: 0.3s;
 		}
 	}

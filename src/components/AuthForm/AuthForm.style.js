@@ -8,7 +8,7 @@ export const AuthFormContainer = styled(motion.div)`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin: 3rem 2rem;
+	margin: var(--container-margin);
 `;
 
 export const Title = styled.h1`font-weight: 400;`;
@@ -16,7 +16,7 @@ export const Title = styled.h1`font-weight: 400;`;
 export const LinkToAuth = styled(Link)`
 	font-size: 1.4rem;
 	text-decoration: none;
-	color: ${({ theme }) => theme.colors.blue2};
+	color: var(--blue-2);
     &:hover {
         text-decoration: underline;
     }
