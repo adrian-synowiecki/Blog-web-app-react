@@ -57,6 +57,7 @@ function ArticleOverviewPage({
 		unloadArticle();
 	};
 
+	
 	return (
 		<S.ArticleOverviewPageContainer>
 			{error && <NotFound>404 Article Not Found</NotFound>}
@@ -69,7 +70,7 @@ function ArticleOverviewPage({
 						</S.Title>
 						<S.Wrapper initial="initial" animate="animate" variants={variants}>
 							<ArticleMeta articleData={articleData} articleOverviewPage />
-							<S.IconsWrapper>
+							<S.MultipleIconsWrapper>
 								{canModifyArticle && (
 									<Fragment>
 										<Link to={`/editArticle/${slug}`} style={{ textDecoration: 'none' }}>
@@ -96,7 +97,7 @@ function ArticleOverviewPage({
 										</Dialog>
 									</Fragment>
 								)}
-							</S.IconsWrapper>
+							</S.MultipleIconsWrapper>
 						</S.Wrapper>
 					</S.Header>
 					<S.MainWrapper initial="initial" animate="animate" variants={variants}>

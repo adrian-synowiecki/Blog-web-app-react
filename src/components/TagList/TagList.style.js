@@ -1,11 +1,11 @@
 import styled from 'styled-components/macro';
 import { Link } from 'react-router-dom';
 
-export const TagListContainer = styled.div``;
+export const TagListContainer = styled.ul``;
 
 export const Tag = styled(Link)`
 	text-align: center;
-	background-color: ${({ theme }) => theme.colors.blue2};
+	background-color: var(--blue-2);
 	border-radius: 1rem;
     padding: 0.5rem 1rem;
 	color: #fff;

@@ -30,7 +30,7 @@ export const Bio = styled.p`
 	font-size: 1.5rem;
 `;
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.section`
 	position: relative;
 	margin-top: 3rem;
 	min-height: 22rem;

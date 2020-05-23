@@ -4,12 +4,26 @@ import { motion } from 'framer-motion';
 
 import { ReactComponent as Heart } from 'assets/iconmonstr-favorite-1.svg';
 
+export const ReadMore = styled(Link)`
+	text-decoration: none;
+	margin-bottom: 0.5rem;
+	font-size: 1.1rem;  
+	color: var(--blue-3);
+`;
+
 export const ArticlePreviewContainer = styled(motion.li)`
 	margin-top: 2rem;
 	position: relative;
+	border-radius: 0.5rem;
+	&:hover {
+		${ReadMore} {
+			color: var(--hover-color);
+		}
+	}
+
 `;
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.section`
 	display: flex;
 	flex-direction: column;
 	margin-top: 0.2rem;
@@ -32,12 +46,6 @@ export const Text = styled(Link)`
 	overflow-wrap: break-word;
 `;
 
-export const ReadMore = styled(Link)`
-	text-decoration: none;
-	margin-bottom: 1rem;
-	font-size: 1.1rem;  
-	color: var(--blue-3);
-`;
 
 export const HeartIcon = styled(Heart)`
 	fill: ${({ favorited }) => (favorited ? 'var(--white)' : 'var(--blue-1)')};
@@ -62,9 +70,9 @@ export const UpdateFavoriteArticles = styled(motion.button)`
 	border: 1px solid var(--blue-3);
 	border-radius: 0.4rem;
 	cursor: pointer;
-	background-color: ${({ theme, favorited }) => favorited && theme.colors.blue1};
+	background-color: ${({ favorited }) => favorited && 'var(--theme-1)'};
 	&:hover {
-		background-color: ${({ theme }) => theme.colors.blue1};
+		background-color: var(--blue-1);
 		transition: 0.3s;
 		${HeartIcon} {
 			fill: var(--white);

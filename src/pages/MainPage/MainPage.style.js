@@ -45,9 +45,10 @@ export const NavLinkItem = styled(NavLink)`
 	text-decoration: none;
 	margin-left: ${({ tag }) => tag && '2rem'};  
 	padding: 1.5rem; 
+	padding-left: 2rem;
 	display: inline-block;
   	&.active {
-	border-bottom: 3px solid var(--blue-1)   ;
+	border-bottom: 3px solid var(--blue-1);
 	font-weight: bold;
 	&:active {
 		transform: scale(0.95);

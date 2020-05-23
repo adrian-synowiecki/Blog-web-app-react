@@ -16,8 +16,9 @@ import SignUpPage from 'pages/SignUpPage/SignUpPage';
 import Navbar from 'components/Navbar/Navbar';
 import NotFound from 'components/NotFound/NotFound';
 import PrivateRoute from 'components/PrivateRoute/PrivateRoute';
+import ErrorBoundary from 'components/ErrorBoundary/ErrorBoundary';
 
-function App({ currentUserData, isAuth, fetchArticlesByMostRecentRequest }) {
+function App({ currentUserData, isAuth, fetchArticlesByMostRecentRequest, key }) {
 	return (
 		<Fragment>
 			<Navbar
@@ -26,37 +27,44 @@ function App({ currentUserData, isAuth, fetchArticlesByMostRecentRequest }) {
 				fetchArticlesByMostRecentRequest={fetchArticlesByMostRecentRequest}
 			/>
 			<AnimatePresence>
-				<Switch>
-					{[ '/', '/page/:currentPageNumber', '/tag/:tag', '/tag/:tag/:currentPageNumber' ].map((path) => (
-						<Route exact key={path} path={path}>
-							<MainPage />
+				<ErrorBoundary key={key}>
+					<Switch>
+						{[
+							'/',
+							'/page/:currentPageNumber',
+							'/tag/:tag',
+							'/tag/:tag/:currentPageNumber'
+						].map((path) => (
+							<Route exact key={path} path={path}>
+								<MainPage />
+							</Route>
+						))}
+						<Route path="/login">
+							<LoginPage />
 						</Route>
-					))}
-					<Route path="/login">
-						<LoginPage />
-					</Route>
-					<Route path="/signUp">
-						<SignUpPage />
-					</Route>
-					<Route path="/article/:articleSlug">
-						<ArticleOverviewPage />
-					</Route>
-					<Route path="/profile/:username">
-						<ProfilePage />
-					</Route>
-					<PrivateRoute path="/userSettings">
-						<CurrentUserSettingsPage />
-					</PrivateRoute>
-					<PrivateRoute path="/createNewArticle">
-						<ArticleCreationPage />
-					</PrivateRoute>
-					<PrivateRoute path="/editArticle/:articleSlug">
-						<EditArticlePage />
-					</PrivateRoute>
-					<Route path="*">
-						<NotFound>404 Page Not Found</NotFound>
-					</Route>
-				</Switch>
+						<Route path="/signUp">
+							<SignUpPage />
+						</Route>
+						<Route path="/article/:articleSlug">
+							<ArticleOverviewPage />
+						</Route>
+						<Route path="/profile/:username">
+							<ProfilePage />
+						</Route>
+						<PrivateRoute path="/userSettings">
+							<CurrentUserSettingsPage />
+						</PrivateRoute>
+						<PrivateRoute path="/createNewArticle">
+							<ArticleCreationPage />
+						</PrivateRoute>
+						<PrivateRoute path="/editArticle/:articleSlug">
+							<EditArticlePage />
+						</PrivateRoute>
+						<Route path="*">
+							<NotFound>404 Page Not Found</NotFound>
+						</Route>
+					</Switch>
+				</ErrorBoundary>
 			</AnimatePresence>
 		</Fragment>
 	);
@@ -64,7 +72,8 @@ function App({ currentUserData, isAuth, fetchArticlesByMostRecentRequest }) {
 
 const mapStateToProps = (state) => ({
 	currentUserData: state.user.currentUserData,
-	isAuth: state.user.isAuth
+	isAuth: state.user.isAuth,
+	key: state.router.location.key
 });
 
 const mapDispatchToProps = (dispatch) => ({

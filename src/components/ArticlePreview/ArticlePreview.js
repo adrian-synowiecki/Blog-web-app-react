@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 
@@ -10,13 +10,14 @@ import ArticleMeta from 'components/ArticleMeta/ArticleMeta';
 import TagList from 'components/TagList/TagList';
 
 function ArticlePreview({ articleData, isAuth, updateFavoriteArticlesRequest, fetchArticlesByTagRequest, push, i }) {
+	const [ isParentHovered, toggleParentHover ] = useState(false);
 	const { favorited, slug, title, description, favoritesCount, tagList } = articleData;
 	const handleUpdateFavoriteArticleRequest = () => {
 		if (isAuth) {
 			updateFavoriteArticlesRequest(slug, favorited, favoritesCount);
 		} else push('/signUp');
 	};
-
+	
 	const variants = {
 		animate: (i) => ({
 			opacity: 1,
@@ -28,8 +29,15 @@ function ArticlePreview({ articleData, isAuth, updateFavoriteArticlesRequest, fe
 	};
 
 	return (
-		<S.ArticlePreviewContainer initial="initial" animate="animate" custom={i} variants={variants}>
-			<ArticleMeta articleData={articleData} />
+		<S.ArticlePreviewContainer
+			initial="initial"
+			animate="animate"
+			custom={i}
+			variants={variants}
+			onMouseEnter={() => toggleParentHover(true)}
+			onMouseLeave={() => toggleParentHover(false)}
+		>
+			<ArticleMeta articleData={articleData} isParentHovered={isParentHovered} />
 			<S.Wrapper>
 				<S.Title to={`/article/${slug}`}>{title}</S.Title>
 				<S.Text to={`/article/${slug}`}>{description}</S.Text>

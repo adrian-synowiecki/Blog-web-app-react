@@ -3,10 +3,9 @@ import { Link } from 'react-router-dom';
 
 import * as S from './ArticleMeta.style';
 
-function ArticleMeta({ articleData, articleOverviewPage, className }) {
+function ArticleMeta({ articleData, articleOverviewPage, isParentHovered, className }) {
 	const { createdAt, author: { username, image } } = articleData;
 	const createdAtDate = new Date(createdAt).toDateString();
-
 	return (
 		<S.ArticleMetaContainer className={className}>
 			<Link to={`/profile/${username}`}>
@@ -19,7 +18,9 @@ function ArticleMeta({ articleData, articleOverviewPage, className }) {
 				<Link to={`/profile/${username}`} style={{ textDecoration: 'none' }}>
 					<S.AuthorName articleOverviewPage={articleOverviewPage}>{username}</S.AuthorName>
 				</Link>
-				<S.DateCreated articleOverviewPage={articleOverviewPage}>{createdAtDate}</S.DateCreated>
+				<S.DateCreated articleOverviewPage={articleOverviewPage} isParentHovered={isParentHovered}>
+					{createdAtDate}
+				</S.DateCreated>
 			</S.Wrapper>
 		</S.ArticleMetaContainer>
 	);

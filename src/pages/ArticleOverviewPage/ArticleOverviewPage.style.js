@@ -11,7 +11,7 @@ import CommentFormComponent from 'components/CommentForm/CommentForm';
 export const ArticleOverviewPageContainer = styled.div`--remove-color: #d12449;`;
 
 export const Header = styled(HeaderComponent)`
-	background-color: ${({ theme }) => theme.colors.blue2};
+	background-color: var(--blue-2);
 	min-height: 16rem;
 	display: flex;
 	flex-direction: column;
@@ -27,7 +27,7 @@ export const Title = styled(motion.h1)`
 	margin-bottom: 2rem;
 `;
 
-export const Wrapper = styled(motion.div)`
+export const Wrapper = styled(motion.section)`
 	display: flex;
 	align-items: center;
 `;
@@ -61,7 +61,7 @@ export const ModifyButton = styled.button`
 	margin-right: 3rem;
 `;
 
-export const IconsWrapper = styled.div`display: flex;`;
+export const MultipleIconsWrapper = styled.div`display: flex;`;
 
 export const IconWrapper = styled.div`
 	background-color: var(--white);
@@ -88,7 +88,7 @@ export const ModifyIcon = styled(Modify)`
 	fill: #55abb5;
 `;
 
-export const MainWrapper = styled(motion.div)`margin: var(--container-margin)`;
+export const MainWrapper = styled(motion.main)`margin: var(--container-margin)`;
 
 export const Text = styled.p`
 	margin-bottom: 3rem;

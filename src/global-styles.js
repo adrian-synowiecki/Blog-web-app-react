@@ -30,8 +30,7 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
-ul {
-	list-style: none;
+ol, ul {
+	list-style-type: none;
 }
-
 `;

@@ -12,13 +12,13 @@ export const ImageProfile = styled.img`
 	}
 `;
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.section`
 	margin-top: -0.1rem;
 	margin-left: 0.4rem;
 `;
 
 export const AuthorName = styled.p`
-	width: 20rem;
+	max-width: 20rem;
 	font-weight: 500;
 	color: ${({ articleOverviewPage }) => (articleOverviewPage ? 'var(--white)' : 'var(--blue-1)')};
 	&:hover {
@@ -26,8 +26,11 @@ export const AuthorName = styled.p`
 	}
 `;
 
-export const DateCreated = styled.p`
+export const DateCreated = styled.time`
 	opacity: 0.8;
 	font-size: 1rem;
-	color: ${({ articleOverviewPage }) => (articleOverviewPage ? 'var(--gray)' : 'var(--blue-3)')};
+	display: block;
+	color: ${({ articleOverviewPage, isParentHovered }) =>
+		(articleOverviewPage && 'var(--gray)') || (isParentHovered && 'var(--hover-color)') || 'var(--blue-3)'};
+	transition: 0.2s;
 `;

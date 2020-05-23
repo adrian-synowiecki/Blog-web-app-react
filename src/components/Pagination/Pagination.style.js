@@ -1,12 +1,12 @@
 import styled from 'styled-components/macro';
 import { NavLink } from 'react-router-dom';
 
-export const PaginationContainer = styled.div``;
+export const PaginationContainer = styled.nav``;
 
 export const PageLink = styled(NavLink)`
-    padding: .5rem 1rem; 
+    padding: 0.5rem 1rem; 
     border: 1px solid rgba(0,0,0,0.1);
-    color: ${({ theme }) => theme.colors.blue2};
+    color: var(--blue-2);
     text-decoration: none;
     display: inline-block;
     border: none;

@@ -10,7 +10,7 @@ export const CommentListItemContainer = styled(motion.li)`
 
 export const Text = styled.div`padding: 5rem 2rem;`;
 
-export const FooterWrapper = styled.div`
+export const Wrapper = styled.section`
 	display: flex;
 	align-items: center;
 	background-color: rgba(180, 185, 194, 0.4);
@@ -29,10 +29,11 @@ export const Username = styled.p`
 	margin-left: 1rem;
 `;
 
-export const CreatedAt = styled.p`
-	color: var(--gray);
+export const CreatedAt = styled.time`
+	color: gray;
 	font-size: 0.9rem;
 	margin-left: 1rem;
+	display: block;
 `;
 
 export const TrashCanIcon = motion.custom(styled(TrashCan)`

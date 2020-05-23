@@ -52,7 +52,7 @@ function CommentListItem({
 			custom={index}
 		>
 			<S.Text>{body}</S.Text>
-			<S.FooterWrapper>
+			<S.Wrapper>
 				<S.AuthorImage src={image ? image : 'https://static.productionready.io/images/smiley-cyrus.jpg'} />
 				<S.Username>{username}</S.Username>
 				<S.CreatedAt>{createdAtDate}</S.CreatedAt>
@@ -63,7 +63,7 @@ function CommentListItem({
 						onClick={() => toggleCommentDialog(id)}
 					/>
 				)}
-			</S.FooterWrapper>
+			</S.Wrapper>
 			<Dialog
 				isOpen={dialogID === id}
 				toggleDialog={toggleCommentDialog}

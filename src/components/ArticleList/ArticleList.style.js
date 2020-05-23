@@ -1,3 +1,3 @@
 import styled from 'styled-components';
 
-export const ArticleListContainer = styled.ul``;
+export const ArticleListContainer = styled.ol``;

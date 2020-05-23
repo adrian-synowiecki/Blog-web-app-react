@@ -10,9 +10,11 @@ function TagList({ tagList, children }) {
 		<S.TagListContainer>
 			{children}
 			{tagList.map((tag) => (
-				<S.Tag to={`/tag/${tag}`} key={tag}>
-					{tag}
-				</S.Tag>
+				<li>
+					<S.Tag to={`/tag/${tag}`} key={tag}>
+						{tag}
+					</S.Tag>
+				</li>
 			))}
 		</S.TagListContainer>
 	);
