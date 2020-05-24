@@ -18,9 +18,6 @@ function EditArticlePage({ error, articleToEdit, username, fetchArticleRequest, 
 		};
 	}, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-	if (!isEmpty(articleToEdit)) {
-	}
-
 	return (
 		<Fragment>
 			{error && <NotFound>404 Article Not Found</NotFound>}

@@ -10,7 +10,7 @@ function TagList({ tagList, children }) {
 		<S.TagListContainer>
 			{children}
 			{tagList.map((tag) => (
-				<li>
+				<li style={{ display: 'inline-block' }}>
 					<S.Tag to={`/tag/${tag}`} key={tag}>
 						{tag}
 					</S.Tag>

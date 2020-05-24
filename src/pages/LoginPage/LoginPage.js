@@ -7,7 +7,6 @@ import AuthForm from 'components/AuthForm/AuthForm';
 
 function LoginPage({ error, loginRequest, clearUserError }) {
 	useEffect(() => {
-		throw new Error("An error has occured in Buggy component!");
 		return () => {
 			clearUserError();
 			

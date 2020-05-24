@@ -96,12 +96,12 @@ function ProfilePage({
 	return (
 		<S.ProfilePageContainer>
 			{error && <NotFound>404 Profile Not Found</NotFound>}
-			{isFetchingProfileData &&
+		{/* 	{isFetchingProfileData &&
 			isEmpty(profileData) && (
 				<S.CredentialsWrapper>
 					<LoadingSpinner center />
 				</S.CredentialsWrapper>
-			)}
+			)} */}
 			{!isEmpty(profileData) && (
 				<Fragment>
 					<S.CredentialsWrapper
