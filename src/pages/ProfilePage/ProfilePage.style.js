@@ -14,6 +14,8 @@ export const CredentialsWrapper = styled(motion.div)`
   justify-content: center;
   position: relative;
   min-height: 11rem;
+
+  
 `;
 
 export const UserImage = styled.img`

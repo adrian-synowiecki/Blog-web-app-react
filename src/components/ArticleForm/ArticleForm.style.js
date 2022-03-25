@@ -8,6 +8,13 @@ export const ArticleFormContainer = styled(motion.div)`
 	flex-direction: column;
 	align-items: center;
 	margin: var(--container-margin);
+
+	@media (min-width: 768px) {
+		width: 600px;
+		margin: 0 auto;
+		margin-top: 300px;
+	}
+
 `;
 
 export const Title = styled.h1`
