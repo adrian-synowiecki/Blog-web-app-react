@@ -12,8 +12,6 @@
 		"body-parser": "^1.19.0",
 		"connected-react-router": "^6.8.0",
 		"eslint-config-react-app": "^5.0.2",
-		"firebase": "^6.6.1",
-		"firebase-functions-helper": "^0.7.3",
 		"formik": "^1.5.8",
 		"formik-material-ui": "0.0.22",
 		"framer-motion": "^1.11.0",

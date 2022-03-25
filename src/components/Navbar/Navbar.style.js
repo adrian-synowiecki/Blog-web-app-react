@@ -16,6 +16,7 @@ export const NavbarContainer = styled.nav`
 	z-index: 999;
 	box-shadow: 0 4px 2px -2px rgba(0, 0, 0, .1);
 	height: ${({ isOpenHamburgerMenu }) => (isOpenHamburgerMenu ? 'auto' : '5rem')};
+
 `;
 
 export const Brand = motion.custom(styled(Link)`

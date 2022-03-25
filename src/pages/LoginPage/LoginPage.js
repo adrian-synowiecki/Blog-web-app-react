@@ -11,7 +11,7 @@ function LoginPage({ error, loginRequest, clearUserError }) {
 			clearUserError();
 			
 		};
-	}, []); // eslint-disable-line react-hooks/exhaustive-deps
+	}, []);
 
 	window.onload = () => {
 		clearUserError();

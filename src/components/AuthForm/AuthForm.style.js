@@ -9,6 +9,12 @@ export const AuthFormContainer = styled(motion.div)`
 	flex-direction: column;
 	align-items: center;
 	margin: var(--container-margin);
+	margin-top: 300px;
+	@media (min-width: 768px) {
+		width: 600px;
+		margin: 0 auto;
+		margin-top: 300px;
+	}
 `;
 
 export const Title = styled.h1`font-weight: 400;`;

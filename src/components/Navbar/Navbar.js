@@ -42,7 +42,7 @@ function Navbar({ currentUserData, isAuth, fetchArticlesByMostRecentRequest }) {
 					)}
 					{!isAuth && (
 						<li>
-							<S.NavLinkItem to="/signUp" onClick={() => toggleHamburgerMenu(!isOpenHamburgerMenu)}>
+							<S.NavLinkItem style={{marginBottom: '5px'}} to="/signUp" onClick={() => toggleHamburgerMenu(!isOpenHamburgerMenu)}>
 								Sign up
 							</S.NavLinkItem>
 						</li>
