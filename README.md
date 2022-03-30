@@ -71,4 +71,4 @@ yarn start
 
 
 ## Acknowledgements
-This project was inspired by https://github.com/gothinkster/realworld and https://realworld-docs.netlify.app/docs/specs/backend-specs/introduction
+This project was inspired by https://github.com/gothinkster/realworld.
