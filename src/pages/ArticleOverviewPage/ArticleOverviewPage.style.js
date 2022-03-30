@@ -34,6 +34,7 @@ export const Title = styled(motion.h1)`
 export const Wrapper = styled(motion.section)`
   display: flex;
   align-items: center;
+  flex-direction: column;
 `;
 
 const buttonStyles = css`
@@ -67,6 +68,7 @@ export const ModifyButton = styled.button`
 
 export const MultipleIconsWrapper = styled.div`
   display: flex;
+  margin-top: 20px;
 `;
 
 export const IconWrapper = styled.div`
