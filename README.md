@@ -38,7 +38,7 @@ List the ready features here:
 - Comments viewing
 - Comments adding
 - Comments editing
-- Comments viewing
+- Comments removing
 - Filtering articles by tag
 - Viewing user profiles
 - Updating user settings
