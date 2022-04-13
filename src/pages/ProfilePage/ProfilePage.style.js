@@ -32,6 +32,7 @@ export const Username = styled.h1`
 export const Bio = styled.p`
   color: var(--blue-2);
   font-size: 1.5rem;
+  margin-top: 10px;
 `;
 
 export const Wrapper = styled.section`

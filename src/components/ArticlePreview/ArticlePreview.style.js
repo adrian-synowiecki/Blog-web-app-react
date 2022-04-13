@@ -70,7 +70,7 @@ export const UpdateFavoriteArticles = styled(motion.button)`
 	border: 1px solid var(--blue-3);
 	border-radius: 0.4rem;
 	cursor: pointer;
-	background-color: ${({ favorited }) => favorited && 'var(--theme-1)'};
+	background-color: ${({ favorited }) => favorited && 'var(--blue-1)'};
 	&:hover {
 		background-color: var(--blue-1);
 		transition: 0.3s;

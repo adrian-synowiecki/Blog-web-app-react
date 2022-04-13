@@ -1,11 +1,11 @@
-import { all, put, call, takeLatest, select } from 'redux-saga/effects';
+import { all, put, call, takeLatest, } from 'redux-saga/effects';
 import { push, replace } from 'connected-react-router';
 
 import * as api from './user.api';
 import * as userActions from './user.actions';
 import userTypes from './user.types';
 
-const getUsername = (state) => state.user.currentUserData.username;
+// const getUsername = (state) => state.user.currentUserData.username;
 
 function* signUpAsync(action) {
 	const { userCreationData } = action;
@@ -33,13 +33,13 @@ function* loginAsync(action) {
 }
 
 function* updateUserAsync(action) {
-	const username = yield select(getUsername);
+	// const username = yield select(getUsername);
 	const { userUpdateData } = action;
 	try {
 		const response = yield call(api.updateUserInAPI, userUpdateData);
 		localStorage.setItem('token', response.data.user.token);
 		yield put(userActions.updateUserDone(response.data.user));
-		yield put(push(`/profile/${username}`));
+		// yield put(push(`/profile/${username}`));
 	} catch (error) {
 		yield put(userActions.updateUserError(error.response.data.errors));
 	}
